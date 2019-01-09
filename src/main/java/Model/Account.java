@@ -1,9 +1,9 @@
 package Model;
+import java.util.ArrayList;
 
 //import Model.Square.Street;
 //import Model.Square.Square;
 
-import java.util.ArrayList;
 
 public class Account{
     private int balance;

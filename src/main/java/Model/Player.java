@@ -17,7 +17,7 @@ public class Player {
 
     public Player(int objectNumber, int numOfPlayers){
         this.objectNumber = objectNumber;
-        this.account = new Account(numOfPlayers);
+        this.account = new Account();
     }
     public int getSumOfProperties(){
         return account.getSumOfStreets();
