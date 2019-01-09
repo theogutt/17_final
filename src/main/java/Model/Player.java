@@ -9,7 +9,10 @@ public class Player {
 
     private int position = 0;
 
-    public Player(int playerNum, )
+    public Player(int playerNum){
+        this.playerNum = playerNum;
+        this.account = new Account();
+    }
 
 
 
