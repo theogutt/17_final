@@ -12,8 +12,8 @@ public class Account{
     private ArrayList <Square> playersStreets = new ArrayList <Square>();
 */
 
-    public Account(int numOfPlayers){
-        startAccount(numOfPlayers);
+    public Account(){
+        startAccount();
     }
 
    /* public void addStreet(Street street){
@@ -21,7 +21,7 @@ public class Account{
         sumOfStreets += street.getPrice();
     }*/
 
-    public void startAccount(int numOfPlayers){
+    public void startAccount(){
         balance = 30000;
     }
 
