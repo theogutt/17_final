@@ -4,15 +4,28 @@ import gui_fields.*;
 import gui_main.GUI;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class GUI_Handler {
     private GUI gui;
+    private MessageHandler message;
+    private static GUI_Field[] fields;
 
-    public GUI_Handler(){}
+    public GUI_Handler() throws IOException {
+        message = new MessageHandler();
+        fields = new GUI_Field[40];
+        setSpecificFields();
+        gui = new GUI(fields);
+    }
 
+    public void startGameGui(){
+        gui.showMessage(message.startGame1());
+        gui.showMessage(message.startGame2());
+        gui.showMessage(message.startGame3());
+        gui.showMessage(message.startGame4());
+    }
 
-    public void startGUI(){
-        GUI_Field[] fields = new GUI_Field[40];
+    public void setSpecificFields(){
         //ejendomsfelter
         GUI_Street rødovrevej= new GUI_Street(); fields[1] = rødovrevej; rødovrevej.setTitle("Rødovrevej");rødovrevej.setSubText("kr. 1.200");rødovrevej.setBorder(Color.BLACK);rødovrevej.setBackGroundColor(Color.cyan);
         GUI_Street hvidovrevej= new GUI_Street(); fields[3] = hvidovrevej; hvidovrevej.setTitle("Hvidovrevej");hvidovrevej.setSubText("kr. 1.200");hvidovrevej.setBorder(Color.BLACK);hvidovrevej.setBackGroundColor(Color.cyan);
@@ -61,7 +74,5 @@ public class GUI_Handler {
         GUI_Tax statsskat = new GUI_Tax(); fields[38] = statsskat; statsskat.setSubText("betal 2.000"); statsskat.setTitle("Statsskat"); statsskat.setBackGroundColor(Color.white );
         //parkering felt
         GUI_Refuge parkering = new GUI_Refuge(); fields[20] = parkering; parkering.setSubText("Parkering");
-        //bræt
-        GUI gui = new GUI(fields);
     }
 }
