@@ -2,11 +2,14 @@ package Controller;
 
 import Model.Squares.*;
 
+import java.util.HashMap;
+
 public class GameBoard {
 
     private Square[] squares = new Square[40];
     private PlayerController PlayerC = new PlayerController();
     private Square Square = new Square();
+    private HashMap squarePrice;
 
 
     public void instantiateSquares(){
