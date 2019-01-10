@@ -32,27 +32,37 @@ public class Street extends Ownable {
         return super.getPositionOnBoard();
     }
 
-    public int landOn(PlayerController playerC, int playerNum){
+    public int landOn(){
+        return 5;
+        /*
         boolean playerOwnStreet = false;
+        int numOfPlayers;
 
         // Paying rent
-        if (owned == true){
+        if (owned){
             for (int i : playerC.getPlayerStreets(playerNum)){
-                if (i == positionOnBoard){
+                if (i == positionOnBoard)
                     playerOwnStreet = true;
-                }
             }
 
             // Who to pay rent to
-            if (playerOwnStreet == false){
-                int numOfPlayers;
+            if (!playerOwnStreet){
                 numOfPlayers = playerC.getNumOfPlayers();
-                for (int j = 0 ; (j < numOfPlayers); j++){
 
+                for (int newPlayerNum = 0 ; (newPlayerNum < numOfPlayers); newPlayerNum++){
+                    for (int i : playerC.getPlayerStreets(newPlayerNum)){
+                        if (i == positionOnBoard){
+                            playerC.updatePlayerBalance(newPlayerNum, rent);
+                            playerC.updatePlayerBalance(playerNum, -rent);
+                        }
+                    }
                 }
             }
         }
+        else if (!owned){
 
+        }
+        */
     }
 
 }
