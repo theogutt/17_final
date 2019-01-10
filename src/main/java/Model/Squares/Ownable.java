@@ -31,8 +31,4 @@ public abstract class Ownable extends Square {
     public int getRent() {
         return rent;
     }
-    @Override
-    public int getPositionOnBoard(){
-        return super.getPositionOnBoard();
-    }
 }
