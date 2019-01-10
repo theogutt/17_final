@@ -8,11 +8,6 @@ public class Brewery extends Ownable{
         super(positionOnBoard, price, rent, owned);
     }
 
-    // Udregner leje
-    public int getRent(int facevalueSum, int numberOfBrewerys){
-        int rent = facevalueSum * 100 * numberOfBrewerys;
-        return rent;
-    }
 
     @Override
     public int landOn(PlayerController playerNum) {
