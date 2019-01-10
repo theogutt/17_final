@@ -42,7 +42,7 @@ public class PlayerController {
             //Finds the player with the highest balance
             if (max < getRef(i).getBalance()) {
                 max = getRef(i).getBalance();
-                ref = getRef(i).getObjectNumber();
+                ref = getRef(i).getPlayerNum();
             }
 
             //If equal amount, the winner is the one with the greatest amount of property value
@@ -120,8 +120,8 @@ public class PlayerController {
         return getRef(ref).getOldPosition();
     }
 
-    public int getPlayerObjectNumber(int ref) {
-        return getRef(ref).getObjectNumber();
+    public int getPlayerPlayerNum(int ref) {
+        return getRef(ref).getPlayerNum();
     }
 
     public int getPosition(int i) {
