@@ -33,12 +33,14 @@ public class GameEngine {
         //Normal turn
         int ref;
         int i = 0;
-        ref = calcTurn(i);
         do {
+            ref = calcTurn(i);
             guiHandler.playerTurnGui(playerC, ref);
             if (true) {
                 playTurn(ref);
             }
+            guiHandler.showScore(playerC, ref);
+            i++;
         }
         while(true);
     }

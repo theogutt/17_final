@@ -145,6 +145,10 @@ public class GUI_Handler {
     public void setDiceGui(Die die1, Die die2) {
         gui.setDice(die1.getFaceValue(), die2.getFaceValue());
     }
+    public void showScore(PlayerController player, int i) {
+        gui.showMessage(message.playerEndTurn(player, i));
+    }
+
 
     public void setSpecificFields(){
             //ejendomsfelter
