@@ -75,7 +75,7 @@ public class CarColor {
         colorArray[2] = Color.BLUE;
         colorArray[3] = Color.MAGENTA;
         colorArray[4] = Color.BLACK;
-        colorArray[5] = Color.YELLOW;
+        colorArray[5] = Color.white;
     }
     public void instaColorStringArray() {
         colorStringArray = new String[6];

@@ -44,11 +44,11 @@ public class GameEngine {
         }
         while(true);
     }
-    public void playTurn(int ref){
-        guiHandler.removeAllCarsCurPos(playerC);
-        playerC.calcNewPosition(die1.roll(), die2.roll(), ref);
-        guiHandler.setAllCarsCurPos(playerC);
-        guiHandler.diceUpdateGui(playerC, die1, die2);
+    public void playTurn(int ref) {
+            guiHandler.removeAllCarsCurPos(playerC);
+            playerC.calcNewPosition(die1.roll(), die2.roll(), ref);
+            guiHandler.setAllCarsCurPos(playerC);
+            guiHandler.diceUpdateGui(playerC, die1, die2);
     }
     public int calcTurn(int j) {
         int currentTurn = j % playerC.getNumOfPlayers();
