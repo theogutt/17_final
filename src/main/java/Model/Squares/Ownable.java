@@ -6,7 +6,7 @@ public abstract class Ownable extends Square {
     protected boolean owned;
     protected int rent;
 
-    public Ownable(int positionOnBoard, int price, boolean owned, int rent){
+    public Ownable(int positionOnBoard, int price, int rent, boolean owned){
         super(positionOnBoard);
         this.owned = owned;
         this.price = price;
