@@ -32,17 +32,25 @@ public class Property extends Ownable {
     }
 
     public int landOn(PlayerController playerC, int playerNum){
-        boolean playerOnwStreet = false;
+        boolean playerOwnStreet = false;
 
         // Paying rent
         if (owned == true){
-            for (PlayerC.getPlayerStreets(playerNum)){
-
-
+            for (int i : playerC.getPlayerStreets(playerNum)){
+                if (i == positionOnBoard){
+                    playerOwnStreet = true;
+                }
             }
 
-        }
+            // Who to pay rent to
+            if (playerOwnStreet == false){
+                int numOfPlayers;
+                numOfPlayers = playerC.getNumOfPlayers();
+                for (int j = 0 ; (j < numOfPlayers); j++){
 
+                }
+            }
+        }
 
     }
 
