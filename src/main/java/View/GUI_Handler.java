@@ -1,6 +1,7 @@
 package View;
 
 import Controller.PlayerController;
+import Model.Die;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -125,7 +126,27 @@ public class GUI_Handler {
 
         return car;
     }
-        public void setSpecificFields(){
+    public void removeAllCarsCurPos(PlayerController playerC) {
+        for (int i = 0; i < gui_Players.length; i++) {
+            fields[(playerC.getPosition(i))].removeAllCars();
+        }
+    }
+    public void setAllCarsCurPos(PlayerController playerC) {
+        for (int i = 0; i < gui_Players.length; i++) {
+            fields[(playerC.getPosition(i))].setCar(getGuiPlayer(i), true);
+        }
+    }
+    public void playerTurnGui(PlayerController player, int ref) {
+        gui.showMessage(message.playerTurn(player, ref));
+    }
+    public void diceUpdateGui(PlayerController player, Die die1, Die die2) {
+        setDiceGui(die1, die2);
+    }
+    public void setDiceGui(Die die1, Die die2) {
+        gui.setDice(die1.getFaceValue(), die2.getFaceValue());
+    }
+
+    public void setSpecificFields(){
             //ejendomsfelter
             GUI_Street rødovrevej = new GUI_Street();
             fields[1] = rødovrevej;
