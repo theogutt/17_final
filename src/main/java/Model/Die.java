@@ -24,6 +24,8 @@ public class Die {
         return this.faceValue;
     }
 
+
+
     //-------------------
     //Getters og setters
     //-------------------
