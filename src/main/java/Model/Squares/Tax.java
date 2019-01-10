@@ -2,15 +2,15 @@ package Model.Squares;
 
 import Controller.PlayerController;
 
-public class Chance extends Square{
+public class Tax extends Square{
 
-    public Chance(int positionOnBoard) {
+    public Tax(int positionOnBoard){
         super(positionOnBoard);
     }
 
     @Override
     public int getPositionOnBoard(){
-        return super.getPositionOnBoard();
+        return super.positionOnBoard;
     }
 
     @Override
@@ -18,6 +18,6 @@ public class Chance extends Square{
 
         //Retur værdi som en controller skal bruge til at finde ud af hvad den skal gøre
         //Selve værdien kan sagtens ændres
-        return -3;
+        return -2;
     }
 }
