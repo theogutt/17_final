@@ -1,6 +1,5 @@
 package Model.Squares;
 
-import Controller.PlayerController;
 
 public class Start extends Square{
 
@@ -12,14 +11,5 @@ public class Start extends Square{
     @Override
     public int getPositionOnBoard(){
         return super.getPositionOnBoard();
-    }
-
-    @Override
-    public int landOn(PlayerController playerNum){
-        /*
-        Retunere værdi som en controller bruger
-        til at finde ud af hvad den skal gøre
-        */
-        return -1;
     }
 }

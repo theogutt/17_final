@@ -1,6 +1,5 @@
 package Model.Squares;
 
-import Controller.PlayerController;
 
 public class Brewery extends Ownable{
 
@@ -13,10 +12,4 @@ public class Brewery extends Ownable{
         int rent = facevalueSum * 100 * numberOfBrewerys;
         return rent;
     }
-
-    @Override
-    public int landOn(PlayerController playerNum) {
-        return 0;
-    }
-
 }
