@@ -1,10 +1,11 @@
 package Model.Squares;
 import Controller.PlayerController;
+import Model.Squares.Ownable;
 
-public class Property extends Ownable {
+public class Street extends Ownable {
 
 
-    public Property (int positionOnBoard, int price, boolean owned, int rent){
+    public Street (int positionOnBoard, int price, boolean owned, int rent){
         super(positionOnBoard, price, owned, rent);
 
     }
