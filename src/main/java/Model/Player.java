@@ -9,14 +9,14 @@ public class Player {
     private boolean broke = false;
     private int oldPosition;
     private int curPosition = 0;
-    private int objectNumber;
+    private int playerNum;
     private Account account;
     private boolean inJail = false;
     private boolean jailCard = false;
     private boolean specialCard = false;
 
-    public Player(int objectNumber, int numOfPlayers){
-        this.objectNumber = objectNumber;
+    public Player(int playerNum, int numOfPlayers){
+        this.playerNum = playerNum;
         this.account = new Account();
     }
     public int getSumOfProperties(){
@@ -55,8 +55,8 @@ public class Player {
         this.curPosition = curPosition;
     }
 
-    public int getObjectNumber() {
-        return objectNumber;
+    public int getPlayerNum() {
+        return playerNum;
     }
 
     public boolean getBroke(){
