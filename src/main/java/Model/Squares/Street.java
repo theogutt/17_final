@@ -6,7 +6,7 @@ public class Street extends Ownable {
 
 
     public Street (int positionOnBoard, int price, boolean owned, int rent){
-        super(positionOnBoard, price, owned, rent);
+        super(positionOnBoard, price, rent, owned);
 
     }
     public void setOwned(boolean owned) {
