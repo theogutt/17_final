@@ -218,10 +218,6 @@ public class Chance extends Square{
         return chanceCards;
     }
 
-    public int[] getChanceCards2() {
-        return chanceCards2;
-    }
-
     public void setChanceCards(int[] chanceCards) {
         this.chanceCards = chanceCards;
     }
