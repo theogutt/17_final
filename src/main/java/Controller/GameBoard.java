@@ -26,7 +26,10 @@ public class GameBoard {
         }
     }
 
-/*
+    public void streetImpact(PlayerController playerC, int position,int facevalueSum){
+        squares[position].landOn(playerC,position,facevalueSum);
+    }
+    /*
     public void landOnEffect(int playerNum){
 
         // i er den reelle spiller position på brættet

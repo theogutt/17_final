@@ -1,5 +1,7 @@
 package Model.Squares;
 
+import Controller.PlayerController;
+
 public abstract class Ownable extends Square {
 
     protected final int price;
@@ -12,6 +14,9 @@ public abstract class Ownable extends Square {
         this.price = price;
         this.rent = rent;
     }
+
+    @Override
+    public abstract int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum);
 
     public void setOwned(boolean owned) {
         this.owned = owned;
