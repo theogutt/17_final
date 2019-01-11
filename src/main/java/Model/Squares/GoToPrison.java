@@ -23,4 +23,5 @@ public class GoToPrison extends Square{
 
         return super.getPositionOnBoard();
     }
+
 }
