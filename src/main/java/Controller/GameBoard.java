@@ -29,7 +29,7 @@ public class GameBoard {
     public void landOnEffect(int playerNum){
 
         // i er den reelle spiller position på brættet
-        int i = Square.getPositionOnBoard() + 1;
+        int i = PlayerC.getPosition(playerNum) + 1;
 
 
         //Start felt
@@ -40,18 +40,18 @@ public class GameBoard {
         //Chancekort
         else if (i == 3 || i == 8 || i == 18 || i == 23 || i == 34 || i == 37){
 
+
         }
 
         //Skatte felt
-        else if (i == 5 || i == 39){
-            if (i == 39){
+        else if (i == 39){
                 PlayerC.updatePlayerBalance(playerNum, -2000);
-            }
-            else {
+        }
+        else if (i == 5){
                 //Mangler valgmulighed for at betale 10%
                 PlayerC.updatePlayerBalance(playerNum, -4000);
-            }
         }
+
 
         //På besøg og gratis parkering
         else if (i == 11 || i == 21){
