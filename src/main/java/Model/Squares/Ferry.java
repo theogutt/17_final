@@ -16,7 +16,7 @@ public class Ferry extends Ownable{
     }
 
     @Override
-    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum){
+    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
         return -1;
     }
 }
