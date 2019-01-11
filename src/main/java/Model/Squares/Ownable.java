@@ -16,7 +16,7 @@ public abstract class Ownable extends Square {
     }
 
     @Override
-    public abstract int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum);
+    public abstract int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref);
 
     public void setOwned(boolean owned) {
         this.owned = owned;
