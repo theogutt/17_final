@@ -104,21 +104,57 @@ public class ChanceController {
                 returnInt = 14;
                 break;
 
-            case 15: // Move to Rådhuspladsen.
-                playerC.setPosition(playerNum, 39);
+            case 15: // Move to nearest brewery
+                if (playerC.getPosition(playerNum) > 12 && playerC.getPosition(playerNum) < 28){
+                    playerC.setPosition(playerNum, 28);
+                }
+                else{
+                    playerC.setPosition(playerNum, 12);
+                }
                 returnInt = 15;
                 break;
 
-            case 16: // Pay for houses and Hotels
+            case 16: // Move to Rådhuspladsen.
+                playerC.setPosition(playerNum, 39);
                 returnInt = 16;
                 break;
 
-            case 17: // Jailcard.
-                playerC.setJailCard(playerNum, true);
+            case 17: // Pay for houses and hotels.
                 returnInt = 17;
                 break;
 
+            case 18: // Pay more for houses and hotels.
+                returnInt = 18;
+                break;
 
+            case 19: // Jailcard.
+                playerC.setJailCard(playerNum, true);
+                returnInt = 19;
+                break;
+
+            case 20: // Jailcard.
+                playerC.setJailCard(playerNum, true);
+                returnInt = 20;
+                break;
+
+            case 21: // Move 3 squares back.
+                int newPosition;
+                newPosition = playerC.getPosition(playerNum)-3;
+                if (newPosition < 0){
+                    playerC.setPosition(playerNum, newPosition + 40);
+                }
+                else{
+                    playerC.setPosition(playerNum, newPosition);
+                }
+                returnInt = 21;
+                break;
+
+            case 22: // Move to start.
+                playerC.setPosition(playerNum, 0);
+                returnInt = 22;
+                break;
+
+            case 23: // Go to prison
 
         }
         return returnInt;
