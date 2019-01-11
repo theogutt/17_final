@@ -2,8 +2,8 @@ package Controller;
 import Controller.PlayerController;
 
 public class ChanceController {
-    private int[] chanceCards = new int[20];
-    private int[] chanceCards2 = new int[20];
+    private int[] chanceCards = new int[12];
+    private int[] chanceCards2 = new int[12];
     private int positionOnBoard;
 
     public ChanceController(int positionOnBoard) {
@@ -72,9 +72,6 @@ public class ChanceController {
                         playerC.updatePlayerBalance(payingPlayer, -200);
                     payingPlayer++;
                 }
-
-            case 13:
-
         }
         return returnInt;
     }
