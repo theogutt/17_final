@@ -11,4 +11,9 @@ public class Tax extends Square{
     public int getPositionOnBoard(){
         return super.positionOnBoard;
     }
+
+    @Override
+    public int landOn(){
+        return -1;
+    }
 }

@@ -13,6 +13,8 @@ public abstract class Ownable extends Square {
         this.rent = rent;
     }
 
+
+
     public void setOwned(boolean owned) {
         this.owned = owned;
     }

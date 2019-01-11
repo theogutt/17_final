@@ -12,4 +12,9 @@ public class Ferry extends Ownable{
 
         this.rent = (int)(250 * Math.pow(2,numbersOfOwnedFerrys));
     }
+
+    @Override
+    public int landOn(){
+        return -1;
+    }
 }

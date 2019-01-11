@@ -11,4 +11,9 @@ public class Parking extends Square{
     public int getPositionOnBoard(){
         return super.getPositionOnBoard();
     }
+
+    @Override
+    public int landOn(){
+        return -1;
+    }
 }

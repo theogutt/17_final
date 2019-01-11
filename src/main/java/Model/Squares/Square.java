@@ -12,4 +12,9 @@ public abstract class Square {
     public int getPositionOnBoard(){
         return positionOnBoard;
     }
+
+
+    public int landOn(){
+        return -1;
+    }
 }

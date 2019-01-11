@@ -30,6 +30,11 @@ public class Street extends Ownable {
     }
 
     @Override
+    public int landOn(){
+        return -1;
+    }
+
+    @Override
     public int getPositionOnBoard(){
         return super.getPositionOnBoard();
     }

@@ -12,4 +12,9 @@ public class Brewery extends Ownable{
         int rent = facevalueSum * 100 * numberOfBrewerys;
         return rent;
     }
+
+    @Override
+    public int landOn(){
+        return -1;
+    }
 }
