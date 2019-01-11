@@ -154,7 +154,32 @@ public class ChanceController {
                 returnInt = 22;
                 break;
 
-            case 23: // Go to prison
+            case 23: // Go to prison.
+                playerC.setInJail(playerNum,true);
+                playerC.setPosition(playerNum,10);
+                returnInt = 23;
+                break;
+
+            case 24: // Go to prison.
+                playerC.setInJail(playerNum,true);
+                playerC.setPosition(playerNum,10);
+                returnInt = 24;
+                break;
+
+            case 25: // Move to Grønningen.
+                playerC.setPosition(playerNum, 24);
+                returnInt = 25;
+                break;
+
+            case 26: // Move to LB-ferry.
+                playerC.setPosition(playerNum,5);
+                returnInt = 26;
+                break;
+
+            case 27: // Move to Frederiksberg Alle.
+                playerC.setPosition(playerNum,11);
+                returnInt = 27;
+                break;
 
         }
         return returnInt;
