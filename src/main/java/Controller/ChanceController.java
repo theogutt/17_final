@@ -2,8 +2,8 @@ package Controller;
 import Controller.PlayerController;
 
 public class ChanceController {
-    private int[] chanceCards = new int[12];
-    private int[] chanceCards2 = new int[12];
+    private int[] chanceCards = new int[27];
+    private int[] chanceCards2 = new int[27];
 
     public ChanceController() {
         intantiateCards();
