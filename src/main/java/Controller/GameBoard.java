@@ -26,8 +26,8 @@ public class GameBoard {
         }
     }
 
-    public void streetImpact(PlayerController playerC, int position,int facevalueSum){
-        squares[position].landOn(playerC,position,facevalueSum);
+    public void streetImpact(PlayerController playerC, int position,int facevalueSum, int ref){
+        squares[position].landOn(playerC,position,facevalueSum,ref);
     }
     /*
     public void landOnEffect(int playerNum){
