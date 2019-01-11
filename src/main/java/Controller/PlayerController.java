@@ -71,10 +71,10 @@ public class PlayerController {
         }
     }
 
-    public void setPosition(int newPosition, int i) {
-        int oldPosition = playerModels[i].getCurPosition();
-        getRef(i).setOldPosition(oldPosition);
-        playerModels[i].setCurPosition(newPosition);
+    public void setPosition(int newPosition, int playerNum) {
+        int oldPosition = playerModels[playerNum].getCurPosition();
+        getRef(playerNum).setOldPosition(oldPosition);
+        playerModels[playerNum].setCurPosition(newPosition);
     }
 
 /*

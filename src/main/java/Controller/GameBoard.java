@@ -65,8 +65,7 @@ public class GameBoard {
 
         //Gå i fængsel
         else if (i == 31){
-            PlayerC.setPosition(playerNum,10);
-            PlayerC.setInJail(playerNum, true);
+
         }
 
         //Grunde
