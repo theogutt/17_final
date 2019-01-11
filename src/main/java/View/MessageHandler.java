@@ -38,4 +38,12 @@ public class MessageHandler {
         String playerMessage = getSquareMessage(Integer.parseInt(messageNum));
         return playerMessage;
     }
+    public String playerEndTurn(PlayerController playerC, int i) {
+        returnString = playerC.getName(i) + " har nu " + playerC.getBalance(i) + " kr.";
+        return returnString;
+    }
+    public String playerTurn(PlayerController playerC, int i) {
+        returnString = "Det er " + playerC.getName(i) + "'s tur! Tryk enter for at kaste terningerne!";
+        return returnString;
+    }
 }

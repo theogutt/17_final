@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Player;
-//import Model.Square.Street;
 import java.util.ArrayList;
 
 public class PlayerController {
@@ -55,19 +54,19 @@ public class PlayerController {
         return ref;
     }
 
-    public void calcNewPosition(int rollSum, int i) {
+    public void calcNewPosition(int rollSum1, int rollSum2, int i) {
         int oldPosition = getRef(i).getCurPosition();
         getRef(i).setOldPosition(oldPosition);
 
         int newPosition;
-        if (rollSum + oldPosition == 23) {
-            getRef(i).setCurPosition(23);
-        } else if ((rollSum + oldPosition) > 23) {
-            newPosition = ((rollSum + oldPosition) % 24);
+        if (rollSum1+rollSum2 + oldPosition == 39) {
+            getRef(i).setCurPosition(39);
+        } else if ((rollSum1+rollSum2 + oldPosition) > 39) {
+            newPosition = ((rollSum1+rollSum2 + oldPosition) % 40);
             getRef(i).setCurPosition((newPosition));
 
         } else {
-            newPosition = (rollSum + oldPosition);
+            newPosition = (rollSum1+rollSum2 + oldPosition);
             getRef(i).setCurPosition((newPosition));
         }
     }

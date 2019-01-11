@@ -1,7 +1,5 @@
 package Model.Squares;
 
-import Controller.PlayerController;
-
 public abstract class Square {
 
     protected int positionOnBoard;
@@ -14,9 +12,4 @@ public abstract class Square {
     public int getPositionOnBoard(){
         return positionOnBoard;
     }
-
-    public abstract int landOn(PlayerController playerNum);
-
-
-
 }

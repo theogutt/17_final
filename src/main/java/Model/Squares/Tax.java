@@ -1,14 +1,14 @@
 package Model.Squares;
 
 
-public class Parking extends Square{
+public class Tax extends Square{
 
-    public Parking(int positionOnBoard){
+    public Tax(int positionOnBoard){
         super(positionOnBoard);
     }
 
     @Override
     public int getPositionOnBoard(){
-        return super.getPositionOnBoard();
+        return super.positionOnBoard;
     }
 }
