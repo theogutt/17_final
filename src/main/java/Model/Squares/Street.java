@@ -5,7 +5,7 @@ import Model.Squares.Ownable;
 public class Street extends Ownable {
 
 
-    public Street (int positionOnBoard, int price, boolean owned, int rent){
+    public Street (int positionOnBoard, int price,int rent, boolean owned){
         super(positionOnBoard, price, rent, owned);
 
     }
