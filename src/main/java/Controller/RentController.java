@@ -1,4 +1,4 @@
-/*
+
 package Controller;
 import Model.Squares.Square;
 import Utilities.TextReader;
@@ -14,9 +14,11 @@ public class RentController {
     private HashMap threeHouseRent;
     private HashMap fourHouseRent;
     private HashMap hotelRent;
+    private HashMap baseRent;
     private Square[] squares = new Square[40];
 
     public RentController() throws IOException {
+        baseRent = TextReader.textReader(".\\src\\Resources\\BaseRent");
         oneHouseRent = TextReader.textReader(".\\src\\Resources\\1HouseRent");
         twoHouseRent = TextReader.textReader(".\\src\\Resources\\2HouseRent");
         threeHouseRent = TextReader.textReader(".\\src\\Resources\\3HouseRent");
@@ -36,21 +38,27 @@ public class RentController {
         int position = playerC.getPosition(ref);
         int buildings = squares[position].getNumOfBuildings();
         switch (buildings) {
+            case 0:
+                return baseRent(position);
+                break;
             case 1:
-               return oneHouseRent(position);
+                return oneHouseRent(position);
                 break;
             case 2:
-               return twoHouseRent(position);
+                return twoHouseRent(position);
                 break;
             case 3:
                 return threeHouseRent(position);
                 break;
             case 4:
-               return fourHouseRent(position);
+                return fourHouseRent(position);
                 break;
             default:
-               return HotelRent(position);
+                return HotelRent(position);
         }
+    }
+     public int getRentInt0(int index) {
+        return (Integer) baseRent.get(index);
     }
     public int getRentInt1(int index) {
         return (Integer) oneHouseRent.get(index);
@@ -68,6 +76,9 @@ public class RentController {
         return (Integer) hotelRent.get(index);
     }
 
+    public int baseRent(int position){
+        return getRentInt0(position);
+    }
     public int oneHouseRent(int position){
         return getRentInt1(position);
     }
@@ -84,4 +95,3 @@ public class RentController {
         return getRentInt5(position);
     }
 }
-*/
