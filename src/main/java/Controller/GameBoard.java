@@ -7,7 +7,6 @@ import java.util.HashMap;
 public class GameBoard {
 
     private Square[] squares = new Square[40];
-    private PlayerController PlayerC = new PlayerController();
     private Square Square = new Square();
     private HashMap squarePrice;
 
@@ -26,7 +25,7 @@ public class GameBoard {
 
 
 
-    public void landOnEffect(int playerNum){
+    public void landOnEffect(int playerNum, PlayerController PlayerC){
 
         // i er den reelle spiller position på brættet
         int i = Square.getPositionOnBoard() + 1;
