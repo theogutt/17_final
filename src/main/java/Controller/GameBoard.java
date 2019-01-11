@@ -32,6 +32,9 @@ public class GameBoard {
     /*
     public void landOnEffect(int playerNum){
 
+    //Der kommer nok en nullPointerException på grund af Square Square. Men nu kan programmet køres.
+    public void landOnEffect(int playerNum, PlayerController PlayerC, Square Square){
+
         // i er den reelle spiller position på brættet
         int i = PlayerC.getPosition(playerNum) + 1;
 
@@ -65,7 +68,8 @@ public class GameBoard {
 
         //Gå i fængsel
         else if (i == 31){
-
+            PlayerC.setPosition(playerNum,10);
+            PlayerC.setInJail(playerNum, true);
         }
 
         //Grunde
