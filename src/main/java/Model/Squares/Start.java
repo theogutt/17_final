@@ -1,6 +1,8 @@
 package Model.Squares;
 
 
+import Controller.PlayerController;
+
 public class Start extends Square{
 
     //Constructor
@@ -14,7 +16,7 @@ public class Start extends Square{
     }
 
     @Override
-    public int landOn(){
+    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum){
         return -1;
     }
 }

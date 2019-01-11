@@ -1,6 +1,8 @@
 package Model.Squares;
 
 
+import Controller.PlayerController;
+
 public class Brewery extends Ownable{
 
     public Brewery(int positionOnBoard, int price, int rent, boolean owned){
@@ -14,7 +16,7 @@ public class Brewery extends Ownable{
     }
 
     @Override
-    public int landOn(){
+    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum){
         return -1;
     }
 }

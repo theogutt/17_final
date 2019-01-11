@@ -24,8 +24,4 @@ public class GoToPrison extends Square{
         return super.getPositionOnBoard();
     }
 
-    @Override
-    public int landOn(){
-        return -1;
-    }
 }

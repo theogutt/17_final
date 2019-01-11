@@ -1,5 +1,6 @@
 package Model.Squares;
 
+import Controller.PlayerController;
 import Model.Squares.Ownable;
 
 public class Street extends Ownable {
@@ -30,7 +31,7 @@ public class Street extends Ownable {
     }
 
     @Override
-    public int landOn(){
+    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum){
         return -1;
     }
 
