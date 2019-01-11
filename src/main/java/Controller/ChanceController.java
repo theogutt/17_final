@@ -84,7 +84,42 @@ public class ChanceController {
                         playerC.updatePlayerBalance(payingPlayer, -200);
                     payingPlayer++;
                 }
+                returnInt = 12;
                 break;
+
+            case 13: // Get 40.000 if balance < 3.000.
+                if (playerC.getBalance(playerNum) < 3000){
+                    playerC.updatePlayerBalance(playerNum, 40000);
+                }
+                returnInt = 13;
+                break;
+
+            case 14: // Move to nearest brewery.
+                if (playerC.getPosition(playerNum) > 12 && playerC.getPosition(playerNum) < 28){
+                    playerC.setPosition(playerNum, 28);
+                }
+                else{
+                    playerC.setPosition(playerNum, 12);
+                }
+                returnInt = 14;
+                break;
+
+            case 15: // Move to Rådhuspladsen.
+                playerC.setPosition(playerNum, 39);
+                returnInt = 15;
+                break;
+
+            case 16: // Pay for houses and Hotels
+                returnInt = 16;
+                break;
+
+            case 17: // Jailcard.
+                playerC.setJailCard(playerNum, true);
+                returnInt = 17;
+                break;
+
+
+
         }
         return returnInt;
     }
