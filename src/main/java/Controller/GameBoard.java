@@ -7,7 +7,6 @@ import java.util.HashMap;
 public class GameBoard {
 
     private Square[] squares = new Square[40];
-    private Square Square = new Square();
     private HashMap squarePrice;
 
 
@@ -18,14 +17,14 @@ public class GameBoard {
             else if (i == 30 ){ squares[i]= new GoToPrison(i);}                                                      //Jail
             else if (i == 2 || i == 7 || i == 17 || i == 22 || i == 33 || i == 36) {squares[i]= new Chance(i);}     //Chance
             else if (i == 4 || i == 38){squares[i]= new Tax(i);}                                                    //Tax
-            else{squares[i]= new Street(i, (Integer)squarePrice.get(i),false);                                      //Street
+            else{squares[i]= new Street(i, (Integer)squarePrice.get(i),false,0);                                      //Street
             }
         }
     }
 
 
-
-    public void landOnEffect(int playerNum, PlayerController PlayerC){
+    //Der kommer nok en nullPointerException på grund af Square Square. Men nu kan programmet køres.
+    public void landOnEffect(int playerNum, PlayerController PlayerC, Square Square){
 
         // i er den reelle spiller position på brættet
         int i = Square.getPositionOnBoard() + 1;
