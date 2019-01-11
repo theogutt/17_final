@@ -19,50 +19,62 @@ public class ChanceController {
             case 0: // Get 3.000 kr.
                 playerC.updatePlayerBalance(playerNum, 3000);
                 returnInt = 0;
+                break;
 
             case 1: // Get 1.000 kr.
                 playerC.updatePlayerBalance(playerNum, 1000);
                 returnInt = 1;
+                break;
 
             case 2: // Get 1.000 kr.
                 playerC.updatePlayerBalance(playerNum, 1000);
                 returnInt = 2;
+                break;
 
             case 3: // Get 1.000 kr.
                 playerC.updatePlayerBalance(playerNum, 1000);
                 returnInt = 3;
+                break;
 
             case 4: // Get 1.000 kr.
                 playerC.updatePlayerBalance(playerNum, 1000);
                 returnInt = 4;
+                break;
 
             case 5: // Lose 200 kr.
                 playerC.updatePlayerBalance(playerNum, -200);
                 returnInt = 5;
+                break;
 
             case 6: // Lose 200 kr.
                 playerC.updatePlayerBalance(playerNum,-200);
                 returnInt = 6;
+                break;
 
             case 7: // Lose 1.000 kr.
                 playerC.updatePlayerBalance(playerNum, -1000);
                 returnInt = 7;
+                break;
 
             case 8: // Lose 3.000 kr.
                 playerC.updatePlayerBalance(playerNum,-3000);
                 returnInt = 8;
+                break;
 
             case 9: // Get 200 kr.
                 playerC.updatePlayerBalance(playerNum,200);
                 returnInt = 9;
+                break;
 
-            case 10: // Lose 3.000 kr.;
+            case 10: // Lose 3.000 kr.
                 playerC.updatePlayerBalance(playerNum,-3000);
                 returnInt = 10;
+                break;
 
             case 11: // Lose 1.000 kr.
                 playerC.updatePlayerBalance(playerNum,-1000);
                 returnInt = 11;
+                break;
 
             case 12: // Birthday.
                 int payingPlayer = 0;
@@ -72,6 +84,7 @@ public class ChanceController {
                         playerC.updatePlayerBalance(payingPlayer, -200);
                     payingPlayer++;
                 }
+                break;
         }
         return returnInt;
     }
