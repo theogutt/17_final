@@ -4,9 +4,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class CarColor {
-    private Color[] colorArray = new Color[4];
+    private Color[] colorArray = new Color[6];
     private int colorsChosen;
-    private int numOfColors = 4;
+    private int numOfColors = 6;
     private String[] colorStringArray;
     private String[] colorStringArray2;
     private String colorChosenString;
@@ -19,15 +19,22 @@ public class CarColor {
     public Color colorChosen(String colorChoiceString) {
         Color returnColor;
         colorChosenString = colorChoiceString;
-        if (colorChoiceString.equalsIgnoreCase("grey")) {
+        if (colorChoiceString.equalsIgnoreCase("grå")) {
             returnColor = colorArray[0];
-        } else if (colorChoiceString.equalsIgnoreCase("green")) {
+        } else if (colorChoiceString.equalsIgnoreCase("grøn")) {
             returnColor = colorArray[1];
-        } else if (colorChoiceString.equalsIgnoreCase("blue")) {
+        } else if (colorChoiceString.equalsIgnoreCase("blå")) {
             returnColor = colorArray[2];
-        } else {
-            //If choice is magenta
+        }
+        else if (colorChoiceString.equalsIgnoreCase("lila")) {
             returnColor = colorArray[3];
+        }
+        else if (colorChoiceString.equalsIgnoreCase("sort")) {
+            returnColor = colorArray[4];
+        }
+        else {
+            //If choice is white
+            returnColor = colorArray[5];
         }
         colorsChosen++;
         updateColorStringArray(colorChoiceString);
@@ -67,13 +74,17 @@ public class CarColor {
         colorArray[1] = Color.GREEN;
         colorArray[2] = Color.BLUE;
         colorArray[3] = Color.MAGENTA;
+        colorArray[4] = Color.BLACK;
+        colorArray[5] = Color.white;
     }
     public void instaColorStringArray() {
-        colorStringArray = new String[4];
-        colorStringArray[0] = "Grey";
-        colorStringArray[1] = "Green";
-        colorStringArray[2] = "Blue";
-        colorStringArray[3] = "Magenta";
+        colorStringArray = new String[6];
+        colorStringArray[0] = "grå";
+        colorStringArray[1] = "grøn";
+        colorStringArray[2] = "blå";
+        colorStringArray[3] = "lila";
+        colorStringArray[4] = "sort";
+        colorStringArray[5] = "hvid";
     }
 
     public String[] getColorStringArray() {

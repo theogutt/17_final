@@ -1,8 +1,10 @@
+import Controller.GameEngine;
 import View.GUI_Handler;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[]args){
-        GUI_Handler gui_handler = new GUI_Handler();
-        gui_handler.startGUI();
+    public static void main(String[]args) throws IOException {
+        new GameEngine().start();
     }
 }
