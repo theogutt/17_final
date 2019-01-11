@@ -1,4 +1,4 @@
-
+/*
 package Controller;
 import Model.Squares.Square;
 import Utilities.TextReader;
@@ -95,3 +95,4 @@ public class RentController {
         return getRentInt5(position);
     }
 }
+*/
