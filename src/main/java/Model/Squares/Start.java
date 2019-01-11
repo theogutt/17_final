@@ -17,6 +17,8 @@ public class Start extends Square{
 
     @Override
     public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
+
+        playerC.updatePlayerBalance(ref, 4000);
         return -1;
     }
 }
