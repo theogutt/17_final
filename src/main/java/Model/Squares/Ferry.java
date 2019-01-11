@@ -1,6 +1,8 @@
 package Model.Squares;
 
 
+import Controller.PlayerController;
+
 public class Ferry extends Ownable{
 
     public Ferry(int positionOnBoard, int price, int rent, boolean owned){
@@ -11,5 +13,10 @@ public class Ferry extends Ownable{
     public void changeRent(int numbersOfOwnedFerrys){
 
         this.rent = (int)(250 * Math.pow(2,numbersOfOwnedFerrys));
+    }
+
+    @Override
+    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
+        return -1;
     }
 }

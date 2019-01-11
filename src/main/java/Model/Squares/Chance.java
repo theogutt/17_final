@@ -1,6 +1,8 @@
 package Model.Squares;
 
 
+import Controller.PlayerController;
+
 public class Chance extends Square{
 
     public Chance(int positionOnBoard) {
@@ -10,5 +12,10 @@ public class Chance extends Square{
     @Override
     public int getPositionOnBoard(){
         return super.getPositionOnBoard();
+    }
+
+    @Override
+    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
+        return -1;
     }
 }
