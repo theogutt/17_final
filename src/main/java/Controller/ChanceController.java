@@ -4,10 +4,8 @@ import Controller.PlayerController;
 public class ChanceController {
     private int[] chanceCards = new int[12];
     private int[] chanceCards2 = new int[12];
-    private int positionOnBoard;
 
-    public ChanceController(int positionOnBoard) {
-        this.positionOnBoard = positionOnBoard;
+    public ChanceController() {
         intantiateCards();
     }
 
