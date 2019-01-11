@@ -15,8 +15,5 @@ public abstract class Square {
         return positionOnBoard;
     }
 
-    public abstract int landOn(PlayerController playerNum);
-
-
-
+    public abstract int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref);
 }

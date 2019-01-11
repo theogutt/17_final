@@ -1,5 +1,6 @@
 package Model.Squares;
 
+
 import Controller.PlayerController;
 
 public class Chance extends Square{
@@ -14,10 +15,7 @@ public class Chance extends Square{
     }
 
     @Override
-    public int landOn(PlayerController playerNum){
-
-        //Retur værdi som en controller skal bruge til at finde ud af hvad den skal gøre
-        //Selve værdien kan sagtens ændres
-        return -3;
+    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
+        return -1;
     }
 }
