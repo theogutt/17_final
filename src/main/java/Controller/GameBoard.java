@@ -23,9 +23,10 @@ public class GameBoard {
 
     public void squareImpact(int ref){
         int position = PlayerC.getPosition(ref);
-
+        squares[position].landOn();
     }
-
+    public void streetImpact(PlayerController playerC, int position,int facevalueSum){
+    }
 // Opretter felter med pris og rent
     public void instantiateSquares(){
         for (int i = 0; i < 40; i++) {

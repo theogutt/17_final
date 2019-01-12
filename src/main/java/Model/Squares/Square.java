@@ -10,6 +10,8 @@ public abstract class Square{
         this.positionOnBoard = positionOnBoard;
     }
 
+    public void landOn(){}
+
     public int getOwner() {
         return owner;
     }
