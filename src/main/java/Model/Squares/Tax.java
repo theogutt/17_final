@@ -1,5 +1,7 @@
 package Model.Squares;
 
 public class Tax extends Square{
-    public Tax(){}
+    public Tax(int positionOnBoard) {
+        super(positionOnBoard);
+    }
 }
