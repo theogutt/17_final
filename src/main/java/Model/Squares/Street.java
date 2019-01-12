@@ -1,75 +1,19 @@
 package Model.Squares;
 
-import Controller.PlayerController;
-import Model.Squares.Ownable;
+public class Street extends Ownable{
+    private final int price;
+    private boolean owned;
+    private int positionOnBoard;
+    private final String name;
+    private int numOfBuildings;
+    private int groupID;
 
-public class Street extends Ownable {
-
-
-    public Street (int positionOnBoard, int price,int rent, boolean owned){
-        super(positionOnBoard, price, rent, owned);
-
-    }
-    public void setOwned(boolean owned) {
+    public Street(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned){
+        this.price = price;
         this.owned = owned;
+        this.positionOnBoard = positionOnBoard;
+        this.name = name;
+        this.numOfBuildings = numOfBuildings;
+        this.groupID = groupID;
     }
-
-    public boolean getOwned(){
-        return owned;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setRent(int rent) {
-        this.rent = rent;
-    }
-
-    public int getRent() {
-        return rent;
-    }
-
-    @Override
-    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
-        return -1;
-    }
-
-    @Override
-    public int getPositionOnBoard(){
-        return super.getPositionOnBoard();
-    }
-
-
-        /*
-        boolean playerOwnStreet = false;
-        int numOfPlayers;
-
-        // Paying rent
-        if (owned){
-            for (int i : playerC.getPlayerStreets(playerNum)){
-                if (i == positionOnBoard)
-                    playerOwnStreet = true;
-            }
-
-            // Who to pay rent to
-            if (!playerOwnStreet){
-                numOfPlayers = playerC.getNumOfPlayers();
-
-                for (int newPlayerNum = 0 ; (newPlayerNum < numOfPlayers); newPlayerNum++){
-                    for (int i : playerC.getPlayerStreets(newPlayerNum)){
-                        if (i == positionOnBoard){
-                            playerC.updatePlayerBalance(newPlayerNum, rent);
-                            playerC.updatePlayerBalance(playerNum, -rent);
-                        }
-                    }
-                }
-            }
-        }
-        else if (!owned){
-
-        }
-        */
-
-
 }

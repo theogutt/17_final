@@ -14,6 +14,7 @@ public class Player {
     private boolean inJail = false;
     private boolean jailCard = false;
     private boolean specialCard = false;
+    private int oldRollSum;
 
     public Player(int playerNum, int numOfPlayers){
         this.playerNum = playerNum;
@@ -94,7 +95,15 @@ public class Player {
 
     public void setSpecialCard(Boolean bool) {specialCard = bool; }
 
-  /*  public ArrayList getAllPlayersStreets(){
+    public void setOldRollSum(int oldRollSum) {
+        this.oldRollSum = oldRollSum;
+    }
+
+    public int getOldRollSum() {
+        return oldRollSum;
+    }
+
+    /*  public ArrayList getAllPlayersStreets(){
        return this.account.getPlayersStreets();
     }
 
