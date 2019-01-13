@@ -56,4 +56,12 @@ public class GameEngine {
         int currentTurn = j % playerC.getNumOfPlayers();
         return currentTurn;
     }
+
+    public Die getDie1() {
+        return die1;
+    }
+
+    public Die getDie2() {
+        return die2;
+    }
 }

@@ -1,6 +1,5 @@
 package Model.Squares;
 
-
 import Controller.PlayerController;
 
 public class Ferry extends Ownable{
