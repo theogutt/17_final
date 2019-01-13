@@ -23,24 +23,24 @@ public class RentController {
     public RentController() throws IOException {
         baseRent = TextReader.textReader(".\\src\\Resources\\BaseRent");
         oneHouseRent = TextReader.textReader(".\\src\\Resources\\1HouseRent");
-        twoHouseRent = TextReader.textReader(".\\src\\Resources\\2HouseRent");
-        threeHouseRent = TextReader.textReader(".\\src\\Resources\\3HouseRent");
-        fourHouseRent = TextReader.textReader(".\\src\\Resources\\4HouseRent");
+        twoHouseRent = TextReader.textReader(".\\src\\Resources\\2HousesRent");
+        threeHouseRent = TextReader.textReader(".\\src\\Resources\\3HousesRent");
+        fourHouseRent = TextReader.textReader(".\\src\\Resources\\4HousesRent");
         hotelRent = TextReader.textReader(".\\src\\Resources\\HotelRent");
-        gameBoard.instantiateSquares();
     }
 
     public void payRent(PlayerController playerC, int ref){
         int rent = retrieveRent(playerC, ref);
         playerC.updatePlayerBalance(ref, rent*-1);
         int position = playerC.getPosition(ref);
-        int owner=squares[position].getOwner();
-        playerC.updatePlayerBalance(owner, rent);
+       // int owner=squares[position].getOwner();
+        //playerC.updatePlayerBalance(owner, rent);
     }
 
     public int retrieveRent(PlayerController playerC, int ref) {
         int position = playerC.getPosition(ref);
-        int buildings = squares[position].getNumOfBuildings();
+        //indsæt getnumberofbuildings når den virker
+        int buildings =0;
         int rent;
         if(buildings==1){rent=oneHouseRent(position);}
         else if(buildings==2){rent=twoHouseRent(position);}

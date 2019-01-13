@@ -13,11 +13,14 @@ public class GameEngine {
     private GameBoard gameBoard;
     private Die die1;
     private Die die2;
+    private RentController rentC;
 
     public GameEngine() throws IOException {
         guiHandler = new GUI_Handler();
         die1 = new Die(6);
         die2 = new Die(6);
+        gameBoard = new GameBoard();
+        rentC = new RentController();
     }
     public void start() {
         setUpGame();
@@ -50,6 +53,7 @@ public class GameEngine {
             playerC.calcNewPosition(die1.roll(), die2.roll(), ref);
             guiHandler.setAllCarsCurPos(playerC);
             guiHandler.diceUpdateGui(playerC, die1, die2);
+            gameBoard.squareImpact(ref, playerC, guiHandler, rentC);
     }
     public int calcTurn(int j) {
         int currentTurn = j % playerC.getNumOfPlayers();

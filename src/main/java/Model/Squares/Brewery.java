@@ -1,5 +1,9 @@
 package Model.Squares;
 
+import Controller.PlayerController;
+import Controller.RentController;
+import View.GUI_Handler;
+
 public class Brewery extends Ownable{
     private boolean owned;
     private int price;
@@ -11,5 +15,9 @@ public class Brewery extends Ownable{
 
     public int getPrice() {
         return price;
+    }
+
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
+
     }
 }

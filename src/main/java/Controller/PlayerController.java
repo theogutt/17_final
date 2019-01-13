@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Player;
+import Model.Squares.Ownable;
+
 import java.util.ArrayList;
 
 public class PlayerController {
@@ -169,6 +171,8 @@ public class PlayerController {
     public boolean getModelBroke(int i) {
         return playerModels[i].getBroke();
     }
+
+    public void addOwnable(int i, Ownable ownable){playerModels[i].addOwnable(ownable);}
 
    /* public ArrayList getPlayerStreets(int ref) {
         return getRef(ref).getAllPlayersStreets();

@@ -74,7 +74,17 @@ public class GUI_Handler {
             }
         }
     }
-
+    public void updateGuiPlayerBalance(PlayerController playerC) {
+        for (int i = 0; i < gui_Players.length; i++) {
+            gui_Players[i].setBalance(playerC.getBalance(i));
+        }
+    }
+    public int buyStreet(){
+        gui.showMessage("test");
+        String answer = gui.getUserSelection("Vil du købe grunden?","ja", "nej");
+        if(answer.equalsIgnoreCase("ja")){return 1;}
+        else{return 0;}
+    }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;
