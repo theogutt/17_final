@@ -19,7 +19,7 @@ public abstract class Square {
 
     public abstract int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref);
 
-    public int buy(){
+    public int buy(){ // Skal have et andet navn
         int boardPos = getPositionOnBoard();
         int n;
         n = 0;
@@ -31,7 +31,7 @@ public abstract class Square {
         }}
         return n;
     }
-public String buy2{
+public String buy2{ //Skal have et andet navn
 
         if (squares[buy()].getOwned()){
 
