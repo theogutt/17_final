@@ -390,4 +390,24 @@ public class GUI_Handler {
         updateGuiplayerBalance(playerC);
         setAllCarsCurPos(playerC);
     }
+
+    public void trade(PlayerController playerC, int currentPlayer){
+        String[] players = new String[playerC.getNumOfPlayers()];
+        int otherPlayer;
+        String[] properties;
+
+        for(int n=0 ; n < players.length ; n++)
+            players[n] = playerC.getName(n);
+
+        String playerSelect = gui.getUserSelection("Hvem vil du bytte med?", players);
+
+        // Finder spilleren som skal byttes med's reference
+        for(int n=0 ; n < players.length ; n++){
+            if(playerSelect.equals(players[n]))
+                otherPlayer = n;
+        }
+
+
+        String ownableOffer = gui.getUserSelection("Hvad tilbyder du?", properties);
+    }
 }
