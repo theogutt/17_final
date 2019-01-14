@@ -184,12 +184,12 @@ public class Chance extends Square{
                 break;
 
         }
+        mixCards();
         return returnInt;
     }
 
 
     public void mixCards(){
-        //chanceCards[chanceCards.length-1] = chanceCards[0];
         int[] leftShifted = new int[chanceCards.length];
         for (int number = 0; number < chanceCards.length; number++) {
             int j = (number + 1) % chanceCards.length;
