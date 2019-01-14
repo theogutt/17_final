@@ -2,6 +2,7 @@ package Model.Squares;
 
 
 import Controller.PlayerController;
+import View.GUI_Handler;
 
 public class Chance extends Square{
     private int[] chanceCards = new int[27];
@@ -12,7 +13,7 @@ public class Chance extends Square{
         intantiateCards();
     }
 
-    public int landOn(PlayerController playerC,int a, int b , int playerNum){
+    public int landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC){
         int card = chanceCards[0];
         int returnInt = -1;
 
