@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Die;
 import Model.Player;
 import Model.Squares.Ownable;
 
@@ -9,8 +10,8 @@ import java.util.ArrayList;
 
 public class PlayerController {
     private int numOfPlayers;
-    private GUI gui;
-    private GameEngine gameEngine;
+    //private GUI_Handler gui;
+    //private GameEngine gameEngine;
 
     private int roll1;
     private int roll2;
@@ -26,44 +27,35 @@ public class PlayerController {
         }
     }
 
-    public boolean wantOutOfJail(int ref) {
-        boolean gotOutOfJail = false;
-
-        if (getRef(ref).getJailCard()) {
-            getRef(ref).setJailCard(false);
-            gotOutOfJail = true;
+    public void wantOutOfJail(int ref, int choice, Die die1, Die die2) {
+        if (choice == 1){
+            getRef(ref).updateBalance(-1000);
+            getRef(ref).setOutOfJailTries(0);
             setInJail(ref, false);
         }
-        else {
-            String chose = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "1", "2");
-            if (chose == "1"){
-                getRef(ref).updateBalance(-1000);
-                getRef(ref).setOutOfJailTries(0);
-                gotOutOfJail = true;
+        else if (choice == 2){
+
+            roll1 = die1.roll();
+            roll2 = die2.roll();
+
+            if (roll1 == roll2){
                 setInJail(ref, false);
+                getRef(ref).setOutOfJailTries(0);
             }
-            else if (chose == "2"){
-
-                roll1 = gameEngine.getDie1().roll();
-                roll2 = gameEngine.getDie2().roll();
-
-                if (roll1 == roll2){
-                    gotOutOfJail = true;
-                    setInJail(ref, false);
+            else {
+                getRef(ref).setOutOfJailTries(getRef(ref).getOutOfJailTries() + 1);
+                if (getRef(ref).getOutOfJailTries() == 3){
+                    getRef(ref).updateBalance(-1000);
                     getRef(ref).setOutOfJailTries(0);
-                }
-                else {
-                    getRef(ref).setOutOfJailTries(getRef(ref).getOutOfJailTries() + 1);
-                    if (getRef(ref).getOutOfJailTries() == 3){
-                        getRef(ref).updateBalance(-1000);
-                        getRef(ref).setOutOfJailTries(0);
-                        gotOutOfJail = true;
-                        setInJail(ref, false);
-                    }
+                    setInJail(ref, false);
                 }
             }
         }
-        return gotOutOfJail;
+    }
+
+    public void getOutOfJailFree(int playerNum){
+        getRef(playerNum).setJailCard(false);
+        setInJail(playerNum, false);
     }
 
     public int playerWithHighestBalance() {

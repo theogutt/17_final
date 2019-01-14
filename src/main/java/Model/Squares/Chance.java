@@ -5,16 +5,17 @@ import Controller.PlayerController;
 import View.GUI_Handler;
 import Controller.RentController;
 
-public class Chance extends Square{
+public class Chance extends Square {
     private int[] chanceCards = new int[27];
     private int[] chanceCards2 = new int[27];
 
     public Chance(int positionOnBoard) {
         super(positionOnBoard);
-        intantiateCards();
+       // intantiateCards();
     }
 
-    public int landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC){
+    public int landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC) {
+        /*
         int card = chanceCards[0];
         int returnInt = -1;
 
@@ -217,11 +218,18 @@ public class Chance extends Square{
         }
     }
 
+
     public int[] getChanceCards() {
         return chanceCards;
     }
 
     public void setChanceCards(int[] chanceCards) {
         this.chanceCards = chanceCards;
+
+
+    }
+   */
+
+        return -1;
     }
 }
