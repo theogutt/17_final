@@ -40,6 +40,7 @@ public class PlayerController {
 
             if (chose == "1"){
                 getRef(ref).updateBalance(-1000);
+                getRef(ref).setOutOfJailTries(0);
                 gotOutOfJail = true;
                 setInJail(ref, false);
             }
