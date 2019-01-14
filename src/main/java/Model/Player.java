@@ -44,8 +44,6 @@ public class Player {
         this.account.updateBalance(amount);
     }
 
-    public void addOwnable(Ownable ownable){this.account.addOwnable(ownable);}
-
     public String getName() {
         return name;
     }
@@ -108,6 +106,19 @@ public class Player {
     public boolean getSpecialCard() {return specialCard;}
 
     public void setSpecialCard(Boolean bool) {specialCard = bool; }
+
+
+    public Ownable[] getAllPlayerOwnables(){
+       return this.account.getPlayerOwnables();
+    }
+
+    public void addOwnable(Ownable ownable) {
+        this.account.addOwnable(ownable);
+    }
+
+    public void removeOwnable(Ownable ownable){
+        this.account.removeOwnable(ownable);
+    }
 
     public void setOldRollSum(int oldRollSum) {
         this.oldRollSum = oldRollSum;
