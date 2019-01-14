@@ -65,9 +65,8 @@ public class Street extends Ownable{
     public int getPositionOnBoard() {
         return positionOnBoard;
     }
-    @Override
     public int getOwner() {
-        return owner;
+        return this.owner;
     }
 
     public boolean isOwned() {

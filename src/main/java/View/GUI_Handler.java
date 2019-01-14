@@ -2,6 +2,8 @@ package View;
 
 import Controller.PlayerController;
 import Model.Die;
+import Model.Squares.Square;
+import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -74,6 +76,13 @@ public class GUI_Handler {
             }
         }
     }
+    public void messageSquareGui(PlayerController playerC, int ref, Square square, boolean passedStart) {
+        if (passedStart) {
+            gui.showMessage(message.messageSquare(playerC, ref));
+        }
+        gui.showMessage(message.messageSquare(playerC, ref));
+    }
+
     public void updateGuiPlayerBalance(PlayerController playerC) {
         for (int i = 0; i < gui_Players.length; i++) {
             gui_Players[i].setBalance(playerC.getBalance(i));

@@ -16,13 +16,12 @@ public abstract class Square{
 
     public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
         try {
-            street.landOn(playerC, ref, guiHandler, rentC);
         }
         catch (NullPointerException ex){}
     }
 
-    public int getOwner() {
-        return owner;
+    public int getOwner(int ref) {
+        return this.owner;
     }
 
     public int getNumOfBuildings() {

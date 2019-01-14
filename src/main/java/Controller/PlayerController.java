@@ -151,7 +151,6 @@ public class PlayerController {
     public void updatePlayerBalance(int ref, int accountUpdate) {
         playerModels[ref].updateBalance(accountUpdate);
     }
-
     public int getBalance(int i) {
         return playerModels[i].getBalance();
     }

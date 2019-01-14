@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Die;
+import Model.Squares.Square;
 import View.GUI_Handler;
 
 import java.io.IOException;
@@ -53,6 +54,8 @@ public class GameEngine {
             playerC.calcNewPosition(die1.roll(), die2.roll(), ref);
             guiHandler.setAllCarsCurPos(playerC);
             guiHandler.diceUpdateGui(playerC, die1, die2);
+            boolean passedStart = gameBoard.didPlayerPassStart(playerC, ref);
+            if(passedStart==true){guiHandler.messageSquareGui(playerC, ref, gameBoard.getSquare(playerC.getPosition(ref)), passedStart);}
             gameBoard.squareImpact(ref, playerC, guiHandler, rentC);
     }
     public int calcTurn(int j) {

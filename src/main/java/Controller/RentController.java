@@ -27,14 +27,38 @@ public class RentController {
         threeHouseRent = TextReader.textReader(".\\src\\Resources\\3HousesRent");
         fourHouseRent = TextReader.textReader(".\\src\\Resources\\4HousesRent");
         hotelRent = TextReader.textReader(".\\src\\Resources\\HotelRent");
+        gameBoard = new GameBoard();
     }
 
     public void payRent(PlayerController playerC, int ref){
         int rent = retrieveRent(playerC, ref);
         playerC.updatePlayerBalance(ref, rent*-1);
         int position = playerC.getPosition(ref);
-       // int owner=squares[position].getOwner();
-        //playerC.updatePlayerBalance(owner, rent);
+        playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+    }
+    public void payRentFerry(PlayerController playerC, int ref){
+        if(true){payRent(playerC, ref);} //en færge
+        else if(false){ int rent = retrieveRent(playerC, ref);
+            playerC.updatePlayerBalance(ref, rent*-2);
+            int position = playerC.getPosition(ref);
+            playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+        } //to færger
+        else if(false){ int rent = retrieveRent(playerC, ref);
+            playerC.updatePlayerBalance(ref, rent*-4);
+            int position = playerC.getPosition(ref);
+            playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+        } //tre færger
+        else if(false){ int rent = retrieveRent(playerC, ref);
+            playerC.updatePlayerBalance(ref, rent*-8);
+            int position = playerC.getPosition(ref);
+            playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+        } //fire færger
+    }
+    public void payRentBrewery(PlayerController playerC, int ref){
+        int rent = playerC.oldRollSum*100;
+        playerC.updatePlayerBalance(ref, rent*-1);
+        int position = playerC.getPosition(ref);
+        playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
     }
 
     public int retrieveRent(PlayerController playerC, int ref) {
