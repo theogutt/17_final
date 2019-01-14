@@ -38,25 +38,29 @@ public class GameEngine {
         //Normal turn
         int ref;
         int i = 0;
+
         do {
             ref = calcTurn(i);
             guiHandler.playerTurnGui(playerC, ref);
             if (true) {
                 playTurn(ref);
             }
+            guiHandler.updateGuiPlayerBalance(playerC);
             guiHandler.showScore(playerC, ref);
             i++;
         }
         while(true);
     }
     public void playTurn(int ref) {
-            guiHandler.removeAllCarsCurPos(playerC);
+        guiHandler.updateGuiPlayerBalance(playerC);
+        guiHandler.removeAllCarsCurPos(playerC);
             playerC.calcNewPosition(die1.roll(), die2.roll(), ref);
             guiHandler.setAllCarsCurPos(playerC);
             guiHandler.diceUpdateGui(playerC, die1, die2);
             boolean passedStart = gameBoard.didPlayerPassStart(playerC, ref);
             if(passedStart==true){guiHandler.messageSquareGui(playerC, ref, gameBoard.getSquare(playerC.getPosition(ref)), passedStart);}
             gameBoard.squareImpact(ref, playerC, guiHandler, rentC);
+            guiHandler.updateGuiPlayerBalance(playerC);
     }
     public int calcTurn(int j) {
         int currentTurn = j % playerC.getNumOfPlayers();
