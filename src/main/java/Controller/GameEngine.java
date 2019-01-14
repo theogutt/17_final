@@ -36,36 +36,34 @@ public class GameEngine {
 
     public void playGame() {
         //Normal turn
-        int ref;
+        int playerNum;
         int i = 0;
         do {
-            ref = calcTurn(i);
-            guiHandler.playerTurnGui(playerC, ref);
+            playerNum = calcTurn(i);
+            guiHandler.playerTurnGui(playerC, playerNum);
             if (true) {
-                playTurn(ref);
+                playTurn(playerNum);
             }
-            guiHandler.showScore(playerC, ref);
+            guiHandler.showScore(playerC, playerNum);
             i++;
         }
         while(true);
     }
-    public void playTurn(int ref) {
-
-        if (playerC.getInJail(ref) == true){
-            playerC.wantOutOfJail(ref);
+    public void playTurn(int playerNum) {
+        if (playerC.getInJail(playerNum) == true){
+            playerC.wantOutOfJail(playerNum);
         }
-        else {
+        else{
             die1.roll();
             die2.roll();
         }
-
             guiHandler.removeAllCarsCurPos(playerC);
-            playerC.calcNewPosition(die1.getFaceValue(), die2.getFaceValue(), ref);
+            playerC.calcNewPosition(die1.getFaceValue(), die2.getFaceValue(), playerNum);
             guiHandler.setAllCarsCurPos(playerC);
             guiHandler.diceUpdateGui(playerC, die1, die2);
-            boolean passedStart = gameBoard.didPlayerPassStart(playerC, ref);
-            if(passedStart==true){guiHandler.messageSquareGui(playerC, ref, gameBoard.getSquare(playerC.getPosition(ref)), passedStart);}
-            gameBoard.squareImpact(ref, playerC, guiHandler, rentC);
+            boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
+            if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
+            gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
     }
     public int calcTurn(int j) {
         int currentTurn = j % playerC.getNumOfPlayers();

@@ -29,7 +29,7 @@ public class Street extends Ownable{
         this.owner = owner;
     }
 
-    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
+    public int landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
             //spørger om spiller vil købe grunden
         if(isOwned()==false) {
             int ja = 1;
@@ -44,6 +44,7 @@ public class Street extends Ownable{
         else{
             rentC.payRent(playerC, ref);
         }
+        return -1;
     }
 
     public int getPrice(int positionOnBoard) {

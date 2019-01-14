@@ -14,10 +14,11 @@ public abstract class Square{
         this.positionOnBoard = positionOnBoard;
     }
 
-    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
+    public int landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
         try {
         }
         catch (NullPointerException ex){}
+        return -1;
     }
 
     public int getOwner(int ref) {
@@ -28,4 +29,7 @@ public abstract class Square{
         int numOfBuildings = street.getNumOfBuildings();
         return numOfBuildings;
     }
-}
+    public int getPositionOnBoard(){
+        return positionOnBoard;
+    }
+    }

@@ -34,13 +34,9 @@ public class PlayerController {
             getRef(ref).setJailCard(false);
             gotOutOfJail = true;
             setInJail(ref, false);
-
         }
         else {
-
-
             String chose = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "1", "2");
-
             if (chose == "1"){
                 getRef(ref).updateBalance(-1000);
                 getRef(ref).setOutOfJailTries(0);
@@ -49,8 +45,8 @@ public class PlayerController {
             }
             else if (chose == "2"){
 
-                roll1 = gameEngine.die1.roll();
-                roll2 = gameEngine.die2.roll();
+                roll1 = gameEngine.getDie1().roll();
+                roll2 = gameEngine.getDie2().roll();
 
                 if (roll1 == roll2){
                     gotOutOfJail = true;
