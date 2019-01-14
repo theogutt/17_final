@@ -41,7 +41,7 @@ public class GameBoard {
         int numberOfGroupIDs=0;
         for(int i = 0; i<40; i++){
             if(index==getGroupID(i)){
-                numberOfGroupIDs=+1;
+                numberOfGroupIDs++;
             }
         }
         return numberOfGroupIDs;
