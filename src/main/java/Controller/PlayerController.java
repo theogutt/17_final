@@ -11,6 +11,9 @@ public class PlayerController {
     private GUI gui;
     private GameEngine gameEngine;
 
+    private int roll1;
+    private int roll2;
+
     private Player[] playerModels;
 
     public PlayerController(int numOfPlayers) {
@@ -42,8 +45,8 @@ public class PlayerController {
             }
             else if (chose == "2"){
 
-                int roll1 = gameEngine.die1.roll();
-                int roll2 = gameEngine.die2.roll();
+                roll1 = gameEngine.die1.roll();
+                roll2 = gameEngine.die2.roll();
 
                 if (roll1 == roll2){
                     gotOutOfJail = true;
