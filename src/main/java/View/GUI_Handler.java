@@ -1,12 +1,15 @@
 package View;
 
+import Controller.GameBoard;
 import Controller.PlayerController;
 import Model.Die;
 import gui_fields.*;
 import gui_main.GUI;
 
+
 import java.awt.*;
 import java.io.IOException;
+import java.util.HashMap;
 
 import static gui_fields.GUI_Car.Type.*;
 
@@ -16,6 +19,7 @@ public class GUI_Handler {
     private static GUI_Field[] fields;
     private GUI_Player[] gui_Players;
     private GUI_Car[] gui_cars;
+    private HashMap chanceDesc;
 
     public GUI_Handler() throws IOException {
         message = new MessageHandler();
@@ -144,6 +148,11 @@ public class GUI_Handler {
     }
     public void setDiceGui(Die die1, Die die2) {
         gui.setDice(die1.getFaceValue(), die2.getFaceValue());
+    }
+    public void updateGuiplayerBalance(PlayerController playerC){
+        for (int balancePlayer = 0; balancePlayer <gui_Players.length ; balancePlayer++){
+            gui_Players[balancePlayer].setBalance(playerC.getBalance(balancePlayer));
+        }
     }
     public void showScore(PlayerController player, int i) {
         gui.showMessage(message.playerEndTurn(player, i));
@@ -353,4 +362,20 @@ public class GUI_Handler {
             fields[20] = parkering;
             parkering.setSubText("Parkering");
         }
+
+
+
+    public void guiChance(int squareInt, PlayerController playerC, int playerNum, GameBoard board){
+        if ((squareInt > 0 && squareInt <= 13) || (squareInt == 17) || (squareInt == 18)){
+            gui.displayChanceCard((String) chanceDesc.get(squareInt));
+            updateGuiplayerBalance(playerC);
+        }
+
+        else if ((squareInt >= 14 && squareInt <= 16) || (squareInt >= 21 && squareInt <= 27)) {
+            gui.displayChanceCard((String) chanceDesc.get(squareInt));
+            setAllCarsCurPos(playerC);
+
+        }
+    }
+
     }
