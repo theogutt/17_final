@@ -1,7 +1,6 @@
 package View;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class CarColor {
     private Color[] colorArray = new Color[6];
