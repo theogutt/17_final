@@ -1,5 +1,6 @@
 package Model.Squares;
 
+import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import Model.Player;
@@ -20,6 +21,7 @@ public class Street extends Ownable{
     private GUI_Handler guiHandler;
     private PlayerController playerC;
     private RentController rentC;
+    private GameBoard gameBoard;
 
     public Street(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
         super(positionOnBoard);
@@ -41,6 +43,7 @@ public class Street extends Ownable{
                 playerC.updatePlayerBalance(ref, price * -1);
                 setOwner(ref);
                 setOwned(true);
+                int position = playerC.getPosition(ref);
                 guiHandler.changeStreetColor(playerC, ref);
             } else {}
         }

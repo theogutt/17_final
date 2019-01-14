@@ -36,38 +36,34 @@ public class RentController {
         int position = playerC.getPosition(ref);
         playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
     }
-       /* for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
-        if (playerC.getPlayerStreets(j).contains(this)){
-            playerC.updatePlayerBalance(j, (2*price));
-        }*/
-    public void payRentFerry(PlayerController playerC, int ref) {
-        int rent=0;
-        int position = playerC.getPosition(ref);
-        //en færge
-        if(gameBoard.numOfOwned(playerC, ref)==1){
-            rent = baseRent(position);
-        }
-        //to færger
-        else if(gameBoard.numOfOwned(playerC, ref)==2){
-            rent = baseRent(position)*2;
-        }
-        //tre færger
-        else if(gameBoard.numOfOwned(playerC, ref)==3){
-            rent = baseRent(position)*4;
-        }
-        //fire færger
-        else if(gameBoard.numOfOwned(playerC, ref)==4){
-            rent = baseRent(position)*8;
-        }
-        playerC.updatePlayerBalance(ref, rent*-1);
-        playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
-    }
-        public void payRentBrewery (PlayerController playerC,int ref){
-        int rent=0;
-            if(gameBoard.numOfOwned(playerC, ref)==1) {
-                rent = playerC.oldRollSum * 100;
+
+        public void payRentFerry (PlayerController playerC,int ref){
+            int rent = 0;
+            int position = playerC.getPosition(ref);
+            //en færge
+            if (gameBoard.numOfOwned(playerC, ref) == 1) {
+                rent = baseRent(position);
             }
-            else if(gameBoard.numOfOwned(playerC, ref)==2){
+            //to færger
+            else if (gameBoard.numOfOwned(playerC, ref) == 2) {
+                rent = baseRent(position) * 2;
+            }
+            //tre færger
+            else if (gameBoard.numOfOwned(playerC, ref) == 3) {
+                rent = baseRent(position) * 4;
+            }
+            //fire færger
+            else if (gameBoard.numOfOwned(playerC, ref) == 4) {
+                rent = baseRent(position) * 8;
+            }
+            playerC.updatePlayerBalance(ref, rent * -1);
+            playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+        }
+        public void payRentBrewery (PlayerController playerC,int ref){
+            int rent = 0;
+            if (gameBoard.numOfOwned(playerC, ref) == 1) {
+                rent = playerC.oldRollSum * 100;
+            } else if (gameBoard.numOfOwned(playerC, ref) == 2) {
                 rent = playerC.oldRollSum * 200;
             }
             playerC.updatePlayerBalance(ref, rent * -1);
@@ -136,3 +132,4 @@ public class RentController {
             return getRentInt5(position);
         }
     }
+

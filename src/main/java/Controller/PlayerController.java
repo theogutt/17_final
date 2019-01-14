@@ -174,14 +174,6 @@ public class PlayerController {
 
     public void addOwnable(int i, Ownable ownable){playerModels[i].addOwnable(ownable);}
 
-   /* public ArrayList getPlayerStreets(int ref) {
-        return getRef(ref).getAllPlayersStreets();
-    }
-
-    public boolean ownsStreetsAheadOrBehind(int ref, int lfPos) {
-        return getRef(ref).ownsStreetAheadOrBehind(lfPos);
-    }
-*/
     public Player[] getPlayerModels() {
         return playerModels;
     }

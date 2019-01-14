@@ -3,6 +3,7 @@ package Model;
 //import Model.Square.Street;
 import Model.Squares.Ownable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Player {

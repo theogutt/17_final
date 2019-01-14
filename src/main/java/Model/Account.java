@@ -2,6 +2,7 @@ package Model;
 
 import Model.Squares.Ownable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -67,4 +68,5 @@ public class Account{
     public void setSumOfStreets(int sumOfStreets) {
         this.sumOfStreets = sumOfStreets;
     }
+
 }

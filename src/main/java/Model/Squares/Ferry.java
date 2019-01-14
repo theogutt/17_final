@@ -1,5 +1,6 @@
 package Model.Squares;
 
+import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
@@ -16,6 +17,7 @@ public class Ferry extends Ownable{
     private PlayerController playerC;
     private RentController rentC;
     private int groupID;
+    private GameBoard gameBoard;
 
     public Ferry(int positionOnBoard, int price, String name, boolean owned, int owner, int groupID) throws IOException {
         super(positionOnBoard);
@@ -40,6 +42,7 @@ public class Ferry extends Ownable{
                 playerC.updatePlayerBalance(ref, price * -1);
                 setOwner(ref);
                 setOwned(true);
+                int position = playerC.getPosition(ref);
                 guiHandler.changeStreetColor(playerC, ref);
             } else {}
         }
