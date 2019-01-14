@@ -19,15 +19,13 @@ public class Street extends Ownable{
     private PlayerController playerC;
     private RentController rentC;
 
-    public Street(int positionOnBoard, int price, int numOfBuildings, String name, /*int groupID, */boolean owned, int owner) throws IOException {
+    public Street(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
         super(positionOnBoard);
         this.price = price;
         this.owned = owned;
         this.name = name;
         this.numOfBuildings = numOfBuildings;
-/*
         this.groupID = groupID;
-*/
         this.owner = owner;
     }
 
@@ -83,6 +81,4 @@ public class Street extends Ownable{
     public void setOwned(boolean owned) {
         this.owned = owned;
     }
-
-
 }

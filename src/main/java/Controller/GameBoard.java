@@ -39,7 +39,7 @@ public class GameBoard {
             else if (i == 4 || i == 38){squares[i]= new Tax(i);}                                                           //Tax
             else if (i == 5 || i == 15 ||i == 25 ||i == 35) {squares[i] = new Ferry(i,4000,false);} //Ferry
             else if (i == 12 || i == 27){squares[i] = new Brewery(i,3000,false);}                   //Brew
-            else {squares[i]= new Street(i,(Integer)squarePrice.get(i),0,(String)StreetName.get(i),/*(Integer)groupID.get(i),*/false, 99); //Street
+            else {squares[i]= new Street(i,(Integer)squarePrice.get(i),0,(String)StreetName.get(i),(Integer)groupID.get(i),false, 99); //Street
             }
         }
     }
