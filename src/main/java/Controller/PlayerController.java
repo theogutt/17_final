@@ -3,12 +3,20 @@ package Controller;
 import Model.Player;
 import Model.Squares.Ownable;
 
+import View.GUI_Handler;
+import gui_main.GUI;
 import java.util.ArrayList;
 
 public class PlayerController {
     private int numOfPlayers;
+    private GUI gui;
+    private GameEngine gameEngine;
+
+    private int roll1;
+    private int roll2;
 
     private Player[] playerModels;
+    int oldRollSum;
 
     public PlayerController(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
@@ -25,11 +33,35 @@ public class PlayerController {
             getRef(ref).setJailCard(false);
             gotOutOfJail = true;
             setInJail(ref, false);
+        }
+        else {
+            String chose = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "1", "2");
+            if (chose == "1"){
+                getRef(ref).updateBalance(-1000);
+                getRef(ref).setOutOfJailTries(0);
+                gotOutOfJail = true;
+                setInJail(ref, false);
+            }
+            else if (chose == "2"){
 
-        } else if (getRef(ref).getBalance() > 0) {
-            getRef(ref).updateBalance(-1);
-            gotOutOfJail = true;
-            setInJail(ref, false);
+                roll1 = gameEngine.getDie1().roll();
+                roll2 = gameEngine.getDie2().roll();
+
+                if (roll1 == roll2){
+                    gotOutOfJail = true;
+                    setInJail(ref, false);
+                    getRef(ref).setOutOfJailTries(0);
+                }
+                else {
+                    getRef(ref).setOutOfJailTries(getRef(ref).getOutOfJailTries() + 1);
+                    if (getRef(ref).getOutOfJailTries() == 3){
+                        getRef(ref).updateBalance(-1000);
+                        getRef(ref).setOutOfJailTries(0);
+                        gotOutOfJail = true;
+                        setInJail(ref, false);
+                    }
+                }
+            }
         }
         return gotOutOfJail;
     }
@@ -56,7 +88,7 @@ public class PlayerController {
         return ref;
     }
 
-    public void calcNewPosition(int rollSum1, int rollSum2, int i) {
+    public int calcNewPosition(int rollSum1, int rollSum2, int i) {
         int oldPosition = getRef(i).getCurPosition();
         getRef(i).setOldPosition(oldPosition);
 
@@ -71,6 +103,8 @@ public class PlayerController {
             newPosition = (rollSum1+rollSum2 + oldPosition);
             getRef(i).setCurPosition((newPosition));
         }
+        getRef(i).setOldRollSum(rollSum1+rollSum2);
+        return oldRollSum = rollSum1+rollSum2;
     }
 
     public void setPosition(int newPosition, int playerNum) {
@@ -93,7 +127,7 @@ public class PlayerController {
         if (playerModels[ref].getBalance() < 0) setBroke(true, ref);
     }
 
-    public boolean inJail(int ref) {
+    public boolean getInJail(int ref) {
         return getRef(ref).getInJail();
     }
 
@@ -148,7 +182,6 @@ public class PlayerController {
     public void updatePlayerBalance(int ref, int accountUpdate) {
         playerModels[ref].updateBalance(accountUpdate);
     }
-
     public int getBalance(int i) {
         return playerModels[i].getBalance();
     }
@@ -177,6 +210,11 @@ public class PlayerController {
         this.playerModels[i].addOwnable(ownable);
     }
 
+   /* public ArrayList getPlayerStreets(int ref) {
+        return getRef(ref).getAllPlayersStreets();
+
+    }
+
     public void removeOwnable(Ownable ownable, int i){
         this.playerModels[i].removeOwnable(ownable);
     }
@@ -190,5 +228,11 @@ public class PlayerController {
         return playerModels;
     }
 
+    public int getOldRollSum() {
+        return oldRollSum;
+    }
 
+    public void setOldRollSum(int oldRollSum) {
+        this.oldRollSum = oldRollSum;
+    }
 }

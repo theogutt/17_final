@@ -13,6 +13,10 @@ public class MessageHandler {
     public MessageHandler() throws IOException {
         hashMapTurnMessages = (TextReader.textReader(".\\src\\Resources\\TurnMessages"));
     }
+    public String messageSquare(PlayerController playerC, int ref) {
+        returnString = playerC.getName(ref) + getSquareMessage(0);
+        return returnString;
+    }
     public String turnMessage(PlayerController playerC, int ref, String kindOfSquare) {
         String playerMessage = playerC.getName(ref) + getSquareMessage(Integer.parseInt(kindOfSquare));
         return playerMessage;
