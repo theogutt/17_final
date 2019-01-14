@@ -35,6 +35,21 @@ public class GUI_Handler {
         gui = new GUI(fields);
     }
 
+    public void menu(PlayerController playerC, int playerNum){
+        boolean aktivTur = true;
+        while (aktivTur) {
+            String valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
+            if (valg == "Handel") {
+                //trade(playerC, playerNum);
+            } else if (valg == "Bygge") {
+                //build(playerC, playerNum);
+            } else if (valg == "Pantsæt") {
+                //indsæt pantsæt metode :)
+            } else if (valg == "Afslut tur") {
+                aktivTur = false;
+            }
+        }
+    }
 
     public void startGameGui() {
         gui.showMessage(message.startGame1());

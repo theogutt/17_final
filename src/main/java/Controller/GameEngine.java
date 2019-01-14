@@ -64,6 +64,7 @@ public class GameEngine {
             boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
             if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
             gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
+            guiHandler.menu(playerNum);
     }
     public int calcTurn(int j) {
         int currentTurn = j % playerC.getNumOfPlayers();
