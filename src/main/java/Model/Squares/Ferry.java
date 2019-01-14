@@ -15,13 +15,15 @@ public class Ferry extends Ownable{
     private GUI_Handler guiHandler;
     private PlayerController playerC;
     private RentController rentC;
+    private int groupID;
 
-    public Ferry(int positionOnBoard, int price, String name, boolean owned, int owner) throws IOException {
+    public Ferry(int positionOnBoard, int price, String name, boolean owned, int owner, int groupID) throws IOException {
         super(positionOnBoard);
         this.price = price;
         this.owned = owned;
         this.name = name;
         this.owner = owner;
+        this.groupID = groupID;
     }
 
     public int getPrice() {
@@ -69,5 +71,9 @@ public class Ferry extends Ownable{
 
     public void setOwned(boolean owned) {
         this.owned = owned;
+    }
+
+    public int getGroupID() {
+        return groupID;
     }
 }

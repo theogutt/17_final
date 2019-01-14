@@ -34,7 +34,47 @@ public class GameBoard {
         int owner = curSquare.getOwner(ref);
         return owner;
     }
-
+    public int getGroupID(int index) {
+        return (Integer) groupID.get(index);
+    }
+    public int numberOfGroupIDs(int index){
+        int numberOfGroupIDs=0;
+        for(int i = 0; i<40; i++){
+            if(index==getGroupID(i)){
+                numberOfGroupIDs=+1;
+            }
+        }
+        return numberOfGroupIDs;
+    }
+    public boolean ownAllID(int ref, PlayerController playerC){
+        boolean ownAll;
+        int curPosition = playerC.getPosition(ref);
+        Square curSquare = squares[curPosition];
+        int thisGroupID=curSquare.getGroupID(ref);
+        int numOfIDs = numberOfGroupIDs(thisGroupID);
+        int sameOwner=0;
+        for(int i = 0; i<40; i++){
+            Square otherSquares = squares[i];
+            if(otherSquares.getOwner(ref)==curSquare.getOwner(ref)){
+                sameOwner = +1;
+            }
+        }
+        if(sameOwner==numOfIDs){ownAll=true;}
+        else{ownAll=false;}
+        return ownAll;
+    }
+    public int numOfOwned(PlayerController playerC, int ref){
+            int curPosition = playerC.getPosition(ref);
+            Square curSquare = squares[curPosition];
+            int numOfOwned=0;
+            for(int i = 0; i<40; i++){
+                Square otherSquares = squares[i];
+                if(otherSquares.getOwner(ref)==curSquare.getOwner(ref)){
+                    numOfOwned = +1;
+                }
+            }
+        return numOfOwned;
+    }
 // Opretter felter med pris og rent
     public void instantiateSquares() throws IOException {
         for (int i = 0; i < 40; i++) {
@@ -43,8 +83,8 @@ public class GameBoard {
             else if (i == 30 ){ squares[i]= new GoToPrison(i);}                                                            //Jail
             else if (i == 2 || i == 7 || i == 17 || i == 22 || i == 33 || i == 36) {squares[i]= new Chance(i);}            //Chance
             else if (i == 4 || i == 38){squares[i]= new Tax(i);}                                                           //Tax
-            else if (i == 5 || i == 15 ||i == 25 ||i == 35) {squares[i] = new Ferry(i,4000,(String)StreetName.get(i), false, 99 );} //Ferry
-            else if (i == 12 || i == 27){squares[i] = new Brewery(i,3000,(String)StreetName.get(i), false, 99 );}            //Brew
+            else if (i == 5 || i == 15 ||i == 25 ||i == 35) {squares[i] = new Ferry(i,4000,(String)StreetName.get(i), false, 99, (Integer)groupID.get(i));} //Ferry
+            else if (i == 12 || i == 27){squares[i] = new Brewery(i,3000,(String)StreetName.get(i), false, 99, (Integer)groupID.get(i));}            //Brew
             else {squares[i]= new Street(i,(Integer)squarePrice.get(i),0,(String)StreetName.get(i),(Integer)groupID.get(i),false, 99); //Street
             }
         }
