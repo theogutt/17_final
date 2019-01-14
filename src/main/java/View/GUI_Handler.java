@@ -1,12 +1,16 @@
 package View;
 
+import Controller.GameBoard;
 import Controller.PlayerController;
+import Utilities.TextReader;
 import Model.Die;
 import gui_fields.*;
 import gui_main.GUI;
 
+
 import java.awt.*;
 import java.io.IOException;
+import java.util.HashMap;
 
 import static gui_fields.GUI_Car.Type.*;
 
@@ -16,6 +20,7 @@ public class GUI_Handler {
     private static GUI_Field[] fields;
     private GUI_Player[] gui_Players;
     private GUI_Car[] gui_cars;
+    private HashMap chanceDesc;
 
     public GUI_Handler() throws IOException {
         message = new MessageHandler();
@@ -23,6 +28,7 @@ public class GUI_Handler {
         /*for (int i = 0; i < fields.length; i++) {
             fields[i] = new GUI_Street((String) streetNames.get(i), "", (String) streetDesc.get(i), "", Color.YELLOW, Color.BLACK);
         }*/
+        chanceDesc = TextReader.textReader(".\\src\\Resources\\ChanceCards");
         setSpecificFields();
         gui = new GUI(fields);
     }
@@ -144,6 +150,11 @@ public class GUI_Handler {
     }
     public void setDiceGui(Die die1, Die die2) {
         gui.setDice(die1.getFaceValue(), die2.getFaceValue());
+    }
+    public void updateGuiplayerBalance(PlayerController playerC){
+        for (int balancePlayer = 0; balancePlayer <gui_Players.length ; balancePlayer++){
+            gui_Players[balancePlayer].setBalance(playerC.getBalance(balancePlayer));
+        }
     }
     public void showScore(PlayerController player, int i) {
         gui.showMessage(message.playerEndTurn(player, i));
@@ -353,4 +364,12 @@ public class GUI_Handler {
             fields[20] = parkering;
             parkering.setSubText("Parkering");
         }
+
+
+
+    public void guiChance(int squareInt, PlayerController playerC, int playerNum, GameBoard board) {
+        gui.displayChanceCard((String) chanceDesc.get(squareInt));
+        updateGuiplayerBalance(playerC);
+        setAllCarsCurPos(playerC);
     }
+}
