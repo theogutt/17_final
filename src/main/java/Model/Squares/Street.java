@@ -4,7 +4,9 @@ import Controller.PlayerController;
 import Controller.RentController;
 import Model.Player;
 import View.GUI_Handler;
+import gui_fields.GUI_Street;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class Street extends Ownable{
@@ -39,6 +41,7 @@ public class Street extends Ownable{
                 playerC.updatePlayerBalance(ref, price * -1);
                 setOwner(ref);
                 setOwned(true);
+                guiHandler.changeStreetColor(playerC, ref);
             } else {}
         }
         else{

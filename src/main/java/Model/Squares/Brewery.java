@@ -40,6 +40,7 @@ public class Brewery extends Ownable{
                 playerC.updatePlayerBalance(ref, price * -1);
                 setOwner(ref);
                 setOwned(true);
+                guiHandler.changeStreetColor(playerC, ref);
             } else {}
         }
         else{
