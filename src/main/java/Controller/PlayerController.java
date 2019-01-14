@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Player;
+import Model.Squares.Ownable;
+
 import java.util.ArrayList;
 
 public class PlayerController {
@@ -167,10 +169,19 @@ public class PlayerController {
         return playerModels[i].getBroke();
     }
 
-   /* public ArrayList getPlayerStreets(int ref) {
-        return getRef(ref).getAllPlayersStreets();
+    public Ownable[] getPlayerOwnables(int ref) {
+        return getRef(ref).getAllPlayerOwnables();
     }
 
+    public void addOwnable(Ownable ownable, int i){
+        this.playerModels[i].addOwnable(ownable);
+    }
+
+    public void removeOwnable(Ownable ownable, int i){
+        this.playerModels[i].removeOwnable(ownable);
+    }
+
+/*
     public boolean ownsStreetsAheadOrBehind(int ref, int lfPos) {
         return getRef(ref).ownsStreetAheadOrBehind(lfPos);
     }

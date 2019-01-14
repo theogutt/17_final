@@ -37,15 +37,10 @@ public class Account{
             }
         }
         // Sætter alt på den nye plads i Arrayet
-        for(int i = x; x < this.playerOwnables.length; i++){
+        for(int i = x; x < this.playerOwnables.length-1; i++){
             this.playerOwnables[x] = this.playerOwnables[x+1];
         }
-        copyOf(this.playerOwnables,this.playerOwnables.length-1);
-    }
-
-    public static Model.Squares.Ownable[] copyOf(Model.Squares.Ownable[] original, int newLength){
-        Ownable [] newArray = copyOf(original,newLength);
-        return newArray;
+        Arrays.copyOf(this.playerOwnables,this.playerOwnables.length-1);
     }
 
    /* public void addStreet(Street street){
@@ -83,7 +78,7 @@ public class Account{
         this.sumOfStreets = sumOfStreets;
     }
 
-  /*  public ArrayList<Square> getPlayersStreets() {
-        return playersStreets;
-    }*/
+    public Ownable[] getPlayerOwnables() {
+        return playerOwnables;
+    }
 }

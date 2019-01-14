@@ -1,6 +1,8 @@
 package Model;
 
 //import Model.Square.Street;
+import Model.Squares.Ownable;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -94,11 +96,21 @@ public class Player {
 
     public void setSpecialCard(Boolean bool) {specialCard = bool; }
 
-  /*  public ArrayList getAllPlayersStreets(){
-       return this.account.getPlayersStreets();
+    public Ownable[] getAllPlayerOwnables(){
+       return this.account.getPlayerOwnables();
     }
 
+    public void addOwnable(Ownable ownable){
+        this.account.addOwnable(ownable);
+    }
+
+    public void removeOwnable(Ownable ownable){
+        this.account.removeOwnable(ownable);
+    }
+
+    /*
     public boolean ownsStreetAheadOrBehind(int lfStreetPos){
         return account.ownsStreetAheadOrBehind(lfStreetPos);
-    }*/
+    }
+    */
 }
