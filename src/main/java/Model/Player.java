@@ -12,6 +12,7 @@ public class Player {
     private int playerNum;
     private Account account;
     private boolean inJail = false;
+    private int outOfJailTries;
     private boolean jailCard = false;
     private boolean specialCard = false;
 
@@ -80,6 +81,14 @@ public class Player {
 
     public void setJailCard(Boolean bool){
         jailCard = bool;
+    }
+
+    public void setOutOfJailTries(int tries){
+        outOfJailTries = tries;
+    }
+
+    public int getOutOfJailTries(){
+        return outOfJailTries;
     }
 
     public boolean getInJail(){

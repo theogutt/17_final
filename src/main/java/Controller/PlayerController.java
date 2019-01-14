@@ -1,10 +1,15 @@
 package Controller;
 
 import Model.Player;
+import View.GUI_Handler;
+import gui_main.GUI;
+
 import java.util.ArrayList;
 
 public class PlayerController {
     private int numOfPlayers;
+    private GUI gui;
+    private GameEngine gameEngine;
 
     private Player[] playerModels;
 
@@ -24,10 +29,37 @@ public class PlayerController {
             gotOutOfJail = true;
             setInJail(ref, false);
 
-        } else if (getRef(ref).getBalance() > 0) {
-            getRef(ref).updateBalance(-1);
-            gotOutOfJail = true;
-            setInJail(ref, false);
+        }
+        else {
+
+
+            String chose = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "1", "2");
+
+            if (chose == "1"){
+                getRef(ref).updateBalance(-1000);
+                gotOutOfJail = true;
+                setInJail(ref, false);
+            }
+            else if (chose == "2"){
+
+                int roll1 = gameEngine.die1.roll();
+                int roll2 = gameEngine.die2.roll();
+
+                if (roll1 == roll2){
+                    gotOutOfJail = true;
+                    setInJail(ref, false);
+                    getRef(ref).setOutOfJailTries(0);
+                }
+                else {
+                    getRef(ref).setOutOfJailTries(getRef(ref).getOutOfJailTries() + 1);
+                    if (getRef(ref).getOutOfJailTries() == 3){
+                        getRef(ref).updateBalance(-1000);
+                        getRef(ref).setOutOfJailTries(0);
+                        gotOutOfJail = true;
+                        setInJail(ref, false);
+                    }
+                }
+            }
         }
         return gotOutOfJail;
     }

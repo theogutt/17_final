@@ -11,8 +11,8 @@ public class GameEngine {
     private GUI_Handler guiHandler;
     private PlayerController playerC;
     private GameBoard board;
-    private Die die1;
-    private Die die2;
+    public Die die1;
+    public Die die2;
 
     public GameEngine() throws IOException {
         guiHandler = new GUI_Handler();
