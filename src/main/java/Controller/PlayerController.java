@@ -210,14 +210,16 @@ public class PlayerController {
         this.playerModels[i].addOwnable(ownable);
     }
 
+    public void removeOwnable(Ownable ownable, int i){
+        this.playerModels[i].removeOwnable(ownable);
+    }
+
    /* public ArrayList getPlayerStreets(int ref) {
         return getRef(ref).getAllPlayersStreets();
 
     }
 
-    public void removeOwnable(Ownable ownable, int i){
-        this.playerModels[i].removeOwnable(ownable);
-    }
+
 
 /*
     public boolean ownsStreetsAheadOrBehind(int ref, int lfPos) {

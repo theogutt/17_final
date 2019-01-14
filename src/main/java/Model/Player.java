@@ -44,8 +44,6 @@ public class Player {
         this.account.updateBalance(amount);
     }
 
-    public void addOwnable(Ownable ownable){this.account.addOwnable(ownable);}
-
     public String getName() {
         return name;
     }
@@ -114,8 +112,13 @@ public class Player {
        return this.account.getPlayerOwnables();
     }
 
-    public void addOwnable(Ownable ownable){
+    public void addOwnable(Ownable ownable) {
         this.account.addOwnable(ownable);
+    }
+
+    public void removeOwnable(Ownable ownable){
+        this.account.removeOwnable(ownable);
+    }
 
     public void setOldRollSum(int oldRollSum) {
         this.oldRollSum = oldRollSum;
@@ -132,10 +135,6 @@ public class Player {
     /*  public ArrayList getAllPlayersStreets(){
        return this.account.getPlayersStreets();
 
-    }
-
-    public void removeOwnable(Ownable ownable){
-        this.account.removeOwnable(ownable);
     }
 
     /*
