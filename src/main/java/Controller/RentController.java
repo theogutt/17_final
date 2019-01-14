@@ -36,7 +36,10 @@ public class RentController {
         int position = playerC.getPosition(ref);
         playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
     }
-
+       /* for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
+        if (playerC.getPlayerStreets(j).contains(this)){
+            playerC.updatePlayerBalance(j, (2*price));
+        }*/
     public void payRentFerry(PlayerController playerC, int ref) {
         int rent=0;
         int position = playerC.getPosition(ref);
