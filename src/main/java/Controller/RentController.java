@@ -1,6 +1,8 @@
-/*
+
 package Controller;
+import Model.Squares.Ownable;
 import Model.Squares.Square;
+import Model.Squares.Street;
 import Utilities.TextReader;
 
 import java.io.IOException;
@@ -15,47 +17,62 @@ public class RentController {
     private HashMap fourHouseRent;
     private HashMap hotelRent;
     private HashMap baseRent;
-    private Square[] squares = new Square[40];
+    Square[] squares = new Square[40];
+    private Street street;
 
     public RentController() throws IOException {
         baseRent = TextReader.textReader(".\\src\\Resources\\BaseRent");
         oneHouseRent = TextReader.textReader(".\\src\\Resources\\1HouseRent");
-        twoHouseRent = TextReader.textReader(".\\src\\Resources\\2HouseRent");
-        threeHouseRent = TextReader.textReader(".\\src\\Resources\\3HouseRent");
-        fourHouseRent = TextReader.textReader(".\\src\\Resources\\4HouseRent");
+        twoHouseRent = TextReader.textReader(".\\src\\Resources\\2HousesRent");
+        threeHouseRent = TextReader.textReader(".\\src\\Resources\\3HousesRent");
+        fourHouseRent = TextReader.textReader(".\\src\\Resources\\4HousesRent");
         hotelRent = TextReader.textReader(".\\src\\Resources\\HotelRent");
+        gameBoard = new GameBoard();
     }
 
     public void payRent(PlayerController playerC, int ref){
         int rent = retrieveRent(playerC, ref);
         playerC.updatePlayerBalance(ref, rent*-1);
         int position = playerC.getPosition(ref);
-        int owner=squares[position].getOwner();
-        playerC.updatePlayerBalance(owner, rent);
+        playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+    }
+    public void payRentFerry(PlayerController playerC, int ref){
+        if(true){payRent(playerC, ref);} //en færge
+        else if(false){ int rent = retrieveRent(playerC, ref);
+            playerC.updatePlayerBalance(ref, rent*-2);
+            int position = playerC.getPosition(ref);
+            playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+        } //to færger
+        else if(false){ int rent = retrieveRent(playerC, ref);
+            playerC.updatePlayerBalance(ref, rent*-4);
+            int position = playerC.getPosition(ref);
+            playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+        } //tre færger
+        else if(false){ int rent = retrieveRent(playerC, ref);
+            playerC.updatePlayerBalance(ref, rent*-8);
+            int position = playerC.getPosition(ref);
+            playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+        } //fire færger
+    }
+    public void payRentBrewery(PlayerController playerC, int ref){
+        int rent = playerC.oldRollSum*100;
+        playerC.updatePlayerBalance(ref, rent*-1);
+        int position = playerC.getPosition(ref);
+        playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
     }
 
     public int retrieveRent(PlayerController playerC, int ref) {
         int position = playerC.getPosition(ref);
-        int buildings = squares[position].getNumOfBuildings();
-        switch (buildings) {
-            case 0:
-                return baseRent(position);
-                break;
-            case 1:
-                return oneHouseRent(position);
-                break;
-            case 2:
-                return twoHouseRent(position);
-                break;
-            case 3:
-                return threeHouseRent(position);
-                break;
-            case 4:
-                return fourHouseRent(position);
-                break;
-            default:
-                return HotelRent(position);
-        }
+        //indsæt getnumberofbuildings når den virker
+        int buildings =0;
+        int rent;
+        if(buildings==1){rent=oneHouseRent(position);}
+        else if(buildings==2){rent=twoHouseRent(position);}
+        else if(buildings==3){rent=threeHouseRent(position);}
+        else if(buildings==4){rent=fourHouseRent(position);}
+        else if(buildings==5){rent=HotelRent(position);}
+        else{rent=baseRent(position);}
+        return rent;
     }
      public int getRentInt0(int index) {
         return (Integer) baseRent.get(index);
@@ -95,4 +112,3 @@ public class RentController {
         return getRentInt5(position);
     }
 }
-*/

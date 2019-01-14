@@ -1,14 +1,15 @@
 package Model;
 
+import Model.Squares.Ownable;
+
 import java.util.Arrays;
 
-import Model.Squares.Ownable;
 
 
 public class Account{
     private int balance;
     private int sumOfStreets;
-    private Ownable [] playerOwnables = new Ownable[0];
+    private Ownable[] playerOwnables = new Ownable[0];
 
     // private ArrayList <Square> playersStreets = new ArrayList <Square>();
 
@@ -42,22 +43,6 @@ public class Account{
         }
         this.playerOwnables = Arrays.copyOf(this.playerOwnables,this.playerOwnables.length-1);
     }
-
-   /* public void addStreet(Street street){
-        playersStreets.add(street);
-        sumOfStreets += street.getPrice();
-    }*/
-
-   /* public boolean ownsStreetAheadOrBehind(int lfStreetPosition){
-        boolean x = false;
-        for (int i = 0; i < playersStreets.size(); i++) {
-            if (playersStreets.get(i).getPositionOnBoard() == lfStreetPosition){
-                x = true;
-                break;
-            }
-        }
-        return x;
-    }*/
     public void updateBalance(int accountUpdate) {
         balance += accountUpdate;
     }
@@ -77,7 +62,7 @@ public class Account{
     public void setSumOfStreets(int sumOfStreets) {
         this.sumOfStreets = sumOfStreets;
     }
-
+  
     public Ownable[] getPlayerOwnables() {
         return playerOwnables;
     }
