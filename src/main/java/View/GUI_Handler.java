@@ -365,17 +365,9 @@ public class GUI_Handler {
 
 
 
-    public void guiChance(int squareInt, PlayerController playerC, int playerNum, GameBoard board){
-        if ((squareInt > 0 && squareInt <= 13) || (squareInt == 17) || (squareInt == 18)){
-            gui.displayChanceCard((String) chanceDesc.get(squareInt));
-            updateGuiplayerBalance(playerC);
-        }
-
-        else if ((squareInt >= 14 && squareInt <= 16) || (squareInt >= 21 && squareInt <= 27)) {
-            gui.displayChanceCard((String) chanceDesc.get(squareInt));
-            setAllCarsCurPos(playerC);
-
-        }
+    public void guiChance(int squareInt, PlayerController playerC, int playerNum, GameBoard board) {
+        gui.displayChanceCard((String) chanceDesc.get(squareInt));
+        updateGuiplayerBalance(playerC);
+        setAllCarsCurPos(playerC);
     }
-
-    }
+}
