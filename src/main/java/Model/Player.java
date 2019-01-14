@@ -109,14 +109,6 @@ public class Player {
 
     public void setSpecialCard(Boolean bool) {specialCard = bool; }
 
-
-    public Ownable[] getAllPlayerOwnables(){
-       return this.account.getPlayerOwnables();
-    }
-
-    public void addOwnable(Ownable ownable){
-        this.account.addOwnable(ownable);
-
     public void setOldRollSum(int oldRollSum) {
         this.oldRollSum = oldRollSum;
     }
@@ -131,16 +123,9 @@ public class Player {
 
     /*  public ArrayList getAllPlayersStreets(){
        return this.account.getPlayersStreets();
-
     }
 
-    public void removeOwnable(Ownable ownable){
-        this.account.removeOwnable(ownable);
-    }
-
-    /*
     public boolean ownsStreetAheadOrBehind(int lfStreetPos){
         return account.ownsStreetAheadOrBehind(lfStreetPos);
-    }
-    */
+    }*/
 }
