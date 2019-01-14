@@ -401,13 +401,14 @@ public class GUI_Handler {
 
         String playerSelect = gui.getUserSelection("Hvem vil du bytte med?", players);
 
-        // Finder spilleren som skal byttes med's reference
+        // Finder  referencen til spilleren som skal byttes med
         for(int n=0 ; n < players.length ; n++){
             if(playerSelect.equals(players[n]))
                 otherPlayer = n;
         }
 
-
+        for(int n=0 ; n < playerC.getPlayerOwnables(currentPlayer).length ; n++)
+            properties[n] = playerC.getPlayerOwnables(currentPlayer)[n].g;
         String ownableOffer = gui.getUserSelection("Hvad tilbyder du?", properties);
     }
 }
