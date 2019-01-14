@@ -23,7 +23,7 @@ public class Account{
 
     //tilføjer et Ownable til playerownables
     public void addOwnable(Ownable ownable){
-        Ownable [] newArray = copyOf(this.playerOwnables,this.playerOwnables.length+1);
+        Ownable [] newArray = Arrays.copyOf(this.playerOwnables,this.playerOwnables.length+1);
         newArray[this.playerOwnables.length] = ownable;
         this.playerOwnables = newArray;
     }
@@ -38,15 +38,10 @@ public class Account{
             }
         }
         // Sætter alt på den nye plads i Arrayet
-        for(int i = x; x < this.playerOwnables.length; i++){
+        for(int i = x; x < this.playerOwnables.length-1; i++){
             this.playerOwnables[x] = this.playerOwnables[x+1];
         }
-        copyOf(this.playerOwnables,this.playerOwnables.length-1);
-    }
-
-    public static Model.Squares.Ownable[] copyOf(Model.Squares.Ownable[] original, int newLength){
-        Ownable [] newArray = copyOf(original,newLength);
-        return newArray;
+        this.playerOwnables = Arrays.copyOf(this.playerOwnables,this.playerOwnables.length-1);
     }
     public void updateBalance(int accountUpdate) {
         balance += accountUpdate;
@@ -66,5 +61,9 @@ public class Account{
 
     public void setSumOfStreets(int sumOfStreets) {
         this.sumOfStreets = sumOfStreets;
+    }
+  
+    public Ownable[] getPlayerOwnables() {
+        return playerOwnables;
     }
 }
