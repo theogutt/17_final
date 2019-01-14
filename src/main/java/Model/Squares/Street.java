@@ -1,75 +1,83 @@
 package Model.Squares;
 
 import Controller.PlayerController;
-import Model.Squares.Ownable;
+import Controller.RentController;
+import Model.Player;
+import View.GUI_Handler;
 
-public class Street extends Ownable {
+import java.io.IOException;
 
+public class Street extends Ownable{
+    private int owner;
+    private int price;
+    private boolean owned;
+    private int positionOnBoard;
+    private String name;
+    private int numOfBuildings;
+    private int groupID;
+    private GUI_Handler guiHandler;
+    private PlayerController playerC;
+    private RentController rentC;
 
-    public Street (int positionOnBoard, int price,int rent, boolean owned){
-        super(positionOnBoard, price, rent, owned);
-
-    }
-    public void setOwned(boolean owned) {
+    public Street(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
+        super(positionOnBoard);
+        this.price = price;
         this.owned = owned;
+        this.name = name;
+        this.numOfBuildings = numOfBuildings;
+        this.groupID = groupID;
+        this.owner = owner;
     }
 
-    public boolean getOwned(){
-        return owned;
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
+            //spørger om spiller vil købe grunden
+        if(isOwned()==false) {
+            int ja = 1;
+            int answer = guiHandler.buyStreet();
+            if (ja == answer) {
+                int price = getPrice(positionOnBoard);
+                playerC.updatePlayerBalance(ref, price * -1);
+                setOwner(ref);
+                setOwned(true);
+            } else {}
+        }
+        else{
+            rentC.payRent(playerC, ref);
+        }
     }
 
-    public int getPrice() {
+    public int getPrice(int positionOnBoard) {
         return price;
     }
 
-    public void setRent(int rent) {
-        this.rent = rent;
+    public String getName() {
+        return name;
     }
 
-    public int getRent() {
-        return rent;
+    public int getGroupID() {
+        return groupID;
     }
-
     @Override
-    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
-        return -1;
+    public int getNumOfBuildings() {
+        return numOfBuildings;
     }
 
-    @Override
-    public int getPositionOnBoard(){
-        return super.getPositionOnBoard();
+    public int getPositionOnBoard() {
+        return positionOnBoard;
+    }
+    public int getOwner() {
+        return this.owner;
     }
 
+    public boolean isOwned() {
+        return owned;
+    }
 
-        /*
-        boolean playerOwnStreet = false;
-        int numOfPlayers;
+    public void setOwner(int ref) {
+        this.owner = ref;
+    }
 
-        // Paying rent
-        if (owned){
-            for (int i : playerC.getPlayerStreets(playerNum)){
-                if (i == positionOnBoard)
-                    playerOwnStreet = true;
-            }
-
-            // Who to pay rent to
-            if (!playerOwnStreet){
-                numOfPlayers = playerC.getNumOfPlayers();
-
-                for (int newPlayerNum = 0 ; (newPlayerNum < numOfPlayers); newPlayerNum++){
-                    for (int i : playerC.getPlayerStreets(newPlayerNum)){
-                        if (i == positionOnBoard){
-                            playerC.updatePlayerBalance(newPlayerNum, rent);
-                            playerC.updatePlayerBalance(playerNum, -rent);
-                        }
-                    }
-                }
-            }
-        }
-        else if (!owned){
-
-        }
-        */
-
-
+    public void setOwned(boolean owned) {
+        this.owned = owned;
+    }
 }

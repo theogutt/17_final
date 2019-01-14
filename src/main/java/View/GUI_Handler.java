@@ -4,6 +4,8 @@ import Controller.GameBoard;
 import Controller.PlayerController;
 import Utilities.TextReader;
 import Model.Die;
+import Model.Squares.Square;
+import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -80,7 +82,23 @@ public class GUI_Handler {
             }
         }
     }
+    public void messageSquareGui(PlayerController playerC, int ref, Square square, boolean passedStart) {
+        if (passedStart) {
+            gui.showMessage(message.messageSquare(playerC, ref));
+        }
+        gui.showMessage(message.messageSquare(playerC, ref));
+    }
 
+    public void updateGuiPlayerBalance(PlayerController playerC) {
+        for (int i = 0; i < gui_Players.length; i++) {
+            gui_Players[i].setBalance(playerC.getBalance(i));
+        }
+    }
+    public int buyStreet(){
+        String answer = gui.getUserSelection("Vil du købe grunden?","ja", "nej");
+        if(answer.equalsIgnoreCase("ja")){return 1;}
+        else{return 0;}
+    }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;

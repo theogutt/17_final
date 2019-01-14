@@ -1,39 +1,18 @@
 package Model.Squares;
 
 import Controller.PlayerController;
+import Controller.RentController;
+import View.GUI_Handler;
 
-public abstract class Ownable extends Square {
-
-    protected final int price;
-    protected boolean owned;
-    protected int rent;
-
-    public Ownable(int positionOnBoard, int price, int rent, boolean owned){
+public abstract class Ownable extends Square{
+    public Ownable(int positionOnBoard) {
         super(positionOnBoard);
-        this.owned = owned;
-        this.price = price;
-        this.rent = rent;
     }
 
-    @Override
-    public abstract int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref);
+    public abstract void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC);
 
-    public void setOwned(boolean owned) {
-        this.owned = owned;
-    }
-    public boolean getOwned(){
-        return owned;
-    }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setRent(int rent) {
-        this.rent = rent;
-    }
-
-    public int getRent() {
-        return rent;
+    public int getOwner() {
+        return getOwner();
     }
 }
