@@ -2,6 +2,7 @@ package View;
 
 import Controller.GameBoard;
 import Controller.PlayerController;
+import Utilities.TextReader;
 import Model.Die;
 import gui_fields.*;
 import gui_main.GUI;
@@ -27,6 +28,7 @@ public class GUI_Handler {
         /*for (int i = 0; i < fields.length; i++) {
             fields[i] = new GUI_Street((String) streetNames.get(i), "", (String) streetDesc.get(i), "", Color.YELLOW, Color.BLACK);
         }*/
+        chanceDesc = TextReader.textReader(".\\src\\Resources\\ChanceCards");
         setSpecificFields();
         gui = new GUI(fields);
     }
