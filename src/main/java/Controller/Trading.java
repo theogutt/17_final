@@ -16,11 +16,18 @@ public class Trading {
                                                 int othRef, Ownable othOwnable, int othMoney){
 
         // Ownable overførsel
-        playerC.removeOwnable(curOwnable, curRef);
-        playerC.removeOwnable(othOwnable, othRef);
 
-        playerC.addOwnable(othOwnable, curRef);
-        playerC.addOwnable(curOwnable, othRef);
+
+
+        if (othOwnable != null){
+            playerC.removeOwnable(othOwnable, othRef);
+            playerC.addOwnable(othOwnable, curRef);
+        }
+
+        if (curOwnable != null){
+            playerC.removeOwnable(curOwnable, curRef);
+            playerC.addOwnable(curOwnable, othRef);
+        }
 
 
         // Penge overførsel
@@ -29,14 +36,6 @@ public class Trading {
 
         playerC.updatePlayerBalance(curRef, othMoney);
         playerC.updatePlayerBalance(othRef, curMoney);
-
-    }
-
-    private void removeNull(PlayerController playerC, int ref){
-        Ownable[] ownables = playerC.getPlayerOwnables(ref);
-        if (ownables[ownables.length-1] == null){
-
-        }
 
     }
 }

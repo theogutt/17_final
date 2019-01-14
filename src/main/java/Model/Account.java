@@ -22,7 +22,7 @@ public class Account{
 
     //tilføjer et Ownable til playerownables
     public void addOwnable(Ownable ownable){
-        Ownable [] newArray = copyOf(this.playerOwnables,this.playerOwnables.length+1);
+        Ownable [] newArray = Arrays.copyOf(this.playerOwnables,this.playerOwnables.length+1);
         newArray[this.playerOwnables.length] = ownable;
         this.playerOwnables = newArray;
     }
@@ -40,7 +40,7 @@ public class Account{
         for(int i = x; x < this.playerOwnables.length-1; i++){
             this.playerOwnables[x] = this.playerOwnables[x+1];
         }
-        Arrays.copyOf(this.playerOwnables,this.playerOwnables.length-1);
+        this.playerOwnables = Arrays.copyOf(this.playerOwnables,this.playerOwnables.length-1);
     }
 
    /* public void addStreet(Street street){
