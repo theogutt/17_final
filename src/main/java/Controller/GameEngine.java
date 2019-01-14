@@ -50,8 +50,17 @@ public class GameEngine {
         while(true);
     }
     public void playTurn(int ref) {
+
+        if (playerC.getInJail(ref) == true){
+            playerC.wantOutOfJail(ref);
+        }
+        else {
+            die1.roll();
+            die2.roll();
+        }
+
             guiHandler.removeAllCarsCurPos(playerC);
-            playerC.calcNewPosition(die1.roll(), die2.roll(), ref);
+            playerC.calcNewPosition(die1.getFaceValue(), die2.getFaceValue(), ref);
             guiHandler.setAllCarsCurPos(playerC);
             guiHandler.diceUpdateGui(playerC, die1, die2);
             boolean passedStart = gameBoard.didPlayerPassStart(playerC, ref);
