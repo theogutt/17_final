@@ -10,7 +10,7 @@ public class TextReader {
     public static HashMap textReader(String file) throws IOException {
         BufferedReader br = new BufferedReader((new FileReader(file)));
         String line;
-        if (file.equals(".\\src\\Resources\\SquarePrice")) {
+        if (file.equals(".\\src\\Resources\\SquarePrice")||file.equals(".\\src\\Resources\\1HouseRent")||file.equals(".\\src\\Resources\\2HousesRent")||file.equals(".\\src\\Resources\\3HousesRent")||file.equals(".\\src\\Resources\\4HousesRent")||file.equals(".\\src\\Resources\\BaseRent")||file.equals(".\\src\\Resources\\HotelRent")) {
             HashMap<Integer, Integer> hashMapINT = new HashMap<Integer, Integer>();
             while ((line = br.readLine()) != null) {
                 String[] keyAndPairs = line.split("=");
