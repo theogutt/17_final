@@ -67,4 +67,8 @@ public class Account{
     public void setSumOfStreets(int sumOfStreets) {
         this.sumOfStreets = sumOfStreets;
     }
+
+    public Ownable[] getPlayerOwnables() {
+        return playerOwnables;
+    }
 }
