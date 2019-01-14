@@ -46,6 +46,11 @@ public class GameEngine {
         while(true);
     }
     public void playTurn(int ref) {
+
+        if (playerC.getInJail(ref) == true){
+            playerC.wantOutOfJail(ref);
+        }
+
             guiHandler.removeAllCarsCurPos(playerC);
             playerC.calcNewPosition(die1.roll(), die2.roll(), ref);
             guiHandler.setAllCarsCurPos(playerC);
