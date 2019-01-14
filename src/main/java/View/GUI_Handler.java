@@ -80,7 +80,6 @@ public class GUI_Handler {
         }
     }
     public int buyStreet(){
-        gui.showMessage("test");
         String answer = gui.getUserSelection("Vil du købe grunden?","ja", "nej");
         if(answer.equalsIgnoreCase("ja")){return 1;}
         else{return 0;}
