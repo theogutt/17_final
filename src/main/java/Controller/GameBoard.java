@@ -11,6 +11,8 @@ import java.util.HashMap;
 public class GameBoard {
 
     private Square[] squares = new Square[40];
+    public static Square[] squares = new Square[40];
+    private PlayerController PlayerC;
     private HashMap squarePrice;
     private HashMap StreetName;
     private HashMap groupID;
@@ -42,6 +44,40 @@ public class GameBoard {
             }
         }
     }
+
+    public void streetImpact(PlayerController playerC, int position,int facevalueSum, int ref){
+        squares[position].landOn(playerC,position,facevalueSum,ref);
+    }
+    /*
+    public void landOnEffect(int playerNum){
+
+    //Der kommer nok en nullPointerException på grund af Square Square. Men nu kan programmet køres.
+    public void landOnEffect(int playerNum, PlayerController PlayerC, Square Square){
+
+        // i er den reelle spiller position på brættet
+        int i = PlayerC.getPosition(playerNum) + 1;
+
+
+        //Start felt
+        if (i == 1){
+
+            PlayerC.updatePlayerBalance(playerNum, 4000);
+        }
+
+        //Chancekort
+        else if (i == 3 || i == 8 || i == 18 || i == 23 || i == 34 || i == 37){
+
+
+        }
+
+        //Skatte felt
+        else if (i == 39){
+                PlayerC.updatePlayerBalance(playerNum, -2000);
+        }
+        else if (i == 5){
+                //Mangler valgmulighed for at betale 10%
+                PlayerC.updatePlayerBalance(playerNum, -4000);
+        }
 
     public Square[] getSquares() {
         return squares;
