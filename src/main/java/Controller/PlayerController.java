@@ -128,32 +128,32 @@ public class PlayerController {
         return getRef(ref).getPlayerNum();
     }
 
-    public int getPosition(int i) {
-        return playerModels[i].getCurPosition();
+    public int getPosition(int playerNum) {
+        return playerModels[playerNum].getCurPosition();
     }
 
-    public int getOldPosition(int i) {
-        return playerModels[i].getOldPosition();
+    public int getOldPosition(int playerNum) {
+        return playerModels[playerNum].getOldPosition();
     }
 
     public void setSumOfStreets(int ref, int sumOfStreets) {
         playerModels[ref].setSumOfProperties(sumOfStreets);
     }
 
-    public String getName(int i) {
-        return playerModels[i].getName();
+    public String getName(int playerNum) {
+        return playerModels[playerNum].getName();
     }
 
-    public void setName(String name, int i) {
-        playerModels[i].setName(name);
+    public void setName(String name, int playerNum) {
+        playerModels[playerNum].setName(name);
     }
 
-    public void updatePlayerBalance(int ref, int accountUpdate) {
-        playerModels[ref].updateBalance(accountUpdate);
+    public void updatePlayerBalance(int playerNum, int accountUpdate) {
+        playerModels[playerNum].updateBalance(accountUpdate);
     }
 
-    public int getBalance(int i) {
-        return playerModels[i].getBalance();
+    public int getBalance(int playerNum) {
+        return playerModels[playerNum].getBalance();
     }
 
     public void setBroke(boolean bool, int i) {
@@ -172,7 +172,9 @@ public class PlayerController {
         return playerModels[i].getBroke();
     }
 
-    public void addOwnable(int i, Ownable ownable){playerModels[i].addOwnable(ownable);}
+    public void addOwnable(int playerNum,Ownable ownable){
+        playerModels[playerNum].addOwnable(ownable);
+    }
 
    /* public ArrayList getPlayerStreets(int ref) {
         return getRef(ref).getAllPlayersStreets();

@@ -31,21 +31,26 @@ public class Street extends Ownable{
         this.owner = owner;
     }
 
-    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC){
             //spørger om spiller vil købe grunden
-        if(isOwned()==false) {
+        if(owned==false) {
             int ja = 1;
             int answer = guiHandler.buyStreet();
             if (ja == answer) {
                 int price = getPrice(positionOnBoard);
-                playerC.updatePlayerBalance(ref, price * -1);
-                setOwner(ref);
+                playerC.updatePlayerBalance(playerNum, price * -1);
+                setOwner(playerNum);
                 setOwned(true);
-            } else {}
+            }
         }
-        else{
-            rentC.payRent(playerC, ref);
+        else if(owner!=playerNum) {
+                rentC.payRent(playerC, playerNum);
+            }
         }
+
+    public void setOwner(int playerNum) {
+        this.owner = playerNum;
+        playerC.addOwnable(playerNum, this);
     }
 
     public int getPrice(int positionOnBoard) {
@@ -64,20 +69,17 @@ public class Street extends Ownable{
         return numOfBuildings;
     }
 
-    public int getPositionOnBoard() {
-        return positionOnBoard;
-    }
     @Override
     public int getOwner() {
         return owner;
     }
+    public int getPositionOnBoard() {
+        return positionOnBoard;
+    }
+
 
     public boolean isOwned() {
         return owned;
-    }
-
-    public void setOwner(int ref) {
-        this.owner = ref;
     }
 
     public void setOwned(boolean owned) {

@@ -14,7 +14,6 @@ public class GameBoard {
     private HashMap squarePrice;
     private HashMap StreetName;
     private HashMap groupID;
-    private PlayerController PlayerC;
 
     public GameBoard() throws IOException {
         squarePrice = TextReader.textReader(".\\src\\Resources\\SquarePrice");
@@ -44,4 +43,10 @@ public class GameBoard {
         }
     }
 
+    public Square[] getSquares() {
+        return squares;
+    }
+    public Square getSquareX(int position){
+        return squares[position];
+    }
 }
