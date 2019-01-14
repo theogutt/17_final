@@ -3,6 +3,7 @@ package Model.Squares;
 
 import Controller.PlayerController;
 import View.GUI_Handler;
+import Controller.RentController;
 
 public class Chance extends Square{
     private int[] chanceCards = new int[27];
