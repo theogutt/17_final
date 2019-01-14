@@ -388,6 +388,7 @@ public class GUI_Handler {
     public void guiChance(int squareInt, PlayerController playerC) {
         gui.displayChanceCard((String) chanceDesc.get(squareInt));
         updateGuiplayerBalance(playerC);
+        removeAllCarsCurPos(playerC);
         setAllCarsCurPos(playerC);
     }
 }
