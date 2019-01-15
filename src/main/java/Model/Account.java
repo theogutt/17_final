@@ -1,8 +1,8 @@
 package Model;
 
 import Model.Squares.Ownable;
+import Utilities.Copy;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -24,7 +24,7 @@ public class Account{
 
     //tilføjer et Ownable til playerownables
     public void addOwnable(Ownable ownable){
-        Ownable [] newArray = copyOf(this.playerOwnables,this.playerOwnables.length+1);
+        Ownable [] newArray = Copy.of(this.playerOwnables,this.playerOwnables.length+1);
         newArray[this.playerOwnables.length] = ownable;
         this.playerOwnables = newArray;
     }
@@ -35,14 +35,14 @@ public class Account{
         for(int i= 0;i < this.playerOwnables.length; i++){
             if (this.playerOwnables[i] == ownable){
                 x=i;
-                break;
             }
+            break;
         }
         // Sætter alt på den nye plads i Arrayet
         for(int i = x; x < this.playerOwnables.length; i++){
             this.playerOwnables[x] = this.playerOwnables[x+1];
         }
-        copyOf(this.playerOwnables,this.playerOwnables.length-1);
+        Copy.of(this.playerOwnables,this.playerOwnables.length-1);
     }
 
     public Ownable[] getPlayerOwnables() {
@@ -73,4 +73,7 @@ public class Account{
         this.sumOfStreets = sumOfStreets;
     }
 
+    public Ownable[] getPlayerOwnables() {
+        return playerOwnables;
+    }
 }

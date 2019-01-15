@@ -15,6 +15,7 @@ public class Player {
     private int playerNum;
     private Account account;
     private boolean inJail = false;
+    private int outOfJailTries;
     private boolean jailCard = false;
     private boolean specialCard = false;
     private int oldRollSum;
@@ -44,15 +45,7 @@ public class Player {
         this.account.updateBalance(amount);
     }
 
-    public ArrayList getAllPlayersOwnables(){
-        return this.account.getPlayersOwnables();
-    }
-
-    public void addOwnables(Ownable ownable){this.account.addOwnables(ownable);}
-
-    public Ownable[] getPlayerOwnables(){
-        return account.getPlayerOwnables();
-    }
+    public void addOwnable(Ownable ownable){this.account.addOwnable(ownable);}
 
     public String getName() {
         return name;
@@ -97,6 +90,14 @@ public class Player {
         jailCard = bool;
     }
 
+    public void setOutOfJailTries(int tries){
+        outOfJailTries = tries;
+    }
+
+    public int getOutOfJailTries(){
+        return outOfJailTries;
+    }
+
     public boolean getInJail(){
         return inJail;
     }
@@ -108,6 +109,19 @@ public class Player {
     public boolean getSpecialCard() {return specialCard;}
 
     public void setSpecialCard(Boolean bool) {specialCard = bool; }
+
+
+    public Ownable[] getAllPlayerOwnables(){
+       return this.account.getPlayerOwnables();
+    }
+
+    public void addOwnable(Ownable ownable) {
+        this.account.addOwnable(ownable);
+    }
+
+    public void removeOwnable(Ownable ownable){
+        this.account.removeOwnable(ownable);
+    }
 
     public void setOldRollSum(int oldRollSum) {
         this.oldRollSum = oldRollSum;
