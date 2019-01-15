@@ -37,8 +37,9 @@ public class GUI_Handler {
 
     public void menu(PlayerController playerC, int playerNum){
         boolean aktivTur = true;
+        String valg;
         while (aktivTur) {
-            String valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
+            valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
             if (valg == "Handel") {
                 //trade(playerC, playerNum);
             } else if (valg == "Bygge") {
@@ -407,6 +408,7 @@ public class GUI_Handler {
 
     public void guiChance(int squareInt, PlayerController playerC) {
         gui.displayChanceCard((String) chanceDesc.get(squareInt));
+        gui.getUserButtonPressed("", "Ok");
         removeAllCarsCurPos(playerC);
         updateGuiplayerBalance(playerC);
         setAllCarsCurPos(playerC);
