@@ -9,7 +9,6 @@ import java.io.IOException;
 
 public class Brewery extends Ownable{
     private int owner;
-    private int price;
     private boolean owned;
     private int positionOnBoard;
     private String name;
@@ -18,18 +17,14 @@ public class Brewery extends Ownable{
     private RentController rentC;
     private int groupID;
     private GameBoard gameBoard;
+    private Square[] squares = new Square[40];
 
     public Brewery(int positionOnBoard, int price, String name, boolean owned, int owner, int groupID) throws IOException {
-        super(positionOnBoard);
-        this.price = price;
+        super(positionOnBoard, price);
         this.owned = owned;
         this.name = name;
         this.owner = owner;
         this.groupID = groupID;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
@@ -38,11 +33,13 @@ public class Brewery extends Ownable{
             int ja = 1;
             int answer = guiHandler.buyStreet();
             if (ja == answer) {
-                int price = getPrice(positionOnBoard);
+                int price = getPrice();
                 playerC.updatePlayerBalance(ref, price * -1);
                 setOwner(ref);
                 setOwned(true);
                 int position = playerC.getPosition(ref);
+                Square curSquare = squares[position];
+                playerC.addOwnables(ref, (Ownable) curSquare);
                 guiHandler.changeStreetColor(playerC, ref);
             } else {}
         }
@@ -50,10 +47,6 @@ public class Brewery extends Ownable{
             rentC.payRentBrewery(playerC, ref);
         }
     }
-    public int getPrice(int positionOnBoard) {
-        return price;
-    }
-
     public String getName() {
         return name;
     }

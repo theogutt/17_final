@@ -82,12 +82,6 @@ public class PlayerController {
         playerModels[playerNum].setCurPosition(newPosition);
     }
 
-/*
-    public void addPlayerStreet(int i, Street street) {
-        getRef(i).addStreet(street);
-    }
-*/
-
     private Player getRef(int i) {
         return playerModels[i];
     }
@@ -172,7 +166,7 @@ public class PlayerController {
         return playerModels[i].getBroke();
     }
 
-    public void addOwnable(int i, Ownable ownable){playerModels[i].addOwnable(ownable);}
+    public void addOwnables(int i, Ownable ownable){playerModels[i].addOwnables(ownable);}
 
     public Ownable[] getPlayerOwnables(int playerNum){
         return playerModels[playerNum].getPlayerOwnables();
@@ -189,4 +183,10 @@ public class PlayerController {
     public void setOldRollSum(int oldRollSum) {
         this.oldRollSum = oldRollSum;
     }
+
+    public ArrayList getPlayerOwnables(int ref) {
+        return getRef(ref).getAllPlayersOwnables();
+    }
+
+
 }

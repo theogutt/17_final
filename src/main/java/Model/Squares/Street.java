@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class Street extends Ownable{
     private int owner;
-    private int price;
     private boolean owned;
     private int positionOnBoard;
     private String name;
@@ -22,10 +21,10 @@ public class Street extends Ownable{
     private PlayerController playerC;
     private RentController rentC;
     private GameBoard gameBoard;
+    private Square[] squares = new Square[40];
 
     public Street(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
-        super(positionOnBoard);
-        this.price = price;
+        super(positionOnBoard, price);
         this.owned = owned;
         this.name = name;
         this.numOfBuildings = numOfBuildings;
@@ -39,21 +38,19 @@ public class Street extends Ownable{
             int ja = 1;
             int answer = guiHandler.buyStreet();
             if (ja == answer) {
-                int price = getPrice(positionOnBoard);
+                int price = getPrice();
                 playerC.updatePlayerBalance(ref, price * -1);
                 setOwner(ref);
                 setOwned(true);
                 int position = playerC.getPosition(ref);
+                Square curSquare = squares[position];
+                playerC.addOwnables(ref, (Ownable) curSquare);
                 guiHandler.changeStreetColor(playerC, ref);
             } else {}
         }
         else{
             rentC.payRent(playerC, ref);
         }
-    }
-
-    public int getPrice(int positionOnBoard) {
-        return price;
     }
 
     public String getName() {
