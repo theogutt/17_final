@@ -38,13 +38,15 @@ public class GameEngine {
         //Normal turn
         int playerNum;
         int i = 0;
+
         do {
             playerNum = calcTurn(i);
             guiHandler.playerTurnGui(playerC, playerNum);
             if (true) {
                 playTurn(playerNum);
             }
-            guiHandler.showScore(playerC, playerNum);
+            guiHandler.updateGuiPlayerBalance(playerC);
+            guiHandler.showScore(playerC, ref);
             i++;
         }
         while(true);

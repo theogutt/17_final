@@ -3,6 +3,7 @@ package Model;
 import Model.Squares.Ownable;
 import Utilities.Copy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -45,6 +46,10 @@ public class Account{
         Copy.of(this.playerOwnables,this.playerOwnables.length-1);
     }
 
+    public static Model.Squares.Ownable[] copyOf(Model.Squares.Ownable[] original, int newLength){
+        Ownable [] newArray = copyOf(original,newLength);
+        return newArray;
+    }
     public void updateBalance(int accountUpdate) {
         balance += accountUpdate;
     }

@@ -203,7 +203,14 @@ public class GUI_Handler {
     public void showScore(PlayerController player, int i) {
         gui.showMessage(message.playerEndTurn(player, i));
     }
-
+    public void changeStreetColor(PlayerController player, int ref){
+        GUI_Field field;
+        GUI_Ownable ownable;
+        Color carColor = getGuiPlayer(ref).getCar().getPrimaryColor();
+        field = gui.getFields()[player.getPosition(ref)];
+        ownable = (GUI_Ownable) field;
+        ownable.setBorder(carColor);
+    }
 
     public void setSpecificFields(){
             //ejendomsfelter
