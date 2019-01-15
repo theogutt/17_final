@@ -52,6 +52,14 @@ public class GUI_Handler {
         }
     }
 
+    public void playerWonGui(PlayerController playerC, int i) {
+        gui.showMessage(message.playerWon(playerC, i));
+    }
+
+    public void gotBrokeGui(PlayerController playerC, int i) {
+        gui.showMessage(message.gotBroke(playerC, i));
+    }
+
     public void startGameGui() {
         gui.showMessage(message.startGame1());
         gui.showMessage(message.startGame2());
