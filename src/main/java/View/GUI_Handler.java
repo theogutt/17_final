@@ -47,7 +47,7 @@ public class GUI_Handler {
         while (aktivTur) {
             String valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
             if (valg == "Handel") {
-                trade(playerC, playerNum);
+                trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
                 building.build(playerC, playerNum, this);
             } else if (valg == "Pantsæt") {
