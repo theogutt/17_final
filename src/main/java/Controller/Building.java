@@ -139,15 +139,13 @@ public class Building {
         }
         for(int i=0; i<ejendomme.length; i++){
             if(bygningDerSkalÆndres.equalsIgnoreCase(ejendomme[i].getName())){
-             buildBuilding((Street) ejendomme[i],playerC,playerNum);
+             buildBuilding((Street) ejendomme[i]);
                 break;
             }
         }
     }
-    private void buildBuilding(Street street,PlayerController playerC, int playerNum){
+    private void buildBuilding(Street street){
         int valg = guiHandler.chooseNumBuildnings();
-        gameBoard.changeBuildning(valg);
+        gameBoard.changeBuildning(street, valg);
     }
-
-
 }
