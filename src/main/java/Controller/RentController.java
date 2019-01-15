@@ -1,8 +1,6 @@
 
 package Controller;
-import Model.Squares.Ownable;
-import Model.Squares.Square;
-import Model.Squares.Street;
+import Model.Squares.*;
 import Utilities.TextReader;
 
 import java.io.IOException;
@@ -30,12 +28,31 @@ public class RentController {
         gameBoard = new GameBoard();
     }
 
-    public void payRent(PlayerController playerC, int ref) {
-        int rent = retrieveRent(playerC, ref);
-        playerC.updatePlayerBalance(ref, rent * -1);
-        int position = playerC.getPosition(ref);
-        playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+    public int getOwnableType(int position) {
+        Square cursquare = squares[position];
+        int type=0;
+        if (cursquare instanceof Street) {
+            type=1;
+        }
+        else if(cursquare instanceof Ferry){
+            type=2;
+        }
+        else if(cursquare instanceof Brewery){
+            type=3;
+        }
+        return type;
     }
+
+        public void payRent (PlayerController playerC,int ref){
+            int rent = retrieveRent(playerC, ref);
+            for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
+                if (playerC.getPlayerOwnables(j).contains(this)) {
+                    playerC.updatePlayerBalance(ref, (-1 * rent));
+                    playerC.updatePlayerBalance(j, rent);
+                    break;
+                }
+            }
+        }
 
         public void payRentFerry (PlayerController playerC,int ref){
             int rent = 0;
@@ -56,8 +73,13 @@ public class RentController {
             else if (gameBoard.numOfOwned(playerC, ref) == 4) {
                 rent = baseRent(position) * 8;
             }
-            playerC.updatePlayerBalance(ref, rent * -1);
-            playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+            for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
+                if (playerC.getPlayerOwnables(j).contains(this)) {
+                    playerC.updatePlayerBalance(ref, (-1 * rent));
+                    playerC.updatePlayerBalance(j, rent);
+                    break;
+                }
+            }
         }
         public void payRentBrewery (PlayerController playerC,int ref){
             int rent = 0;
@@ -66,8 +88,13 @@ public class RentController {
             } else if (gameBoard.numOfOwned(playerC, ref) == 2) {
                 rent = playerC.oldRollSum * 200;
             }
-            playerC.updatePlayerBalance(ref, rent * -1);
-            playerC.updatePlayerBalance(gameBoard.getSquareOwner(ref, playerC), rent);
+            for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
+                if (playerC.getPlayerOwnables(j).contains(this)) {
+                    playerC.updatePlayerBalance(ref, (-1 * rent));
+                    playerC.updatePlayerBalance(j, rent);
+                    break;
+                }
+            }
         }
 
         public int retrieveRent (PlayerController playerC,int ref){

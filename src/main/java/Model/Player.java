@@ -44,7 +44,11 @@ public class Player {
         this.account.updateBalance(amount);
     }
 
-    public void addOwnable(Ownable ownable){this.account.addOwnable(ownable);}
+    public ArrayList getAllPlayersOwnables(){
+        return this.account.getPlayersOwnables();
+    }
+
+    public void addOwnables(Ownable ownable){this.account.addOwnables(ownable);}
 
     public String getName() {
         return name;

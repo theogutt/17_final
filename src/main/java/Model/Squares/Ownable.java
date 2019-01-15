@@ -4,9 +4,13 @@ import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
 
+
 public abstract class Ownable extends Square{
-    public Ownable(int positionOnBoard) {
+    private int price;
+
+    public Ownable(int positionOnBoard, int price) {
         super(positionOnBoard);
+        this.price = price;
     }
 
     public abstract void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC);
@@ -15,4 +19,6 @@ public abstract class Ownable extends Square{
     public int getOwner() {
         return getOwner();
     }
+
+    public int getPrice(){return price;}
 }
