@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Building;
 import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.Trading;
@@ -27,6 +28,8 @@ public class GUI_Handler {
     private GUI_Player[] gui_Players;
     private GUI_Car[] gui_cars;
     private HashMap chanceDesc;
+    private GUI_Street gui_street;
+
 
     public GUI_Handler() throws IOException {
         message = new MessageHandler();
@@ -39,14 +42,14 @@ public class GUI_Handler {
         gui = new GUI(fields);
     }
 
-    public void menu(PlayerController playerC, int playerNum){
+    public void menu(PlayerController playerC, int playerNum, Building building, Trading trading){
         boolean aktivTur = true;
         while (aktivTur) {
             String valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
             if (valg == "Handel") {
-                //trade(playerC, playerNum);
+                trade(playerC, playerNum);
             } else if (valg == "Bygge") {
-                //build(playerC, playerNum);
+                building.build(playerC, playerNum, this);
             } else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
             } else if (valg == "Afslut tur") {
@@ -135,6 +138,31 @@ public class GUI_Handler {
         String choice = gui.getUserSelection("Betal 20% eller 4.000 kr.", "20%", "4.000 kr.");
         if (choice.equalsIgnoreCase("20%")){ return 1; }
         else { return 2; }
+    }
+
+    public String chooseStreetToBuildOn(){
+        String valg = gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
+        return valg;
+    }
+    public String chooseSepecificStreet(String[] streets){
+        String valg = gui.getUserSelection("Vælg grund",streets);
+        return valg;
+    }
+
+    public int chooseNumBuildnings(){
+        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
+        int i = 0;
+        if (valg == "1")        i=1;
+        else if (valg == "2")   i=2;
+        else if (valg == "3")   i=3;
+        else if (valg == "4")   i=4;
+        else if (valg == "Hotel")  i=5;
+        else                    i=0;
+
+        if (i==0){}
+        else if(i==5){gui_street.setHotel(true);}
+        else {gui_street.setHouses(i);}
+        return i;
     }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");

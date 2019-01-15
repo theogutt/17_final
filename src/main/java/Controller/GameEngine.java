@@ -12,6 +12,8 @@ public class GameEngine {
     private GUI_Handler guiHandler;
     private PlayerController playerC;
     private GameBoard gameBoard;
+    private Building building;
+    private Trading trading;
     private Die die1;
     private Die die2;
     private RentController rentC;
@@ -22,6 +24,8 @@ public class GameEngine {
         die2 = new Die(6);
         gameBoard = new GameBoard();
         rentC = new RentController();
+        building = new Building();
+        trading = new Trading();
     }
     public void start() {
         setUpGame();
@@ -84,7 +88,7 @@ public class GameEngine {
         if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
-        guiHandler.menu(playerC, playerNum);
+        guiHandler.menu(playerC, playerNum, building, trading);
     }
 
     public int calcTurn(int j) {

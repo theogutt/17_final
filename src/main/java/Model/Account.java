@@ -6,36 +6,34 @@ import Utilities.Copy;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
-
-public class Account{
+public class Account {
     private int balance;
     private int sumOfStreets;
     private Ownable[] playerOwnables = new Ownable[0];
 
-    // private ArrayList <Square> playersStreets = new ArrayList <Square>();
 
-    public Account(){
+    public Account() {
         startAccount();
     }
 
-    public void startAccount(){
+    public void startAccount() {
         balance = 30000;
     }
 
     //tilføjer et Ownable til playerownables
-    public void addOwnable(Ownable ownable){
-        Ownable [] newArray = Copy.of(this.playerOwnables,this.playerOwnables.length+1);
+    public void addOwnable(Ownable ownable) {
+        Ownable[] newArray = Copy.of(this.playerOwnables, this.playerOwnables.length + 1);
         newArray[this.playerOwnables.length] = ownable;
         this.playerOwnables = newArray;
     }
-    public void removeOwnable(Ownable ownable){
+
+    public void removeOwnable(Ownable ownable) {
         int x = 0;
 
         //Tjekker hvor grunden, der skal fernes er
-        for(int i= 0;i < this.playerOwnables.length; i++){
-            if (this.playerOwnables[i] == ownable){
-                x=i;
+        for (int i = 0; i < this.playerOwnables.length; i++) {
+            if (this.playerOwnables[i] == ownable) {
+                x = i;
             }
             break;
         }
@@ -43,13 +41,9 @@ public class Account{
         for(int i = x; i < this.playerOwnables.length-1; i++){
             this.playerOwnables[i] = this.playerOwnables[i+1];
         }
-        Copy.of(this.playerOwnables,this.playerOwnables.length-1);
+        Copy.of(this.playerOwnables, this.playerOwnables.length - 1);
     }
 
-    public static Model.Squares.Ownable[] copyOf(Model.Squares.Ownable[] original, int newLength){
-        Ownable [] newArray = copyOf(original,newLength);
-        return newArray;
-    }
     public void updateBalance(int accountUpdate) {
         balance += accountUpdate;
     }
