@@ -20,13 +20,19 @@ public class Cheatkodes {
         Scanner scan = new Scanner(System.in);
         int input = scan.nextInt();
 
+
+        //Giv spilleren et get out of jail free card
         if (input == 1){
             playerC.setJailCard(playerNum, true);
         }
+
+        //Sæt spilleren i faængsel
         else if(input == 2){
             playerC.setInJail(playerNum, true);
             playerC.setPosition(10, playerNum);
         }
+
+        //Tilføj penge til spillerens konto
         else if(input == 3){
             int i = scan.nextInt();
             playerC.updatePlayerBalance(playerNum, i);
@@ -37,12 +43,16 @@ public class Cheatkodes {
         else if(input == 5){
 
         }
+
+        //Sætter antal par slag spilleren har slået
         else if(input == 6){
             int i = scan.nextInt();
             if (i < 4){
                 gameEngine.setPairs(i);
             }
         }
+
+        //Sætter spillerens position og køre landOn metoden for det felt
         else if(input == 7){
             int i = scan.nextInt();
             if (i < 40){
@@ -50,6 +60,8 @@ public class Cheatkodes {
                 squares[i].landOn(playerC,playerNum,guiHandler,rentC);
             }
         }
+
+        //Trækker et chancekort og udfører det effekt
         else if (input == 8){
             int[] chanceCards = new int[27];
             int i = scan.nextInt();
