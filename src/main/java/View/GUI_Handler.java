@@ -93,6 +93,20 @@ public class GUI_Handler {
         if(answer.equalsIgnoreCase("ja")){return 1;}
         else{return 0;}
     }
+
+    public String chooseStreetToBuildOn(){
+        String valg = gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
+        return valg;
+    }
+    public int chooseNumBuildnings(){
+        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel");
+        if (valg == "1")        return 1;
+        else if (valg == "2")   return 2;
+        else if (valg == "3")   return 3;
+        else if (valg == "4")   return 4;
+        else                    {return 5;}
+    }
+
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;

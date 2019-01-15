@@ -67,6 +67,9 @@ public class Street extends Ownable{
     public int getNumOfBuildings() {
         return numOfBuildings;
     }
+    public void setNumOfBuildings(int numOfBuildings){
+        this.numOfBuildings = numOfBuildings;
+    }
 
     public int getPositionOnBoard() {
         return positionOnBoard;

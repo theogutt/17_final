@@ -46,16 +46,15 @@ public class GameBoard {
         }
         return numberOfGroupIDs;
     }
-    public boolean ownAllID(int ref, PlayerController playerC){
+    public boolean ownAllID(PlayerController playerC, int squarePos){
         boolean ownAll;
-        int curPosition = playerC.getPosition(ref);
-        Square curSquare = squares[curPosition];
-        int thisGroupID=curSquare.getGroupID(ref);
+        Square curSquare = squares[squarePos];
+        int thisGroupID = curSquare.getGroupID(squarePos);
         int numOfIDs = numberOfGroupIDs(thisGroupID);
         int sameOwner=0;
         for(int i = 0; i<40; i++){
             Square otherSquares = squares[i];
-            if(otherSquares.getOwner(ref)==curSquare.getOwner(ref)){
+            if(otherSquares.getOwner(squarePos)==curSquare.getOwner(squarePos)){
                 sameOwner = +1;
             }
         }
@@ -107,5 +106,8 @@ public class GameBoard {
 
     public Square getSquare(int i){
         return squares[i];
+    }
+    public void changeBuildning(int numOfBuildnings){
+
     }
 }
