@@ -49,7 +49,7 @@ public class Street extends Ownable{
             } else {
             }
         } else {
-            int rent = rentC.retrieveRent(playerC, ref);
+            int rent = rentC.retrieveRent(playerC, ref, gameBoard);
             playerC.updatePlayerBalance(ref, rent*-1);
             playerC.updatePlayerBalance(this.getOwner(), rent);
         }
