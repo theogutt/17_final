@@ -119,7 +119,7 @@ public class PlayerController {
         if (playerModels[ref].getBalance() < 0) setBroke(true, ref);
     }
 
-    public boolean getInJail(int ref) {
+    public boolean inJail(int ref) {
         return getRef(ref).getInJail();
     }
 

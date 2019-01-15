@@ -115,6 +115,25 @@ public class GUI_Handler {
         if(answer.equalsIgnoreCase("ja")){return 1;}
         else{return 0;}
     }
+
+ /*   public String chooseStreetToBuildOn(){
+        String valg = gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
+        return valg;
+    }
+    public String chooseSepecificStreet(){
+        String valg = gui.getUserSelection("Vælg grund",)
+    }
+
+    public int chooseNumBuildnings(){
+        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
+        if (valg == "1")        return 1;
+        else if (valg == "2")   return 2;
+        else if (valg == "3")   return 3;
+        else if (valg == "4")   return 4;
+        else if (valg == "Hotel")  return 5;
+        else                    return 0;
+    }
+*/
     public int payOrRoll(){
         String choice = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
         if (choice.equalsIgnoreCase("Betal")){ return 1; }
@@ -203,7 +222,14 @@ public class GUI_Handler {
     public void showScore(PlayerController player, int i) {
         gui.showMessage(message.playerEndTurn(player, i));
     }
-
+    public void changeStreetColor(PlayerController player, int ref){
+        GUI_Field field;
+        GUI_Ownable ownable;
+        Color carColor = getGuiPlayer(ref).getCar().getPrimaryColor();
+        field = gui.getFields()[player.getPosition(ref)];
+        ownable = (GUI_Ownable) field;
+        ownable.setBorder(carColor);
+    }
 
     public void setSpecificFields(){
             //ejendomsfelter

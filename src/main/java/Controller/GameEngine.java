@@ -44,7 +44,8 @@ public class GameEngine {
             if (true) {
                 playTurn(playerNum);
             }
-            guiHandler.showScore(playerC, playerNum);
+            guiHandler.updateGuiPlayerBalance(playerC);
+            guiHandler.showScore(playerC, ref);
             i++;
         }
         while(true);
