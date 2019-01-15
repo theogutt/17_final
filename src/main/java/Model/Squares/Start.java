@@ -18,9 +18,9 @@ public class Start extends Square{
     }
 
     @Override
-    public int landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
+    public int landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC){
 
-        playerC.updatePlayerBalance(ref, 4000);
+        playerC.updatePlayerBalance(playerNum, 4000);
         return -1;
     }
 }
