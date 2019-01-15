@@ -28,10 +28,11 @@ public class Cheatkodes {
             playerC.setPosition(10, playerNum);
         }
         else if(input == 3){
-            playerC.updatePlayerBalance(playerNum, -50000);
+            int i = scan.nextInt();
+            playerC.updatePlayerBalance(playerNum, i);
         }
         else if(input == 4){
-            playerC.updatePlayerBalance(playerNum, 50000);
+
         }
         else if(input == 5){
             gameEngine.setPairs(3);
@@ -47,11 +48,13 @@ public class Cheatkodes {
             }
         }
         else if (input == 8){
-            int i = scan.nextInt();
             int[] chanceCards = new int[27];
-            chanceCards[i] = i;
-            chance.setChanceCards(chanceCards);
-            squares[2].landOn(playerC,playerNum,guiHandler,rentC);
+            int i = scan.nextInt();
+            if (i < 27){
+                chanceCards[0] = i;
+                chance.setChanceCards(chanceCards);
+                squares[2].landOn(playerC,playerNum,guiHandler,rentC);
+            }
         }
     }
 }
