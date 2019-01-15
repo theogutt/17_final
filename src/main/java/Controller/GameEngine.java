@@ -35,6 +35,10 @@ public class GameEngine {
     }
 
     public void playGame() {
+        int loser = turnFlow();
+        endGame(loser);
+    }
+    public int turnFlow() {
         //Normal turn
         int playerNum;
         int i = 0;
@@ -44,11 +48,13 @@ public class GameEngine {
             if (true) {
                 playTurn(playerNum);
             }
-            guiHandler.updateGuiPlayerBalance(playerC);
-            guiHandler.showScore(playerC, ref);
+            guiHandler.showScore(playerC, playerNum);
+            playerC.broke(playerNum);
             i++;
         }
-        while(true);
+        // while(true);
+        while (!playerC.getModelBroke(playerNum));
+        return playerNum;
     }
     public void playTurn(int playerNum) {
 
@@ -84,7 +90,13 @@ public class GameEngine {
         return currentTurn;
     }
 
-    public Die getDie1() {
+    public void endGame(int ref) {
+        int x = playerC.playerWithHighestBalance();
+        guiHandler.gotBrokeGui(playerC, ref);
+        guiHandler.playerWonGui(playerC, x);
+    }
+
+        public Die getDie1() {
         return die1;
     }
 

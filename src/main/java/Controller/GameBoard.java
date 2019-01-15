@@ -1,3 +1,6 @@
+
+
+
 package Controller;
 
 import Model.Player;
@@ -23,40 +26,30 @@ public class GameBoard {
         instantiateSquares();
     }
 
-    public int getOwner(int position){
-        Square curSquare = squares[position];
-        return curSquare.getOwner();
-    }
-
-    public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
+    public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC){
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];
-        curSquare.landOn(playerC, ref, guiHandler, rentC, gameBoard);
+        curSquare.landOn(playerC, ref, guiHandler, rentC);
+        guiHandler.updateGuiplayerBalance(playerC);
     }
-
-    public int getGroupID(int index) {
-        return (Integer) groupID.get(index);
-    }
-    public int numberOfGroupIDs(int index){
-        int numberOfGroupIDs=0;
-        for(int i = 0; i<40; i++){
-            if(index==getGroupID(i)){
-                numberOfGroupIDs++;
-            }
-        }
-        return numberOfGroupIDs;
+    public int getSquareOwner(int ref, PlayerController playerC){
+        int curPosition = playerC.getPosition(ref);
+        Square curSquare = squares[curPosition];
+        int owner = curSquare.getOwner(ref);
+        return owner;
     }
 
 // Opretter felter med pris og rent
     public void instantiateSquares() throws IOException {
         for (int i = 0; i < 40; i++) {
+
             if (i == 0){ squares[i]= new Start(i);}                                                                        //Start
             else if (i == 10 || i == 20 ){ squares[i]= new Parking(i);}                                                    //Parking
             else if (i == 30 ){ squares[i]= new GoToPrison(i);}                                                            //Jail
             else if (i == 2 || i == 7 || i == 17 || i == 22 || i == 33 || i == 36) {squares[i]= new Chance(i);}            //Chance
             else if (i == 4 || i == 38){squares[i]= new Tax(i);}                                                           //Tax
-            else if (i == 5 || i == 15 ||i == 25 ||i == 35) {squares[i] = new Ferry(i,4000,(String)StreetName.get(i), false, 99, (Integer)groupID.get(i));} //Ferry
-            else if (i == 12 || i == 27){squares[i] = new Brewery(i,3000,(String)StreetName.get(i), false, 99, (Integer)groupID.get(i));}            //Brew
+            else if (i == 5 || i == 15 ||i == 25 ||i == 35) {squares[i] = new Ferry(i,4000,(String)StreetName.get(i), false, 99 );} //Ferry
+            else if (i == 12 || i == 27){squares[i] = new Brewery(i,3000,(String)StreetName.get(i), false, 99 );}            //Brew
             else {squares[i]= new Street(i,(Integer)squarePrice.get(i),0,(String)StreetName.get(i),(Integer)groupID.get(i),false, 99); //Street
             }
         }
@@ -79,9 +72,5 @@ public class GameBoard {
 
     public Square getSquare(int i){
         return squares[i];
-    }
-    public void changeBuildning(int numOfBuildnings){
-
-
     }
 }
