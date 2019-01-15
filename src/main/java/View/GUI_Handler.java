@@ -2,6 +2,7 @@ package View;
 
 import Controller.GameBoard;
 import Controller.PlayerController;
+import Model.Player;
 import Utilities.TextReader;
 import Model.Die;
 import Model.Squares.Square;
@@ -115,9 +116,14 @@ public class GUI_Handler {
         else{return 0;}
     }
     public int payOrRoll(){
-        String chose = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
-        if (chose.equalsIgnoreCase("Betal")){ return 1; }
+        String choice = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
+        if (choice.equalsIgnoreCase("Betal")){ return 1; }
         else{ return 2; }
+    }
+    public int procentOrFixed(PlayerController playerC, int playerNum){
+        String choice = gui.getUserSelection("Betal 20% eller 4.000 kr.", "20%", "4.000 kr.");
+        if (choice.equalsIgnoreCase("20%")){ return 1; }
+        else { return 2; }
     }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
