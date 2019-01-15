@@ -2,6 +2,7 @@ package View;
 
 import Controller.GameBoard;
 import Controller.PlayerController;
+import Controller.Trading;
 import Model.Player;
 import Utilities.Copy;
 import Utilities.TextReader;
@@ -420,7 +421,7 @@ public class GUI_Handler {
         setAllCarsCurPos(playerC);
     }
 
-    public void trade(PlayerController playerC, int playerNum){
+    public void trade(PlayerController playerC, int playerNum, Trading trading){
         // init = initiator, rece = receiver
         String[] players = new String[playerC.getNumOfPlayers()];
         int init = playerNum, rece = playerNum; // rece sat lig playerNum som en safety measure
@@ -467,8 +468,8 @@ public class GUI_Handler {
             }
         } while (!invSelection.equals("AFSLUT"));
 
-
-
+        trading.trade(playerC, init, initOffer, initMoney,
+                               rece, receOffer, receMoney);
     }
 
     private String[] getTradeOwnable(PlayerController playerC, int ref){
