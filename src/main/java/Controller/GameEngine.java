@@ -46,7 +46,7 @@ public class GameEngine {
                 playTurn(playerNum);
             }
             guiHandler.updateGuiPlayerBalance(playerC);
-            guiHandler.showScore(playerC, ref);
+            guiHandler.showScore(playerC, playerNum);
             i++;
         }
         while(true);
@@ -75,7 +75,7 @@ public class GameEngine {
         guiHandler.diceUpdateGui(playerC, die1, die2);
         boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
         if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
-        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
+        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
         guiHandler.menu(playerC, playerNum);
     }

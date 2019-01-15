@@ -7,23 +7,24 @@ import View.GUI_Handler;
 
 public abstract class Square{
     private int positionOnBoard;
+    private int owner;
 
     public Square(int positionOnBoard){
         this.positionOnBoard = positionOnBoard;
     }
 
-    public int landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
         try {
         }
         catch (NullPointerException ex){}
-        return -1;
+        //return -1;
     }
 
     public int getPositionOnBoard(){
         return positionOnBoard;
     }
-    public int getGroupID(int ref) {
-        return this.groupID;
-    }
 
+    public int getOwner(){
+        return this.owner;
+    }
 }

@@ -39,18 +39,20 @@ public class RentController {
         }
         return type;
     }
+    /*
         public int sameGroupID(PlayerController playerC, int ref, GameBoard gameBoard){
         int same=0;
         int pos = playerC.getPosition(ref);
         int ID = gameBoard.getGroupID(pos);
         gameBoard.numberOfGroupIDs(ID);
-        for(int i=0; i<playerC.getPlayerOwnables(getOwner(pos, gameBoard)).size(); i++){
+        for(int i=0; i<playerC.getPlayerOwnables(getOwner(pos, gameBoard)).length(); i++){
             if(playerC.getPlayerOwnables(getOwner(pos, gameBoard)).get(i) instanceof Street && ((Street) playerC.getPlayerOwnables(getOwner(pos, gameBoard)).get(i)).getGroupID(i)==ID){
                 same++;
             }
         }
         return same;
         }
+        */
 
         public int getOwner(int position, GameBoard gameBoard){
             return gameBoard.getOwner(position);
@@ -74,51 +76,55 @@ public class RentController {
                 } else if (buildings == 5) {
                     rent = HotelRent(position);
                 } else {
+                    /*
                     if (sameGroupID(playerC, ref, gameBoard)==gameBoard.numberOfGroupIDs(playerC.getPosition(ref))) {
                         rent = baseRent(position)*2;
                     }
-                    else{
+
+                    else{*/
                         rent = baseRent(position);
-                    }
+
                 }
+
             }
             else if(getOwnableType(playerC.getPosition(ref), gameBoard)==3){
-                if (getNumberOfBreweries(playerC, gameBoard, ref) == 1) {
+                if (/*getNumberOfBreweries(playerC, gameBoard, ref) == 1*/ true) {
                     rent = playerC.oldRollSum * 100;
-                } else if (getNumberOfBreweries(playerC, gameBoard, ref) == 2) {
+                } else if (/*getNumberOfBreweries(playerC, gameBoard, ref) == 2*/ false) {
                     rent = playerC.oldRollSum * 200;
                 }
             }
             else if(getOwnableType(playerC.getPosition(ref), gameBoard)==2){
-                if (getNumberOfFerries(playerC, gameBoard, ref) == 1) {
+                if (/*getNumberOfFerries(playerC, gameBoard, ref) == 1*/ true) {
                     rent = baseRent(position);
                 }
                 //to færger
-                else if (getNumberOfFerries(playerC, gameBoard, ref) == 2) {
+                else if (/*getNumberOfFerries(playerC, gameBoard, ref) == 2*/ false) {
                     rent = baseRent(position) * 2;
                 }
                 //tre færger
-                else if (getNumberOfFerries(playerC, gameBoard, ref) == 3) {
+                else if (/*getNumberOfFerries(playerC, gameBoard, ref) == 3*/ false) {
                     rent = baseRent(position) * 4;
                 }
                 //fire færger
-                else if (getNumberOfFerries(playerC, gameBoard, ref) == 4) {
+                else if (/*getNumberOfFerries(playerC, gameBoard, ref) == 4*/ false) {
                     rent = baseRent(position) * 8;
                 }
             }
                 return rent;
         }
-
+/*
         public int getNumberOfFerries(PlayerController playerC, GameBoard gameBoard, int ref){
             int ferries=0;
             int pos = playerC.getPosition(ref);
-            for(int i=0; i<playerC.getPlayerOwnables(getOwner(pos, gameBoard)).size(); i++) {
+            for(int i=0; i<playerC.getPlayerOwnables(getOwner(pos, gameBoard)).length(); i++) {
                 if(playerC.getPlayerOwnables(getOwner(i, gameBoard)).get(i) instanceof Ferry){
                     ferries++;
                 }
             }
             return ferries;
         }
+
         public int getNumberOfBreweries(PlayerController playerC, GameBoard gameBoard, int ref){
         int breweries=0;
             int pos = playerC.getPosition(ref);
@@ -138,7 +144,9 @@ public class RentController {
             }
         }
         return streets;
+
         }
+*/
 
         public int getRentInt0 ( int index){
             return (Integer) baseRent.get(index);

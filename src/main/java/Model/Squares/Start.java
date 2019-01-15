@@ -17,10 +17,10 @@ public class Start extends Square{
         return super.getPositionOnBoard();
     }
 
-    @Override
-    public int landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC){
+    //@Override
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC){
 
         playerC.updatePlayerBalance(playerNum, 4000);
-        return -1;
+        //return -1;
     }
 }

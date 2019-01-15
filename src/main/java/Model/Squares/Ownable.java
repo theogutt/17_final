@@ -44,7 +44,7 @@ public abstract class Ownable extends Square{
                 setOwner(ref);
                 int position = playerC.getPosition(ref);
                 Square curSquare = squares[position];
-                playerC.addOwnables(ref, (Ownable) curSquare);
+                playerC.addOwnable((Ownable) curSquare, ref);
                 guiHandler.changeStreetColor(playerC, ref);
             }
             else {}
