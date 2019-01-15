@@ -3,6 +3,7 @@ package Utilities;
 import Controller.GameEngine;
 import Controller.PlayerController;
 import Controller.RentController;
+import Model.Squares.Chance;
 import Model.Squares.Square;
 import View.GUI_Handler;
 
@@ -14,7 +15,7 @@ public class Cheatkodes {
 
     private Square[] squares = new Square[40];
 
-    public void cheats(PlayerController playerC, int playerNum, GameEngine gameEngine, GUI_Handler guiHandler, RentController rentC){
+    public void cheats(PlayerController playerC, int playerNum, GameEngine gameEngine, GUI_Handler guiHandler, RentController rentC, Chance chance){
 
         Scanner scan = new Scanner(System.in);
         int input = scan.nextInt();
@@ -44,6 +45,13 @@ public class Cheatkodes {
                 playerC.setPosition(i, playerNum);
                 squares[i].landOn(playerC,playerNum,guiHandler,rentC);
             }
+        }
+        else if (input == 8){
+            int i = scan.nextInt();
+            int[] chanceCards = new int[27];
+            chanceCards[i] = i;
+            chance.setChanceCards(chanceCards);
+            squares[2].landOn(playerC,playerNum,guiHandler,rentC);
         }
     }
 }
