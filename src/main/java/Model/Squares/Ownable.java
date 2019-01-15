@@ -9,7 +9,7 @@ public abstract class Ownable extends Square{
         super(positionOnBoard);
     }
 
-    public abstract int landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC);
+    public abstract int landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC);
 
 
     public int getOwner() {

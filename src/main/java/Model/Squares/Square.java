@@ -14,14 +14,14 @@ public abstract class Square{
         this.positionOnBoard = positionOnBoard;
     }
 
-    public int landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
+    public int landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC){
         try {
         }
         catch (NullPointerException ex){}
         return -1;
     }
 
-    public int getOwner(int ref) {
+    public int getOwner(int playerNum) {
         return this.owner;
     }
 
