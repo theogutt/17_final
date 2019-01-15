@@ -5,10 +5,7 @@ import Controller.RentController;
 import View.GUI_Handler;
 
 public abstract class Square{
-    private Street street;
     private int positionOnBoard;
-    private int owner;
-    private int numOfBuildings;
 
     public Square(int positionOnBoard){
         this.positionOnBoard = positionOnBoard;
@@ -21,15 +18,7 @@ public abstract class Square{
         return -1;
     }
 
-    public int getOwner(int ref) {
-        return this.owner;
-    }
-
-    public int getNumOfBuildings() {
-        int numOfBuildings = street.getNumOfBuildings();
-        return numOfBuildings;
-    }
     public int getPositionOnBoard(){
         return positionOnBoard;
     }
-    }
+}
