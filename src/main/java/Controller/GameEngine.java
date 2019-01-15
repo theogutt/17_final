@@ -42,12 +42,14 @@ public class GameEngine {
         //Normal turn
         int playerNum;
         int i = 0;
+
         do {
             playerNum = calcTurn(i);
             guiHandler.playerTurnGui(playerC, playerNum);
             if (true) {
                 playTurn(playerNum);
             }
+            guiHandler.updateGuiPlayerBalance(playerC);
             guiHandler.showScore(playerC, playerNum);
             playerC.broke(playerNum);
             i++;
@@ -80,7 +82,7 @@ public class GameEngine {
         guiHandler.diceUpdateGui(playerC, die1, die2);
         boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
         if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
-        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
+        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
         guiHandler.menu(playerC, playerNum);
     }
