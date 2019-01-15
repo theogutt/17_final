@@ -5,12 +5,13 @@ import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
 
-public abstract class Ownable extends Square{
+public abstract class Ownable extends Square {
     private int owner;
     private int price;
     private boolean owned;
     private int positionOnBoard;
     private String name;
+    private int groupID;
 
     public Ownable(int positionOnBoard, int price, String name, boolean owned, int owner) {
         super(positionOnBoard);
@@ -20,9 +21,9 @@ public abstract class Ownable extends Square{
         this.owner = owner;
     }
 
-    public int landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
+    public int landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
         //spørger om spiller vil købe grunden
-        if(!isOwned()) {
+        if (!isOwned()) {
             int ja = 1;
             int answer = guiHandler.buyStreet();
             if (ja == answer) {
@@ -30,13 +31,15 @@ public abstract class Ownable extends Square{
                 setOwner(ref);
                 setOwned(true);
             }
-        }
-        else{
+        } else {
             rentC.payRent(playerC, ref);
         }
         return -1;
-    };
+    }
 
+    public int getGroupID(){
+        return this.groupID;
+    }
     public int getPrice() {
         return this.price;
     }
@@ -60,6 +63,4 @@ public abstract class Ownable extends Square{
     public void setOwned(boolean owned) {
         this.owned = owned;
     }
-
-    public int getPrice(){return price;}
 }

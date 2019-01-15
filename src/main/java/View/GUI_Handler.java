@@ -130,8 +130,9 @@ public class GUI_Handler {
         String valg = gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
         return valg;
     }
-    public String chooseSepecificStreet(){
-        String valg = gui.getUserSelection("Vælg grund",)
+    public String chooseSepecificStreet(String[] streets){
+        String valg = gui.getUserSelection("Vælg grund",streets);
+        return valg;
     }
 
     public int chooseNumBuildnings(){

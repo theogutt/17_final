@@ -20,10 +20,6 @@ public class Street extends Ownable{
         this.groupID = groupID;
     }
 
-    public int getGroupID() {
-        return groupID;
-    }
-
     public int getNumOfBuildings() {
         return numOfBuildings;
     }
