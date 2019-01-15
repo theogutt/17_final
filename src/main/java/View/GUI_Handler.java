@@ -114,6 +114,11 @@ public class GUI_Handler {
         if(answer.equalsIgnoreCase("ja")){return 1;}
         else{return 0;}
     }
+    public int payOrRoll(){
+        String chose = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
+        if (chose.equalsIgnoreCase("Betal")){ return 1; }
+        else{ return 2; }
+    }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;
