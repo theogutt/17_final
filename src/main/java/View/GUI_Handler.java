@@ -35,6 +35,21 @@ public class GUI_Handler {
         gui = new GUI(fields);
     }
 
+    public void menu(PlayerController playerC, int playerNum){
+        boolean aktivTur = true;
+        while (aktivTur) {
+            String valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
+            if (valg == "Handel") {
+                //trade(playerC, playerNum);
+            } else if (valg == "Bygge") {
+                //build(playerC, playerNum);
+            } else if (valg == "Pantsæt") {
+                //indsæt pantsæt metode :)
+            } else if (valg == "Afslut tur") {
+                aktivTur = false;
+            }
+        }
+    }
 
     public void startGameGui() {
         gui.showMessage(message.startGame1());
@@ -99,6 +114,11 @@ public class GUI_Handler {
         if(answer.equalsIgnoreCase("ja")){return 1;}
         else{return 0;}
     }
+    public int payOrRoll(){
+        String chose = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
+        if (chose.equalsIgnoreCase("Betal")){ return 1; }
+        else{ return 2; }
+    }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;
@@ -151,8 +171,8 @@ public class GUI_Handler {
         return car;
     }
     public void removeAllCarsCurPos(PlayerController playerC) {
-        for (int i = 0; i < gui_Players.length; i++) {
-            fields[(playerC.getPosition(i))].removeAllCars();
+        for (int i = 0; i < 40; i++) {
+            fields[i].removeAllCars();
         }
     }
     public void setAllCarsCurPos(PlayerController playerC) {
@@ -385,8 +405,9 @@ public class GUI_Handler {
 
 
 
-    public void guiChance(int squareInt, PlayerController playerC, int playerNum, GameBoard board) {
+    public void guiChance(int squareInt, PlayerController playerC) {
         gui.displayChanceCard((String) chanceDesc.get(squareInt));
+        removeAllCarsCurPos(playerC);
         updateGuiplayerBalance(playerC);
         setAllCarsCurPos(playerC);
     }

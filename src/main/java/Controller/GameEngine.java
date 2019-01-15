@@ -50,21 +50,34 @@ public class GameEngine {
         while(true);
     }
     public void playTurn(int playerNum) {
+
+        guiHandler.updateGuiPlayerBalance(playerC);
+
         if (playerC.getInJail(playerNum) == true){
-            playerC.wantOutOfJail(playerNum);
+            if (playerC.getJailCard(playerNum)) {
+                playerC.getOutOfJailFree(playerNum);
+            }
+            else {
+                int choice = guiHandler.payOrRoll();
+                playerC.wantOutOfJail(playerNum, choice, die1, die2);
+            }
         }
         else{
             die1.roll();
             die2.roll();
         }
-            guiHandler.removeAllCarsCurPos(playerC);
+        guiHandler.removeAllCarsCurPos(playerC);
+        if (!playerC.getInJail(playerNum))
             playerC.calcNewPosition(die1.getFaceValue(), die2.getFaceValue(), playerNum);
-            guiHandler.setAllCarsCurPos(playerC);
-            guiHandler.diceUpdateGui(playerC, die1, die2);
-            boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
-            if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
-            gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
+        guiHandler.setAllCarsCurPos(playerC);
+        guiHandler.diceUpdateGui(playerC, die1, die2);
+        boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
+        if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
+        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
+
+        guiHandler.updateGuiPlayerBalance(playerC);
     }
+
     public int calcTurn(int j) {
         int currentTurn = j % playerC.getNumOfPlayers();
         return currentTurn;

@@ -18,6 +18,7 @@ public class Chance extends Square{
         int card = chanceCards[0];
         int returnInt = -1;
 
+
         switch (card-1){
             case 0: // Get 3.000 kr.
                 playerC.updatePlayerBalance(playerNum, 3000);
@@ -99,26 +100,26 @@ public class Chance extends Square{
 
             case 14: // Move to nearest brewery.
                 if (playerC.getPosition(playerNum) > 12 && playerC.getPosition(playerNum) < 28){
-                    playerC.setPosition(playerNum, 28);
+                    playerC.setPosition(28, playerNum);
                 }
                 else{
-                    playerC.setPosition(playerNum, 12);
+                    playerC.setPosition(23, playerNum);
                 }
                 returnInt = 14;
                 break;
 
             case 15: // Move to nearest brewery
                 if (playerC.getPosition(playerNum) > 12 && playerC.getPosition(playerNum) < 28){
-                    playerC.setPosition(playerNum, 28);
+                    playerC.setPosition(28, playerNum);
                 }
                 else{
-                    playerC.setPosition(playerNum, 12);
+                    playerC.setPosition(12, playerNum);
                 }
                 returnInt = 15;
                 break;
 
             case 16: // Move to Rådhuspladsen.
-                playerC.setPosition(playerNum, 39);
+                playerC.setPosition(39, playerNum);
                 returnInt = 16;
                 break;
 
@@ -144,10 +145,10 @@ public class Chance extends Square{
                 int newPosition;
                 newPosition = playerC.getPosition(playerNum)-3;
                 if (newPosition < 0){
-                    playerC.setPosition(playerNum, newPosition + 40);
+                    playerC.setPosition(newPosition + 40, playerNum);
                 }
                 else{
-                    playerC.setPosition(playerNum, newPosition);
+                    playerC.setPosition(newPosition, playerNum);
                 }
                 returnInt = 21;
                 break;
@@ -159,38 +160,39 @@ public class Chance extends Square{
 
             case 23: // Go to prison.
                 playerC.setInJail(playerNum,true);
-                playerC.setPosition(playerNum,10);
+                playerC.setPosition(10,playerNum);
                 returnInt = 23;
                 break;
 
             case 24: // Go to prison.
                 playerC.setInJail(playerNum,true);
-                playerC.setPosition(playerNum,10);
+                playerC.setPosition(10,playerNum);
                 returnInt = 24;
                 break;
 
             case 25: // Move to Grønningen.
-                playerC.setPosition(playerNum, 24);
+                playerC.setPosition(24, playerNum);
                 returnInt = 25;
                 break;
 
             case 26: // Move to LB-ferry.
-                playerC.setPosition(playerNum,5);
+                playerC.setPosition(5,playerNum);
                 returnInt = 26;
                 break;
 
             case 27: // Move to Frederiksberg Alle.
-                playerC.setPosition(playerNum,11);
+                playerC.setPosition(11,playerNum);
                 returnInt = 27;
                 break;
 
         }
+        gui_handler.guiChance(returnInt, playerC);
+        mixCards();
         return returnInt;
     }
 
 
     public void mixCards(){
-        //chanceCards[chanceCards.length-1] = chanceCards[0];
         int[] leftShifted = new int[chanceCards.length];
         for (int number = 0; number < chanceCards.length; number++) {
             int j = (number + 1) % chanceCards.length;
