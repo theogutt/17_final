@@ -391,11 +391,15 @@ public class GUI_Handler {
         setAllCarsCurPos(playerC);
     }
 
-    public void trade(PlayerController playerC, int currentPlayer){
+    public void trade(PlayerController playerC, int initiator){
         String[] players = new String[playerC.getNumOfPlayers()];
-        int otherPlayer;
-        String[] properties;
+        int receiver = initiator; // Sat lig initiator som en safety measure
+        String[] initiatorOwnables = new String[playerC.getPlayerOwnables(initiator).length+1]; // +1 for valg "ingen"
+        String[] receiverOwnables = new String[playerC.getPlayerOwnables(receiver).length+1];
+        String initiatorSelect, receiverSelect;
+        String[] initiatorOffer, receiverOffer;
 
+        // Liste over spiller navne
         for(int n=0 ; n < players.length ; n++)
             players[n] = playerC.getName(n);
 
@@ -404,11 +408,26 @@ public class GUI_Handler {
         // Finder  referencen til spilleren som skal byttes med
         for(int n=0 ; n < players.length ; n++){
             if(playerSelect.equals(players[n]))
-                otherPlayer = n;
+                receiver = n;
         }
 
-        for(int n=0 ; n < playerC.getPlayerOwnables(currentPlayer).length ; n++)
-            properties[n] = playerC.getPlayerOwnables(currentPlayer)[n].g;
-        String ownableOffer = gui.getUserSelection("Hvad tilbyder du?", properties);
+        // Liste over bygninger du ejer
+        for (int n = 0; n < playerC.getPlayerOwnables(initiator).length; n++)
+            initiatorOwnables[n] = playerC.getPlayerOwnables(initiator)[n].getName();
+        initiatorOwnables[initiatorOwnables.length - 1] = "AFSLUT";
+
+        do {
+            initiatorSelect = gui.getUserSelection("Hvad tilbyder du?", initiatorOwnables);
+        } while(!initiatorSelect.equals("AFSLUT"));
+
+        // Liste over bygninger du vil have
+        for(int n=0 ; n < playerC.getPlayerOwnables(receiver).length ; n++)
+            receiverOwnables[n] = playerC.getPlayerOwnables(receiver)[n].getName();
+        receiverOwnables[receiverOwnables.length-1] = "AFSLUT";
+
+        receiverSelect = gui.getUserSelection("Hvad tilbyder du?", receiverOwnables);
+
+
+
     }
 }
