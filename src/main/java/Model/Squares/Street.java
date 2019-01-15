@@ -24,7 +24,7 @@ public class Street extends Ownable{
     private Square[] squares = new Square[40];
 
     public Street(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
-        super(positionOnBoard, price);
+        super(positionOnBoard, price, name, owned, owner);
         this.owned = owned;
         this.name = name;
         this.numOfBuildings = numOfBuildings;
@@ -61,7 +61,7 @@ public class Street extends Ownable{
     public int getGroupID() {
         return groupID;
     }
-    @Override
+
     public int getNumOfBuildings() {
         return numOfBuildings;
     }

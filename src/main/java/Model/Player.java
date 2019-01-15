@@ -45,8 +45,6 @@ public class Player {
         this.account.updateBalance(amount);
     }
 
-    public void addOwnable(Ownable ownable){this.account.addOwnable(ownable);}
-
     public String getName() {
         return name;
     }
@@ -54,6 +52,7 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public int getCurPosition() {
         return curPosition;

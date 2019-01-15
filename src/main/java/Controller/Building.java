@@ -11,6 +11,7 @@ public class Building {
     private GameBoard gameBoard;
 
     public void build(PlayerController playerC, int playerNum){
+        String bygningDerSkalÆndres = "";
         Ownable[] ejendomme = playerC.getPlayerOwnables(playerNum);
         String valg = guiHandler.chooseStreetToBuildOn();
         if(valg=="Lyseblå"){
@@ -25,7 +26,7 @@ public class Building {
                         }
                     }
                 }
-                guiHandler.chooseSepecificStreet(streets);
+                bygningDerSkalÆndres=guiHandler.chooseSepecificStreet(streets);
             }
             else{
                 guiHandler.menu(playerC,playerNum);
@@ -42,7 +43,7 @@ public class Building {
                         }
                     }
                 }
-                guiHandler.chooseSepecificStreet(streets);
+                bygningDerSkalÆndres = guiHandler.chooseSepecificStreet(streets);
             }else{
                 guiHandler.menu(playerC,playerNum);
             }
@@ -58,7 +59,7 @@ public class Building {
                         }
                     }
                 }
-                guiHandler.chooseSepecificStreet(streets);
+                bygningDerSkalÆndres=guiHandler.chooseSepecificStreet(streets);
             }else{
                 guiHandler.menu(playerC,playerNum);
             }
@@ -75,7 +76,7 @@ public class Building {
                         }
                     }
                 }
-                guiHandler.chooseSepecificStreet(streets);
+                bygningDerSkalÆndres=guiHandler.chooseSepecificStreet(streets);
             }else{
                 guiHandler.menu(playerC,playerNum);
             }
@@ -91,7 +92,7 @@ public class Building {
                         }
                     }
                 }
-                guiHandler.chooseSepecificStreet(streets);
+                bygningDerSkalÆndres=guiHandler.chooseSepecificStreet(streets);
             }else{
                 guiHandler.menu(playerC,playerNum);
             }
@@ -107,7 +108,7 @@ public class Building {
                         }
                     }
                 }
-                guiHandler.chooseSepecificStreet(streets);
+                bygningDerSkalÆndres=guiHandler.chooseSepecificStreet(streets);
         }else{
                 guiHandler.menu(playerC,playerNum);
         }
@@ -123,7 +124,7 @@ public class Building {
                         }
                     }
                 }
-                guiHandler.chooseSepecificStreet(streets);
+                bygningDerSkalÆndres=guiHandler.chooseSepecificStreet(streets);
             }else{
                 guiHandler.menu(playerC,playerNum);
             }
@@ -136,10 +137,14 @@ public class Building {
         }else if(valg=="Tilbage"){
             guiHandler.menu(playerC,playerNum);
         }
-
-
+        for(int i=0; i<ejendomme.length; i++){
+            if(bygningDerSkalÆndres.equalsIgnoreCase(ejendomme[i].getName())){
+             buildBuilding((Street) ejendomme[i],playerC,playerNum);
+                break;
+            }
+        }
     }
-    private void buildBuilding(Street street){
+    private void buildBuilding(Street street,PlayerController playerC, int playerNum){
         int valg = guiHandler.chooseNumBuildnings();
         gameBoard.changeBuildning(valg);
     }

@@ -24,6 +24,7 @@ public class GUI_Handler {
     private GUI_Player[] gui_Players;
     private GUI_Car[] gui_cars;
     private HashMap chanceDesc;
+    private GUI_Street gui_street;
 
     public GUI_Handler() throws IOException {
         message = new MessageHandler();
@@ -137,12 +138,18 @@ public class GUI_Handler {
 
     public int chooseNumBuildnings(){
         String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
-        if (valg == "1")        return 1;
-        else if (valg == "2")   return 2;
-        else if (valg == "3")   return 3;
-        else if (valg == "4")   return 4;
-        else if (valg == "Hotel")  return 5;
-        else                    return 0;
+        int i = 0;
+        if (valg == "1")        i=1;
+        else if (valg == "2")   i=2;
+        else if (valg == "3")   i=3;
+        else if (valg == "4")   i=4;
+        else if (valg == "Hotel")  i=5;
+        else                    i=0;
+
+        if (i==0){}
+        else if(i==5){gui_street.setHotel(true);}
+        else {gui_street.setHouses(i);}
+        return i;
     }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");

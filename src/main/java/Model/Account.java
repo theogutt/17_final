@@ -7,59 +7,52 @@ import java.util.Arrays;
 
 
 
-public class Account{
+public class Account {
     private int balance;
     private int sumOfStreets;
     private Ownable[] playerOwnables = new Ownable[0];
-    private ArrayList <Ownable> playersOwnables = new ArrayList <Ownable>();
 
-    public Account(){
+    public Account() {
         startAccount();
     }
 
-    public void startAccount(){
+    public void startAccount() {
         balance = 30000;
     }
 
     //tilføjer et Ownable til playerownables
-    public void addOwnable(Ownable ownable){
-        Ownable [] newArray = Copy.of(this.playerOwnables,this.playerOwnables.length+1);
+    public void addOwnable(Ownable ownable) {
+        Ownable[] newArray = Copy.of(this.playerOwnables, this.playerOwnables.length + 1);
         newArray[this.playerOwnables.length] = ownable;
         this.playerOwnables = newArray;
     }
-    public void removeOwnable(Ownable ownable){
+
+    public void removeOwnable(Ownable ownable) {
         int x = 0;
 
         //Tjekker hvor grunden, der skal fernes er
-        for(int i= 0;i < this.playerOwnables.length; i++){
-            if (this.playerOwnables[i] == ownable){
-                x=i;
+        for (int i = 0; i < this.playerOwnables.length; i++) {
+            if (this.playerOwnables[i] == ownable) {
+                x = i;
             }
             break;
         }
         // Sætter alt på den nye plads i Arrayet
-        for(int i = x; x < this.playerOwnables.length; i++){
-            this.playerOwnables[x] = this.playerOwnables[x+1];
+        for (int i = x; x < this.playerOwnables.length; i++) {
+            this.playerOwnables[x] = this.playerOwnables[x + 1];
         }
-        Copy.of(this.playerOwnables,this.playerOwnables.length-1);
+        Copy.of(this.playerOwnables, this.playerOwnables.length - 1);
     }
 
     public Ownable[] getPlayerOwnables() {
         return playerOwnables;
     }
 
-    public ArrayList<Ownable> getPlayersOwnables() {
-        return playersOwnables;
-    }
-    public void addPlayerOwnables(Ownable ownable){
-        playersOwnables.add(ownable);
-
-    }
-
-    public static Model.Squares.Ownable[] copyOf(Model.Squares.Ownable[] original, int newLength){
-        Ownable [] newArray = copyOf(original,newLength);
+    public static Model.Squares.Ownable[] copyOf(Model.Squares.Ownable[] original, int newLength) {
+        Ownable[] newArray = copyOf(original, newLength);
         return newArray;
     }
+
     public void updateBalance(int accountUpdate) {
         balance += accountUpdate;
     }
@@ -78,9 +71,5 @@ public class Account{
 
     public void setSumOfStreets(int sumOfStreets) {
         this.sumOfStreets = sumOfStreets;
-    }
-
-    public Ownable[] getPlayerOwnables() {
-        return playerOwnables;
     }
 }

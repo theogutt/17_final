@@ -107,7 +107,7 @@ public class GameBoard {
     public Square getSquare(int i){
         return squares[i];
     }
-    public void changeBuildning(int numOfBuildnings){
+    public void changeBuildning(int numOfBuildnings, PlayerController playerC, int playerNum){
 
 
     }

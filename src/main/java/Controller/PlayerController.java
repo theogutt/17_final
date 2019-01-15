@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Player;
 import Model.Squares.Ownable;
+import Model.Squares.Street;
 
 import java.util.ArrayList;
 
