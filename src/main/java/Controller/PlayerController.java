@@ -103,6 +103,12 @@ public class PlayerController {
         playerModels[playerNum].setCurPosition(newPosition);
     }
 
+/*
+    public void addPlayerStreet(int i, Street street) {
+        getRef(i).addStreet(street);
+    }
+*/
+
     private Player getRef(int i) {
         return playerModels[i];
     }
@@ -166,7 +172,6 @@ public class PlayerController {
     public void updatePlayerBalance(int ref, int accountUpdate) {
         playerModels[ref].updateBalance(accountUpdate);
     }
-
     public int getBalance(int i) {
         return playerModels[i].getBalance();
     }
