@@ -22,7 +22,7 @@ public abstract class Square{
         catch (NullPointerException ex){}
     }
 
-    public int getOwner(int ref) {
+    public int getOwner() {
         return this.owner;
     }
 

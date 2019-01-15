@@ -39,17 +39,21 @@ public class RentController {
         }
         return type;
     }
-        public int sameGroupID(PlayerController playerC, int ref, GameBoard gameBoard, int thisID){
+        public int sameGroupID(PlayerController playerC, int ref, GameBoard gameBoard){
         int same=0;
         int pos = playerC.getPosition(ref);
         int ID = gameBoard.getGroupID(pos);
         gameBoard.numberOfGroupIDs(ID);
-        for(int i=0; i<40; i++){
-            if(playerC.getPlayerOwnables(ref).get(i) instanceof Street && ((Street) playerC.getPlayerOwnables(ref).get(i)).getGroupID(i)==thisID){
+        for(int i=0; i<playerC.getPlayerOwnables(getOwner(pos, gameBoard)).size(); i++){
+            if(playerC.getPlayerOwnables(getOwner(pos, gameBoard)).get(i) instanceof Street && ((Street) playerC.getPlayerOwnables(getOwner(pos, gameBoard)).get(i)).getGroupID(i)==ID){
                 same++;
             }
         }
         return same;
+        }
+
+        public int getOwner(int position, GameBoard gameBoard){
+            return gameBoard.getOwner(position);
         }
 
         public int retrieveRent (PlayerController playerC,int ref, GameBoard gameBoard){
@@ -70,7 +74,7 @@ public class RentController {
                 } else if (buildings == 5) {
                     rent = HotelRent(position);
                 } else {
-                    if (getNumberOfStreets(playerC, ref)==gameBoard.numberOfGroupIDs(playerC.getPosition(ref))) {
+                    if (sameGroupID(playerC, ref, gameBoard)==gameBoard.numberOfGroupIDs(playerC.getPosition(ref))) {
                         rent = baseRent(position)*2;
                     }
                     else{
@@ -79,54 +83,57 @@ public class RentController {
                 }
             }
             else if(getOwnableType(playerC.getPosition(ref), gameBoard)==3){
-                if (getNumberOfBreweries(playerC, ref) == 1) {
+                if (getNumberOfBreweries(playerC, gameBoard, ref) == 1) {
                     rent = playerC.oldRollSum * 100;
-                } else if (getNumberOfBreweries(playerC, ref) == 2) {
+                } else if (getNumberOfBreweries(playerC, gameBoard, ref) == 2) {
                     rent = playerC.oldRollSum * 200;
                 }
             }
             else if(getOwnableType(playerC.getPosition(ref), gameBoard)==2){
-                if (getNumberOfFerries(playerC, ref) == 1) {
+                if (getNumberOfFerries(playerC, gameBoard, ref) == 1) {
                     rent = baseRent(position);
                 }
                 //to færger
-                else if (getNumberOfFerries(playerC, ref) == 2) {
+                else if (getNumberOfFerries(playerC, gameBoard, ref) == 2) {
                     rent = baseRent(position) * 2;
                 }
                 //tre færger
-                else if (getNumberOfFerries(playerC, ref) == 3) {
+                else if (getNumberOfFerries(playerC, gameBoard, ref) == 3) {
                     rent = baseRent(position) * 4;
                 }
                 //fire færger
-                else if (getNumberOfFerries(playerC, ref) == 4) {
+                else if (getNumberOfFerries(playerC, gameBoard, ref) == 4) {
                     rent = baseRent(position) * 8;
                 }
             }
                 return rent;
         }
 
-        public int getNumberOfFerries(PlayerController playerC, int ref){
+        public int getNumberOfFerries(PlayerController playerC, GameBoard gameBoard, int ref){
             int ferries=0;
-            for(int i=0; i<40; i++) {
-                if(playerC.getPlayerOwnables(ref).get(i) instanceof Ferry){
+            int pos = playerC.getPosition(ref);
+            for(int i=0; i<playerC.getPlayerOwnables(getOwner(pos, gameBoard)).size(); i++) {
+                if(playerC.getPlayerOwnables(getOwner(i, gameBoard)).get(i) instanceof Ferry){
                     ferries++;
                 }
             }
             return ferries;
         }
-        public int getNumberOfBreweries(PlayerController playerC, int ref){
+        public int getNumberOfBreweries(PlayerController playerC, GameBoard gameBoard, int ref){
         int breweries=0;
-        for(int i=0; i<40; i++) {
-            if(playerC.getPlayerOwnables(ref).get(i) instanceof Brewery){
+            int pos = playerC.getPosition(ref);
+            for(int i=0; i<playerC.getPlayerOwnables(getOwner(pos, gameBoard)).size(); i++) {
+            if(playerC.getPlayerOwnables(getOwner(i, gameBoard)).get(i) instanceof Brewery){
                 breweries++;
             }
         }
+
         return breweries;
         }
-        public int getNumberOfStreets(PlayerController playerC, int ref){
+        public int getNumberOfStreets(PlayerController playerC,  GameBoard gameBoard){
         int streets=0;
         for(int i=0; i<40; i++) {
-            if(playerC.getPlayerOwnables(ref).get(i) instanceof Street){
+            if(playerC.getPlayerOwnables(getOwner(i, gameBoard)).get(i) instanceof Street){
                 streets++;
             }
         }

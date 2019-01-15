@@ -23,17 +23,17 @@ public class GameBoard {
         instantiateSquares();
     }
 
+    public int getOwner(int position){
+        Square curSquare = squares[position];
+        return curSquare.getOwner();
+    }
+
     public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];
         curSquare.landOn(playerC, ref, guiHandler, rentC, gameBoard);
     }
-    public int getSquareOwner(int ref, PlayerController playerC){
-        int curPosition = playerC.getPosition(ref);
-        Square curSquare = squares[curPosition];
-        int owner = curSquare.getOwner(ref);
-        return owner;
-    }
+
     public int getGroupID(int index) {
         return (Integer) groupID.get(index);
     }
@@ -46,34 +46,7 @@ public class GameBoard {
         }
         return numberOfGroupIDs;
     }
-    public boolean ownAllID(PlayerController playerC, int squarePos){
-        boolean ownAll;
-        Square curSquare = squares[squarePos];
-        int thisGroupID = curSquare.getGroupID(squarePos);
-        int numOfIDs = numberOfGroupIDs(thisGroupID);
-        int sameOwner=0;
-        for(int i = 0; i<40; i++){
-            Square otherSquares = squares[i];
-            if(otherSquares.getOwner(squarePos)==curSquare.getOwner(squarePos)){
-                sameOwner = +1;
-            }
-        }
-        if(sameOwner==numOfIDs){ownAll=true;}
-        else{ownAll=false;}
-        return ownAll;
-    }
-    public int numOfOwned(PlayerController playerC, int ref){
-            int curPosition = playerC.getPosition(ref);
-            Square curSquare = squares[curPosition];
-            int numOfOwned=0;
-            for(int i = 0; i<40; i++){
-                Square otherSquares = squares[i];
-                if(otherSquares.getOwner(ref)==curSquare.getOwner(ref)){
-                    numOfOwned = +1;
-                }
-            }
-        return numOfOwned;
-    }
+
 // Opretter felter med pris og rent
     public void instantiateSquares() throws IOException {
         for (int i = 0; i < 40; i++) {
