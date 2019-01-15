@@ -94,7 +94,7 @@ public class GUI_Handler {
         else{return 0;}
     }
 
-    public String chooseStreetToBuildOn(){
+ /*   public String chooseStreetToBuildOn(){
         String valg = gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
         return valg;
     }
@@ -111,7 +111,7 @@ public class GUI_Handler {
         else if (valg == "Hotel")  return 5;
         else                    return 0;
     }
-
+*/
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;

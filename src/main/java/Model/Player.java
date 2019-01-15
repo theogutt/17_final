@@ -48,11 +48,11 @@ public class Player {
         return this.account.getPlayersOwnables();
     }
 
-    public void addOwnables(Ownable ownable){this.account.addOwnables(ownable);}
+    public void addOwnables(Ownable ownable){this.account.addPlayerOwnables(ownable);}
 
-    public Ownable[] getPlayerOwnables(){
+    /*public Ownable[] getPlayerOwnables(){
         return account.getPlayerOwnables();
-    }
+    }*/
 
     public String getName() {
         return name;

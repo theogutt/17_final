@@ -1,3 +1,4 @@
+/*
 package Controller;
 
 import Model.Squares.Ownable;
@@ -12,13 +13,15 @@ public class Building {
 
     public void build(PlayerController playerC, int playerNum){
 
-        /*
+        */
+/*
         Ownable[] ejendomme = playerC.getPlayerOwnables(playerNum);
         for (int i=0; i<ejendomme.length; i++){
             if(ejendomme[i] instanceof Street){
             }
         }
-        */
+        *//*
+
 
         String valg = guiHandler.chooseStreetToBuildOn();
         if(valg=="Lyseblå"){
@@ -91,3 +94,4 @@ public class Building {
 
 
 }
+*/

@@ -11,8 +11,7 @@ public class Account{
     private int balance;
     private int sumOfStreets;
     private Ownable[] playerOwnables = new Ownable[0];
-
-    // private ArrayList <Square> playersStreets = new ArrayList <Square>();
+    private ArrayList <Ownable> playersOwnables = new ArrayList <Ownable>();
 
     public Account(){
         startAccount();
@@ -47,6 +46,14 @@ public class Account{
 
     public Ownable[] getPlayerOwnables() {
         return playerOwnables;
+    }
+
+    public ArrayList<Ownable> getPlayersOwnables() {
+        return playersOwnables;
+    }
+    public void addPlayerOwnables(Ownable ownable){
+        playersOwnables.add(ownable);
+
     }
 
     public static Model.Squares.Ownable[] copyOf(Model.Squares.Ownable[] original, int newLength){
