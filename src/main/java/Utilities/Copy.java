@@ -5,8 +5,8 @@ import Model.Squares.Street;
 import java.util.Arrays;
 
 public class Copy {
-    public static Object[] of(Object[] original, int newLength){
-        Object[] newArray = new Object[newLength];
+    public static Ownable[] of(Ownable[] original, int newLength){
+        Ownable[] newArray = new Ownable[newLength];
         int stop;
 
         if (original.length < newArray.length)
@@ -20,7 +20,7 @@ public class Copy {
         return newArray;
     }
 
-    /*
+
     public static Street[] of(Street[] original, int newLength){
         Street[] newArray = new Street[newLength];
         int stop;
@@ -50,5 +50,5 @@ public class Copy {
 
         return newArray;
     }
-    */
+
 }
