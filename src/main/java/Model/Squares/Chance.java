@@ -18,7 +18,7 @@ public class Chance extends Square{
         int card = chanceCards[0];
         int returnInt = -1;
 
-        gui_handler.guiChance(card-1, playerC);
+
         switch (card-1){
             case 0: // Get 3.000 kr.
                 playerC.updatePlayerBalance(playerNum, 3000);
@@ -186,6 +186,7 @@ public class Chance extends Square{
                 break;
 
         }
+        gui_handler.guiChance(returnInt, playerC);
         mixCards();
         return returnInt;
     }
