@@ -71,7 +71,13 @@ public class GameEngine {
         return currentTurn;
     }
 
-    public Die getDie1() {
+    public void endGame(int ref) {
+        int x = playerC.playerWithHighestBalance();
+        guiHandler.gotBrokeGui(playerC, ref);
+        guiHandler.playerWonGui(playerC, x);
+    }
+
+        public Die getDie1() {
         return die1;
     }
 

@@ -24,6 +24,10 @@ public class MessageHandler {
     public String getSquareMessage(int index) {
         return (String) hashMapTurnMessages.get(index);
     }
+    public String gotBroke(PlayerController playerC, int i) {
+        returnString = turnMessage(playerC, i, "28");
+        return returnString;
+    }
 
     public String startGame1() {
         return getSquareMessage(996);
@@ -48,6 +52,10 @@ public class MessageHandler {
     }
     public String playerTurn(PlayerController playerC, int i) {
         returnString = "Det er " + playerC.getName(i) + "'s tur! Tryk enter for at kaste terningerne!";
+        return returnString;
+    }
+    public String playerWon(PlayerController playerC, int i) {
+        returnString = playerC.getName(i) + " has won the game by having the most $! " + playerC.getBalance(i);
         return returnString;
     }
 }
