@@ -30,6 +30,7 @@ public class GameBoard {
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];
         curSquare.landOn(playerC, ref, guiHandler, rentC);
+        guiHandler.updateGuiplayerBalance(playerC);
     }
     public int getSquareOwner(int ref, PlayerController playerC){
         int curPosition = playerC.getPosition(ref);
@@ -41,6 +42,7 @@ public class GameBoard {
 // Opretter felter med pris og rent
     public void instantiateSquares() throws IOException {
         for (int i = 0; i < 40; i++) {
+
             if (i == 0){ squares[i]= new Start(i);}                                                                        //Start
             else if (i == 10 || i == 20 ){ squares[i]= new Parking(i);}                                                    //Parking
             else if (i == 30 ){ squares[i]= new GoToPrison(i);}                                                            //Jail

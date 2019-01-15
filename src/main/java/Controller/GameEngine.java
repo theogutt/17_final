@@ -35,6 +35,10 @@ public class GameEngine {
     }
 
     public void playGame() {
+        int loser = turnFlow();
+        endGame(loser);
+    }
+    public int turnFlow() {
         //Normal turn
         int playerNum;
         int i = 0;
