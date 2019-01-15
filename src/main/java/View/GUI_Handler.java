@@ -3,6 +3,7 @@ package View;
 import Controller.GameBoard;
 import Controller.PlayerController;
 import Model.Player;
+import Utilities.Copy;
 import Utilities.TextReader;
 import Model.Die;
 import Model.Squares.Square;
@@ -13,6 +14,7 @@ import gui_main.GUI;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static gui_fields.GUI_Car.Type.*;
@@ -418,13 +420,12 @@ public class GUI_Handler {
         setAllCarsCurPos(playerC);
     }
 
-    public void trade(PlayerController playerC, int initiator){
+    public void trade(PlayerController playerC, int playerNum){
+        // init = initiator, rece = receiver
         String[] players = new String[playerC.getNumOfPlayers()];
-        int receiver = initiator; // Sat lig initiator som en safety measure
-        String[] initiatorOwnables = new String[playerC.getPlayerOwnables(initiator).length+1]; // +1 for valg "ingen"
-        String[] receiverOwnables = new String[playerC.getPlayerOwnables(receiver).length+1];
-        String initiatorSelect, receiverSelect;
-        String[] initiatorOffer, receiverOffer;
+        int init = playerNum, rece = playerNum; // rece sat lig playerNum som en safety measure
+        String[] initOffer = new String[0], receOffer = new String[0];
+        int initMoney = 0, receMoney = 0;
 
         // Liste over spiller navne
         for(int n=0 ; n < players.length ; n++)
@@ -435,26 +436,67 @@ public class GUI_Handler {
         // Finder  referencen til spilleren som skal byttes med
         for(int n=0 ; n < players.length ; n++){
             if(playerSelect.equals(players[n]))
-                receiver = n;
+                rece = n;
         }
 
-        // Liste over bygninger du ejer
-        for (int n = 0; n < playerC.getPlayerOwnables(initiator).length; n++)
-            initiatorOwnables[n] = playerC.getPlayerOwnables(initiator)[n].getName();
-        initiatorOwnables[initiatorOwnables.length - 1] = "AFSLUT";
+        // Starten af byttehandlen
+        String invSelection;
+        do {
+            gui.showMessage(players[init] + "'s tilbud: " + Arrays.toString(initOffer) + "\n" +
+                    players[rece] + "'s tilbud: " + Arrays.toString(receOffer));
+
+            invSelection = gui.getUserButtonPressed("Vælg spiller inventar", players[init], "AFSLUT", players[rece]);
+
+            String typeSelection;
+            // INITIATOR
+            if (invSelection.equals(players[init])) {
+                typeSelection = gui.getUserButtonPressed("Ejendomme eller penge?", "EJENDOMME", "PENGE");
+                if (typeSelection.equals("EJENDOMME"))
+                    initOffer = getTradeOwnable(playerC, init);
+                else if (typeSelection.equals("PENGE"))
+                    initMoney = gui.getUserInteger("Hvor mange penge skal byttes?", 0, playerC.getBalance(init));
+            }
+
+            // RECEIVER
+            else if (invSelection.equals(players[rece])) {
+                typeSelection = gui.getUserButtonPressed("Ejendomme eller penge?", "EJENDOMME", "PENGE");
+                if (typeSelection.equals("EJENDOMME"))
+                    receOffer = getTradeOwnable(playerC, rece);
+                else if (typeSelection.equals("PENGE"))
+                    receMoney = gui.getUserInteger("Hvor mange penge skal byttes?", 0, playerC.getBalance(rece));
+            }
+        } while (!invSelection.equals("AFSLUT"));
+
+
+
+    }
+
+    private String[] getTradeOwnable(PlayerController playerC, int ref){
+        String[] ownables = new String[playerC.getPlayerOwnables(ref).length+2]; // +2 for valg "AFSLUT" og "RESET"
+        String[] offer = new String[0];
+        String selected;
+
+        for (int n = 0; n < playerC.getPlayerOwnables(ref).length; n++)
+            ownables[n] = playerC.getPlayerOwnables(ref)[n].getName();
+        ownables[ownables.length - 1] = "AFSLUT";
+        ownables[ownables.length - 2] = "RESET";
 
         do {
-            initiatorSelect = gui.getUserSelection("Hvad tilbyder du?", initiatorOwnables);
-        } while(!initiatorSelect.equals("AFSLUT"));
+            selected = gui.getUserSelection("Hvad skal byttes?", ownables);
+            if (!selected.equals("AFSLUT") && !selected.equals("RESET")) {
+                if (!Copy.contains(offer, selected)){
+                    offer = Copy.of(offer, offer.length + 1);
+                    offer[offer.length - 1] = selected;
+                }
+            }
+            else if (selected.equals("RESET"))
+                offer = new String[0];
 
-        // Liste over bygninger du vil have
-        for(int n=0 ; n < playerC.getPlayerOwnables(receiver).length ; n++)
-            receiverOwnables[n] = playerC.getPlayerOwnables(receiver)[n].getName();
-        receiverOwnables[receiverOwnables.length-1] = "AFSLUT";
+            gui.showMessage("Ejendomme: " + Arrays.toString(offer));
+        } while(!selected.equals("AFSLUT"));
 
-        receiverSelect = gui.getUserSelection("Hvad tilbyder du?", receiverOwnables);
+        Copy.of(offer, offer.length-2); // sletter AFSLUT og RESET
 
-
-
+        return offer;
     }
 }
