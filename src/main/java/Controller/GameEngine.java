@@ -49,9 +49,12 @@ public class GameEngine {
                 playTurn(playerNum);
             }
             guiHandler.showScore(playerC, playerNum);
+            playerC.broke(playerNum);
             i++;
         }
-        while(true);
+        // while(true);
+        while (!playerC.getModelBroke(playerNum));
+        return playerNum;
     }
     public void playTurn(int playerNum) {
         if (playerC.getInJail(playerNum) == true){
