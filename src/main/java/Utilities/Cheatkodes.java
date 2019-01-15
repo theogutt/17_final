@@ -35,10 +35,13 @@ public class Cheatkodes {
 
         }
         else if(input == 5){
-            gameEngine.setPairs(3);
+
         }
         else if(input == 6){
-            gameEngine.setPairs(1);
+            int i = scan.nextInt();
+            if (i < 4){
+                gameEngine.setPairs(i);
+            }
         }
         else if(input == 7){
             int i = scan.nextInt();
