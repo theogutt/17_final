@@ -1,11 +1,8 @@
 package Controller;
 
-import Model.Die;
 import Model.Player;
 import Model.Squares.Ownable;
 
-import View.GUI_Handler;
-import gui_main.GUI;
 import java.util.ArrayList;
 
 public class PlayerController {
@@ -196,6 +193,9 @@ public class PlayerController {
     public void addOwnable(Ownable ownable, int i){
         this.playerModels[i].addOwnable(ownable);
     }
+    /*public Ownable[] getPlayerOwnables(int playerNum){
+        return playerModels[playerNum].getPlayerOwnables();
+    }*/
 
     public void removeOwnable(Ownable ownable, int i){
         this.playerModels[i].removeOwnable(ownable);

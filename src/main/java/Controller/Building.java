@@ -129,17 +129,7 @@ public class Building {
             }
         }else if(valg=="Lilla"){
             if(gameBoard.ownAllID(playerC,39)){
-                int k=0;
-                String[] streets = new String[2];
-                for (int i=0; i<ejendomme.length; i++){
-                    if(ejendomme[i] instanceof Street){
-                        if(ejendomme[i].getGroupID()==8){
-                            streets[k] = ejendomme[i].getName();
-                            k++;
-                        }
-                    }
-                }
-                guiHandler.chooseSepecificStreet(streets);
+
             }else{
                 guiHandler.menu(playerC,playerNum);
             }
