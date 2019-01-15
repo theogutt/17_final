@@ -21,12 +21,12 @@ public class Cheatkodes {
         int input = scan.nextInt();
 
 
-        //Giv spilleren et get out of jail free card
+        //Giver spilleren et get out of jail free card
         if (input == 1){
             playerC.setJailCard(playerNum, true);
         }
 
-        //Sæt spilleren i faængsel
+        //Sætter spilleren i faængsel
         else if(input == 2){
             playerC.setInJail(playerNum, true);
             playerC.setPosition(10, playerNum);
@@ -52,7 +52,7 @@ public class Cheatkodes {
             }
         }
 
-        //Sætter spillerens position og køre landOn metoden for det felt
+        //Sætter spillerens position og kører landOn metoden for det felt
         else if(input == 7){
             int i = scan.nextInt();
             if (i < 40){
@@ -61,7 +61,7 @@ public class Cheatkodes {
             }
         }
 
-        //Trækker et chancekort og udfører det effekt
+        //Trækker et chancekort og udfører dets effekt
         else if (input == 8){
             int[] chanceCards = new int[27];
             int i = scan.nextInt();
