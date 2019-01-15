@@ -46,6 +46,10 @@ public class Player {
 
     public void addOwnable(Ownable ownable){this.account.addOwnable(ownable);}
 
+    public Ownable[] getPlayerOwnables(){
+        return account.getPlayerOwnables();
+    }
+
     public String getName() {
         return name;
     }

@@ -45,6 +45,10 @@ public class Account{
         copyOf(this.playerOwnables,this.playerOwnables.length-1);
     }
 
+    public Ownable[] getPlayerOwnables() {
+        return playerOwnables;
+    }
+
     public static Model.Squares.Ownable[] copyOf(Model.Squares.Ownable[] original, int newLength){
         Ownable [] newArray = copyOf(original,newLength);
         return newArray;

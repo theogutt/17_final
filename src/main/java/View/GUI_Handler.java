@@ -98,13 +98,18 @@ public class GUI_Handler {
         String valg = gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
         return valg;
     }
+    public String chooseSepecificStreet(){
+        String valg = gui.getUserSelection("Vælg grund",)
+    }
+
     public int chooseNumBuildnings(){
-        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel");
+        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
         if (valg == "1")        return 1;
         else if (valg == "2")   return 2;
         else if (valg == "3")   return 3;
         else if (valg == "4")   return 4;
-        else                    {return 5;}
+        else if (valg == "Hotel")  return 5;
+        else                    return 0;
     }
 
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {

@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Squares.Ownable;
 import Model.Squares.Street;
 import View.GUI_Handler;
 import Controller.GameBoard;
@@ -9,14 +10,31 @@ public class Building {
     private GUI_Handler guiHandler;
     private GameBoard gameBoard;
 
-
     public void build(PlayerController playerC, int playerNum){
+
+        /*
+        Ownable[] ejendomme = playerC.getPlayerOwnables(playerNum);
+        for (int i=0; i<ejendomme.length; i++){
+            if(ejendomme[i] instanceof Street){
+            }
+        }
+        */
+
         String valg = guiHandler.chooseStreetToBuildOn();
         if(valg=="Lyseblå"){
-            if(gameBoard.ownAllID(playerC,1) {
+            if(gameBoard.ownAllID(playerC,1)){
+                Ownable[] ejendomme = playerC.getPlayerOwnables(playerNum);
+                for (int i=0; i<ejendomme.length; i++){
+                    if(ejendomme[i] instanceof Street){
+                        Street[] bo = new Street[2];
+                        = Street(ejendomme[i]);
+                        if((Street)ejendomme[i].getGroupID()==1){
+                        }
+                    }
+                }
 
-
-            }else{
+            }
+            else{
                 guiHandler.menu;
             }
         }else if(valg=="Pink"){
@@ -67,8 +85,8 @@ public class Building {
         }
     }
     private void buildBuilding(Street street){
-        int valg =
-        gameBoard.changeBuildning();
+        int valg = guiHandler.chooseNumBuildnings();
+        gameBoard.changeBuildning(valg);
     }
 
 

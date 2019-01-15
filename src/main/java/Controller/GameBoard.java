@@ -109,5 +109,6 @@ public class GameBoard {
     }
     public void changeBuildning(int numOfBuildnings){
 
+
     }
 }
