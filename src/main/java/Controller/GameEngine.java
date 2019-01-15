@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Die;
 import Model.Squares.Square;
+import Utilities.Cheatkodes;
 import View.GUI_Handler;
 
 import java.io.IOException;
@@ -12,9 +13,11 @@ public class GameEngine {
     private GUI_Handler guiHandler;
     private PlayerController playerC;
     private GameBoard gameBoard;
+    private Cheatkodes cheatkodes;
     private Die die1;
     private Die die2;
     private RentController rentC;
+    private int pairs;
 
     public GameEngine() throws IOException {
         guiHandler = new GUI_Handler();
@@ -42,14 +45,16 @@ public class GameEngine {
             playerNum = calcTurn(i);
             guiHandler.playerTurnGui(playerC, playerNum);
             if (true) {
-                playTurn(playerNum);
+                playTurn(playerNum,cheatkodes);
             }
             guiHandler.showScore(playerC, playerNum);
             i++;
         }
         while(true);
     }
-    public void playTurn(int playerNum) {
+    public void playTurn(int playerNum, Cheatkodes cheatkodes) {
+
+        cheatkodes.cheats(playerC, playerNum, this,guiHandler,rentC);
 
         guiHandler.updateGuiPlayerBalance(playerC);
 
@@ -76,12 +81,29 @@ public class GameEngine {
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
 
         guiHandler.updateGuiPlayerBalance(playerC);
+        extraTurn(playerNum);
+        pairs = 0;
     }
 
     public int calcTurn(int j) {
         int currentTurn = j % playerC.getNumOfPlayers();
         return currentTurn;
     }
+
+    public void extraTurn(int playerNum){
+
+        if (die1 == die2){
+            pairs++;
+        }
+        if (pairs == 3){
+            playerC.setPosition(10,playerNum);
+            playerC.setInJail(playerNum, true);
+        }
+        else{
+            playTurn(playerNum, cheatkodes);
+        }
+    }
+
 
     public Die getDie1() {
         return die1;
@@ -90,4 +112,18 @@ public class GameEngine {
     public Die getDie2() {
         return die2;
     }
+
+    public void setPairs(int pairs){
+        this.pairs = pairs;
+    }
+
+
+
+
+
+
+
+
+
+
 }
