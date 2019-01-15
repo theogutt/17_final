@@ -1,5 +1,6 @@
 package Model.Squares;
 
+import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
@@ -15,7 +16,7 @@ public abstract class Square{
         this.positionOnBoard = positionOnBoard;
     }
 
-    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
         try {
         }
         catch (NullPointerException ex){}

@@ -23,16 +23,22 @@ public class GameBoard {
         instantiateSquares();
     }
 
-    public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC){
+    public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];
-        curSquare.landOn(playerC, ref, guiHandler, rentC);
+        curSquare.landOn(playerC, ref, guiHandler, rentC, gameBoard);
     }
-    public int getSquareOwner(int ref, PlayerController playerC){
+    public int getSquareOwner(int ref, PlayerController playerC) {
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];
-        int owner = curSquare.getOwner(ref);
-        return owner;
+        int j=0;
+        for (int i = 0; i < playerC.getNumOfPlayers(); i++) {
+            if (curSquare.getOwner(ref)==i) {
+                j=i;
+                break;
+            }
+        }
+        return j;
     }
     public int getGroupID(int index) {
         return (Integer) groupID.get(index);
@@ -46,7 +52,7 @@ public class GameBoard {
         }
         return numberOfGroupIDs;
     }
-    public boolean ownAllID(int ref, PlayerController playerC){
+    public boolean ownAllID(int ref, PlayerController playerC, Square[]squares){
         boolean ownAll;
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];

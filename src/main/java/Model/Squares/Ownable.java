@@ -1,5 +1,6 @@
 package Model.Squares;
 
+import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
@@ -13,7 +14,7 @@ public abstract class Ownable extends Square{
         this.price = price;
     }
 
-    public abstract void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC);
+    public abstract void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard);
 
 
     public int getOwner() {

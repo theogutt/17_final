@@ -16,7 +16,6 @@ public class Brewery extends Ownable{
     private PlayerController playerC;
     private RentController rentC;
     private int groupID;
-    private GameBoard gameBoard;
     private Square[] squares = new Square[40];
 
     public Brewery(int positionOnBoard, int price, String name, boolean owned, int owner, int groupID) throws IOException {
@@ -27,24 +26,26 @@ public class Brewery extends Ownable{
         this.groupID = groupID;
     }
 
-    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard) {
         //spørger om spiller vil købe grunden
-        if(isOwned()==false) {
+        if (isOwned() == false) {
             int ja = 1;
             int answer = guiHandler.buyStreet();
             if (ja == answer) {
                 int price = getPrice();
                 playerC.updatePlayerBalance(ref, price * -1);
-                setOwner(ref);
                 setOwned(true);
+                setOwner(ref);
                 int position = playerC.getPosition(ref);
                 Square curSquare = squares[position];
                 playerC.addOwnables(ref, (Ownable) curSquare);
                 guiHandler.changeStreetColor(playerC, ref);
-            } else {}
-        }
-        else{
-            rentC.payRentBrewery(playerC, ref);
+            } else {
+            }
+        } else {
+            int rent = rentC.retrieveRent(playerC, ref);
+            playerC.updatePlayerBalance(ref, rent * -1);
+            playerC.updatePlayerBalance(this.getOwner(), rent);
         }
     }
     public String getName() {

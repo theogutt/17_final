@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 public class RentController {
     private PlayerController playerC;
-    private GameBoard gameBoard;
     private HashMap oneHouseRent;
     private HashMap twoHouseRent;
     private HashMap threeHouseRent;
@@ -25,36 +24,34 @@ public class RentController {
         threeHouseRent = TextReader.textReader(".\\src\\Resources\\3HousesRent");
         fourHouseRent = TextReader.textReader(".\\src\\Resources\\4HousesRent");
         hotelRent = TextReader.textReader(".\\src\\Resources\\HotelRent");
-        gameBoard = new GameBoard();
     }
 
-    public int getOwnableType(int position) {
-        Square cursquare = squares[position];
+    public int getOwnableType(int position, GameBoard gameBoard) {
         int type=0;
-        if (cursquare instanceof Street) {
+        if (gameBoard.getSquare(position) instanceof Street) {
             type=1;
         }
-        else if(cursquare instanceof Ferry){
+        else if(gameBoard.getSquare(position) instanceof Ferry){
             type=2;
         }
-        else if(cursquare instanceof Brewery){
+        else if(gameBoard.getSquare(position) instanceof Brewery){
             type=3;
         }
         return type;
     }
 
-        public void payRent (PlayerController playerC,int ref){
-            if(getOwnableType(playerC.getPosition(ref))==1) {
+        public void payRent (PlayerController playerC,int ref, GameBoard gameBoard){
+            if(getOwnableType(playerC.getPosition(ref), gameBoard)==1) {
                 int rent = retrieveRent(playerC, ref);
                 for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
-                    if (playerC.getPlayerOwnables(j).contains(this)) {
+                    if (playerC.getPlayerOwnables(j).contains(gameBoard.getSquare(playerC.getPosition(ref)))) {
                         playerC.updatePlayerBalance(ref, (-1 * rent));
                         playerC.updatePlayerBalance(j, rent);
                         break;
                     }
                 }
             }
-            else if(getOwnableType(playerC.getPosition(ref))==2){
+            else if(getOwnableType(playerC.getPosition(ref), gameBoard)==2){
                 int rent = 0;
                 int position = playerC.getPosition(ref);
                 //en færge
@@ -74,14 +71,14 @@ public class RentController {
                     rent = baseRent(position) * 8;
                 }
                 for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
-                    if (playerC.getPlayerOwnables(j).contains(this)) {
+                    if (playerC.getPlayerOwnables(j).contains(gameBoard.getSquare(playerC.getPosition(ref)))) {
                         playerC.updatePlayerBalance(ref, (-1 * rent));
                         playerC.updatePlayerBalance(j, rent);
                         break;
                     }
                 }
             }
-            else if(getOwnableType(playerC.getPosition(ref))==3){
+            else if(getOwnableType(playerC.getPosition(ref), gameBoard)==3){
                 int rent = 0;
                 if (gameBoard.numOfOwned(playerC, ref) == 1) {
                     rent = playerC.oldRollSum * 100;
@@ -89,7 +86,7 @@ public class RentController {
                     rent = playerC.oldRollSum * 200;
                 }
                 for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
-                    if (playerC.getPlayerOwnables(j).contains(this)) {
+                    if (playerC.getPlayerOwnables(j).contains(gameBoard.getSquare(playerC.getPosition(ref)))) {
                         playerC.updatePlayerBalance(ref, (-1 * rent));
                         playerC.updatePlayerBalance(j, rent);
                         break;
@@ -114,11 +111,7 @@ public class RentController {
             } else if (buildings == 5) {
                 rent = HotelRent(position);
             } else {
-                if (gameBoard.ownAllID(ref, playerC) == true) {
-                    rent = baseRent(position) * 2;
-                } else if (gameBoard.ownAllID(ref, playerC) == false) {
                     rent = baseRent(position);
-                }
             }
             return rent;
         }

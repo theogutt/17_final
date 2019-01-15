@@ -28,7 +28,7 @@ public class Ferry extends Ownable{
     }
 
 
-    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard) {
         //spørger om spiller vil købe grunden
         if(isOwned()==false) {
             int ja = 1;
@@ -36,8 +36,8 @@ public class Ferry extends Ownable{
             if (ja == answer) {
                 int price = getPrice();
                 playerC.updatePlayerBalance(ref, price * -1);
-                setOwner(ref);
                 setOwned(true);
+                setOwner(ref);
                 int position = playerC.getPosition(ref);
                 Square curSquare = squares[position];
                 playerC.addOwnables(ref, (Ownable) curSquare);
@@ -45,8 +45,9 @@ public class Ferry extends Ownable{
             } else {}
         }
         else{
-            rentC.payRentFerry(playerC, ref);
-        }
+            int rent = rentC.retrieveRent(playerC, ref);
+            playerC.updatePlayerBalance(ref, rent*-1);
+            playerC.updatePlayerBalance(this.getOwner(), rent);        }
     }
 
     public String getName() {
