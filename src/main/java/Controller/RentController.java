@@ -44,55 +44,56 @@ public class RentController {
     }
 
         public void payRent (PlayerController playerC,int ref){
-            int rent = retrieveRent(playerC, ref);
-            for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
-                if (playerC.getPlayerOwnables(j).contains(this)) {
-                    playerC.updatePlayerBalance(ref, (-1 * rent));
-                    playerC.updatePlayerBalance(j, rent);
-                    break;
+            if(getOwnableType(playerC.getPosition(ref))==1) {
+                int rent = retrieveRent(playerC, ref);
+                for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
+                    if (playerC.getPlayerOwnables(j).contains(this)) {
+                        playerC.updatePlayerBalance(ref, (-1 * rent));
+                        playerC.updatePlayerBalance(j, rent);
+                        break;
+                    }
                 }
             }
-        }
-
-        public void payRentFerry (PlayerController playerC,int ref){
-            int rent = 0;
-            int position = playerC.getPosition(ref);
-            //en færge
-            if (gameBoard.numOfOwned(playerC, ref) == 1) {
-                rent = baseRent(position);
-            }
-            //to færger
-            else if (gameBoard.numOfOwned(playerC, ref) == 2) {
-                rent = baseRent(position) * 2;
-            }
-            //tre færger
-            else if (gameBoard.numOfOwned(playerC, ref) == 3) {
-                rent = baseRent(position) * 4;
-            }
-            //fire færger
-            else if (gameBoard.numOfOwned(playerC, ref) == 4) {
-                rent = baseRent(position) * 8;
-            }
-            for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
-                if (playerC.getPlayerOwnables(j).contains(this)) {
-                    playerC.updatePlayerBalance(ref, (-1 * rent));
-                    playerC.updatePlayerBalance(j, rent);
-                    break;
+            else if(getOwnableType(playerC.getPosition(ref))==2){
+                int rent = 0;
+                int position = playerC.getPosition(ref);
+                //en færge
+                if (gameBoard.numOfOwned(playerC, ref) == 1) {
+                    rent = baseRent(position);
+                }
+                //to færger
+                else if (gameBoard.numOfOwned(playerC, ref) == 2) {
+                    rent = baseRent(position) * 2;
+                }
+                //tre færger
+                else if (gameBoard.numOfOwned(playerC, ref) == 3) {
+                    rent = baseRent(position) * 4;
+                }
+                //fire færger
+                else if (gameBoard.numOfOwned(playerC, ref) == 4) {
+                    rent = baseRent(position) * 8;
+                }
+                for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
+                    if (playerC.getPlayerOwnables(j).contains(this)) {
+                        playerC.updatePlayerBalance(ref, (-1 * rent));
+                        playerC.updatePlayerBalance(j, rent);
+                        break;
+                    }
                 }
             }
-        }
-        public void payRentBrewery (PlayerController playerC,int ref){
-            int rent = 0;
-            if (gameBoard.numOfOwned(playerC, ref) == 1) {
-                rent = playerC.oldRollSum * 100;
-            } else if (gameBoard.numOfOwned(playerC, ref) == 2) {
-                rent = playerC.oldRollSum * 200;
-            }
-            for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
-                if (playerC.getPlayerOwnables(j).contains(this)) {
-                    playerC.updatePlayerBalance(ref, (-1 * rent));
-                    playerC.updatePlayerBalance(j, rent);
-                    break;
+            else if(getOwnableType(playerC.getPosition(ref))==3){
+                int rent = 0;
+                if (gameBoard.numOfOwned(playerC, ref) == 1) {
+                    rent = playerC.oldRollSum * 100;
+                } else if (gameBoard.numOfOwned(playerC, ref) == 2) {
+                    rent = playerC.oldRollSum * 200;
+                }
+                for (int j = 0; j < playerC.getNumOfPlayers(); j++) {
+                    if (playerC.getPlayerOwnables(j).contains(this)) {
+                        playerC.updatePlayerBalance(ref, (-1 * rent));
+                        playerC.updatePlayerBalance(j, rent);
+                        break;
+                    }
                 }
             }
         }
