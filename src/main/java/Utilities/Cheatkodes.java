@@ -39,8 +39,11 @@ public class Cheatkodes {
             gameEngine.setPairs(1);
         }
         else if(input == 7){
-            playerC.setPosition(4, playerNum);
-            squares[4].landOn(playerC,playerNum,guiHandler,rentC);
+            int i = scan.nextInt();
+            if (i < 40){
+                playerC.setPosition(i, playerNum);
+                squares[i].landOn(playerC,playerNum,guiHandler,rentC);
+            }
         }
     }
 }
