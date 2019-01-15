@@ -171,8 +171,8 @@ public class GUI_Handler {
         return car;
     }
     public void removeAllCarsCurPos(PlayerController playerC) {
-        for (int i = 0; i < gui_Players.length; i++) {
-            fields[(playerC.getPosition(i))].removeAllCars();
+        for (int i = 0; i < 40; i++) {
+            fields[i].removeAllCars();
         }
     }
     public void setAllCarsCurPos(PlayerController playerC) {
