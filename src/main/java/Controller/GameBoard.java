@@ -28,17 +28,11 @@ public class GameBoard {
         Square curSquare = squares[curPosition];
         curSquare.landOn(playerC, ref, guiHandler, rentC, gameBoard);
     }
-    public int getSquareOwner(int ref, PlayerController playerC) {
+    public int getSquareOwner(int ref, PlayerController playerC){
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];
-        int j=0;
-        for (int i = 0; i < playerC.getNumOfPlayers(); i++) {
-            if (curSquare.getOwner(ref)==i) {
-                j=i;
-                break;
-            }
-        }
-        return j;
+        int owner = curSquare.getOwner(ref);
+        return owner;
     }
     public int getGroupID(int index) {
         return (Integer) groupID.get(index);
@@ -52,16 +46,15 @@ public class GameBoard {
         }
         return numberOfGroupIDs;
     }
-    public boolean ownAllID(int ref, PlayerController playerC, Square[]squares){
+    public boolean ownAllID(PlayerController playerC, int squarePos){
         boolean ownAll;
-        int curPosition = playerC.getPosition(ref);
-        Square curSquare = squares[curPosition];
-        int thisGroupID=curSquare.getGroupID(ref);
+        Square curSquare = squares[squarePos];
+        int thisGroupID = curSquare.getGroupID(squarePos);
         int numOfIDs = numberOfGroupIDs(thisGroupID);
         int sameOwner=0;
         for(int i = 0; i<40; i++){
             Square otherSquares = squares[i];
-            if(otherSquares.getOwner(ref)==curSquare.getOwner(ref)){
+            if(otherSquares.getOwner(squarePos)==curSquare.getOwner(squarePos)){
                 sameOwner = +1;
             }
         }
@@ -113,5 +106,9 @@ public class GameBoard {
 
     public Square getSquare(int i){
         return squares[i];
+    }
+    public void changeBuildning(int numOfBuildnings){
+
+
     }
 }

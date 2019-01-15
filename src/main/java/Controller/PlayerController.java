@@ -168,6 +168,10 @@ public class PlayerController {
 
     public void addOwnables(int i, Ownable ownable){playerModels[i].addOwnables(ownable);}
 
+    public Ownable[] getPlayerOwnables(int playerNum){
+        return playerModels[playerNum].getPlayerOwnables();
+    }
+
     public Player[] getPlayerModels() {
         return playerModels;
     }
