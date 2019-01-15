@@ -40,8 +40,8 @@ public class Account{
             break;
         }
         // Sætter alt på den nye plads i Arrayet
-        for(int i = x; x < this.playerOwnables.length; i++){
-            this.playerOwnables[x] = this.playerOwnables[x+1];
+        for(int i = x; i < this.playerOwnables.length-1; i++){
+            this.playerOwnables[i] = this.playerOwnables[i+1];
         }
         Copy.of(this.playerOwnables,this.playerOwnables.length-1);
     }
