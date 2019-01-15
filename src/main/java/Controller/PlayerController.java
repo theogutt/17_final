@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Die;
 import Model.Player;
 import Model.Squares.Ownable;
 import Model.Squares.Street;
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 
 public class PlayerController {
     private int numOfPlayers;
-    private GUI gui;
     private GameEngine gameEngine;
 
     private int roll1;

@@ -77,6 +77,23 @@ public class GameBoard {
         return passedStart;
     }
 
+    public boolean ownAllID(PlayerController playerC, int squarePos){
+        boolean ownAll;
+        Ownable curSquare = (Ownable)squares[squarePos];
+        int thisGroupID = curSquare.getGroupID();
+        int numOfIDs = numberOfGroupIDs(thisGroupID);
+        int sameOwner=0;
+        for(int i = 0; i<40; i++){
+            Square otherSquares = squares[i];
+            if(otherSquares.getOwner()==curSquare.getOwner()){
+                sameOwner++;
+            }
+        }
+        if(sameOwner==numOfIDs){ownAll=true;}
+        else{ownAll=false;}
+        return ownAll;
+    }
+
     public Square getSquare(int i){
         return squares[i];
     }

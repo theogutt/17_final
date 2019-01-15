@@ -1,7 +1,9 @@
 package View;
 
+import Controller.Building;
 import Controller.GameBoard;
 import Controller.PlayerController;
+import Controller.Trading;
 import Model.Player;
 import Utilities.TextReader;
 import Model.Die;
@@ -26,6 +28,7 @@ public class GUI_Handler {
     private HashMap chanceDesc;
     private GUI_Street gui_street;
 
+
     public GUI_Handler() throws IOException {
         message = new MessageHandler();
         fields = new GUI_Field[40];
@@ -37,14 +40,14 @@ public class GUI_Handler {
         gui = new GUI(fields);
     }
 
-    public void menu(PlayerController playerC, int playerNum){
+    public void menu(PlayerController playerC, int playerNum, Building building, Trading trading){
         boolean aktivTur = true;
         while (aktivTur) {
             String valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
             if (valg == "Handel") {
-                //trade(playerC, playerNum);
+                trade(playerC, playerNum);
             } else if (valg == "Bygge") {
-                //build(playerC, playerNum);
+                building.build(playerC, playerNum, this);
             } else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
             } else if (valg == "Afslut tur") {
