@@ -16,10 +16,8 @@ public class GoToPrison extends Square{
 
     @Override
     public int landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
-
-        int p = playerC.getPlayerPlayerNum(playerNum);
-        playerC.setPosition(10,p);
-        playerC.setInJail(p, true);
+        playerC.setPosition(10,playerNum);
+        playerC.setInJail(playerNum, true);
         return -2;
     }
 }
