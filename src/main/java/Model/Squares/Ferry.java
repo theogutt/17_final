@@ -1,22 +1,14 @@
 package Model.Squares;
 
-
+import Controller.GameBoard;
 import Controller.PlayerController;
+import Controller.RentController;
+import View.GUI_Handler;
 
-public class Ferry extends Ownable{
+import java.io.IOException;
 
-    public Ferry(int positionOnBoard, int price, int rent, boolean owned){
-        super(positionOnBoard, price, rent, owned);
-    }
-
-// Ændrer leje i forhold til antal færger
-    public void changeRent(int numbersOfOwnedFerrys){
-
-        this.rent = (int)(250 * Math.pow(2,numbersOfOwnedFerrys));
-    }
-
-    @Override
-    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
-        return -1;
+public class Ferry extends Ownable {
+    public Ferry(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
+        super(positionOnBoard, price, numOfBuildings, name, groupID, owned, owner);
     }
 }

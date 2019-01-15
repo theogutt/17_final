@@ -1,22 +1,15 @@
 package Model.Squares;
 
-
+import Controller.GameBoard;
 import Controller.PlayerController;
+import Controller.RentController;
+import View.GUI_Handler;
 
-public class Brewery extends Ownable{
+import java.io.IOException;
 
-    public Brewery(int positionOnBoard, int price, int rent, boolean owned){
-        super(positionOnBoard, price, rent, owned);
-    }
-
-    // Udregner leje
-    public int getRent(int facevalueSum, int numberOfBrewerys){
-        int rent = facevalueSum * 100 * numberOfBrewerys;
-        return rent;
-    }
-
-    @Override
-    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
-        return -1;
+public class Brewery extends Ownable {
+    public Brewery(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
+        super(positionOnBoard, price, numOfBuildings, name, groupID, owned, owner);
     }
 }
+

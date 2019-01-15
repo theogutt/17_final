@@ -1,39 +1,89 @@
 package Model.Squares;
 
+import Controller.GameBoard;
 import Controller.PlayerController;
+import Controller.RentController;
+import View.GUI_Handler;
 
-public abstract class Ownable extends Square {
+import java.io.IOException;
 
-    protected final int price;
-    protected boolean owned;
-    protected int rent;
 
-    public Ownable(int positionOnBoard, int price, int rent, boolean owned){
+public abstract class Ownable extends Square{
+    private int owner;
+    private boolean owned;
+    private int positionOnBoard;
+    private String name;
+    private int numOfBuildings;
+    private int groupID;
+    private GUI_Handler guiHandler;
+    private PlayerController playerC;
+    private RentController rentC;
+    private int price;
+    private GameBoard gameBoard;
+    private Square[] squares = new Square[40];
+
+    public Ownable(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
         super(positionOnBoard);
         this.owned = owned;
+        this.name = name;
+        this.numOfBuildings = numOfBuildings;
+        this.groupID = groupID;
+        this.owner = owner;
         this.price = price;
-        this.rent = rent;
     }
 
-    @Override
-    public abstract int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref);
-
-    public void setOwned(boolean owned) {
-        this.owned = owned;
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard) {
+        //spørger om spiller vil købe grunden
+        if (isOwned() == false) {
+            int ja = 1;
+            int answer = guiHandler.buyStreet();
+            if (ja == answer) {
+                int price = getPrice();
+                playerC.updatePlayerBalance(ref, price * -1);
+                setOwned(true);
+                setOwner(ref);
+                int position = playerC.getPosition(ref);
+                Square curSquare = squares[position];
+                playerC.addOwnable((Ownable) curSquare, ref);
+                guiHandler.changeStreetColor(playerC, ref);
+            }
+            else {}
+        } else {
+            int rent = rentC.retrieveRent(playerC, ref, gameBoard);
+            playerC.updatePlayerBalance(ref, rent*-1);
+            playerC.updatePlayerBalance(this.getOwner(), rent);
+        }
     }
-    public boolean getOwned(){
+    public String getName() {
+        return name;
+    }
+    public int getPrice(){return price;}
+    public int getGroupID() {
+        return groupID;
+    }
+    public int getNumOfBuildings() {
+        return numOfBuildings;
+    }
+    public void setNumOfBuildings(int numOfBuildings){
+        this.numOfBuildings = numOfBuildings;
+    }
+
+    public int getPositionOnBoard() {
+        return positionOnBoard;
+    }
+    public int getOwner() {
+        return this.owner;
+    }
+
+    public boolean isOwned() {
         return owned;
     }
 
-    public int getPrice() {
-        return price;
+    public void setOwner(int ref) {
+        this.owner = ref;
     }
 
-    public void setRent(int rent) {
-        this.rent = rent;
-    }
-
-    public int getRent() {
-        return rent;
+    public void setOwned(boolean owned) {
+        this.owned = owned;
     }
 }

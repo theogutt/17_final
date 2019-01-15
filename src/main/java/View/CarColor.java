@@ -1,7 +1,6 @@
 package View;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class CarColor {
     private Color[] colorArray = new Color[6];
@@ -19,7 +18,7 @@ public class CarColor {
     public Color colorChosen(String colorChoiceString) {
         Color returnColor;
         colorChosenString = colorChoiceString;
-        if (colorChoiceString.equalsIgnoreCase("grå")) {
+        if (colorChoiceString.equalsIgnoreCase("rød")) {
             returnColor = colorArray[0];
         } else if (colorChoiceString.equalsIgnoreCase("grøn")) {
             returnColor = colorArray[1];
@@ -29,7 +28,7 @@ public class CarColor {
         else if (colorChoiceString.equalsIgnoreCase("lila")) {
             returnColor = colorArray[3];
         }
-        else if (colorChoiceString.equalsIgnoreCase("sort")) {
+        else if (colorChoiceString.equalsIgnoreCase("gul")) {
             returnColor = colorArray[4];
         }
         else {
@@ -70,20 +69,20 @@ public class CarColor {
         return returnString;
     }
     private void instaColorArray() {
-        colorArray[0] = Color.darkGray;
+        colorArray[0] = Color.red;
         colorArray[1] = Color.GREEN;
         colorArray[2] = Color.BLUE;
         colorArray[3] = Color.MAGENTA;
-        colorArray[4] = Color.BLACK;
+        colorArray[4] = Color.yellow;
         colorArray[5] = Color.white;
     }
     public void instaColorStringArray() {
         colorStringArray = new String[6];
-        colorStringArray[0] = "grå";
+        colorStringArray[0] = "rød";
         colorStringArray[1] = "grøn";
         colorStringArray[2] = "blå";
         colorStringArray[3] = "lila";
-        colorStringArray[4] = "sort";
+        colorStringArray[4] = "gul";
         colorStringArray[5] = "hvid";
     }
 

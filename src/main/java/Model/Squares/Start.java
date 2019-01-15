@@ -2,6 +2,8 @@ package Model.Squares;
 
 
 import Controller.PlayerController;
+import Controller.RentController;
+import View.GUI_Handler;
 
 public class Start extends Square{
 
@@ -15,8 +17,10 @@ public class Start extends Square{
         return super.getPositionOnBoard();
     }
 
-    @Override
-    public int landOn(PlayerController playerC, int positionOnBoard, int faceValueSum, int ref){
-        return -1;
+    //@Override
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC){
+
+        playerC.updatePlayerBalance(playerNum, 4000);
+        //return -1;
     }
 }

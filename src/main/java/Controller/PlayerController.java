@@ -1,12 +1,23 @@
 package Controller;
 
+import Model.Die;
 import Model.Player;
+import Model.Squares.Ownable;
+
+import View.GUI_Handler;
+import gui_main.GUI;
 import java.util.ArrayList;
 
 public class PlayerController {
     private int numOfPlayers;
+    private GUI gui;
+    private GameEngine gameEngine;
+
+    private int roll1;
+    private int roll2;
 
     private Player[] playerModels;
+    int oldRollSum;
 
     public PlayerController(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
@@ -16,20 +27,35 @@ public class PlayerController {
         }
     }
 
-    public boolean wantOutOfJail(int ref) {
-        boolean gotOutOfJail = false;
-
-        if (getRef(ref).getJailCard()) {
-            getRef(ref).setJailCard(false);
-            gotOutOfJail = true;
-            setInJail(ref, false);
-
-        } else if (getRef(ref).getBalance() > 0) {
-            getRef(ref).updateBalance(-1);
-            gotOutOfJail = true;
+    public void wantOutOfJail(int ref, int choice, Die die1, Die die2) {
+        if (choice == 1){
+            getRef(ref).updateBalance(-1000);
+            getRef(ref).setOutOfJailTries(0);
             setInJail(ref, false);
         }
-        return gotOutOfJail;
+        else if (choice == 2){
+
+            roll1 = die1.roll();
+            roll2 = die2.roll();
+
+            if (roll1 == roll2){
+                setInJail(ref, false);
+                getRef(ref).setOutOfJailTries(0);
+            }
+            else {
+                getRef(ref).setOutOfJailTries(getRef(ref).getOutOfJailTries() + 1);
+                if (getRef(ref).getOutOfJailTries() == 3){
+                    getRef(ref).updateBalance(-1000);
+                    getRef(ref).setOutOfJailTries(0);
+                    setInJail(ref, false);
+                }
+            }
+        }
+    }
+
+    public void getOutOfJailFree(int playerNum){
+        getRef(playerNum).setJailCard(false);
+        setInJail(playerNum, false);
     }
 
     public int playerWithHighestBalance() {
@@ -54,7 +80,7 @@ public class PlayerController {
         return ref;
     }
 
-    public void calcNewPosition(int rollSum1, int rollSum2, int i) {
+    public int calcNewPosition(int rollSum1, int rollSum2, int i) {
         int oldPosition = getRef(i).getCurPosition();
         getRef(i).setOldPosition(oldPosition);
 
@@ -69,6 +95,8 @@ public class PlayerController {
             newPosition = (rollSum1+rollSum2 + oldPosition);
             getRef(i).setCurPosition((newPosition));
         }
+        getRef(i).setOldRollSum(rollSum1+rollSum2);
+        return oldRollSum = rollSum1+rollSum2;
     }
 
     public void setPosition(int newPosition, int playerNum) {
@@ -91,7 +119,7 @@ public class PlayerController {
         if (playerModels[ref].getBalance() < 0) setBroke(true, ref);
     }
 
-    public boolean inJail(int ref) {
+    public boolean getInJail(int ref) {
         return getRef(ref).getInJail();
     }
 
@@ -167,10 +195,26 @@ public class PlayerController {
         return playerModels[i].getBroke();
     }
 
-   /* public ArrayList getPlayerStreets(int ref) {
-        return getRef(ref).getAllPlayersStreets();
+    public Ownable[] getPlayerOwnables(int ref) {
+        return getRef(ref).getAllPlayerOwnables();
     }
 
+    public void addOwnable(Ownable ownable, int i){
+        this.playerModels[i].addOwnable(ownable);
+    }
+
+    public void removeOwnable(Ownable ownable, int i){
+        this.playerModels[i].removeOwnable(ownable);
+    }
+
+   /* public ArrayList getPlayerStreets(int ref) {
+        return getRef(ref).getAllPlayersStreets();
+
+    }
+
+
+
+/*
     public boolean ownsStreetsAheadOrBehind(int ref, int lfPos) {
         return getRef(ref).ownsStreetAheadOrBehind(lfPos);
     }
@@ -179,5 +223,11 @@ public class PlayerController {
         return playerModels;
     }
 
+    public int getOldRollSum() {
+        return oldRollSum;
+    }
 
+    public void setOldRollSum(int oldRollSum) {
+        this.oldRollSum = oldRollSum;
+    }
 }

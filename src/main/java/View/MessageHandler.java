@@ -13,12 +13,20 @@ public class MessageHandler {
     public MessageHandler() throws IOException {
         hashMapTurnMessages = (TextReader.textReader(".\\src\\Resources\\TurnMessages"));
     }
+    public String messageSquare(PlayerController playerC, int ref) {
+        returnString = playerC.getName(ref) + getSquareMessage(0);
+        return returnString;
+    }
     public String turnMessage(PlayerController playerC, int ref, String kindOfSquare) {
         String playerMessage = playerC.getName(ref) + getSquareMessage(Integer.parseInt(kindOfSquare));
         return playerMessage;
     }
     public String getSquareMessage(int index) {
         return (String) hashMapTurnMessages.get(index);
+    }
+    public String gotBroke(PlayerController playerC, int i) {
+        returnString = turnMessage(playerC, i, "28");
+        return returnString;
     }
 
     public String startGame1() {
@@ -44,6 +52,10 @@ public class MessageHandler {
     }
     public String playerTurn(PlayerController playerC, int i) {
         returnString = "Det er " + playerC.getName(i) + "'s tur! Tryk enter for at kaste terningerne!";
+        return returnString;
+    }
+    public String playerWon(PlayerController playerC, int i) {
+        returnString = playerC.getName(i) + " has won the game by having the most $! " + playerC.getBalance(i);
         return returnString;
     }
 }
