@@ -2,8 +2,6 @@ package Utilities;
 import Model.Squares.Ownable;
 import Model.Squares.Street;
 
-import java.util.Arrays;
-
 public class Copy {
     public static Ownable[] of(Ownable[] original, int newLength){
         Ownable[] newArray = new Ownable[newLength];
@@ -19,7 +17,6 @@ public class Copy {
 
         return newArray;
     }
-
 
     public static Street[] of(Street[] original, int newLength){
         Street[] newArray = new Street[newLength];
@@ -51,4 +48,16 @@ public class Copy {
         return newArray;
     }
 
+    public static boolean contains(String[] arr, String element){
+        boolean contains = false;
+
+        for (int n=0 ; n < arr.length ; n++){
+            if (element.equals(arr[n])){
+                contains = true;
+                break;
+            }
+        }
+
+        return contains;
+    }
 }
