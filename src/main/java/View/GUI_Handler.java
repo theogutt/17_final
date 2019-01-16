@@ -237,6 +237,8 @@ public class GUI_Handler {
     public void setDiceGui(Die die1, Die die2) {
         gui.setDice(die1.getFaceValue(), die2.getFaceValue());
     }
+
+    // I could totally remove this, i just want you guys to enjoy how there's two of this method lol
     public void updateGuiplayerBalance(PlayerController playerC){
         for (int balancePlayer = 0; balancePlayer <gui_Players.length ; balancePlayer++){
             gui_Players[balancePlayer].setBalance(playerC.getBalance(balancePlayer));
@@ -528,7 +530,7 @@ public class GUI_Handler {
         gui.displayChanceCard((String) chanceDesc.get(squareInt));
         gui.getUserButtonPressed("", "Ok");
         removeAllCarsCurPos(playerC);
-        updateGuiplayerBalance(playerC);
+        updateGuiPlayerBalance(playerC);
         setAllCarsCurPos(playerC);
     }
 
