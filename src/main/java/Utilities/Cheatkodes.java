@@ -5,16 +5,12 @@ import Controller.GameEngine;
 import Controller.PlayerController;
 import Controller.RentController;
 import Model.Squares.Chance;
-import Model.Squares.Square;
 import View.GUI_Handler;
-
 import java.util.Scanner;
-
 
 
 public class Cheatkodes {
 
-    //private Square[] squares = new Square[40];
 
     public void cheats(PlayerController playerC, int playerNum, GameEngine gameEngine, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
 
@@ -40,9 +36,8 @@ public class Cheatkodes {
             int i = scan.nextInt();
             playerC.updatePlayerBalance(playerNum, i);
         }
+
         else if(input == 4){
-
-
 
         }
         else if(input == 5){

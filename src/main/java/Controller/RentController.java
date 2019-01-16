@@ -7,15 +7,12 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class RentController {
-    private PlayerController playerC;
     private HashMap oneHouseRent;
     private HashMap twoHouseRent;
     private HashMap threeHouseRent;
     private HashMap fourHouseRent;
     private HashMap hotelRent;
     private HashMap baseRent;
-    Square[] squares = new Square[40];
-    private Street street;
 
     public RentController() throws IOException {
         baseRent = TextReader.textReader(".\\src\\Resources\\BaseRent");
@@ -39,24 +36,7 @@ public class RentController {
         }
         return type;
     }
-    /*
-        public int sameGroupID(PlayerController playerC, int ref, GameBoard gameBoard){
-        int same=0;
-        int pos = playerC.getPosition(ref);
-        int ID = gameBoard.getGroupID(pos);
-        gameBoard.numberOfGroupIDs(ID);
-        for(int i=0; i<playerC.getPlayerOwnables(getOwner(pos, gameBoard)).length(); i++){
-            if(playerC.getPlayerOwnables(getOwner(pos, gameBoard)).get(i) instanceof Street && ((Street) playerC.getPlayerOwnables(getOwner(pos, gameBoard)).get(i)).getGroupID(i)==ID){
-                same++;
-            }
-        }
-        return same;
-        }
-        */
-
         public int getOwner(int position, GameBoard gameBoard){
-            /*Ownable curOwnable = (Ownable) squares[position];
-            int owner = curOwnable.getOwner();*/
             return gameBoard.getOwner(position);
         }
 
@@ -77,16 +57,13 @@ public class RentController {
                 } else if (buildings == 5) {
                     rent = HotelRent(position);
                 } else {
-                    /*
-                    if (sameGroupID(playerC, ref, gameBoard)==gameBoard.numberOfGroupIDs(playerC.getPosition(ref))) {
-                        rent = baseRent(position)*2;
-                    }
-
-                    else{*/
+                    if (ownAll(playerC, ref, gameBoard)==true) {
+                        rent = baseRent(position) * 2;
+                    } else {
                         rent = baseRent(position);
 
+                    }
                 }
-
             }
             else if(getOwnableType(playerC.getPosition(ref), gameBoard)==3){
                 if (getNumberOfBreweries(playerC, gameBoard, ref) == 1) {
@@ -141,6 +118,28 @@ public class RentController {
         int pos = playerC.getPosition(ref);
         int numOfBuildings=gameBoard.getSquare(pos).getNumberOfBuildings();
         return numOfBuildings;
+        }
+
+        public boolean ownAll(PlayerController playerC, int ref, GameBoard gameBoard){
+            boolean ownAll = false;
+            int pos = playerC.getPosition(ref);
+            int groupID = gameBoard.getSquare(pos).getGroupID();
+            int owned=0;
+            for(int i = 0; i<40; i++){
+                if(gameBoard.getSquare(i).getGroupID()==groupID && gameBoard.getSquare(i).getOwner()==getOwner(pos, gameBoard)){
+                    owned++;
+                }
+            }
+            int sameID=0;
+            for(int i =0; i<40; i++){
+                if(gameBoard.getSquare(i).getGroupID()==groupID){
+                    sameID++;
+                }
+            }
+            if(owned==sameID && owned!=0){
+                ownAll = true;
+            }
+            return ownAll;
         }
 
 
