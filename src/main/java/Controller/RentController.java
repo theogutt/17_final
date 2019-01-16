@@ -7,15 +7,12 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class RentController {
-    private PlayerController playerC;
     private HashMap oneHouseRent;
     private HashMap twoHouseRent;
     private HashMap threeHouseRent;
     private HashMap fourHouseRent;
     private HashMap hotelRent;
     private HashMap baseRent;
-    Square[] squares = new Square[40];
-    private Street street;
 
     public RentController() throws IOException {
         baseRent = TextReader.textReader(".\\src\\Resources\\BaseRent");
