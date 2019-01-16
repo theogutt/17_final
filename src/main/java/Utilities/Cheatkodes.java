@@ -62,6 +62,8 @@ public class Cheatkodes {
             int i = scan.nextInt();
             if (i < 40){
                 playerC.setPosition(i, playerNum);
+                guiHandler.removeAllCarsCurPos(playerC);
+                guiHandler.setAllCarsCurPos(playerC);
                 GameBoard.squares[i].landOn(playerC,playerNum,guiHandler,rentC,gameBoard);
             }
         }
