@@ -581,8 +581,6 @@ public class GUI_Handler {
             gui.showMessage("Ejendomme: " + Arrays.toString(offer));
         } while(!selected.equals("AFSLUT"));
 
-        Copy.of(offer, offer.length-2); // sletter AFSLUT og RESET
-
         return offer;
     }
 }
