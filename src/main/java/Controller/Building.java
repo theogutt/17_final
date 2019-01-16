@@ -2,9 +2,19 @@ package Controller;
 
 import Model.Squares.Ownable;
 import Model.Squares.Street;
+import Utilities.TextReader;
 import View.GUI_Handler;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 public class Building {
+
+    private HashMap buildningPrice;
+
+    public Building() throws IOException{
+        buildningPrice = TextReader.textReader(".\\src\\Resources\\BuildningPrice");
+    }
 
     public void build(PlayerController playerC, int playerNum, GUI_Handler gui_handler, GameBoard gameBoard){
         String bygningDerSkalÆndres = "";
@@ -139,14 +149,23 @@ public class Building {
         }
         for(int i=0; i<ejendomme.length; i++){
             if(bygningDerSkalÆndres.equalsIgnoreCase(ejendomme[i].getName())){
-             buildBuilding((Street) ejendomme[i], gui_handler, gameBoard);
+             buildBuilding((Street) ejendomme[i], gui_handler, gameBoard, playerC, playerNum);
                 break;
             }
         }
     }
-    private void buildBuilding(Street street, GUI_Handler gui_handler, GameBoard gameBoard){
+    private void buildBuilding(Street street, GUI_Handler gui_handler, GameBoard gameBoard, PlayerController playerC, int playerNum){
+        int numBuildBefore = street.getNumberOfBuildings();
+
         int valg = gui_handler.chooseNumBuildnings(street.getPositionOnBoard());
         gameBoard.changeBuildning(street, valg);
+        int price = (Integer) buildningPrice.get(street.getPositionOnBoard());
+        if (numBuildBefore>street.getNumberOfBuildings()){
+            playerC.updatePlayerBalance(playerNum,price/2);
+        }else{
+            playerC.updatePlayerBalance(playerNum,-price);
+        }
+
     }
     public boolean ownAllID(Ownable[] property, int ID){
         boolean ownAll;
