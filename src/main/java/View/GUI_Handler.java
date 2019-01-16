@@ -44,7 +44,7 @@ public class GUI_Handler {
         boolean aktivTur = true;
         String valg;
         while (aktivTur) {
-            valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
+            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Pantsæt", "Afslut tur");
             if (valg == "Handel") {
                 trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
@@ -509,34 +509,45 @@ public class GUI_Handler {
 
     public void trade(PlayerController playerC, int playerNum, Trading trading){
         // init = initiator, rece = receiver
-        String[] players = new String[playerC.getNumOfPlayers()];
+        String[] players = new String[playerC.getNumOfPlayers()-1];
         int init = playerNum, rece = playerNum; // rece sat lig playerNum som en safety measure
         String[] initOffer = new String[0], receOffer = new String[0];
         int initMoney = 0, receMoney = 0;
 
         // Liste over spiller navne
-        for(int n=0 ; n < players.length ; n++)
+        /*
+        for(int n=0 ; n < players.length+1 ; n++)
             players[n] = playerC.getName(n);
+        */
+
+        boolean initfound = false;
+        for(int n=0 ; n < players.length+1 ; n++) {
+            if (playerC.getName(n).equals(playerC.getName(init))) // Du skal ikke kunne vælge dig selv
+                initfound = true;
+            else if (initfound)
+                players[n-1] = playerC.getName(n);
+            else
+                players[n] = playerC.getName(n);
+
+        }
+
 
         String playerSelect = gui.getUserSelection("Hvem vil du bytte med?", players);
 
         // Finder  referencen til spilleren som skal byttes med
-        for(int n=0 ; n < players.length ; n++){
-            if(playerSelect.equals(players[n]))
-                rece = n;
-        }
+        rece = playerC.getPlayerNumFromName(playerSelect);
 
         // Starten af byttehandlen
         String invSelection;
         do {
-            gui.showMessage(players[init] + "'s tilbud: " + Arrays.toString(initOffer) + "\n" +
-                    players[rece] + "'s tilbud: " + Arrays.toString(receOffer));
+            gui.showMessage(playerC.getName(init) + "'s tilbud: " + Arrays.toString(initOffer) + " + " + initMoney + " kr." + "\n" +
+                    playerC.getName(rece) + "'s tilbud: " + Arrays.toString(receOffer) + " + " + receMoney + " kr.");
 
-            invSelection = gui.getUserButtonPressed("Vælg spiller inventar", players[init], "AFSLUT", players[rece]);
+            invSelection = gui.getUserButtonPressed("Vælg spiller inventar", playerC.getName(init), "AFSLUT", playerC.getName(rece));
 
             String typeSelection;
             // INITIATOR
-            if (invSelection.equals(players[init])) {
+            if (invSelection.equals(playerC.getName(init))) {
                 typeSelection = gui.getUserButtonPressed("Ejendomme eller penge?", "EJENDOMME", "PENGE");
                 if (typeSelection.equals("EJENDOMME"))
                     initOffer = getTradeOwnable(playerC, init);
@@ -545,7 +556,7 @@ public class GUI_Handler {
             }
 
             // RECEIVER
-            else if (invSelection.equals(players[rece])) {
+            else if (invSelection.equals(playerC.getName(init))) {
                 typeSelection = gui.getUserButtonPressed("Ejendomme eller penge?", "EJENDOMME", "PENGE");
                 if (typeSelection.equals("EJENDOMME"))
                     receOffer = getTradeOwnable(playerC, rece);
