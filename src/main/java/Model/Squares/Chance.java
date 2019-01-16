@@ -7,8 +7,8 @@ import View.GUI_Handler;
 import Controller.RentController;
 
 public class Chance extends Square{
-    private int[] chanceCards = new int[27];
-    private int[] chanceCards2 = new int[27];
+    private int[] chanceCards = new int[28];
+    private int[] chanceCards2 = new int[28];
 
     public Chance(int positionOnBoard) {
         super(positionOnBoard);
@@ -195,11 +195,11 @@ public class Chance extends Square{
             gameBoard.squareImpact(playerNum,playerC,gui_handler,rentC,gameBoard);
         }
         gui_handler.guiChance(returnInt, playerC);
-        mixCards();
+        leftShiftCards();
     }
 
 
-    public void mixCards(){
+    public void leftShiftCards(){
         int[] leftShifted = new int[chanceCards.length];
         for (int number = 0; number < chanceCards.length; number++) {
             int j = (number + 1) % chanceCards.length;
