@@ -8,6 +8,7 @@ import View.GUI_Handler;
 public abstract class Square{
     private int positionOnBoard;
     private int owner;
+    private int numberOfBuildings;
 
     public Square(int positionOnBoard){
         this.positionOnBoard = positionOnBoard;
@@ -27,4 +28,7 @@ public abstract class Square{
     public int getOwner(){
         return this.owner;
     }
+     public int getNumberOfBuildings(){
+        return numberOfBuildings;
+     }
 }

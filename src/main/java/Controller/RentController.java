@@ -64,7 +64,7 @@ public class RentController {
             rent = baseRent(position);
             if(getOwnableType(playerC.getPosition(ref), gameBoard)==1) {
                 //indsæt getnumberofbuildings når den virker
-                int buildings = 0;
+                int buildings=0;
                 if (buildings == 1) {
                     rent = oneHouseRent(position);
                 } else if (buildings == 2) {
