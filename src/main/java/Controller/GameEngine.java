@@ -95,6 +95,7 @@ public class GameEngine {
         guiHandler.menu(playerC, playerNum, building, trading);
 
         extraTurn(playerNum);
+        turnFlow();
         pairs = 0;
     }
 
