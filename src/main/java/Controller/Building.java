@@ -159,11 +159,14 @@ public class Building {
 
         int valg = gui_handler.chooseNumBuildnings(street.getPositionOnBoard());
         gameBoard.changeBuildning(street, valg);
+
         int price = (Integer) buildningPrice.get(street.getPositionOnBoard());
-        if (numBuildBefore>street.getNumberOfBuildings()){
-            playerC.updatePlayerBalance(playerNum,price/2);
+        if (numBuildBefore > street.getNumberOfBuildings()){
+            int price2 = price * (numBuildBefore - street.getNumberOfBuildings());
+            playerC.updatePlayerBalance(playerNum,price2/2);
         }else{
-            playerC.updatePlayerBalance(playerNum,-price);
+            int price2 = price * (street.getNumberOfBuildings() - numBuildBefore);
+            playerC.updatePlayerBalance(playerNum,price2);
         }
 
     }

@@ -153,7 +153,7 @@ public class GUI_Handler {
 
     public int chooseNumBuildnings(int posOnBoard){
         GUI_Street street;
-        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
+        String valg = gui.getUserButtonPressed("Antal huse på grund","0","1","2","3","4","Hotel","Tilbage");
         int i = 0;
         if (valg == "1")        i=1;
         else if (valg == "2")   i=2;
