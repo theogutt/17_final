@@ -11,16 +11,10 @@ import java.io.IOException;
 public abstract class Ownable extends Square{
     private int owner;
     private boolean owned;
-    private int positionOnBoard;
     private String name;
     private int numOfBuildings;
     private int groupID;
-    private GUI_Handler guiHandler;
-    private PlayerController playerC;
-    private RentController rentC;
     private int price;
-    private GameBoard gameBoard;
-    private Square[] squares = new Square[40];
 
     public Ownable(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
         super(positionOnBoard);
@@ -67,9 +61,6 @@ public abstract class Ownable extends Square{
         this.numOfBuildings = numOfBuildings;
     }
 
-    public int getPositionOnBoard() {
-        return positionOnBoard;
-    }
     public int getOwner() {
         return this.owner;
     }
