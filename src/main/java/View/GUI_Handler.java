@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Building;
+import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.Trading;
 import Utilities.Copy;
@@ -39,7 +40,7 @@ public class GUI_Handler {
         gui = new GUI(fields);
     }
 
-    public void menu(PlayerController playerC, int playerNum, Building building, Trading trading){
+    public void menu(PlayerController playerC, int playerNum, Building building, Trading trading, GameBoard gameBoard){
         boolean aktivTur = true;
         String valg;
         while (aktivTur) {
@@ -47,7 +48,7 @@ public class GUI_Handler {
             if (valg == "Handel") {
                 trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
-                building.build(playerC, playerNum, this);
+                building.build(playerC, playerNum, this, gameBoard);
             } else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
             } else if (valg == "Afslut tur") {
