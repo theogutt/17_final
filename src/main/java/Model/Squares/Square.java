@@ -9,6 +9,7 @@ public abstract class Square{
     private int positionOnBoard;
     private int owner;
     private int numberOfBuildings;
+    private int groupID;
 
     public Square(int positionOnBoard){
         this.positionOnBoard = positionOnBoard;
@@ -28,7 +29,8 @@ public abstract class Square{
     public int getOwner(){
         return this.owner;
     }
-     public int getNumberOfBuildings(){
+    public int getNumberOfBuildings(){
         return numberOfBuildings;
      }
+    public int getGroupID(){return groupID;}
 }

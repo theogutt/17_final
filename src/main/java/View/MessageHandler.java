@@ -55,7 +55,7 @@ public class MessageHandler {
         return returnString;
     }
     public String playerWon(PlayerController playerC, int i) {
-        returnString = playerC.getName(i) + " has won the game by having the most $! " + playerC.getBalance(i);
+        returnString = playerC.getName(i) + " har vundet spillet! Med et beløb på " + playerC.getBalance(i);
         return returnString;
     }
 }
