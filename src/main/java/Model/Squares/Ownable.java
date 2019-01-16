@@ -19,8 +19,6 @@ public abstract class Ownable extends Square{
     private PlayerController playerC;
     private RentController rentC;
     private int price;
-    private GameBoard gameBoard;
-    private Square[] squares = new Square[40];
 
     public Ownable(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
         super(positionOnBoard);
@@ -51,6 +49,7 @@ public abstract class Ownable extends Square{
             int rent = rentC.retrieveRent(playerC, ref, gameBoard);
             playerC.updatePlayerBalance(ref, rent*-1);
             playerC.updatePlayerBalance(this.getOwner(), rent);
+            guiHandler.payRent(playerC, this.getOwner(), ref, rent);
         }
     }
     public String getName() {
