@@ -1,6 +1,7 @@
 package Model.Squares;
 
 
+import Controller.GameBoard;
 import Controller.PlayerController;
 import View.GUI_Handler;
 import Controller.RentController;
@@ -14,9 +15,11 @@ public class Chance extends Square{
         intantiateCards();
     }
 
-    public int landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC){
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC, GameBoard gameBoard){
         int card = chanceCards[0];
         int returnInt = -1;
+        int oldPos = playerC.getPosition(playerNum);
+        int currPos;
 
 
         switch (card-1){
@@ -103,7 +106,7 @@ public class Chance extends Square{
                     playerC.setPosition(28, playerNum);
                 }
                 else{
-                    playerC.setPosition(23, playerNum);
+                    playerC.setPosition(12, playerNum);
                 }
                 returnInt = 14;
                 break;
@@ -187,8 +190,12 @@ public class Chance extends Square{
 
         }
         gui_handler.guiChance(returnInt, playerC);
+        currPos = playerC.getPosition(playerNum);
+        if (currPos != oldPos){
+            gameBoard.squareImpact(playerNum,playerC,gui_handler,rentC,gameBoard);
+        }
+        gui_handler.guiChance(returnInt, playerC);
         mixCards();
-        return returnInt;
     }
 
 
