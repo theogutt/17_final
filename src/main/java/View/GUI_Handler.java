@@ -414,42 +414,59 @@ public class GUI_Handler {
             //prøv lykken felter
             GUI_Chance felt3 = new GUI_Chance();
             fields[2] = felt3;
+            felt3.setBackGroundColor(Color.black);
+            felt3.setForeGroundColor(Color.white);
 
             GUI_Chance felt8 = new GUI_Chance();
             fields[7] = felt8;
+            felt8.setBackGroundColor(Color.black);
+            felt8.setForeGroundColor(Color.white);
 
             GUI_Chance felt18 = new GUI_Chance();
             fields[17] = felt18;
+            felt18.setBackGroundColor(Color.black);
+            felt18.setForeGroundColor(Color.white);
 
             GUI_Chance felt23 = new GUI_Chance();
             fields[22] = felt23;
+            felt23.setBackGroundColor(Color.black);
+            felt23.setForeGroundColor(Color.white);
 
             GUI_Chance felt34 = new GUI_Chance();
             fields[33] = felt34;
+            felt34.setBackGroundColor(Color.black);
+            felt34.setForeGroundColor(Color.white);
 
             GUI_Chance felt37 = new GUI_Chance();
             fields[36] = felt37;
+            felt37.setBackGroundColor(Color.black);
+            felt37.setForeGroundColor(Color.white);
 
             //færge felter
+            Color boat = new Color(0, 143, 197);
             GUI_Shipping lBfærgerne = new GUI_Shipping();
             fields[5] = lBfærgerne;
             lBfærgerne.setTitle((String)StreetName.get(5));
             lBfærgerne.setSubText("4.000");
+            lBfærgerne.setBackGroundColor(boat);
 
             GUI_Shipping danmark = new GUI_Shipping();
             fields[15] = danmark;
             danmark.setTitle((String)StreetName.get(15));
             danmark.setSubText("4.000");
+            danmark.setBackGroundColor(boat);
 
             GUI_Shipping mols_linien = new GUI_Shipping();
             fields[25] = mols_linien;
             mols_linien.setTitle((String)StreetName.get(25));
             mols_linien.setSubText("4.000");
+            mols_linien.setBackGroundColor(boat);
 
             GUI_Shipping skandinavisk = new GUI_Shipping();
             fields[35] = skandinavisk;
             skandinavisk.setTitle((String)StreetName.get(35));
             skandinavisk.setSubText("4.000");
+            skandinavisk.setBackGroundColor(boat);
 
             //fængsel felt
             GUI_Jail fængsel = new GUI_Jail();
@@ -461,16 +478,18 @@ public class GUI_Handler {
             defængsles.setSubText("De Fængsles");
 
             //bryggeri felter
+            Color beer = new Color(6, 118, 20);
             GUI_Brewery tuborg = new GUI_Brewery();
             fields[12] = tuborg;
             tuborg.setTitle((String)StreetName.get(12));
             tuborg.setSubText("3.000");
+            tuborg.setBackGroundColor(beer);
 
             GUI_Brewery carlsberg = new GUI_Brewery();
             fields[28] = carlsberg;
             carlsberg.setTitle((String)StreetName.get(28));
             carlsberg.setSubText("3.000");
-            carlsberg.setBackGroundColor(Color.red);
+            carlsberg.setBackGroundColor(beer);
 
             //start felt
             GUI_Start start = new GUI_Start();
