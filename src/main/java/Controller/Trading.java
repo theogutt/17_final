@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Player;
 import Model.Squares.Ownable;
 
 public class Trading {

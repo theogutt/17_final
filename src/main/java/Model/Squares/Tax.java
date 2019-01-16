@@ -4,7 +4,6 @@ package Model.Squares;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
-import gui_main.GUI;
 
 public class Tax extends Square {
 

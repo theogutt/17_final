@@ -5,8 +5,6 @@ import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
 
-
-
 public class GoToPrison extends Square{
 
     private PlayerController playerC;

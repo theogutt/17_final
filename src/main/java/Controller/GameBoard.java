@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Player;
 import Model.Squares.*;
 import Utilities.TextReader;
 import View.GUI_Handler;

@@ -1,15 +1,12 @@
 package View;
 
 import Controller.Building;
-import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.Trading;
-import Model.Player;
 import Utilities.Copy;
 import Utilities.TextReader;
 import Model.Die;
 import Model.Squares.Square;
-import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
 

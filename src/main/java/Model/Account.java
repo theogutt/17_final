@@ -3,9 +3,6 @@ package Model;
 import Model.Squares.Ownable;
 import Utilities.Copy;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Account {
     private int balance;
     private int sumOfStreets;

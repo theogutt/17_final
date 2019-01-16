@@ -1,11 +1,7 @@
 package Controller;
 
 import Model.Die;
-import Model.Squares.Square;
 import View.GUI_Handler;
-
-import java.io.IOException;
-
 import java.io.IOException;
 
 public class GameEngine {

@@ -3,8 +3,6 @@ package Controller;
 import Model.Squares.Ownable;
 import Model.Squares.Street;
 import View.GUI_Handler;
-import Controller.GameBoard;
-import Controller.PlayerController;
 
 public class Building {
     private GUI_Handler guiHandler;
