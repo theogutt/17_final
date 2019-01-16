@@ -93,9 +93,7 @@ public class GameEngine {
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
         guiHandler.menu(playerC, playerNum, building, trading);
-
         extraTurn(playerNum);
-        turnFlow();
         pairs = 0;
     }
 
@@ -115,13 +113,13 @@ public class GameEngine {
 
         if (die1 == die2){
             pairs++;
-        }
-        if (pairs == 3){
-            playerC.setPosition(10,playerNum);
-            playerC.setInJail(playerNum, true);
-        }
-        else{
-            playTurn(playerNum, cheatkodes);
+            if (pairs == 3){
+                playerC.setPosition(10,playerNum);
+                playerC.setInJail(playerNum, true);
+            }
+            else{
+                playTurn(playerNum, cheatkodes);
+            }
         }
     }
 

@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Cheatkodes {
 
-    private Square[] squares = new Square[40];
+    //private Square[] squares = new Square[40];
 
     public void cheats(PlayerController playerC, int playerNum, GameEngine gameEngine, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
 
@@ -60,7 +60,7 @@ public class Cheatkodes {
             int i = scan.nextInt();
             if (i < 40){
                 playerC.setPosition(i, playerNum);
-                squares[i].landOn(playerC,playerNum,guiHandler,rentC,gameBoard);
+                GameBoard.squares[i].landOn(playerC,playerNum,guiHandler,rentC,gameBoard);
             }
         }
 
@@ -71,7 +71,7 @@ public class Cheatkodes {
             if (i < 27){
                 chanceCards[0] = i;
                 chance.setChanceCards(chanceCards);
-                squares[2].landOn(playerC,playerNum,guiHandler,rentC,gameBoard);
+                GameBoard.squares[2].landOn(playerC,playerNum,guiHandler,rentC,gameBoard);
             }
         }
     }
