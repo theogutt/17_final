@@ -134,14 +134,4 @@ public class GameEngine {
     public void setPairs(int pairs){
         this.pairs = pairs;
     }
-
-
-
-
-
-
-
-
-
-
 }
