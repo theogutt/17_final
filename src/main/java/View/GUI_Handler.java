@@ -540,10 +540,9 @@ public class GUI_Handler {
         // Starten af byttehandlen
         String invSelection;
         do {
-            gui.showMessage(playerC.getName(init) + "'s tilbud: " + Arrays.toString(initOffer) + " + " + initMoney + " kr." + "\n" +
-                    playerC.getName(rece) + "'s tilbud: " + Arrays.toString(receOffer) + " + " + receMoney + " kr.");
-
-            invSelection = gui.getUserButtonPressed("Vælg spiller inventar", playerC.getName(init), "AFSLUT", playerC.getName(rece));
+            invSelection = gui.getUserButtonPressed(playerC.getName(init) + "'s tilbud: " + Arrays.toString(initOffer) + " + " + initMoney + " kr." + "\n" +
+                    playerC.getName(rece) + "'s tilbud: " + Arrays.toString(receOffer) + " + " + receMoney + " kr.",
+                    playerC.getName(init), "AFSLUT", playerC.getName(rece));
 
             String typeSelection;
             // INITIATOR
@@ -556,7 +555,7 @@ public class GUI_Handler {
             }
 
             // RECEIVER
-            else if (invSelection.equals(playerC.getName(init))) {
+            else if (invSelection.equals(playerC.getName(rece))) {
                 typeSelection = gui.getUserButtonPressed("Ejendomme eller penge?", "EJENDOMME", "PENGE");
                 if (typeSelection.equals("EJENDOMME"))
                     receOffer = getTradeOwnable(playerC, rece);
@@ -580,7 +579,7 @@ public class GUI_Handler {
         ownables[ownables.length - 2] = "RESET";
 
         do {
-            selected = gui.getUserSelection("Hvad skal byttes?", ownables);
+            selected = gui.getUserSelection("Ejendomme: " + Arrays.toString(offer), ownables);
             if (!selected.equals("AFSLUT") && !selected.equals("RESET")) {
                 if (!Copy.contains(offer, selected)){
                     offer = Copy.of(offer, offer.length + 1);
@@ -589,8 +588,6 @@ public class GUI_Handler {
             }
             else if (selected.equals("RESET"))
                 offer = new String[0];
-
-            gui.showMessage("Ejendomme: " + Arrays.toString(offer));
         } while(!selected.equals("AFSLUT"));
 
         return offer;
