@@ -85,9 +85,10 @@ public class GameEngine {
         if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
-        guiHandler.menu(playerC, playerNum, building, trading, gameBoard);
         extraTurn(playerNum);
         pairs = 0;
+        guiHandler.menu(playerC, playerNum, building, trading, gameBoard);
+
     }
 
     public int calcTurn(int j) {
@@ -103,8 +104,9 @@ public class GameEngine {
 
     public void extraTurn(int playerNum){
 
-        if (die1 == die2){
+        if (die1.getFaceValue() == die2.getFaceValue()){
             pairs++;
+            System.out.println(pairs);
             if (pairs == 3){
                 playerC.setPosition(10,playerNum);
                 playerC.setInJail(playerNum, true);
