@@ -67,9 +67,9 @@ public class RentController {
             }
             else if(getOwnableType(playerC.getPosition(ref), gameBoard)==3){
                 if (getNumberOfBreweries(playerC, gameBoard, ref) == 1) {
-                    rent = playerC.oldRollSum * 100;
+                    rent = playerC.getOldRollSum(ref) * 100;
                 } else if (getNumberOfBreweries(playerC, gameBoard, ref) == 2) {
-                    rent = playerC.oldRollSum * 200;
+                    rent = playerC.getOldRollSum(ref) * 200;
                 }
             }
             else if(getOwnableType(playerC.getPosition(ref), gameBoard)==2){
