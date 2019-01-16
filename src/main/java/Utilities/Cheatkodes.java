@@ -1,5 +1,6 @@
 package Utilities;
 
+import Controller.GameBoard;
 import Controller.GameEngine;
 import Controller.PlayerController;
 import Controller.RentController;
@@ -15,7 +16,9 @@ public class Cheatkodes {
 
     private Square[] squares = new Square[40];
 
-    public void cheats(PlayerController playerC, int playerNum, GameEngine gameEngine, GUI_Handler guiHandler, RentController rentC, Chance chance){
+    public void cheats(PlayerController playerC, int playerNum, GameEngine gameEngine, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
+
+        Chance chance = new Chance(playerNum);
 
         Scanner scan = new Scanner(System.in);
         int input = scan.nextInt();
@@ -26,7 +29,7 @@ public class Cheatkodes {
             playerC.setJailCard(playerNum, true);
         }
 
-        //Sætter spilleren i faængsel
+        //Sætter spilleren i fængsel
         else if(input == 2){
             playerC.setInJail(playerNum, true);
             playerC.setPosition(10, playerNum);
@@ -57,7 +60,7 @@ public class Cheatkodes {
             int i = scan.nextInt();
             if (i < 40){
                 playerC.setPosition(i, playerNum);
-                squares[i].landOn(playerC,playerNum,guiHandler,rentC);
+                squares[i].landOn(playerC,playerNum,guiHandler,rentC,gameBoard);
             }
         }
 
@@ -68,7 +71,7 @@ public class Cheatkodes {
             if (i < 27){
                 chanceCards[0] = i;
                 chance.setChanceCards(chanceCards);
-                squares[2].landOn(playerC,playerNum,guiHandler,rentC);
+                squares[2].landOn(playerC,playerNum,guiHandler,rentC,gameBoard);
             }
         }
     }

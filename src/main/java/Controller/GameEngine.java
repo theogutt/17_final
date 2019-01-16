@@ -12,7 +12,6 @@ public class GameEngine {
     private PlayerController playerC;
     private GameBoard gameBoard;
     private Cheatkodes cheatkodes;
-    private Chance chance;
     private Building building;
     private Trading trading;
     private Die die1;
@@ -28,6 +27,7 @@ public class GameEngine {
         rentC = new RentController();
         building = new Building();
         trading = new Trading();
+        cheatkodes = new Cheatkodes();
     }
     public void start() {
         setUpGame();
@@ -66,7 +66,7 @@ public class GameEngine {
     }
     public void playTurn(int playerNum, Cheatkodes cheatkodes) {
 
-        cheatkodes.cheats(playerC, playerNum, this,guiHandler,rentC,chance);
+        cheatkodes.cheats(playerC, playerNum, this,guiHandler,rentC,gameBoard);
 
         guiHandler.updateGuiPlayerBalance(playerC);
 
