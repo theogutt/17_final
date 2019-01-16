@@ -5,9 +5,6 @@ import Model.Squares.Chance;
 import Model.Squares.Square;
 import Utilities.Cheatkodes;
 import View.GUI_Handler;
-
-import java.io.IOException;
-
 import java.io.IOException;
 
 public class GameEngine {
@@ -16,6 +13,8 @@ public class GameEngine {
     private GameBoard gameBoard;
     private Cheatkodes cheatkodes;
     private Chance chance;
+    private Building building;
+    private Trading trading;
     private Die die1;
     private Die die2;
     private RentController rentC;
@@ -27,6 +26,8 @@ public class GameEngine {
         die2 = new Die(6);
         gameBoard = new GameBoard();
         rentC = new RentController();
+        building = new Building();
+        trading = new Trading();
     }
     public void start() {
         setUpGame();
@@ -40,19 +41,28 @@ public class GameEngine {
     }
 
     public void playGame() {
+        int loser = turnFlow();
+        endGame(loser);
+    }
+    public int turnFlow() {
         //Normal turn
         int playerNum;
         int i = 0;
+
         do {
             playerNum = calcTurn(i);
             guiHandler.playerTurnGui(playerC, playerNum);
             if (true) {
                 playTurn(playerNum,cheatkodes);
             }
+            guiHandler.updateGuiPlayerBalance(playerC);
             guiHandler.showScore(playerC, playerNum);
+            playerC.broke(playerNum);
             i++;
         }
-        while(true);
+        // while(true);
+        while (!playerC.getModelBroke(playerNum));
+        return playerNum;
     }
     public void playTurn(int playerNum, Cheatkodes cheatkodes) {
 
@@ -80,11 +90,11 @@ public class GameEngine {
         guiHandler.diceUpdateGui(playerC, die1, die2);
         boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
         if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
-        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
-
+        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
         extraTurn(playerNum);
         pairs = 0;
+        guiHandler.menu(playerC, playerNum, building, trading);
     }
 
     public int calcTurn(int j) {
@@ -92,6 +102,13 @@ public class GameEngine {
         return currentTurn;
     }
 
+    public void endGame(int ref) {
+        int x = playerC.playerWithHighestBalance();
+        guiHandler.gotBrokeGui(playerC, ref);
+        guiHandler.playerWonGui(playerC, x);
+    }
+
+        public Die getDie1() {
     public void extraTurn(int playerNum){
 
         if (die1 == die2){

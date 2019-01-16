@@ -4,7 +4,6 @@ package Model.Squares;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
-import gui_main.GUI;
 
 public class Tax extends Square {
 
@@ -17,8 +16,8 @@ public class Tax extends Square {
         return super.getPositionOnBoard();
     }
 
-    @Override
-    public int landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
+    //@Override
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
 
         if (playerC.getPosition(playerNum) == 4) {
             int choice = guiHandler.procentOrFixed(playerC, playerNum);
@@ -32,6 +31,6 @@ public class Tax extends Square {
         } else {
             playerC.updatePlayerBalance(playerNum, -2000);
         }
-        return -1;
+        //return -1;
     }
 }

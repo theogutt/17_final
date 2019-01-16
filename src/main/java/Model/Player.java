@@ -1,9 +1,6 @@
 package Model;
 
-//import Model.Square.Street;
 import Model.Squares.Ownable;
-
-import java.util.ArrayList;
 
 public class Player {
 
@@ -51,6 +48,7 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public int getCurPosition() {
         return curPosition;

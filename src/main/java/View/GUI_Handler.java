@@ -1,18 +1,19 @@
 package View;
 
-import Controller.GameBoard;
+import Controller.Building;
 import Controller.PlayerController;
-import Model.Player;
+import Controller.Trading;
+import Utilities.Copy;
 import Utilities.TextReader;
 import Model.Die;
 import Model.Squares.Square;
-import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
 
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static gui_fields.GUI_Car.Type.*;
@@ -24,6 +25,8 @@ public class GUI_Handler {
     private GUI_Player[] gui_Players;
     private GUI_Car[] gui_cars;
     private HashMap chanceDesc;
+    private GUI_Street gui_street;
+
 
     public GUI_Handler() throws IOException {
         message = new MessageHandler();
@@ -36,20 +39,29 @@ public class GUI_Handler {
         gui = new GUI(fields);
     }
 
-    public void menu(PlayerController playerC, int playerNum){
+    public void menu(PlayerController playerC, int playerNum, Building building, Trading trading){
         boolean aktivTur = true;
+        String valg;
         while (aktivTur) {
-            String valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
+            valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
             if (valg == "Handel") {
-                //trade(playerC, playerNum);
+                trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
-                //build(playerC, playerNum);
+                building.build(playerC, playerNum, this);
             } else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
             } else if (valg == "Afslut tur") {
                 aktivTur = false;
             }
         }
+    }
+
+    public void playerWonGui(PlayerController playerC, int i) {
+        gui.showMessage(message.playerWon(playerC, i));
+    }
+
+    public void gotBrokeGui(PlayerController playerC, int i) {
+        gui.showMessage(message.gotBroke(playerC, i));
     }
 
     public void startGameGui() {
@@ -124,6 +136,31 @@ public class GUI_Handler {
         String choice = gui.getUserSelection("Betal 20% eller 4.000 kr.", "20%", "4.000 kr.");
         if (choice.equalsIgnoreCase("20%")){ return 1; }
         else { return 2; }
+    }
+
+    public String chooseStreetToBuildOn(){
+        String valg = gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
+        return valg;
+    }
+    public String chooseSepecificStreet(String[] streets){
+        String valg = gui.getUserSelection("Vælg grund",streets);
+        return valg;
+    }
+
+    public int chooseNumBuildnings(){
+        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
+        int i = 0;
+        if (valg == "1")        i=1;
+        else if (valg == "2")   i=2;
+        else if (valg == "3")   i=3;
+        else if (valg == "4")   i=4;
+        else if (valg == "Hotel")  i=5;
+        else                    i=0;
+
+        if (i==0){}
+        else if(i==5){gui_street.setHotel(true);}
+        else {gui_street.setHouses(i);}
+        return i;
     }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
@@ -203,7 +240,14 @@ public class GUI_Handler {
     public void showScore(PlayerController player, int i) {
         gui.showMessage(message.playerEndTurn(player, i));
     }
-
+    public void changeStreetColor(PlayerController player, int ref){
+        GUI_Field field;
+        GUI_Ownable ownable;
+        Color carColor = getGuiPlayer(ref).getCar().getPrimaryColor();
+        field = gui.getFields()[player.getPosition(ref)];
+        ownable = (GUI_Ownable) field;
+        ownable.setBorder(carColor);
+    }
 
     public void setSpecificFields(){
             //ejendomsfelter
@@ -213,218 +257,261 @@ public class GUI_Handler {
             rødovrevej.setSubText("kr. 1.200");
             rødovrevej.setBorder(Color.BLACK);
             rødovrevej.setBackGroundColor(Color.cyan);
+
             GUI_Street hvidovrevej = new GUI_Street();
             fields[3] = hvidovrevej;
             hvidovrevej.setTitle("Hvidovrevej");
             hvidovrevej.setSubText("kr. 1.200");
             hvidovrevej.setBorder(Color.BLACK);
             hvidovrevej.setBackGroundColor(Color.cyan);
+
             GUI_Street roskildevej = new GUI_Street();
             fields[6] = roskildevej;
             roskildevej.setTitle("Roskildevej");
             roskildevej.setSubText("kr. 2.000");
             roskildevej.setBorder(Color.BLACK);
             roskildevej.setBackGroundColor(Color.pink);
+
             GUI_Street valby_Langgade = new GUI_Street();
             fields[8] = valby_Langgade;
             valby_Langgade.setTitle("Valby Langgade");
             valby_Langgade.setSubText("kr. 2.000");
             valby_Langgade.setBorder(Color.BLACK);
             valby_Langgade.setBackGroundColor(Color.pink);
+
             GUI_Street allégade = new GUI_Street();
             fields[9] = allégade;
             allégade.setTitle("Allégade");
             allégade.setSubText("kr. 2.400");
             allégade.setBorder(Color.BLACK);
             allégade.setBackGroundColor(Color.pink);
+
             GUI_Street frederiksberg_Allé = new GUI_Street();
             fields[11] = frederiksberg_Allé;
             frederiksberg_Allé.setTitle("Frederiksberg Allé");
             frederiksberg_Allé.setSubText("kr. 2.800");
             frederiksberg_Allé.setBorder(Color.BLACK);
             frederiksberg_Allé.setBackGroundColor(new Color(173, 255, 47));
+
             GUI_Street bülowsvej = new GUI_Street();
             fields[13] = bülowsvej;
             bülowsvej.setTitle("Bülowsvej");
             bülowsvej.setSubText("kr. 2.800");
             bülowsvej.setBorder(Color.BLACK);
             bülowsvej.setBackGroundColor(new Color(173, 255, 47));
+
             GUI_Street gl_Kongevej = new GUI_Street();
             fields[14] = gl_Kongevej;
             gl_Kongevej.setTitle("Gl. Kongevej");
             gl_Kongevej.setSubText("kr. 3.200");
             gl_Kongevej.setBorder(Color.BLACK);
             gl_Kongevej.setBackGroundColor(new Color(173, 255, 47));
+
             GUI_Street bernstorffsvej = new GUI_Street();
             fields[16] = bernstorffsvej;
             bernstorffsvej.setTitle("Bernstorffsvej");
             bernstorffsvej.setSubText("kr. 3.600");
             bernstorffsvej.setBorder(Color.BLACK);
             bernstorffsvej.setBackGroundColor(Color.gray);
+
             GUI_Street hellerupvej = new GUI_Street();
             fields[18] = hellerupvej;
             hellerupvej.setTitle("Hellerupvej");
             hellerupvej.setSubText("kr. 3.600");
             hellerupvej.setBorder(Color.BLACK);
             hellerupvej.setBackGroundColor(Color.gray);
+
             GUI_Street strandvej = new GUI_Street();
             fields[19] = strandvej;
             strandvej.setTitle("Strandvej");
             strandvej.setSubText("kr. 4.000");
             strandvej.setBorder(Color.BLACK);
             strandvej.setBackGroundColor(Color.gray);
+
             GUI_Street trianglen = new GUI_Street();
             fields[21] = trianglen;
             trianglen.setTitle("Trianglen");
             trianglen.setSubText("kr. 4.400");
             trianglen.setBorder(Color.BLACK);
             trianglen.setBackGroundColor(Color.red);
+
             GUI_Street østerbrogade = new GUI_Street();
             fields[23] = østerbrogade;
             østerbrogade.setTitle("Østerbrogade");
             østerbrogade.setSubText("kr. 4.400");
             østerbrogade.setBorder(Color.BLACK);
             østerbrogade.setBackGroundColor(Color.red);
+
             GUI_Street grønningen = new GUI_Street();
             fields[24] = grønningen;
             grønningen.setTitle("Grønningen");
             grønningen.setSubText("kr. 4.800");
             grønningen.setBorder(Color.BLACK);
             grønningen.setBackGroundColor(Color.red);
+
             GUI_Street bredgade = new GUI_Street();
             fields[26] = bredgade;
             bredgade.setTitle("Bredgade");
             bredgade.setSubText("kr. 5.200");
             bredgade.setBorder(Color.BLACK);
             bredgade.setBackGroundColor(Color.white);
+
             GUI_Street kgs_nytorv = new GUI_Street();
             fields[27] = kgs_nytorv;
             kgs_nytorv.setTitle("Kgs. nytorv");
             kgs_nytorv.setSubText("kr. 5.200");
             kgs_nytorv.setBorder(Color.BLACK);
             kgs_nytorv.setBackGroundColor(Color.white);
+
             GUI_Street østergade = new GUI_Street();
             fields[29] = østergade;
             østergade.setTitle("Østergade");
             østergade.setSubText("kr. 5.600");
             østergade.setBorder(Color.BLACK);
             østergade.setBackGroundColor(Color.white);
+
             GUI_Street amagertorv = new GUI_Street();
             fields[31] = amagertorv;
             amagertorv.setTitle("Amagertorv");
             amagertorv.setSubText("kr. 6.000");
             amagertorv.setBorder(Color.BLACK);
             amagertorv.setBackGroundColor(Color.yellow);
+
             GUI_Street vimmelskaftet = new GUI_Street();
             fields[32] = vimmelskaftet;
             vimmelskaftet.setTitle("Vimmelskaftet");
             vimmelskaftet.setSubText("kr. 6.000");
             vimmelskaftet.setBorder(Color.BLACK);
             vimmelskaftet.setBackGroundColor(Color.yellow);
+
             GUI_Street nygade = new GUI_Street();
             fields[34] = nygade;
             nygade.setTitle("Nygade");
             nygade.setSubText("kr. 6.400");
             nygade.setBorder(Color.BLACK);
             nygade.setBackGroundColor(Color.yellow);
+
             GUI_Street frederiksberggade = new GUI_Street();
             fields[37] = frederiksberggade;
             frederiksberggade.setTitle("Frederiksberggade");
             frederiksberggade.setSubText("kr. 7.000");
             frederiksberggade.setBorder(Color.BLACK);
             frederiksberggade.setBackGroundColor(new Color(139, 0, 139));
+
             GUI_Street rådhuspladsen = new GUI_Street();
             fields[39] = rådhuspladsen;
             rådhuspladsen.setTitle("Rådhuspladsen");
             rådhuspladsen.setSubText("kr. 8.000");
             rådhuspladsen.setBorder(Color.BLACK);
             rådhuspladsen.setBackGroundColor(new Color(139, 0, 139));
+
             //prøv lykken felter
             GUI_Chance felt3 = new GUI_Chance();
             fields[2] = felt3;
+
             GUI_Chance felt8 = new GUI_Chance();
             fields[7] = felt8;
+
             GUI_Chance felt18 = new GUI_Chance();
             fields[17] = felt18;
+
             GUI_Chance felt23 = new GUI_Chance();
             fields[22] = felt23;
+
             GUI_Chance felt34 = new GUI_Chance();
             fields[33] = felt34;
+
             GUI_Chance felt37 = new GUI_Chance();
             fields[36] = felt37;
+
             //færge felter
             GUI_Shipping lBfærgerne = new GUI_Shipping();
             fields[5] = lBfærgerne;
             lBfærgerne.setTitle("LB færgerne");
             lBfærgerne.setSubText("4.000");
+
             GUI_Shipping danmark = new GUI_Shipping();
             fields[15] = danmark;
             danmark.setTitle("Danmark");
             danmark.setSubText("4.000");
+
             GUI_Shipping mols_linien = new GUI_Shipping();
             fields[25] = mols_linien;
             mols_linien.setTitle("Mols-linien");
             mols_linien.setSubText("4.000");
+
             GUI_Shipping skandinavisk = new GUI_Shipping();
             fields[35] = skandinavisk;
             skandinavisk.setTitle("Skandinavisk");
             skandinavisk.setSubText("4.000");
+
             //fængsel felt
             GUI_Jail fængsel = new GUI_Jail();
             fields[10] = fængsel;
             fængsel.setSubText("I Fængsel");
+
             GUI_Jail defængsles = new GUI_Jail();
             fields[30] = defængsles;
             defængsles.setSubText("De Fængsles");
+
             //bryggeri felter
             GUI_Brewery carlsberg = new GUI_Brewery();
             fields[12] = carlsberg;
             carlsberg.setTitle("Carlsberg");
             carlsberg.setSubText("3.000");
+
             GUI_Field coca_Cola = new GUI_Street();
             fields[28] = coca_Cola;
             coca_Cola.setTitle("Coca Cola");
             coca_Cola.setSubText("3.000");
             coca_Cola.setBackGroundColor(Color.red);
+
             //start felt
             GUI_Start start = new GUI_Start();
             fields[0] = start;
             start.setBackGroundColor(Color.red);
             start.setSubText("modtag 4.000");
             start.setTitle("START");
+
             //skatte felter
             GUI_Tax indkomstskat = new GUI_Tax();
             fields[4] = indkomstskat;
             indkomstskat.setSubText("10% el. 4.000");
             indkomstskat.setTitle("Indkomstskat");
             indkomstskat.setBackGroundColor(Color.white);
+
             GUI_Tax statsskat = new GUI_Tax();
             fields[38] = statsskat;
             statsskat.setSubText("betal 2.000");
             statsskat.setTitle("Statsskat");
             statsskat.setBackGroundColor(Color.white);
+
             //parkering felt
             GUI_Refuge parkering = new GUI_Refuge();
             fields[20] = parkering;
             parkering.setSubText("Parkering");
+
+            for (int n=0 ; n < fields.length ; n++)
+                fields[n].setDescription("");
+
         }
 
 
 
     public void guiChance(int squareInt, PlayerController playerC) {
         gui.displayChanceCard((String) chanceDesc.get(squareInt));
+        gui.getUserButtonPressed("", "Ok");
         removeAllCarsCurPos(playerC);
         updateGuiplayerBalance(playerC);
         setAllCarsCurPos(playerC);
     }
 
-    public void trade(PlayerController playerC, int initiator){
+    public void trade(PlayerController playerC, int playerNum, Trading trading){
+        // init = initiator, rece = receiver
         String[] players = new String[playerC.getNumOfPlayers()];
-        int receiver = initiator; // Sat lig initiator som en safety measure
-        String[] initiatorOwnables = new String[playerC.getPlayerOwnables(initiator).length+1]; // +1 for valg "ingen"
-        String[] receiverOwnables = new String[playerC.getPlayerOwnables(receiver).length+1];
-        String initiatorSelect, receiverSelect;
-        String[] initiatorOffer, receiverOffer;
+        int init = playerNum, rece = playerNum; // rece sat lig playerNum som en safety measure
+        String[] initOffer = new String[0], receOffer = new String[0];
+        int initMoney = 0, receMoney = 0;
 
         // Liste over spiller navne
         for(int n=0 ; n < players.length ; n++)
@@ -435,26 +522,67 @@ public class GUI_Handler {
         // Finder  referencen til spilleren som skal byttes med
         for(int n=0 ; n < players.length ; n++){
             if(playerSelect.equals(players[n]))
-                receiver = n;
+                rece = n;
         }
 
-        // Liste over bygninger du ejer
-        for (int n = 0; n < playerC.getPlayerOwnables(initiator).length; n++)
-            initiatorOwnables[n] = playerC.getPlayerOwnables(initiator)[n].getName();
-        initiatorOwnables[initiatorOwnables.length - 1] = "AFSLUT";
+        // Starten af byttehandlen
+        String invSelection;
+        do {
+            gui.showMessage(players[init] + "'s tilbud: " + Arrays.toString(initOffer) + "\n" +
+                    players[rece] + "'s tilbud: " + Arrays.toString(receOffer));
+
+            invSelection = gui.getUserButtonPressed("Vælg spiller inventar", players[init], "AFSLUT", players[rece]);
+
+            String typeSelection;
+            // INITIATOR
+            if (invSelection.equals(players[init])) {
+                typeSelection = gui.getUserButtonPressed("Ejendomme eller penge?", "EJENDOMME", "PENGE");
+                if (typeSelection.equals("EJENDOMME"))
+                    initOffer = getTradeOwnable(playerC, init);
+                else if (typeSelection.equals("PENGE"))
+                    initMoney = gui.getUserInteger("Hvor mange penge skal byttes?", 0, playerC.getBalance(init));
+            }
+
+            // RECEIVER
+            else if (invSelection.equals(players[rece])) {
+                typeSelection = gui.getUserButtonPressed("Ejendomme eller penge?", "EJENDOMME", "PENGE");
+                if (typeSelection.equals("EJENDOMME"))
+                    receOffer = getTradeOwnable(playerC, rece);
+                else if (typeSelection.equals("PENGE"))
+                    receMoney = gui.getUserInteger("Hvor mange penge skal byttes?", 0, playerC.getBalance(rece));
+            }
+        } while (!invSelection.equals("AFSLUT"));
+
+        trading.trade(playerC, init, initOffer, initMoney,
+                               rece, receOffer, receMoney);
+    }
+
+    private String[] getTradeOwnable(PlayerController playerC, int ref){
+        String[] ownables = new String[playerC.getPlayerOwnables(ref).length+2]; // +2 for valg "AFSLUT" og "RESET"
+        String[] offer = new String[0];
+        String selected;
+
+        for (int n = 0; n < playerC.getPlayerOwnables(ref).length; n++)
+            ownables[n] = playerC.getPlayerOwnables(ref)[n].getName();
+        ownables[ownables.length - 1] = "AFSLUT";
+        ownables[ownables.length - 2] = "RESET";
 
         do {
-            initiatorSelect = gui.getUserSelection("Hvad tilbyder du?", initiatorOwnables);
-        } while(!initiatorSelect.equals("AFSLUT"));
+            selected = gui.getUserSelection("Hvad skal byttes?", ownables);
+            if (!selected.equals("AFSLUT") && !selected.equals("RESET")) {
+                if (!Copy.contains(offer, selected)){
+                    offer = Copy.of(offer, offer.length + 1);
+                    offer[offer.length - 1] = selected;
+                }
+            }
+            else if (selected.equals("RESET"))
+                offer = new String[0];
 
-        // Liste over bygninger du vil have
-        for(int n=0 ; n < playerC.getPlayerOwnables(receiver).length ; n++)
-            receiverOwnables[n] = playerC.getPlayerOwnables(receiver)[n].getName();
-        receiverOwnables[receiverOwnables.length-1] = "AFSLUT";
+            gui.showMessage("Ejendomme: " + Arrays.toString(offer));
+        } while(!selected.equals("AFSLUT"));
 
-        receiverSelect = gui.getUserSelection("Hvad tilbyder du?", receiverOwnables);
+        Copy.of(offer, offer.length-2); // sletter AFSLUT og RESET
 
-
-
+        return offer;
     }
 }

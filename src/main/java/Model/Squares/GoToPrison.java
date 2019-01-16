@@ -1,10 +1,9 @@
 package Model.Squares;
 
+import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
-
-
 
 public class GoToPrison extends Square{
 
@@ -14,10 +13,10 @@ public class GoToPrison extends Square{
         super(positionOnBoard);
     }
 
-    @Override
-    public int landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
+    //@Override
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard) {
         playerC.setPosition(10,playerNum);
         playerC.setInJail(playerNum, true);
-        return -2;
+        //return -2;
     }
 }
