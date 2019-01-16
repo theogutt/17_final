@@ -148,7 +148,8 @@ public class GUI_Handler {
         return valg;
     }
 
-    public int chooseNumBuildnings(){
+    public int chooseNumBuildnings(int posOnBoard){
+        GUI_Street street;
         String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
         int i = 0;
         if (valg == "1")        i=1;
@@ -157,10 +158,10 @@ public class GUI_Handler {
         else if (valg == "4")   i=4;
         else if (valg == "Hotel")  i=5;
         else                    i=0;
-
+        street = (GUI_Street) gui.getFields()[posOnBoard];
         if (i==0){}
-        else if(i==5){gui_street.setHotel(true);}
-        else {gui_street.setHouses(i);}
+        else if(i==5){street.setHotel(true);}
+        else {street.setHouses(i);}
         return i;
     }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {

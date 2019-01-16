@@ -145,13 +145,13 @@ public class Building {
         }
     }
     private void buildBuilding(Street street, GUI_Handler gui_handler, GameBoard gameBoard){
-        int valg = gui_handler.chooseNumBuildnings();
+        int valg = gui_handler.chooseNumBuildnings(street.getPositionOnBoard());
         gameBoard.changeBuildning(street, valg);
     }
     public boolean ownAllID(Ownable[] property, int ID){
         boolean ownAll;
         int numOfIDs = 0;
-        for (int i = 0; i > property.length; i++) {
+        for (int i = 0; i < property.length; i++) {
             if (property[i].getGroupID()==ID){
                 numOfIDs++;
             }
