@@ -31,8 +31,9 @@ public class Account {
         for (int i = 0; i < this.playerOwnables.length; i++) {
             if (this.playerOwnables[i] == ownable) {
                 x = i;
+                break;
             }
-            break;
+
         }
         // Sætter alt på den nye plads i Arrayet
         for(int i = x; i < this.playerOwnables.length-1; i++){

@@ -92,7 +92,7 @@ public class GameEngine {
         if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
-        guiHandler.menu(playerC, playerNum, building, trading);
+        guiHandler.menu(playerC, playerNum, building, trading, gameBoard);
         extraTurn(playerNum);
         pairs = 0;
     }
