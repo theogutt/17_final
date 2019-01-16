@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Die;
+import Model.Squares.Chance;
 import Model.Squares.Square;
 import Utilities.Cheatkodes;
 import View.GUI_Handler;
@@ -14,6 +15,7 @@ public class GameEngine {
     private PlayerController playerC;
     private GameBoard gameBoard;
     private Cheatkodes cheatkodes;
+    private Chance chance;
     private Die die1;
     private Die die2;
     private RentController rentC;
@@ -54,7 +56,7 @@ public class GameEngine {
     }
     public void playTurn(int playerNum, Cheatkodes cheatkodes) {
 
-        cheatkodes.cheats(playerC, playerNum, this,guiHandler,rentC);
+        cheatkodes.cheats(playerC, playerNum, this,guiHandler,rentC,chance);
 
         guiHandler.updateGuiPlayerBalance(playerC);
 
