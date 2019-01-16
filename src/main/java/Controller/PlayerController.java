@@ -142,8 +142,15 @@ public class PlayerController {
         return getRef(ref).getOldPosition();
     }
 
-    public int getPlayerPlayerNum(int ref) {
-        return getRef(ref).getPlayerNum();
+    public int getPlayerNumFromName(String name) {
+        int ref = -1;
+
+        for(int n=0 ; n < playerModels.length ; n++) {
+            if (name.equals(playerModels[n].getName()))
+                ref = n;
+        }
+
+        return ref;
     }
 
     public int getPosition(int i) {
@@ -211,9 +218,6 @@ public class PlayerController {
 
     }
 
-
-
-/*
     public boolean ownsStreetsAheadOrBehind(int ref, int lfPos) {
         return getRef(ref).ownsStreetAheadOrBehind(lfPos);
     }
