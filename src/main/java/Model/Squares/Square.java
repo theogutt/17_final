@@ -21,11 +21,9 @@ public abstract class Square{
         catch (NullPointerException ex){}
         //return -1;
     }
-
     public int getPositionOnBoard(){
         return positionOnBoard;
     }
-
     public int getOwner(){
         return this.owner;
     }
