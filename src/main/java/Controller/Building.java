@@ -13,7 +13,7 @@ public class Building {
         boolean forsæt = true;
         while(forsæt) {
             if (valg == "Lyseblå") {
-                if (ownAllID(ejendomme, 1, gameBoard)) {
+                if (ownAllID(ejendomme, 1)) {
                     forsæt = false;
                     int k = 0;
                     String[] streets = new String[2];
@@ -28,7 +28,7 @@ public class Building {
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{forsæt = false;}
             } else if (valg == "Pink") {
-                if (ownAllID(ejendomme, 2, gameBoard)) {
+                if (ownAllID(ejendomme, 2)) {
                     forsæt = false;
                     int k = 0;
                     String[] streets = new String[3];
@@ -43,7 +43,7 @@ public class Building {
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{forsæt = false;}
             } else if (valg == "Gørn") {
-                if (ownAllID(ejendomme, 3, gameBoard)) {
+                if (ownAllID(ejendomme, 3)) {
                     forsæt = false;
                     int k = 0;
                     String[] streets = new String[3];
@@ -58,7 +58,7 @@ public class Building {
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{forsæt = false;}
             } else if (valg == "Grå") {
-                if (ownAllID(ejendomme, 4, gameBoard)) {
+                if (ownAllID(ejendomme, 4)) {
                     forsæt = false;
                     int k = 0;
                     String[] streets = new String[3];
@@ -73,7 +73,7 @@ public class Building {
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{forsæt = false;}
             } else if (valg == "Rød") {
-                if (ownAllID(ejendomme, 5, gameBoard)) {
+                if (ownAllID(ejendomme, 5)) {
                     forsæt = false;
                     int k = 0;
                     String[] streets = new String[3];
@@ -88,7 +88,7 @@ public class Building {
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{forsæt = false;}
             } else if (valg == "Hvid") {
-                if (ownAllID(ejendomme, 6, gameBoard)) {
+                if (ownAllID(ejendomme, 6)) {
                     forsæt = false;
                     int k = 0;
                     String[] streets = new String[3];
@@ -103,7 +103,7 @@ public class Building {
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{forsæt = false;}
             } else if (valg == "Gul") {
-                if (ownAllID(ejendomme, 7, gameBoard)) {
+                if (ownAllID(ejendomme, 7)) {
                     forsæt = false;
                     int k = 0;
                     String[] streets = new String[3];
@@ -118,7 +118,7 @@ public class Building {
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{forsæt = false;}
             } else if (valg == "Lilla") {
-                if (ownAllID(ejendomme, 8, gameBoard)) {
+                if (ownAllID(ejendomme, 8)) {
                     int k = 0;
                     String[] streets = new String[2];
                     for (int i = 0; i < ejendomme.length; i++) {
@@ -148,17 +148,21 @@ public class Building {
         int valg = gui_handler.chooseNumBuildnings(street.getPositionOnBoard());
         gameBoard.changeBuildning(street, valg);
     }
-    public boolean ownAllID(Ownable[] property, int ID, GameBoard gameBoard){
-        boolean ownAll = false;
+    public boolean ownAllID(Ownable[] property, int ID){
+        boolean ownAll;
         int numOfIDs = 0;
         for (int i = 0; i < property.length; i++) {
             if (property[i].getGroupID()==ID){
                 numOfIDs++;
             }
         }
-        if (numOfIDs==gameBoard.numberOfGroupIDs(ID)){
+        int numInIDGroup = 3;
+        if( ID==1 || ID==8){ numInIDGroup = 2; }
+
+        if (numOfIDs==numInIDGroup){
             ownAll = true;
-        }
+        }else{
+            ownAll = false;}
         return ownAll;
     }
 }

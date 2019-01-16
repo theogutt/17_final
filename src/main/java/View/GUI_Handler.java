@@ -128,6 +128,9 @@ public class GUI_Handler {
         if(answer.equalsIgnoreCase("ja")){return 1;}
         else{return 0;}
     }
+    public void payRent(PlayerController playerC, int owner, int ref, int rent){
+        gui.showMessage(playerC.getName(ref) + " betalte " + rent +" kr. til "+playerC.getName(owner));
+    }
     public int payOrRoll(){
         String choice = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
         if (choice.equalsIgnoreCase("Betal")){ return 1; }

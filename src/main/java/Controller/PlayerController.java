@@ -12,7 +12,7 @@ public class PlayerController {
     private int roll2;
 
     private Player[] playerModels;
-    int oldRollSum;
+    private int oldRollSum;
 
     public PlayerController(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
@@ -181,6 +181,8 @@ public class PlayerController {
         playerModels[i].setBalance(newBalance);
     }
 
+    public int getOldRollSum(int i){return playerModels[i].getOldRollSum();}
+
     public int getNumOfPlayers() {
         return numOfPlayers;
     }
@@ -218,13 +220,5 @@ public class PlayerController {
 */
     public Player[] getPlayerModels() {
         return playerModels;
-    }
-
-    public int getOldRollSum() {
-        return oldRollSum;
-    }
-
-    public void setOldRollSum(int oldRollSum) {
-        this.oldRollSum = oldRollSum;
     }
 }
