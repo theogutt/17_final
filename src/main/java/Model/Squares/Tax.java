@@ -1,6 +1,7 @@
 package Model.Squares;
 
 
+import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
@@ -17,7 +18,7 @@ public class Tax extends Square {
     }
 
     //@Override
-    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard) {
 
         if (playerC.getPosition(playerNum) == 4) {
             int choice = guiHandler.procentOrFixed(playerC, playerNum);

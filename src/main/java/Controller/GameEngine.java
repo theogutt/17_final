@@ -13,6 +13,7 @@ public class GameEngine {
     private Die die1;
     private Die die2;
     private RentController rentC;
+    private int pairs;
 
     public GameEngine() throws IOException {
         guiHandler = new GUI_Handler();
@@ -85,6 +86,8 @@ public class GameEngine {
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
         guiHandler.menu(playerC, playerNum, building, trading);
+        extraTurn(playerNum);
+        pairs = 0;
     }
 
     public int calcTurn(int j) {
@@ -98,7 +101,21 @@ public class GameEngine {
         guiHandler.playerWonGui(playerC, x);
     }
 
-        public Die getDie1() {
+    public void extraTurn(int playerNum){
+
+        if (die1 == die2){
+            pairs++;
+            if (pairs == 3){
+                playerC.setPosition(10,playerNum);
+                playerC.setInJail(playerNum, true);
+            }
+            else{
+                playTurn(playerNum);
+            }
+        }
+    }
+
+    public Die getDie1() {
         return die1;
     }
 
