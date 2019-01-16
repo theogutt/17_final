@@ -461,16 +461,16 @@ public class GUI_Handler {
             defængsles.setSubText("De Fængsles");
 
             //bryggeri felter
-            GUI_Brewery carlsberg = new GUI_Brewery();
-            fields[12] = carlsberg;
-            carlsberg.setTitle((String)StreetName.get(12));
-            carlsberg.setSubText("3.000");
+            GUI_Brewery tuborg = new GUI_Brewery();
+            fields[12] = tuborg;
+            tuborg.setTitle((String)StreetName.get(12));
+            tuborg.setSubText("3.000");
 
-            GUI_Field coca_Cola = new GUI_Street();
-            fields[28] = coca_Cola;
-            coca_Cola.setTitle((String)StreetName.get(28));
-            coca_Cola.setSubText("3.000");
-            coca_Cola.setBackGroundColor(Color.red);
+            GUI_Brewery carlsberg = new GUI_Brewery();
+            fields[28] = carlsberg;
+            carlsberg.setTitle((String)StreetName.get(28));
+            carlsberg.setSubText("3.000");
+            carlsberg.setBackGroundColor(Color.red);
 
             //start felt
             GUI_Start start = new GUI_Start();
@@ -496,6 +496,7 @@ public class GUI_Handler {
             GUI_Refuge parkering = new GUI_Refuge();
             fields[20] = parkering;
             parkering.setSubText("Parkering");
+            parkering.setTitle("Parkering");
 
             for (int n=0 ; n < fields.length ; n++)
                 fields[n].setDescription("");
