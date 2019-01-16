@@ -12,6 +12,8 @@ public class GameEngine {
     private GUI_Handler guiHandler;
     private PlayerController playerC;
     private GameBoard gameBoard;
+    private Building building;
+    private Trading trading;
     private Die die1;
     private Die die2;
     private RentController rentC;
@@ -22,6 +24,8 @@ public class GameEngine {
         die2 = new Die(6);
         gameBoard = new GameBoard();
         rentC = new RentController();
+        building = new Building();
+        trading = new Trading();
     }
     public void start() {
         setUpGame();
@@ -35,19 +39,28 @@ public class GameEngine {
     }
 
     public void playGame() {
+        int loser = turnFlow();
+        endGame(loser);
+    }
+    public int turnFlow() {
         //Normal turn
         int playerNum;
         int i = 0;
+
         do {
             playerNum = calcTurn(i);
             guiHandler.playerTurnGui(playerC, playerNum);
             if (true) {
                 playTurn(playerNum);
             }
+            guiHandler.updateGuiPlayerBalance(playerC);
             guiHandler.showScore(playerC, playerNum);
+            playerC.broke(playerNum);
             i++;
         }
-        while(true);
+        // while(true);
+        while (!playerC.getModelBroke(playerNum));
+        return playerNum;
     }
     public void playTurn(int playerNum) {
 
@@ -73,9 +86,9 @@ public class GameEngine {
         guiHandler.diceUpdateGui(playerC, die1, die2);
         boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
         if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
-        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
-
+        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
+        guiHandler.menu(playerC, playerNum, building, trading);
     }
 
     public int calcTurn(int j) {
@@ -83,7 +96,13 @@ public class GameEngine {
         return currentTurn;
     }
 
-    public Die getDie1() {
+    public void endGame(int ref) {
+        int x = playerC.playerWithHighestBalance();
+        guiHandler.gotBrokeGui(playerC, ref);
+        guiHandler.playerWonGui(playerC, x);
+    }
+
+        public Die getDie1() {
         return die1;
     }
 

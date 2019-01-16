@@ -52,6 +52,7 @@ public class Player {
         this.name = name;
     }
 
+
     public int getCurPosition() {
         return curPosition;
     }

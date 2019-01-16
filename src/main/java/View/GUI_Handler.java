@@ -1,7 +1,11 @@
 package View;
 
+import Controller.Building;
 import Controller.GameBoard;
 import Controller.PlayerController;
+import Controller.Trading;
+import Model.Player;
+import Utilities.Copy;
 import Utilities.TextReader;
 import Model.Die;
 import Model.Squares.Square;
@@ -12,6 +16,7 @@ import gui_main.GUI;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static gui_fields.GUI_Car.Type.*;
@@ -23,6 +28,8 @@ public class GUI_Handler {
     private GUI_Player[] gui_Players;
     private GUI_Car[] gui_cars;
     private HashMap chanceDesc;
+    private GUI_Street gui_street;
+
 
     public GUI_Handler() throws IOException {
         message = new MessageHandler();
@@ -35,21 +42,29 @@ public class GUI_Handler {
         gui = new GUI(fields);
     }
 
-    public void menu(PlayerController playerC, int playerNum){
+    public void menu(PlayerController playerC, int playerNum, Building building, Trading trading){
         boolean aktivTur = true;
         String valg;
         while (aktivTur) {
             valg = gui.getUserButtonPressed("Menu", "Handel", "Bygge", "Pantsæt", "Afslut tur");
             if (valg == "Handel") {
-                //trade(playerC, playerNum);
+                trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
-                //build(playerC, playerNum);
+                building.build(playerC, playerNum, this);
             } else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
             } else if (valg == "Afslut tur") {
                 aktivTur = false;
             }
         }
+    }
+
+    public void playerWonGui(PlayerController playerC, int i) {
+        gui.showMessage(message.playerWon(playerC, i));
+    }
+
+    public void gotBrokeGui(PlayerController playerC, int i) {
+        gui.showMessage(message.gotBroke(playerC, i));
     }
 
     public void startGameGui() {
@@ -116,9 +131,39 @@ public class GUI_Handler {
         else{return 0;}
     }
     public int payOrRoll(){
-        String chose = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
-        if (chose.equalsIgnoreCase("Betal")){ return 1; }
+        String choice = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
+        if (choice.equalsIgnoreCase("Betal")){ return 1; }
         else{ return 2; }
+    }
+    public int procentOrFixed(PlayerController playerC, int playerNum){
+        String choice = gui.getUserSelection("Betal 20% eller 4.000 kr.", "20%", "4.000 kr.");
+        if (choice.equalsIgnoreCase("20%")){ return 1; }
+        else { return 2; }
+    }
+
+    public String chooseStreetToBuildOn(){
+        String valg = gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
+        return valg;
+    }
+    public String chooseSepecificStreet(String[] streets){
+        String valg = gui.getUserSelection("Vælg grund",streets);
+        return valg;
+    }
+
+    public int chooseNumBuildnings(){
+        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
+        int i = 0;
+        if (valg == "1")        i=1;
+        else if (valg == "2")   i=2;
+        else if (valg == "3")   i=3;
+        else if (valg == "4")   i=4;
+        else if (valg == "Hotel")  i=5;
+        else                    i=0;
+
+        if (i==0){}
+        else if(i==5){gui_street.setHotel(true);}
+        else {gui_street.setHouses(i);}
+        return i;
     }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
@@ -198,7 +243,14 @@ public class GUI_Handler {
     public void showScore(PlayerController player, int i) {
         gui.showMessage(message.playerEndTurn(player, i));
     }
-
+    public void changeStreetColor(PlayerController player, int ref){
+        GUI_Field field;
+        GUI_Ownable ownable;
+        Color carColor = getGuiPlayer(ref).getCar().getPrimaryColor();
+        field = gui.getFields()[player.getPosition(ref)];
+        ownable = (GUI_Ownable) field;
+        ownable.setBorder(carColor);
+    }
 
     public void setSpecificFields(){
             //ejendomsfelter
@@ -412,5 +464,85 @@ public class GUI_Handler {
         removeAllCarsCurPos(playerC);
         updateGuiplayerBalance(playerC);
         setAllCarsCurPos(playerC);
+    }
+
+    public void trade(PlayerController playerC, int playerNum, Trading trading){
+        // init = initiator, rece = receiver
+        String[] players = new String[playerC.getNumOfPlayers()];
+        int init = playerNum, rece = playerNum; // rece sat lig playerNum som en safety measure
+        String[] initOffer = new String[0], receOffer = new String[0];
+        int initMoney = 0, receMoney = 0;
+
+        // Liste over spiller navne
+        for(int n=0 ; n < players.length ; n++)
+            players[n] = playerC.getName(n);
+
+        String playerSelect = gui.getUserSelection("Hvem vil du bytte med?", players);
+
+        // Finder  referencen til spilleren som skal byttes med
+        for(int n=0 ; n < players.length ; n++){
+            if(playerSelect.equals(players[n]))
+                rece = n;
+        }
+
+        // Starten af byttehandlen
+        String invSelection;
+        do {
+            gui.showMessage(players[init] + "'s tilbud: " + Arrays.toString(initOffer) + "\n" +
+                    players[rece] + "'s tilbud: " + Arrays.toString(receOffer));
+
+            invSelection = gui.getUserButtonPressed("Vælg spiller inventar", players[init], "AFSLUT", players[rece]);
+
+            String typeSelection;
+            // INITIATOR
+            if (invSelection.equals(players[init])) {
+                typeSelection = gui.getUserButtonPressed("Ejendomme eller penge?", "EJENDOMME", "PENGE");
+                if (typeSelection.equals("EJENDOMME"))
+                    initOffer = getTradeOwnable(playerC, init);
+                else if (typeSelection.equals("PENGE"))
+                    initMoney = gui.getUserInteger("Hvor mange penge skal byttes?", 0, playerC.getBalance(init));
+            }
+
+            // RECEIVER
+            else if (invSelection.equals(players[rece])) {
+                typeSelection = gui.getUserButtonPressed("Ejendomme eller penge?", "EJENDOMME", "PENGE");
+                if (typeSelection.equals("EJENDOMME"))
+                    receOffer = getTradeOwnable(playerC, rece);
+                else if (typeSelection.equals("PENGE"))
+                    receMoney = gui.getUserInteger("Hvor mange penge skal byttes?", 0, playerC.getBalance(rece));
+            }
+        } while (!invSelection.equals("AFSLUT"));
+
+        trading.trade(playerC, init, initOffer, initMoney,
+                               rece, receOffer, receMoney);
+    }
+
+    private String[] getTradeOwnable(PlayerController playerC, int ref){
+        String[] ownables = new String[playerC.getPlayerOwnables(ref).length+2]; // +2 for valg "AFSLUT" og "RESET"
+        String[] offer = new String[0];
+        String selected;
+
+        for (int n = 0; n < playerC.getPlayerOwnables(ref).length; n++)
+            ownables[n] = playerC.getPlayerOwnables(ref)[n].getName();
+        ownables[ownables.length - 1] = "AFSLUT";
+        ownables[ownables.length - 2] = "RESET";
+
+        do {
+            selected = gui.getUserSelection("Hvad skal byttes?", ownables);
+            if (!selected.equals("AFSLUT") && !selected.equals("RESET")) {
+                if (!Copy.contains(offer, selected)){
+                    offer = Copy.of(offer, offer.length + 1);
+                    offer[offer.length - 1] = selected;
+                }
+            }
+            else if (selected.equals("RESET"))
+                offer = new String[0];
+
+            gui.showMessage("Ejendomme: " + Arrays.toString(offer));
+        } while(!selected.equals("AFSLUT"));
+
+        Copy.of(offer, offer.length-2); // sletter AFSLUT og RESET
+
+        return offer;
     }
 }
