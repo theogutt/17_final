@@ -118,7 +118,7 @@ public class GameEngine {
                 playerC.setInJail(playerNum, true);
             }
             else{
-                playTurn(playerNum);
+                playTurn(playerNum, cheatkodes);
             }
         }
     }
