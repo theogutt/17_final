@@ -48,7 +48,7 @@ public abstract class Ownable extends Square{
                 playerC.updatePlayerBalance(this.getOwner(), rent);
                 guiHandler.payRent(playerC, this.getOwner(), ref, rent);
             }
-            else{}
+            else{guiHandler.playersOwnSquare(playerC, ref);}
         }
     }
     public String getName() {
