@@ -51,7 +51,6 @@ public class GameEngine {
                 playTurn(playerNum);
             }
             guiHandler.updateGuiPlayerBalance(playerC);
-            guiHandler.showScore(playerC, playerNum);
             playerC.broke(playerNum);
             i++;
         }
