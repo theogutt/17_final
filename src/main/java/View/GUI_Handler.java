@@ -521,7 +521,7 @@ public class GUI_Handler {
             //skatte felter
             GUI_Tax indkomstskat = new GUI_Tax();
             fields[4] = indkomstskat;
-            indkomstskat.setSubText("10% el. 4.000");
+            indkomstskat.setSubText("20% el. 4.000");
             indkomstskat.setTitle("Indkomstskat");
             indkomstskat.setBackGroundColor(Color.white);
 
