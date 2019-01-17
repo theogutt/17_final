@@ -165,9 +165,10 @@ public class GUI_Handler {
         return valg;
     }
 
-    public int chooseNumBuildnings(int posOnBoard){
+    public int chooseNumBuildnings(int posOnBoard, int price){
         GUI_Street street;
-        String valg = gui.getUserButtonPressed("Antal huse på grund","0","1","2","3","4","Hotel","Tilbage");
+        String p = Integer.toString(price);
+        String valg = gui.getUserButtonPressed("Et hus koster " + p + ". \nMan får halv pris tilbage ved salg af hus.","0","1","2","3","4","Hotel","Tilbage");
         int i = 0;
         if (valg == "0")        i=0;
         else if (valg == "1")   i=1;
