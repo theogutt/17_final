@@ -116,7 +116,7 @@ public class RentController {
 
         public int getNumberOfBuildings(PlayerController playerC,  GameBoard gameBoard, int ref){
         int pos = playerC.getPosition(ref);
-        int numOfBuildings=gameBoard.getSquare(pos).getNumberOfBuildings();
+        int numOfBuildings=gameBoard.getSquare(pos).getNumOfBuildings();
         return numOfBuildings;
         }
 
