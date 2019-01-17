@@ -174,8 +174,7 @@ public class Building {
             }
         }
     }
-    public boolean ownAllID(Ownable[] property, int ID){
-        boolean ownAll;
+    private boolean ownAllID(Ownable[] property, int ID){
         int numOfIDs = 0;
         for (int i = 0; i < property.length; i++) {
             if (property[i] instanceof Street) {
@@ -187,10 +186,6 @@ public class Building {
         int numInIDGroup = 3;
         if( ID==1 || ID==8){ numInIDGroup = 2; }
 
-        if (numOfIDs==numInIDGroup){
-            ownAll = true;
-        }else{
-            ownAll = false;}
-        return ownAll;
+        return (numOfIDs==numInIDGroup);
     }
 }
