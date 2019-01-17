@@ -167,7 +167,7 @@ public class Building {
                 int price2 = price * (numBuildBefore - valg);
                 playerC.updatePlayerBalance(playerNum, price2 / 2);
             } else {
-                int price2 = price * (valg - numBuildBefore);
+                int price2 = -price * (valg - numBuildBefore);
                 playerC.updatePlayerBalance(playerNum, price2);
             }
         }
