@@ -12,11 +12,6 @@ public class Tax extends Square {
         super(positionOnBoard);
     }
 
-    @Override
-    public int getPositionOnBoard() {
-        return super.getPositionOnBoard();
-    }
-
     //@Override
     public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
 
