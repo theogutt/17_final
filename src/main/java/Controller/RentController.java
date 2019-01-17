@@ -43,7 +43,6 @@ public class RentController {
         public int retrieveRent (PlayerController playerC,int ref, GameBoard gameBoard){
             int rent=0;
             int position = playerC.getPosition(ref);
-            rent = baseRent(position);
             if(getOwnableType(playerC.getPosition(ref), gameBoard)==1) {
                 int buildings=getNumberOfBuildings(playerC, gameBoard, ref);
                 if (buildings == 1) {
@@ -67,9 +66,9 @@ public class RentController {
             }
             else if(getOwnableType(playerC.getPosition(ref), gameBoard)==3){
                 if (getNumberOfBreweries(playerC, gameBoard, ref) == 1) {
-                    rent = playerC.getOldRollSum(ref) * 100;
+                    rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100;
                 } else if (getNumberOfBreweries(playerC, gameBoard, ref) == 2) {
-                    rent = playerC.getOldRollSum(ref) * 200;
+                    rent = (playerC.getPosition(ref)-playerC.getPosition(ref)) * 200;
                 }
             }
             else if(getOwnableType(playerC.getPosition(ref), gameBoard)==2){
