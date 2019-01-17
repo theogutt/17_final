@@ -1,5 +1,8 @@
 package View;
 
+/*
+import Controller.Building;
+*/
 import Controller.Building;
 import Controller.GameBoard;
 import Controller.PlayerController;
@@ -44,12 +47,12 @@ public class GUI_Handler {
         boolean aktivTur = true;
         String valg;
         while (aktivTur) {
-            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Pantsæt", "Afslut tur");
+            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Afslut tur");
             if (valg == "Handel") {
                 trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
-                building.build(playerC, playerNum, this, gameBoard);
-            } else if (valg == "Pantsæt") {
+                building.build(playerC, playerNum, this);
+            //} else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
             } else if (valg == "Afslut tur") {
                 aktivTur = false;
@@ -145,6 +148,9 @@ public class GUI_Handler {
     public void payRent(PlayerController playerC, int owner, int ref, int rent){
         gui.showMessage(playerC.getName(ref) + " betalte " + rent +" kr. til "+playerC.getName(owner));
     }
+    public void playersOwnSquare(PlayerController playerC, int ref){
+        gui.showMessage(playerC.getName(ref)+" ejer selv grunden");
+    }
     public int payOrRoll(){
         String choice = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
         if (choice.equalsIgnoreCase("Betal")){ return 1; }
@@ -165,18 +171,20 @@ public class GUI_Handler {
         return valg;
     }
 
-    public int chooseNumBuildnings(int posOnBoard){
+    public int chooseNumBuildnings(int posOnBoard, int price){
         GUI_Street street;
-        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
+        String p = Integer.toString(price);
+        String valg = gui.getUserButtonPressed("Et hus koster " + p + ". \nMan får halv pris tilbage ved salg af hus.","0","1","2","3","4","Hotel","Tilbage");
         int i = 0;
-        if (valg == "1")        i=1;
+        if (valg == "0")        i=0;
+        else if (valg == "1")   i=1;
         else if (valg == "2")   i=2;
         else if (valg == "3")   i=3;
         else if (valg == "4")   i=4;
         else if (valg == "Hotel")  i=5;
-        else                    i=0;
+        else                    i=-1;
         street = (GUI_Street) gui.getFields()[posOnBoard];
-        if (i==0){}
+        if (i==-1){}
         else if(i==5){street.setHotel(true);}
         else {street.setHouses(i);}
         return i;

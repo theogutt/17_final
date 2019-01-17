@@ -48,7 +48,7 @@ public abstract class Ownable extends Square{
                 playerC.updatePlayerBalance(this.getOwner(), rent);
                 guiHandler.payRent(playerC, this.getOwner(), ref, rent);
             }
-            else{}
+            else{guiHandler.playersOwnSquare(playerC, ref);}
         }
     }
     public String getName() {
@@ -58,11 +58,14 @@ public abstract class Ownable extends Square{
     public int getGroupID() {
         return groupID;
     }
-    public int getNumOfBuildings() {
-        return numOfBuildings;
-    }
+
     public void setNumOfBuildings(int numOfBuildings){
         this.numOfBuildings = numOfBuildings;
+    }
+
+    @Override
+    public int getNumOfBuildings() {
+        return super.getNumOfBuildings();
     }
 
     public int getOwner() {

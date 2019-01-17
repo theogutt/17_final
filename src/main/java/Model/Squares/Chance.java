@@ -162,12 +162,10 @@ public class Chance extends Square{
             case 27: // Move to Frederiksberg Alle.
                 playerC.setPosition(11,playerNum);
                 break;
-
         }
-        gui_handler.guiChance(card-1, playerC);
-        if (playerC.getPosition(playerNum) != oldPos)
-            gameBoard.squareImpact(playerNum,playerC,gui_handler,rentC,gameBoard);
-        gui_handler.guiChance(card-1, playerC);
+        if (oldPos > playerC.getPosition(playerNum) && card != 23 && card != 24)
+            playerC.updatePlayerBalance(playerNum,4000);
+        gui_handler.guiChance(card, playerC);
         leftShiftCards();
     }
 

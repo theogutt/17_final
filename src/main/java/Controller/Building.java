@@ -2,11 +2,21 @@ package Controller;
 
 import Model.Squares.Ownable;
 import Model.Squares.Street;
+import Utilities.TextReader;
 import View.GUI_Handler;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 public class Building {
 
-    public void build(PlayerController playerC, int playerNum, GUI_Handler gui_handler, GameBoard gameBoard){
+    private HashMap buildningPrice;
+
+    public Building() throws IOException{
+        buildningPrice = TextReader.textReader(".\\src\\Resources\\BuildingPrice");
+    }
+
+    public void build(PlayerController playerC, int playerNum, GUI_Handler gui_handler){
         String bygningDerSkalÆndres = "";
         Ownable[] ejendomme = playerC.getPlayerOwnables(playerNum);
         String valg = gui_handler.chooseStreetToBuildOn();
@@ -138,31 +148,44 @@ public class Building {
 
         }
         for(int i=0; i<ejendomme.length; i++){
-            if(bygningDerSkalÆndres.equalsIgnoreCase(ejendomme[i].getName())){
-             buildBuilding((Street) ejendomme[i], gui_handler, gameBoard);
-                break;
+            if (ejendomme[i] instanceof Street) {
+                if (bygningDerSkalÆndres.equalsIgnoreCase(ejendomme[i].getName())) {
+                    buildBuilding((Street) ejendomme[i], gui_handler, playerC, playerNum);
+                    break;
+                }
             }
         }
     }
-    private void buildBuilding(Street street, GUI_Handler gui_handler, GameBoard gameBoard){
-        int valg = gui_handler.chooseNumBuildnings(street.getPositionOnBoard());
-        gameBoard.changeBuildning(street, valg);
+    private void buildBuilding(Street street, GUI_Handler gui_handler, PlayerController playerC, int playerNum){
+        int numBuildBefore = street.getNumOfBuildings();
+
+        int price = (Integer) buildningPrice.get(street.getPositionOnBoard());
+        int valg = gui_handler.chooseNumBuildnings(street.getPositionOnBoard(), price);
+
+        if (valg != -1) {
+            street.setNumOfBuildings(valg);
+
+            if (numBuildBefore > street.getNumOfBuildings()) {
+                int price2 = price * (numBuildBefore - valg);
+                playerC.updatePlayerBalance(playerNum, price2 / 2);
+            } else {
+                int price2 = -price * (valg - numBuildBefore);
+                playerC.updatePlayerBalance(playerNum, price2);
+            }
+        }
     }
-    public boolean ownAllID(Ownable[] property, int ID){
-        boolean ownAll;
+    private boolean ownAllID(Ownable[] property, int ID){
         int numOfIDs = 0;
         for (int i = 0; i < property.length; i++) {
-            if (property[i].getGroupID()==ID){
-                numOfIDs++;
+            if (property[i] instanceof Street) {
+                if (property[i].getGroupID() == ID) {
+                    numOfIDs++;
+                }
             }
         }
         int numInIDGroup = 3;
         if( ID==1 || ID==8){ numInIDGroup = 2; }
 
-        if (numOfIDs==numInIDGroup){
-            ownAll = true;
-        }else{
-            ownAll = false;}
-        return ownAll;
+        return (numOfIDs==numInIDGroup);
     }
 }

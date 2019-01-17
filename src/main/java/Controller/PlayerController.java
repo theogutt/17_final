@@ -161,6 +161,15 @@ public class PlayerController {
         return playerModels[i].getOldPosition();
     }
 
+    public void setOldRollSum(int oldRollSum) {
+        this.oldRollSum = oldRollSum;
+    }
+
+    public int getOldRollSum(int ref) {
+        int oldRoll = playerModels[ref].getOldRollSum();
+        return oldRoll;
+    }
+
     public void setSumOfStreets(int ref, int sumOfStreets) {
         playerModels[ref].setSumOfProperties(sumOfStreets);
     }
@@ -188,8 +197,6 @@ public class PlayerController {
         playerModels[i].setBalance(newBalance);
     }
 
-    public int getOldRollSum(int i){return playerModels[i].getOldRollSum();}
-
     public int getNumOfPlayers() {
         return numOfPlayers;
     }
@@ -205,23 +212,11 @@ public class PlayerController {
     public void addOwnable(Ownable ownable, int i){
         this.playerModels[i].addOwnable(ownable);
     }
-    /*public Ownable[] getPlayerOwnables(int playerNum){
-        return playerModels[playerNum].getPlayerOwnables();
-    }*/
 
     public void removeOwnable(Ownable ownable, int i){
         this.playerModels[i].removeOwnable(ownable);
     }
 
-   /* public ArrayList getPlayerStreets(int ref) {
-        return getRef(ref).getAllPlayersStreets();
-
-    }
-
-    public boolean ownsStreetsAheadOrBehind(int ref, int lfPos) {
-        return getRef(ref).ownsStreetAheadOrBehind(lfPos);
-    }
-*/
     public Player[] getPlayerModels() {
         return playerModels;
     }

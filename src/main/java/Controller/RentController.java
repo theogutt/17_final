@@ -36,13 +36,11 @@ public class RentController {
         return type;
     }
 
-    public int retrieveRent(PlayerController playerC, int ref, Ownable curOwnable) {
-        int rent = 0;
+    public int retrieveRent (PlayerController playerC,int ref, GameBoard gameBoard){
+        int rent=0;
         int position = playerC.getPosition(ref);
-
-        rent = baseRent(position);
-        if (getOwnableType(curOwnable) == 1) {
-            int buildings = curOwnable.getNumOfBuildings();
+        if(getOwnableType(playerC.getPosition(ref), gameBoard)==1) {
+            int buildings=getNumberOfBuildings(playerC, gameBoard, ref);
             if (buildings == 1) {
                 rent = oneHouseRent(position);
             } else if (buildings == 2) {
@@ -54,33 +52,35 @@ public class RentController {
             } else if (buildings == 5) {
                 rent = HotelRent(position);
             } else {
-                if (ownAll(playerC, ref, curOwnable) == true) {
+                if (ownAll(playerC, ref, gameBoard)==true) {
                     rent = baseRent(position) * 2;
                 } else {
                     rent = baseRent(position);
 
                 }
             }
-        } else if (getOwnableType(curOwnable) == 3) {
-            if (getNumberOfBreweries(playerC, curOwnable, ref) == 1) {
-                rent = playerC.getOldRollSum(ref) * 100;
-            } else if (getNumberOfBreweries(playerC, curOwnable, ref) == 2) {
-                rent = playerC.getOldRollSum(ref) * 200;
+        }
+        else if(getOwnableType(playerC.getPosition(ref), gameBoard)==3){
+            if (getNumberOfBreweries(playerC, gameBoard, ref) == 1) {
+                rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100;
+            } else if (getNumberOfBreweries(playerC, gameBoard, ref) == 2) {
+                rent = (playerC.getPosition(ref)-playerC.getPosition(ref)) * 200;
             }
-        } else if (getOwnableType(curOwnable) == 2) {
-            if (getNumberOfFerries(playerC, curOwnable, ref) == 1) {
+        }
+        else if(getOwnableType(playerC.getPosition(ref), gameBoard)==2){
+            if (getNumberOfFerries(playerC, gameBoard, ref) == 1) {
                 rent = baseRent(position);
             }
             //to færger
-            else if (getNumberOfFerries(playerC, curOwnable, ref) == 2) {
+            else if (getNumberOfFerries(playerC, gameBoard, ref) == 2) {
                 rent = baseRent(position) * 2;
             }
             //tre færger
-            else if (getNumberOfFerries(playerC, curOwnable, ref) == 3) {
+            else if (getNumberOfFerries(playerC, gameBoard, ref) == 3) {
                 rent = baseRent(position) * 4;
             }
             //fire færger
-            else if (getNumberOfFerries(playerC, curOwnable, ref) == 4) {
+            else if (getNumberOfFerries(playerC, gameBoard, ref) == 4) {
                 rent = baseRent(position) * 8;
             }
         }
@@ -133,51 +133,42 @@ public class RentController {
     }
 
 
-    public int getRentInt0(int index) {
+
+    public int getRentInt0 ( int index){
         return (Integer) baseRent.get(index);
     }
-
-    public int getRentInt1(int index) {
+    public int getRentInt1 ( int index){
         return (Integer) oneHouseRent.get(index);
     }
-
-    public int getRentInt2(int index) {
+    public int getRentInt2 ( int index){
         return (Integer) twoHouseRent.get(index);
     }
-
-    public int getRentInt3(int index) {
+    public int getRentInt3 ( int index){
         return (Integer) threeHouseRent.get(index);
     }
-
-    public int getRentInt4(int index) {
+    public int getRentInt4 ( int index){
         return (Integer) fourHouseRent.get(index);
     }
-
-    public int getRentInt5(int index) {
+    public int getRentInt5 ( int index){
         return (Integer) hotelRent.get(index);
     }
 
-    public int baseRent(int position) {
+    public int baseRent ( int position){
         return getRentInt0(position);
     }
-
-    public int oneHouseRent(int position) {
+    public int oneHouseRent ( int position){
         return getRentInt1(position);
     }
-
-    public int twoHouseRent(int position) {
+    public int twoHouseRent ( int position){
         return getRentInt2(position);
     }
-
-    public int threeHouseRent(int position) {
+    public int threeHouseRent ( int position){
         return getRentInt3(position);
     }
-
-    public int fourHouseRent(int position) {
+    public int fourHouseRent ( int position){
         return getRentInt4(position);
     }
-
-    public int HotelRent(int position) {
+    public int HotelRent ( int position){
         return getRentInt5(position);
     }
 }
