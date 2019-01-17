@@ -123,7 +123,7 @@ public class Player {
     }
 
     public int getOldRollSum() {
-        return oldRollSum;
+        return this.oldRollSum;
     }
 
     public int getNumOfPlayers() {

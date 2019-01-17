@@ -11,16 +11,10 @@ import java.io.IOException;
 public abstract class Ownable extends Square{
     private int owner;
     private boolean owned;
-    private int positionOnBoard;
     private String name;
     private int numOfBuildings;
     private int groupID;
-    private GUI_Handler guiHandler;
-    private PlayerController playerC;
-    private RentController rentC;
     private int price;
-    private GameBoard gameBoard;
-    private Square[] squares = new Square[40];
 
     public Ownable(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
         super(positionOnBoard);
@@ -48,9 +42,13 @@ public abstract class Ownable extends Square{
             }
             else {}
         } else {
-            int rent = rentC.retrieveRent(playerC, ref, gameBoard);
-            playerC.updatePlayerBalance(ref, rent*-1);
-            playerC.updatePlayerBalance(this.getOwner(), rent);
+            if(this.getOwner()!=ref) {
+                int rent = rentC.retrieveRent(playerC, ref, gameBoard);
+                playerC.updatePlayerBalance(ref, rent * -1);
+                playerC.updatePlayerBalance(this.getOwner(), rent);
+                guiHandler.payRent(playerC, this.getOwner(), ref, rent);
+            }
+            else{guiHandler.playersOwnSquare(playerC, ref);}
         }
     }
     public String getName() {
@@ -60,16 +58,16 @@ public abstract class Ownable extends Square{
     public int getGroupID() {
         return groupID;
     }
-    public int getNumOfBuildings() {
-        return numOfBuildings;
-    }
+
     public void setNumOfBuildings(int numOfBuildings){
         this.numOfBuildings = numOfBuildings;
     }
 
-    public int getPositionOnBoard() {
-        return positionOnBoard;
+    @Override
+    public int getNumOfBuildings() {
+        return super.getNumOfBuildings();
     }
+
     public int getOwner() {
         return this.owner;
     }

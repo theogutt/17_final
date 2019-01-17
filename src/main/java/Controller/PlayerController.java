@@ -12,7 +12,7 @@ public class PlayerController {
     private int roll2;
 
     private Player[] playerModels;
-    int oldRollSum;
+    private int oldRollSum;
 
     public PlayerController(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
@@ -142,8 +142,15 @@ public class PlayerController {
         return getRef(ref).getOldPosition();
     }
 
-    public int getPlayerPlayerNum(int ref) {
-        return getRef(ref).getPlayerNum();
+    public int getPlayerNumFromName(String name) {
+        int ref = -1;
+
+        for(int n=0 ; n < playerModels.length ; n++) {
+            if (name.equals(playerModels[n].getName()))
+                ref = n;
+        }
+
+        return ref;
     }
 
     public int getPosition(int i) {
@@ -152,6 +159,15 @@ public class PlayerController {
 
     public int getOldPosition(int i) {
         return playerModels[i].getOldPosition();
+    }
+
+    public void setOldRollSum(int oldRollSum) {
+        this.oldRollSum = oldRollSum;
+    }
+
+    public int getOldRollSum(int ref) {
+        int oldRoll = playerModels[ref].getOldRollSum();
+        return oldRoll;
     }
 
     public void setSumOfStreets(int ref, int sumOfStreets) {
@@ -196,35 +212,12 @@ public class PlayerController {
     public void addOwnable(Ownable ownable, int i){
         this.playerModels[i].addOwnable(ownable);
     }
-    /*public Ownable[] getPlayerOwnables(int playerNum){
-        return playerModels[playerNum].getPlayerOwnables();
-    }*/
 
     public void removeOwnable(Ownable ownable, int i){
         this.playerModels[i].removeOwnable(ownable);
     }
 
-   /* public ArrayList getPlayerStreets(int ref) {
-        return getRef(ref).getAllPlayersStreets();
-
-    }
-
-
-
-/*
-    public boolean ownsStreetsAheadOrBehind(int ref, int lfPos) {
-        return getRef(ref).ownsStreetAheadOrBehind(lfPos);
-    }
-*/
     public Player[] getPlayerModels() {
         return playerModels;
-    }
-
-    public int getOldRollSum() {
-        return oldRollSum;
-    }
-
-    public void setOldRollSum(int oldRollSum) {
-        this.oldRollSum = oldRollSum;
     }
 }
