@@ -163,6 +163,8 @@ public class Chance extends Square{
                 playerC.setPosition(11,playerNum);
                 break;
         }
+        if (oldPos > playerC.getPosition(playerNum) && card != 23 && card != 24)
+            playerC.updatePlayerBalance(playerNum,4000);
         gui_handler.guiChance(card, playerC);
         leftShiftCards();
     }
