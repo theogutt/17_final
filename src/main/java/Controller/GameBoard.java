@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class GameBoard {
 
-    private Square[] squares = new Square[40];
+    public static Square[] squares = new Square[40];
     private HashMap squarePrice;
     private HashMap StreetName;
     private HashMap groupID;

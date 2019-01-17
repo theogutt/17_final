@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Die;
+import Model.Squares.Chance;
+import Model.Squares.Square;
 import View.GUI_Handler;
 import java.io.IOException;
 
@@ -91,7 +93,6 @@ public class GameEngine {
         extraTurn(playerNum);
         pairs = 0;
         guiHandler.menu(playerC, playerNum, building, trading, gameBoard);
-
     }
 
     public int calcTurn(int j) {
@@ -126,5 +127,9 @@ public class GameEngine {
 
     public Die getDie2() {
         return die2;
+    }
+
+    public void setPairs(int pairs){
+        this.pairs = pairs;
     }
 }

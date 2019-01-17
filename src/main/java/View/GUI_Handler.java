@@ -51,7 +51,7 @@ public class GUI_Handler {
             if (valg == "Handel") {
                 trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
-                building.build(playerC, playerNum, this);
+                building.build(playerC, playerNum, this, gameBoard);
             //} else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
             } else if (valg == "Afslut tur") {

@@ -1,4 +1,5 @@
 import Controller.GameEngine;
+import Model.Squares.Chance;
 
 import java.io.IOException;
 

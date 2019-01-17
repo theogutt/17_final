@@ -12,15 +12,15 @@ public abstract class Ownable extends Square{
     private int owner;
     private boolean owned;
     private String name;
-    private int numOfBuildings;
+    private int numberOfBuildings;
     private int groupID;
     private int price;
 
-    public Ownable(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
+    public Ownable(int positionOnBoard, int price, int numberOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
         super(positionOnBoard);
         this.owned = owned;
         this.name = name;
-        this.numOfBuildings = numOfBuildings;
+        this.numberOfBuildings = numberOfBuildings;
         this.groupID = groupID;
         this.owner = owner;
         this.price = price;
@@ -59,8 +59,8 @@ public abstract class Ownable extends Square{
         return groupID;
     }
 
-    public void setNumOfBuildings(int numOfBuildings){
-        this.numOfBuildings = numOfBuildings;
+    public void setNumberOfBuildings(int numberOfBuildings){
+        this.numberOfBuildings = numberOfBuildings;
     }
 
     @Override
