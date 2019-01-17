@@ -18,7 +18,9 @@ public class Account {
     }
 
     //tilføjer et Ownable til playerownables
-    public void addOwnable(Ownable ownable) {
+    public void addOwnable(Ownable ownable, int playerNum) {
+        ownable.setOwner(playerNum);
+        ownable.setOwned(true);
         Ownable[] newArray = Copy.of(this.playerOwnables, this.playerOwnables.length + 1);
         newArray[this.playerOwnables.length] = ownable;
         this.playerOwnables = newArray;
@@ -26,6 +28,8 @@ public class Account {
 
     public void removeOwnable(Ownable ownable) {
         int x = 0;
+        ownable.setOwner(-1);
+        ownable.setOwned(false);
 
         //Tjekker hvor grunden, der skal fjernes er
         for (int i = 0; i < this.playerOwnables.length; i++) {
