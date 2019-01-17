@@ -100,9 +100,22 @@ public class GUI_Handler {
     }
 
     public void enterNamePlayer(PlayerController playerC, int ref) {
-        while (true) {
+        boolean nameTaken;
+        int i;
+
+        while (true){
             String input = gui.getUserString(message.turnMessage(playerC, ref, "26") + " " + (ref + 1));
-            if (input.length() > 0) {
+
+            nameTaken = false;
+            i = 0;
+            while ((playerC.getNumOfPlayers()-1) > i && !nameTaken) {
+                if (playerC.getName(i).equals(input)) {
+                    nameTaken = true;
+                }
+                i++;
+            }
+
+            if (input.length() > 0 && !nameTaken) {
                 playerC.setName(input, ref);
                 break;
             } else {
@@ -110,6 +123,7 @@ public class GUI_Handler {
             }
         }
     }
+
     public void messageSquareGui(PlayerController playerC, int ref, Square square, boolean passedStart) {
         if (passedStart) {
             gui.showMessage(message.messageSquare(playerC, ref));
