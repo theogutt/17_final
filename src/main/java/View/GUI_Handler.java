@@ -4,7 +4,6 @@ package View;
 import Controller.Building;
 */
 import Controller.Building;
-import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.Trading;
 import Utilities.Copy;
