@@ -16,7 +16,7 @@ public class Building {
         buildningPrice = TextReader.textReader(".\\src\\Resources\\BuildingPrice");
     }
 
-    public void build(PlayerController playerC, int playerNum, GUI_Handler gui_handler){
+    public void build(PlayerController playerC, int playerNum, GUI_Handler gui_handler, GameBoard gameBoard){
         String bygningDerSkalÆndres = "";
         Ownable[] ejendomme = playerC.getPlayerOwnables(playerNum);
         String valg = gui_handler.chooseStreetToBuildOn();
@@ -150,18 +150,19 @@ public class Building {
         for(int i=0; i<ejendomme.length; i++){
             if (ejendomme[i] instanceof Street) {
                 if (bygningDerSkalÆndres.equalsIgnoreCase(ejendomme[i].getName())) {
-                    buildBuilding((Street) ejendomme[i], gui_handler, playerC, playerNum);
+                    buildBuilding((Street) ejendomme[i], gui_handler, playerC, playerNum, gameBoard);
                     break;
                 }
             }
         }
     }
-    private void buildBuilding(Street street, GUI_Handler gui_handler, PlayerController playerC, int playerNum){
+    private void buildBuilding(Street street, GUI_Handler gui_handler, PlayerController playerC, int playerNum, GameBoard gameBoard){
         int numBuildBefore = street.getNumOfBuildings();
 
         int valg = gui_handler.chooseNumBuildnings(street.getPositionOnBoard());
         if (valg != -1) {
             street.setNumOfBuildings(valg);
+            gameBoard.getSquare(street.getPositionOnBoard()).setNumOfBuildings(valg);
             int price = (Integer) buildningPrice.get(street.getPositionOnBoard());
             if (numBuildBefore > street.getNumOfBuildings()) {
                 int price2 = price * (numBuildBefore - valg);
@@ -172,6 +173,7 @@ public class Building {
             }
         }
     }
+
     public boolean ownAllID(Ownable[] property, int ID){
         boolean ownAll;
         int numOfIDs = 0;

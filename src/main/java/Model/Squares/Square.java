@@ -31,4 +31,7 @@ public abstract class Square{
         return numberOfBuildings;
      }
     public int getGroupID(){return groupID;}
+    public void setNumOfBuildings(int numberOfBuildings){
+        this.numberOfBuildings = numberOfBuildings;
+    }
 }

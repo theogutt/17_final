@@ -3,7 +3,6 @@ package Controller;
 import Model.Die;
 import Model.Squares.Chance;
 import Model.Squares.Square;
-import Utilities.Cheatkodes;
 import View.GUI_Handler;
 import java.io.IOException;
 
@@ -11,7 +10,6 @@ public class GameEngine {
     private GUI_Handler guiHandler;
     private PlayerController playerC;
     private GameBoard gameBoard;
-    private Cheatkodes cheatkodes;
     private Building building;
     private Trading trading;
     private Die die1;
@@ -27,7 +25,6 @@ public class GameEngine {
         rentC = new RentController();
         building = new Building();
         trading = new Trading();
-        cheatkodes = new Cheatkodes();
     }
     public void start() {
         setUpGame();
@@ -53,7 +50,7 @@ public class GameEngine {
             playerNum = calcTurn(i);
             guiHandler.playerTurnGui(playerC, playerNum);
             if (true) {
-                playTurn(playerNum,cheatkodes);
+                playTurn(playerNum);
             }
             guiHandler.updateGuiPlayerBalance(playerC);
             playerC.broke(playerNum);
@@ -63,9 +60,7 @@ public class GameEngine {
         while (!playerC.getModelBroke(playerNum));
         return playerNum;
     }
-    public void playTurn(int playerNum, Cheatkodes cheatkodes) {
-
-        cheatkodes.cheats(playerC, playerNum, this,guiHandler,rentC,gameBoard);
+    public void playTurn(int playerNum) {
 
         guiHandler.updateGuiPlayerBalance(playerC);
 
@@ -117,7 +112,7 @@ public class GameEngine {
                 playerC.setInJail(playerNum, true);
             }
             else{
-                playTurn(playerNum, cheatkodes);
+                playTurn(playerNum);
             }
         }
     }
