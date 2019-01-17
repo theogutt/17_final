@@ -47,6 +47,7 @@ public class GUI_Handler {
         boolean aktivTur = true;
         String valg;
         while (aktivTur) {
+            updateGuiPlayerBalance(playerC);
             valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Afslut tur");
             if (valg == "Handel") {
                 trade(playerC, playerNum, trading);
@@ -189,6 +190,9 @@ public class GUI_Handler {
         else {street.setHouses(i);}
         return i;
     }
+    public void notAllID(){
+        gui.showMessage(message.notAllID());
+    }
     public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;
@@ -260,12 +264,6 @@ public class GUI_Handler {
         gui.setDice(die1.getFaceValue(), die2.getFaceValue());
     }
 
-    // I could totally remove this, i just want you guys to enjoy how there's two of this method lol
-    public void updateGuiplayerBalance(PlayerController playerC){
-        for (int balancePlayer = 0; balancePlayer <gui_Players.length ; balancePlayer++){
-            gui_Players[balancePlayer].setBalance(playerC.getBalance(balancePlayer));
-        }
-    }
     public void showScore(PlayerController player, int i) {
         gui.showMessage(message.playerEndTurn(player, i));
     }

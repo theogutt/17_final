@@ -36,7 +36,7 @@ public class Building {
                         }
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
-                }else{forsæt = false;}
+                }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg == "Pink") {
                 if (ownAllID(ejendomme, 2)) {
                     forsæt = false;
@@ -51,8 +51,8 @@ public class Building {
                         }
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
-                }else{forsæt = false;}
-            } else if (valg == "Gørn") {
+                }else{gui_handler.notAllID(); forsæt = false;}
+            } else if (valg == "Grøn") {
                 if (ownAllID(ejendomme, 3)) {
                     forsæt = false;
                     int k = 0;
@@ -66,7 +66,7 @@ public class Building {
                         }
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
-                }else{forsæt = false;}
+                }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg == "Grå") {
                 if (ownAllID(ejendomme, 4)) {
                     forsæt = false;
@@ -81,7 +81,7 @@ public class Building {
                         }
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
-                }else{forsæt = false;}
+                }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg == "Rød") {
                 if (ownAllID(ejendomme, 5)) {
                     forsæt = false;
@@ -96,7 +96,7 @@ public class Building {
                         }
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
-                }else{forsæt = false;}
+                }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg == "Hvid") {
                 if (ownAllID(ejendomme, 6)) {
                     forsæt = false;
@@ -111,7 +111,7 @@ public class Building {
                         }
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
-                }else{forsæt = false;}
+                }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg == "Gul") {
                 if (ownAllID(ejendomme, 7)) {
                     forsæt = false;
@@ -126,7 +126,7 @@ public class Building {
                         }
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
-                }else{forsæt = false;}
+                }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg == "Lilla") {
                 if (ownAllID(ejendomme, 8)) {
                     int k = 0;
@@ -141,7 +141,7 @@ public class Building {
                     }
                     forsæt = false;
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
-                }else{forsæt = false;}
+                }else{ gui_handler.notAllID(); forsæt = false;}
             } else if (valg == "Tilbage") {
                 forsæt = false;
             }
