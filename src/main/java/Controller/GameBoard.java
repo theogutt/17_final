@@ -79,7 +79,7 @@ public class GameBoard {
     public Square getSquare(int i){
         return squares[i];
     }
-    public void changeBuildning(Street street, int numOfBuildnings){
-        street.setNumOfBuildings(numOfBuildnings);
+    public void changeBuilding(Street street, int numOfBuildings){
+        street.setNumOfBuildings(numOfBuildings);
     }
 }

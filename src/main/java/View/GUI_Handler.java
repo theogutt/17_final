@@ -44,12 +44,12 @@ public class GUI_Handler {
         boolean aktivTur = true;
         String valg;
         while (aktivTur) {
-            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Pantsæt", "Afslut tur");
+            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Afslut tur");
             if (valg == "Handel") {
                 trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
-                building.build(playerC, playerNum, this, gameBoard);
-            } else if (valg == "Pantsæt") {
+                building.build(playerC, playerNum, this);
+            //} else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
             } else if (valg == "Afslut tur") {
                 aktivTur = false;
@@ -167,16 +167,17 @@ public class GUI_Handler {
 
     public int chooseNumBuildnings(int posOnBoard){
         GUI_Street street;
-        String valg = gui.getUserButtonPressed("Antal huse på grund","1","2","3","4","Hotel","Tilbage");
+        String valg = gui.getUserButtonPressed("Antal huse på grund","0","1","2","3","4","Hotel","Tilbage");
         int i = 0;
-        if (valg == "1")        i=1;
+        if (valg == "0")        i=0;
+        else if (valg == "1")   i=1;
         else if (valg == "2")   i=2;
         else if (valg == "3")   i=3;
         else if (valg == "4")   i=4;
         else if (valg == "Hotel")  i=5;
-        else                    i=0;
+        else                    i=-1;
         street = (GUI_Street) gui.getFields()[posOnBoard];
-        if (i==0){}
+        if (i==-1){}
         else if(i==5){street.setHotel(true);}
         else {street.setHouses(i);}
         return i;
