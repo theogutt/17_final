@@ -44,7 +44,7 @@ public class GUI_Handler {
         boolean aktivTur = true;
         String valg;
         while (aktivTur) {
-            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Pantsæt", "Afslut tur");
+            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Afslut tur");
             if (valg == "Handel") {
                 trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
