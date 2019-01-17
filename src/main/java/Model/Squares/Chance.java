@@ -14,7 +14,7 @@ public class Chance extends Square{
         intantiateCards();
     }
 
-    public void landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC, GameBoard gameBoard){
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC){
         int card = chanceCards[0];
         int oldPos = playerC.getPosition(playerNum);
         Ownable[] playerOwnabels = playerC.getPlayerOwnables(playerNum);;
