@@ -26,7 +26,7 @@ public abstract class Ownable extends Square{
         this.price = price;
     }
 
-    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard) {
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
         //spørger om spiller vil købe grunden
         if (isOwned() == false) {
             int ja = 1;
@@ -43,7 +43,7 @@ public abstract class Ownable extends Square{
             else {}
         } else {
             if(this.getOwner()!=ref) {
-                int rent = rentC.retrieveRent(playerC, ref, gameBoard);
+                int rent = rentC.retrieveRent(playerC, ref, this);
                 playerC.updatePlayerBalance(ref, rent * -1);
                 playerC.updatePlayerBalance(this.getOwner(), rent);
                 guiHandler.payRent(playerC, this.getOwner(), ref, rent);

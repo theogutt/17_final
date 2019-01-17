@@ -82,7 +82,7 @@ public class GameEngine {
         guiHandler.diceUpdateGui(playerC, die1, die2);
         boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
         if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
-        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
+        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
         guiHandler.updateGuiPlayerBalance(playerC);
         extraTurn(playerNum);
         pairs = 0;

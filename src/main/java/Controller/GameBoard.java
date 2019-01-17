@@ -41,6 +41,25 @@ public class GameBoard {
         return numberOfGroupIDs;
     }
 
+    /*
+    public int getOwner(int pos){
+        int owner = -1;
+        Ownable ownable;
+        if (squares[pos] instanceof Ownable) {
+            ownable = (Ownable) squares[pos];
+            owner = ownable.getOwner();
+        }
+        return owner;
+    }
+    */
+
+    public Ownable getOwnable(int pos){
+        Ownable ownable = null;
+        if (squares[pos] instanceof Ownable)
+            ownable = (Ownable) squares[pos];
+        return ownable;
+    }
+
 // Opretter felter med pris og rent
     public void instantiateSquares() throws IOException {
         for (int i = 0; i < 40; i++) {
