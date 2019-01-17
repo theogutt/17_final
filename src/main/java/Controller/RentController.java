@@ -92,7 +92,7 @@ public class RentController {
         int ferries = 0;
         Ownable[] playerOwnables = playerC.getPlayerOwnables(ref);
         for (int i = 0; i < playerOwnables.length; i++) {
-            if (playerOwnables[i].getOwner() == curOwnable.getOwner() && playerOwnables[i] instanceof Ferry) {
+            if (playerOwnables[i] == curOwnable && playerOwnables[i] instanceof Ferry) {
                 ferries++;
             }
         }
@@ -103,7 +103,7 @@ public class RentController {
         int breweries = 0;
         Ownable[] playerOwnables = playerC.getPlayerOwnables(ref);
         for (int i = 0; i < playerOwnables.length; i++) {
-            if (playerOwnables[i].getOwner() == curOwnable.getOwner() && playerOwnables[i] instanceof Brewery) {
+            if (playerOwnables[i] == curOwnable && playerOwnables[i] instanceof Brewery) {
                 breweries++;
             }
         }

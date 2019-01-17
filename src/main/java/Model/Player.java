@@ -15,9 +15,8 @@ public class Player {
     private boolean jailCard = false;
     private boolean specialCard = false;
     private int oldRollSum;
-    private int numOfPlayers;
 
-    public Player(int playerNum, int numOfPlayers){
+    public Player(int playerNum){
         this.playerNum = playerNum;
         this.account = new Account();
     }
@@ -111,7 +110,7 @@ public class Player {
     }
 
     public void addOwnable(Ownable ownable) {
-        this.account.addOwnable(ownable);
+        this.account.addOwnable(ownable, this.playerNum);
     }
 
     public void removeOwnable(Ownable ownable){
@@ -124,10 +123,6 @@ public class Player {
 
     public int getOldRollSum() {
         return this.oldRollSum;
-    }
-
-    public int getNumOfPlayers() {
-        return numOfPlayers;
     }
 
     /*  public ArrayList getAllPlayersStreets(){

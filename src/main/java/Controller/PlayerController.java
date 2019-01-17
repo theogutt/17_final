@@ -6,7 +6,6 @@ import Model.Squares.Ownable;
 
 public class PlayerController {
     private int numOfPlayers;
-    private GameEngine gameEngine;
 
     private int roll1;
     private int roll2;
@@ -18,7 +17,7 @@ public class PlayerController {
         this.numOfPlayers = numOfPlayers;
         playerModels = new Player[numOfPlayers];
         for (int i = 0; i < numOfPlayers; i++) {
-            playerModels[i] = new Player(i, numOfPlayers);
+            playerModels[i] = new Player(i);
         }
     }
 

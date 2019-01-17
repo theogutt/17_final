@@ -1,6 +1,5 @@
 package Model.Squares;
 
-import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
@@ -28,7 +27,7 @@ public abstract class Ownable extends Square{
 
     public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
         //spørger om spiller vil købe grunden
-        if (isOwned() == false) {
+        if (!isOwned()) {
             int ja = 1;
             int answer = guiHandler.buyStreet();
             if (ja == answer) {
@@ -40,13 +39,12 @@ public abstract class Ownable extends Square{
                 playerC.addOwnable((Ownable) curSquare, ref);
                 guiHandler.changeStreetColor(playerC, ref);
             }
-            else {}
         } else {
-            if(this.getOwner()!=ref) {
+            if(this.owner!=ref) {
                 int rent = rentC.retrieveRent(playerC, ref, this);
                 playerC.updatePlayerBalance(ref, rent * -1);
-                playerC.updatePlayerBalance(this.getOwner(), rent);
-                guiHandler.payRent(playerC, this.getOwner(), ref, rent);
+                playerC.updatePlayerBalance(this.owner, rent);
+                guiHandler.payRent(playerC, this.owner, ref, rent);
             }
             else{guiHandler.playersOwnSquare(playerC, ref);}
         }
@@ -65,10 +63,6 @@ public abstract class Ownable extends Square{
 
     public int getNumOfBuildings() {
         return numberOfBuildings;
-    }
-
-    public int getOwner() {
-        return this.owner;
     }
 
     public boolean isOwned() {
