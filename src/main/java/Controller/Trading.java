@@ -38,7 +38,7 @@ public class Trading {
         int nextID = 0;
 
         for (int n=0 ; n < newOwnables.length ; n++){
-            for(int i=0 ; i < newOwnables.length ; i++) {
+            for(int i=0 ; i < playerOwnables.length ; i++) {
                 if (stringOwnable[n].equals(playerOwnables[i].getName())) {
                     newOwnables[nextID] = playerOwnables[i];
                     nextID++;

@@ -73,6 +73,10 @@ public abstract class Ownable extends Square{
         this.owner = ref;
     }
 
+    public int getOwner() {
+        return owner;
+    }
+
     public void setOwned(boolean owned) {
         this.owned = owned;
     }

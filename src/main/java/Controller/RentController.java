@@ -62,48 +62,48 @@ public class RentController {
                 }
             }
             else if(ownableType==3){
-                if (getNumberOfBreweries(playerC, curOwnable, ref) == 1) {
+                if (getNumberOfBreweries(playerC, curOwnable) == 1) {
                     rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100;
-                } else if (getNumberOfBreweries(playerC, curOwnable, ref) == 2) {
+                } else if (getNumberOfBreweries(playerC, curOwnable) == 2) {
                     rent = (playerC.getPosition(ref)-playerC.getPosition(ref)) * 200;
                 }
             }
             else if(ownableType==2){
-                if (getNumberOfFerries(playerC, curOwnable, ref) == 1) {
+                if (getNumberOfFerries(playerC, curOwnable) == 1) {
                     rent = baseRent(position);
                 }
                 //to færger
-                else if (getNumberOfFerries(playerC, curOwnable, ref) == 2) {
+                else if (getNumberOfFerries(playerC, curOwnable) == 2) {
                     rent = baseRent(position) * 2;
                 }
                 //tre færger
-                else if (getNumberOfFerries(playerC, curOwnable, ref) == 3) {
+                else if (getNumberOfFerries(playerC, curOwnable) == 3) {
                     rent = baseRent(position) * 4;
                 }
                 //fire færger
-                else if (getNumberOfFerries(playerC, curOwnable, ref) == 4) {
+                else if (getNumberOfFerries(playerC, curOwnable) == 4) {
                     rent = baseRent(position) * 8;
                 }
             }
                 return rent;
         }
 
-    public int getNumberOfFerries(PlayerController playerC, Ownable curOwnable, int ref) {
+    public int getNumberOfFerries(PlayerController playerC, Ownable curOwnable) {
         int ferries = 0;
-        Ownable[] playerOwnables = playerC.getPlayerOwnables(ref);
+        Ownable[] playerOwnables = playerC.getPlayerOwnables(curOwnable.getOwner());
         for (int i = 0; i < playerOwnables.length; i++) {
-            if (playerOwnables[i] == curOwnable && playerOwnables[i] instanceof Ferry) {
+            if (playerOwnables[i] instanceof Ferry) {
                 ferries++;
             }
         }
         return ferries;
     }
 
-    public int getNumberOfBreweries(PlayerController playerC, Ownable curOwnable, int ref) {
+    public int getNumberOfBreweries(PlayerController playerC, Ownable curOwnable) {
         int breweries = 0;
-        Ownable[] playerOwnables = playerC.getPlayerOwnables(ref);
+        Ownable[] playerOwnables = playerC.getPlayerOwnables(curOwnable.getOwner());
         for (int i = 0; i < playerOwnables.length; i++) {
-            if (playerOwnables[i] == curOwnable && playerOwnables[i] instanceof Brewery) {
+            if (playerOwnables[i] instanceof Brewery) {
                 breweries++;
             }
         }
