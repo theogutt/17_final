@@ -58,9 +58,7 @@ public abstract class Ownable extends Square{
     public int getGroupID() {
         return groupID;
     }
-    public int getNumOfBuildings() {
-        return numOfBuildings;
-    }
+
     public void setNumOfBuildings(int numOfBuildings){
         this.numOfBuildings = numOfBuildings;
     }
