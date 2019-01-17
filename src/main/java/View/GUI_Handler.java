@@ -29,7 +29,6 @@ public class GUI_Handler {
     private GUI_Player[] gui_Players;
     private GUI_Car[] gui_cars;
     private HashMap chanceDesc;
-    private GUI_Street gui_street;
 
 
     public GUI_Handler() throws IOException {
@@ -43,7 +42,7 @@ public class GUI_Handler {
         gui = new GUI(fields);
     }
 
-    public void menu(PlayerController playerC, int playerNum, Building building, Trading trading, GameBoard gameBoard){
+    public void menu(PlayerController playerC, int playerNum, Building building, Trading trading){
         boolean aktivTur = true;
         String valg;
         while (aktivTur) {
@@ -51,7 +50,7 @@ public class GUI_Handler {
             if (valg == "Handel") {
                 trade(playerC, playerNum, trading);
             } else if (valg == "Bygge") {
-                building.build(playerC, playerNum, this, gameBoard);
+                building.build(playerC, playerNum, this);
             //} else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
             } else if (valg == "Afslut tur") {

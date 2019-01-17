@@ -150,22 +150,22 @@ public class Building {
         for(int i=0; i<ejendomme.length; i++){
             if (ejendomme[i] instanceof Street) {
                 if (bygningDerSkalÆndres.equalsIgnoreCase(ejendomme[i].getName())) {
-                    buildBuilding((Street) ejendomme[i], gui_handler, playerC, playerNum);
+                    buildBuilding(ejendomme[i], gui_handler, playerC, playerNum);
                     break;
                 }
             }
         }
     }
-    private void buildBuilding(Street street, GUI_Handler gui_handler, PlayerController playerC, int playerNum){
-        int numBuildBefore = street.getNumOfBuildings();
+    private void buildBuilding(Ownable ownable, GUI_Handler gui_handler, PlayerController playerC, int playerNum){
+        int numBuildBefore = ownable.getNumOfBuildings();
 
-        int price = (Integer) buildningPrice.get(street.getPositionOnBoard());
-        int valg = gui_handler.chooseNumBuildnings(street.getPositionOnBoard(), price);
+        int price = (Integer) buildningPrice.get(ownable.getPositionOnBoard());
+        int valg = gui_handler.chooseNumBuildnings(ownable.getPositionOnBoard(), price);
 
         if (valg != -1) {
-            street.setNumOfBuildings(valg);
+            ownable.setNumberOfBuildings(valg);
 
-            if (numBuildBefore > street.getNumOfBuildings()) {
+            if (numBuildBefore > ownable.getNumOfBuildings()) {
                 int price2 = price * (numBuildBefore - valg);
                 playerC.updatePlayerBalance(playerNum, price2 / 2);
             } else {

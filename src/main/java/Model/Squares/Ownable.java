@@ -63,9 +63,8 @@ public abstract class Ownable extends Square{
         this.numberOfBuildings = numberOfBuildings;
     }
 
-    @Override
     public int getNumOfBuildings() {
-        return super.getNumOfBuildings();
+        return numberOfBuildings;
     }
 
     public int getOwner() {

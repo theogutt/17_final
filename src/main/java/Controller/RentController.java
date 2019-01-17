@@ -36,11 +36,12 @@ public class RentController {
         return type;
     }
 
-        public int retrieveRent (PlayerController playerC,int ref, GameBoard gameBoard){
+        public int retrieveRent (PlayerController playerC,int ref, Ownable curOwnable){
             int rent=0;
             int position = playerC.getPosition(ref);
-            if(getOwnableType(playerC.getPosition(ref), gameBoard)==1) {
-                int buildings=getNumberOfBuildings(playerC, gameBoard, ref);
+            int ownableType = getOwnableType(curOwnable);
+            if(ownableType==1) {
+                int buildings=curOwnable.getNumOfBuildings();
                 if (buildings == 1) {
                     rent = oneHouseRent(position);
                 } else if (buildings == 2) {
@@ -52,7 +53,7 @@ public class RentController {
                 } else if (buildings == 5) {
                     rent = HotelRent(position);
                 } else {
-                    if (ownAll(playerC, ref, gameBoard)==true) {
+                    if (ownAll(playerC, ref, curOwnable)) {
                         rent = baseRent(position) * 2;
                     } else {
                         rent = baseRent(position);
@@ -60,27 +61,27 @@ public class RentController {
                     }
                 }
             }
-            else if(getOwnableType(playerC.getPosition(ref), gameBoard)==3){
-                if (getNumberOfBreweries(playerC, gameBoard, ref) == 1) {
+            else if(ownableType==3){
+                if (getNumberOfBreweries(playerC, curOwnable, ref) == 1) {
                     rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100;
-                } else if (getNumberOfBreweries(playerC, gameBoard, ref) == 2) {
+                } else if (getNumberOfBreweries(playerC, curOwnable, ref) == 2) {
                     rent = (playerC.getPosition(ref)-playerC.getPosition(ref)) * 200;
                 }
             }
-            else if(getOwnableType(playerC.getPosition(ref), gameBoard)==2){
-                if (getNumberOfFerries(playerC, gameBoard, ref) == 1) {
+            else if(ownableType==2){
+                if (getNumberOfFerries(playerC, curOwnable, ref) == 1) {
                     rent = baseRent(position);
                 }
                 //to færger
-                else if (getNumberOfFerries(playerC, gameBoard, ref) == 2) {
+                else if (getNumberOfFerries(playerC, curOwnable, ref) == 2) {
                     rent = baseRent(position) * 2;
                 }
                 //tre færger
-                else if (getNumberOfFerries(playerC, gameBoard, ref) == 3) {
+                else if (getNumberOfFerries(playerC, curOwnable, ref) == 3) {
                     rent = baseRent(position) * 4;
                 }
                 //fire færger
-                else if (getNumberOfFerries(playerC, gameBoard, ref) == 4) {
+                else if (getNumberOfFerries(playerC, curOwnable, ref) == 4) {
                     rent = baseRent(position) * 8;
                 }
             }

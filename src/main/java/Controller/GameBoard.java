@@ -13,7 +13,6 @@ public class GameBoard {
     private HashMap squarePrice;
     private HashMap StreetName;
     private HashMap groupID;
-    private PlayerController PlayerC;
 
     public GameBoard() throws IOException {
         squarePrice = TextReader.textReader(".\\src\\Resources\\SquarePrice");
@@ -30,34 +29,6 @@ public class GameBoard {
 
     public int getGroupID(int index) {
         return (Integer) groupID.get(index);
-    }
-    public int numberOfGroupIDs(int index){
-        int numberOfGroupIDs=0;
-        for(int i = 0; i<40; i++){
-            if(index==getGroupID(i)){
-                numberOfGroupIDs++;
-            }
-        }
-        return numberOfGroupIDs;
-    }
-
-    /*
-    public int getOwner(int pos){
-        int owner = -1;
-        Ownable ownable;
-        if (squares[pos] instanceof Ownable) {
-            ownable = (Ownable) squares[pos];
-            owner = ownable.getOwner();
-        }
-        return owner;
-    }
-    */
-
-    public Ownable getOwnable(int pos){
-        Ownable ownable = null;
-        if (squares[pos] instanceof Ownable)
-            ownable = (Ownable) squares[pos];
-        return ownable;
     }
 
 // Opretter felter med pris og rent
@@ -92,8 +63,5 @@ public class GameBoard {
 
     public Square getSquare(int i){
         return squares[i];
-    }
-    public void changeBuilding(Street street, int numOfBuildings){
-        street.setNumOfBuildings(numOfBuildings);
     }
 }
