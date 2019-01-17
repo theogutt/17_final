@@ -27,7 +27,7 @@ public abstract class Square{
     public int getOwner(){
         return this.owner;
     }
-    public int getNumberOfBuildings(){
+    public int getNumOfBuildings(){
         return numberOfBuildings;
      }
     public int getGroupID(){return groupID;}

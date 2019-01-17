@@ -51,7 +51,6 @@ public class GameEngine {
                 playTurn(playerNum);
             }
             guiHandler.updateGuiPlayerBalance(playerC);
-            guiHandler.showScore(playerC, playerNum);
             playerC.broke(playerNum);
             i++;
         }
@@ -60,6 +59,7 @@ public class GameEngine {
         return playerNum;
     }
     public void playTurn(int playerNum) {
+        int middlePodition;
 
         guiHandler.updateGuiPlayerBalance(playerC);
 
@@ -83,7 +83,10 @@ public class GameEngine {
         guiHandler.diceUpdateGui(playerC, die1, die2);
         boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
         if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
+        middlePodition = playerC.getPosition(playerNum);
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
+        if (middlePodition != playerC.getPosition(playerNum))
+            gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
         extraTurn(playerNum);
         pairs = 0;
