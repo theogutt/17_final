@@ -23,15 +23,15 @@ public class RentController {
         hotelRent = TextReader.textReader(".\\src\\Resources\\HotelRent");
     }
 
-    public int getOwnableType(int position, GameBoard gameBoard) {
+    public int getOwnableType(Ownable ownable) {
         int type=0;
-        if (gameBoard.getSquare(position) instanceof Street) {
+        if (ownable instanceof Street) {
             type=1;
         }
-        else if(gameBoard.getSquare(position) instanceof Ferry){
+        else if(ownable instanceof Ferry){
             type=2;
         }
-        else if(gameBoard.getSquare(position) instanceof Brewery){
+        else if(ownable instanceof Brewery){
             type=3;
         }
         return type;
@@ -43,9 +43,14 @@ public class RentController {
         public int retrieveRent (PlayerController playerC,int ref, GameBoard gameBoard){
             int rent=0;
             int position = playerC.getPosition(ref);
+
+            Ownable curOwnable = null; // FJERN DETTE
+            if (gameBoard.getSquare(position) instanceof Ownable)
+                curOwnable = (Street) gameBoard.getSquare(position);
+
             rent = baseRent(position);
-            if(getOwnableType(playerC.getPosition(ref), gameBoard)==1) {
-                int buildings=getNumberOfBuildings(playerC, gameBoard, ref);
+            if(getOwnableType(curOwnable)==1) {
+                int buildings = curOwnable.getNumOfBuildings();
                 if (buildings == 1) {
                     rent = oneHouseRent(position);
                 } else if (buildings == 2) {
@@ -65,14 +70,14 @@ public class RentController {
                     }
                 }
             }
-            else if(getOwnableType(playerC.getPosition(ref), gameBoard)==3){
+            else if(getOwnableType(curOwnable)==3){
                 if (getNumberOfBreweries(playerC, gameBoard, ref) == 1) {
                     rent = playerC.getOldRollSum(ref) * 100;
                 } else if (getNumberOfBreweries(playerC, gameBoard, ref) == 2) {
                     rent = playerC.getOldRollSum(ref) * 200;
                 }
             }
-            else if(getOwnableType(playerC.getPosition(ref), gameBoard)==2){
+            else if(getOwnableType(curOwnable)==2){
                 if (getNumberOfFerries(playerC, gameBoard, ref) == 1) {
                     rent = baseRent(position);
                 }
@@ -114,26 +119,30 @@ public class RentController {
         return breweries;
         }
 
-        public int getNumberOfBuildings(PlayerController playerC,  GameBoard gameBoard, int ref){
-        int pos = playerC.getPosition(ref);
-        int numOfBuildings=gameBoard.getSquare(pos).getNumberOfBuildings();
-        return numOfBuildings;
-        }
-
         public boolean ownAll(PlayerController playerC, int ref, GameBoard gameBoard){
             boolean ownAll = false;
             int pos = playerC.getPosition(ref);
-            int groupID = gameBoard.getSquare(pos).getGroupID();
             int owned=0;
+            Ownable curOwnable;
+            int groupID = -1;
+            if (gameBoard.getSquare(pos) instanceof Ownable)
+                groupID = ((Ownable) gameBoard.getSquare(pos)).getGroupID();
+
             for(int i = 0; i<40; i++){
-                if(gameBoard.getSquare(i).getGroupID()==groupID && gameBoard.getSquare(i).getOwner()==getOwner(pos, gameBoard)){
-                    owned++;
+                if (gameBoard.getSquare(i) instanceof Ownable) {
+                    curOwnable = (Ownable) gameBoard.getSquare(i);
+                    if (curOwnable.getGroupID() == groupID && curOwnable.getOwner() == getOwner(pos, gameBoard)) {
+                        owned++;
+                    }
                 }
             }
             int sameID=0;
             for(int i =0; i<40; i++){
-                if(gameBoard.getSquare(i).getGroupID()==groupID){
-                    sameID++;
+                if (gameBoard.getSquare(i) instanceof Ownable) {
+                    curOwnable = (Ownable) gameBoard.getSquare(i);
+                    if (curOwnable.getGroupID() == groupID) {
+                        sameID++;
+                    }
                 }
             }
             if(owned==sameID && owned!=0){

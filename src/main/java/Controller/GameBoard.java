@@ -22,15 +22,10 @@ public class GameBoard {
         instantiateSquares();
     }
 
-    public int getOwner(int position){
-        Square curSquare = squares[position];
-        return curSquare.getOwner();
-    }
-
-    public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
+    public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC){
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];
-        curSquare.landOn(playerC, ref, guiHandler, rentC, gameBoard);
+        curSquare.landOn(playerC, ref, guiHandler, rentC);
     }
 
     public int getGroupID(int index) {
