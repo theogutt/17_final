@@ -158,13 +158,13 @@ public class Building {
     }
     private void buildBuilding(Street street, GUI_Handler gui_handler, PlayerController playerC, int playerNum){
         int numBuildBefore = street.getNumOfBuildings();
-        int numBuildBefore = street.getNumOfBuildings();
+
         int price = (Integer) buildningPrice.get(street.getPositionOnBoard());
         int valg = gui_handler.chooseNumBuildnings(street.getPositionOnBoard(), price);
 
         if (valg != -1) {
             street.setNumOfBuildings(valg);
-            int price = (Integer) buildningPrice.get(street.getPositionOnBoard());
+
             if (numBuildBefore > street.getNumOfBuildings()) {
                 int price2 = price * (numBuildBefore - valg);
                 playerC.updatePlayerBalance(playerNum, price2 / 2);
