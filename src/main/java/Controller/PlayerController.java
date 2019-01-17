@@ -12,7 +12,7 @@ public class PlayerController {
     private int roll2;
 
     private Player[] playerModels;
-    int oldRollSum;
+    private int oldRollSum;
 
     public PlayerController(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
@@ -142,8 +142,15 @@ public class PlayerController {
         return getRef(ref).getOldPosition();
     }
 
-    public int getPlayerPlayerNum(int ref) {
-        return getRef(ref).getPlayerNum();
+    public int getPlayerNumFromName(String name) {
+        int ref = -1;
+
+        for(int n=0 ; n < playerModels.length ; n++) {
+            if (name.equals(playerModels[n].getName()))
+                ref = n;
+        }
+
+        return ref;
     }
 
     public int getPosition(int i) {
@@ -181,6 +188,8 @@ public class PlayerController {
         playerModels[i].setBalance(newBalance);
     }
 
+    public int getOldRollSum(int i){return playerModels[i].getOldRollSum();}
+
     public int getNumOfPlayers() {
         return numOfPlayers;
     }
@@ -209,22 +218,11 @@ public class PlayerController {
 
     }
 
-
-
-/*
     public boolean ownsStreetsAheadOrBehind(int ref, int lfPos) {
         return getRef(ref).ownsStreetAheadOrBehind(lfPos);
     }
 */
     public Player[] getPlayerModels() {
         return playerModels;
-    }
-
-    public int getOldRollSum() {
-        return oldRollSum;
-    }
-
-    public void setOldRollSum(int oldRollSum) {
-        this.oldRollSum = oldRollSum;
     }
 }

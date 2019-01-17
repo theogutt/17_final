@@ -6,9 +6,10 @@ import Controller.PlayerController;
 import View.GUI_Handler;
 import Controller.RentController;
 
+import java.util.Arrays;
+
 public class Chance extends Square{
-    private int[] chanceCards = new int[28];
-    private int[] chanceCards2 = new int[28];
+    private static int[] chanceCards = new int[28];
 
     public Chance(int positionOnBoard) {
         super(positionOnBoard);
@@ -22,7 +23,7 @@ public class Chance extends Square{
         int currPos;
 
 
-        switch (card-1){
+        switch (card){
             case 0: // Get 3.000 kr.
                 playerC.updatePlayerBalance(playerNum, 3000);
                 returnInt = 0;
@@ -201,27 +202,29 @@ public class Chance extends Square{
 
     public void leftShiftCards(){
         int[] leftShifted = new int[chanceCards.length];
+        int firstValue = chanceCards[0];
         for (int number = 0; number < chanceCards.length; number++) {
             int j = (number + 1) % chanceCards.length;
             leftShifted[number] = chanceCards[j];
         }
+        leftShifted[leftShifted.length-1] = firstValue;
         chanceCards = leftShifted;
     }
     public void intantiateCards(){
-        for (int i = 1; i <= chanceCards.length ; i++) {
-            chanceCards[i-1] = i;
+        chanceCards = new int[chanceCards.length]; // Resetter chancecards, da den er static
+        int[] cards = new int[chanceCards.length];
+        int pos;
+
+        for (int i = 0; i < cards.length ; i++) {
+            cards[i] = i;
         }
 
-        for (int j = 0; j < chanceCards.length; j++) {
-            int rand = (int) (Math.random() * chanceCards.length);
+        for (int card = 0; card < chanceCards.length; card++) {
+            do {
+                pos = (int) (Math.random() * chanceCards.length);
+            } while(chanceCards[pos] != 0);
 
-            while(chanceCards2[rand] != 0){
-                rand = (int) (Math.random() * chanceCards.length);
-            }
-            chanceCards2[rand] = chanceCards[j];
-        }
-        for (int k = 0; k < chanceCards.length; k++) {
-            chanceCards[k] = chanceCards2[k];
+            chanceCards[pos] = cards[card];
         }
     }
 
