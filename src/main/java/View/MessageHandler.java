@@ -58,4 +58,8 @@ public class MessageHandler {
         returnString = playerC.getName(i) + " har vundet spillet! Med et beløb på " + playerC.getBalance(i);
         return returnString;
     }
+    public String notAllID(){
+        returnString = "Du ejer ikke alle felter i denne farve.";
+        return returnString;
+    }
 }
