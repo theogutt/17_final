@@ -1,5 +1,8 @@
 package View;
 
+/*
+import Controller.Building;
+*/
 import Controller.Building;
 import Controller.GameBoard;
 import Controller.PlayerController;
@@ -144,6 +147,9 @@ public class GUI_Handler {
     }
     public void payRent(PlayerController playerC, int owner, int ref, int rent){
         gui.showMessage(playerC.getName(ref) + " betalte " + rent +" kr. til "+playerC.getName(owner));
+    }
+    public void playersOwnSquare(PlayerController playerC, int ref){
+        gui.showMessage(playerC.getName(ref)+" ejer selv grunden");
     }
     public int payOrRoll(){
         String choice = gui.getUserSelection("Betal 1000 kr. eller slå to ens", "Betal", "Slå");
