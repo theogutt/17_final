@@ -47,7 +47,7 @@ public class GameEngine {
         int i = 0;
 
         do {
-            playerNum = calcTurn(i);
+            playerNum = i % playerC.getNumOfPlayers(); // Calculates turn
             guiHandler.playerTurnGui(playerC, playerNum);
             playTurn(playerNum);
             guiHandler.updateGuiPlayerBalance(playerC);
@@ -92,10 +92,6 @@ public class GameEngine {
         extraTurn(playerNum);
         this.pairs = 0;
         guiHandler.menu(playerC, playerNum, building, trading);
-    }
-
-    private int calcTurn(int j) {
-        return j % playerC.getNumOfPlayers();
     }
 
     private void endGame(int ref) {
