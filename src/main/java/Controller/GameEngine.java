@@ -24,6 +24,7 @@ public class GameEngine {
         building = new Building();
         trading = new Trading();
     }
+
     public void start() {
         setUpGame();
         playGame();
@@ -39,13 +40,14 @@ public class GameEngine {
         int loser = turnFlow();
         endGame(loser);
     }
+
     private int turnFlow() {
         //Normal turn
         int playerNum;
         int i = 0;
 
         do {
-            playerNum = calcTurn(i);
+            playerNum = i % playerC.getNumOfPlayers(); // Calculates turn
             guiHandler.playerTurnGui(playerC, playerNum);
             playTurn(playerNum);
             guiHandler.updateGuiPlayerBalance(playerC);
@@ -56,6 +58,7 @@ public class GameEngine {
         while (!playerC.getModelBroke(playerNum));
         return playerNum;
     }
+
     private void playTurn(int playerNum) {
         int middlePosition;
 
@@ -89,10 +92,6 @@ public class GameEngine {
         extraTurn(playerNum);
         this.pairs = 0;
         guiHandler.menu(playerC, playerNum, building, trading);
-    }
-
-    public int calcTurn(int j) {
-        return j % playerC.getNumOfPlayers();
     }
 
     private void endGame(int ref) {

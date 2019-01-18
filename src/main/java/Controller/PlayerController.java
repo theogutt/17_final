@@ -6,7 +6,6 @@ import Model.Squares.Ownable;
 
 public class PlayerController {
     private int numOfPlayers;
-
     private Player[] playerModels;
 
     public PlayerController(int numOfPlayers) {
@@ -19,8 +18,8 @@ public class PlayerController {
 
     public void wantOutOfJail(int ref, int choice, Die die1, Die die2) {
         if (choice == 1){
-            getRef(ref).updateBalance(-1000);
-            getRef(ref).setOutOfJailTries(0);
+            playerModels[ref].updateBalance(-1000);
+            playerModels[ref].setOutOfJailTries(0);
             setInJail(ref, false);
         }
         else if (choice == 2){
@@ -30,13 +29,13 @@ public class PlayerController {
 
             if (roll1 == roll2){
                 setInJail(ref, false);
-                getRef(ref).setOutOfJailTries(0);
+                playerModels[ref].setOutOfJailTries(0);
             }
             else {
-                getRef(ref).setOutOfJailTries(getRef(ref).getOutOfJailTries() + 1);
-                if (getRef(ref).getOutOfJailTries() == 3){
-                    getRef(ref).updateBalance(-1000);
-                    getRef(ref).setOutOfJailTries(0);
+                playerModels[ref].setOutOfJailTries(playerModels[ref].getOutOfJailTries() + 1);
+                if (playerModels[ref].getOutOfJailTries() == 3){
+                    playerModels[ref].updateBalance(-1000);
+                    playerModels[ref].setOutOfJailTries(0);
                     setInJail(ref, false);
                 }
             }
@@ -44,7 +43,7 @@ public class PlayerController {
     }
 
     public void getOutOfJailFree(int playerNum){
-        getRef(playerNum).setJailCard(false);
+        playerModels[playerNum].setJailCard(false);
         setInJail(playerNum, false);
     }
 
@@ -55,14 +54,14 @@ public class PlayerController {
 
         for (int i = 0; i < numOfPlayers; i++) {
             //Finds the player with the highest balance
-            if (max < getRef(i).getBalance()) {
-                max = getRef(i).getBalance();
-                ref = getRef(i).getPlayerNum();
+            if (max < playerModels[i].getBalance()) {
+                max = playerModels[i].getBalance();
+                ref = playerModels[i].getPlayerNum();
             }
 
             //If equal amount, the winner is the one with the greatest amount of property value
-            else if (max == getRef(i).getBalance()) {
-                if (getRef(ref).getSumOfProperties() < getRef(i).getSumOfProperties()) {
+            else if (max == playerModels[i].getBalance()) {
+                if (playerModels[ref].getSumOfProperties() < playerModels[i].getSumOfProperties()) {
                     ref = i;
                 }
             }
@@ -71,30 +70,26 @@ public class PlayerController {
     }
 
     public void calcNewPosition(int rollSum1, int rollSum2, int i) {
-        int oldPosition = getRef(i).getCurPosition();
-        getRef(i).setOldPosition(oldPosition);
+        int oldPosition = playerModels[i].getCurPosition();
+        playerModels[i].setOldPosition(oldPosition);
 
         int newPosition;
         if (rollSum1+rollSum2 + oldPosition == 39) {
-            getRef(i).setCurPosition(39);
+            playerModels[i].setCurPosition(39);
         } else if ((rollSum1+rollSum2 + oldPosition) > 39) {
             newPosition = ((rollSum1+rollSum2 + oldPosition) % 40);
-            getRef(i).setCurPosition((newPosition));
+            playerModels[i].setCurPosition((newPosition));
 
         } else {
             newPosition = (rollSum1+rollSum2 + oldPosition);
-            getRef(i).setCurPosition((newPosition));
+            playerModels[i].setCurPosition((newPosition));
         }
     }
 
     public void setPosition(int newPosition, int playerNum) {
         int oldPosition = playerModels[playerNum].getCurPosition();
-        getRef(playerNum).setOldPosition(oldPosition);
+        playerModels[playerNum].setOldPosition(oldPosition);
         playerModels[playerNum].setCurPosition(newPosition);
-    }
-
-    private Player getRef(int i) {
-        return playerModels[i];
     }
 
     public void broke(int ref) {
@@ -102,23 +97,23 @@ public class PlayerController {
     }
 
     public boolean getInJail(int ref) {
-        return getRef(ref).getInJail();
+        return playerModels[ref].getInJail();
     }
 
     public void setInJail(int i, boolean bool) {
-        getRef(i).setInJail(bool);
+        playerModels[i].setInJail(bool);
     }
 
     public void setJailCard(int i, boolean bool) {
-        getRef(i).setJailCard(bool);
+        playerModels[i].setJailCard(bool);
     }
 
     public boolean getJailCard(int ref) {
-        return getRef(ref).getJailCard();
+        return playerModels[ref].getJailCard();
     }
 
     public int getPlayerOldPosition(int ref) {
-        return getRef(ref).getOldPosition();
+        return playerModels[ref].getOldPosition();
     }
 
     public int getPlayerNumFromName(String name) {
@@ -164,7 +159,7 @@ public class PlayerController {
     }
 
     public Ownable[] getPlayerOwnables(int ref) {
-        return getRef(ref).getAllPlayerOwnables();
+        return playerModels[ref].getAllPlayerOwnables();
     }
 
     public void addOwnable(Ownable ownable, int i){

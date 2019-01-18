@@ -156,6 +156,7 @@ public class Building {
             }
         }
     }
+
     private void buildBuilding(Ownable ownable, GUI_Handler gui_handler, PlayerController playerC, int playerNum){
         int numBuildBefore = ownable.getNumOfBuildings();
 
@@ -174,6 +175,7 @@ public class Building {
             }
         }
     }
+
     private boolean ownAllID(Ownable[] property, int ID){
         int numOfIDs = 0;
         for (int i = 0; i < property.length; i++) {

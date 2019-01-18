@@ -8,13 +8,8 @@ public class Account {
     private int sumOfStreets;
     private Ownable[] playerOwnables = new Ownable[0];
 
-
     public Account() {
-        startAccount();
-    }
-
-    private void startAccount() {
-        balance = 30000;
+        this.balance = 30000;
     }
 
     //tilføjer et Ownable til playerownables
