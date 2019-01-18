@@ -7,9 +7,6 @@ import Model.Squares.Ownable;
 public class PlayerController {
     private int numOfPlayers;
 
-    private int roll1;
-    private int roll2;
-
     private Player[] playerModels;
 
     public PlayerController(int numOfPlayers) {
@@ -28,8 +25,8 @@ public class PlayerController {
         }
         else if (choice == 2){
 
-            roll1 = die1.roll();
-            roll2 = die2.roll();
+            int roll1 = die1.roll();
+            int roll2 = die2.roll();
 
             if (roll1 == roll2){
                 setInJail(ref, false);
@@ -102,7 +99,7 @@ public class PlayerController {
     }
 
     public void broke(int ref) {
-        if (playerModels[ref].getBalance() < 0) setBroke(true, ref);
+        if (playerModels[ref].getBalance() < 0) playerModels[ref].setBroke(true);
     }
 
     public boolean getInJail(int ref) {
@@ -117,16 +114,8 @@ public class PlayerController {
         getRef(i).setJailCard(bool);
     }
 
-    public void setSpecialCard(int i, boolean bool) {
-        getRef(i).setSpecialCard(bool);
-    }
-
     public boolean getJailCard(int ref) {
         return getRef(ref).getJailCard();
-    }
-
-    public boolean getSpecialCard(int ref) {
-        return getRef(ref).getSpecialCard();
     }
 
     public int getPlayerOldPosition(int ref) {
@@ -152,15 +141,6 @@ public class PlayerController {
         return playerModels[i].getOldPosition();
     }
 
-    public int getOldRollSum(int ref) {
-        int oldRoll = playerModels[ref].getOldRollSum();
-        return oldRoll;
-    }
-
-    public void setSumOfStreets(int ref, int sumOfStreets) {
-        playerModels[ref].setSumOfProperties(sumOfStreets);
-    }
-
     public String getName(int i) {
         return playerModels[i].getName();
     }
@@ -174,14 +154,6 @@ public class PlayerController {
     }
     public int getBalance(int i) {
         return playerModels[i].getBalance();
-    }
-
-    public void setBroke(boolean bool, int i) {
-        playerModels[i].setBroke(bool);
-    }
-
-    public void setBalance(int newBalance, int i) {
-        playerModels[i].setBalance(newBalance);
     }
 
     public int getNumOfPlayers() {
@@ -202,9 +174,5 @@ public class PlayerController {
 
     public void removeOwnable(Ownable ownable, int i){
         this.playerModels[i].removeOwnable(ownable);
-    }
-
-    public Player[] getPlayerModels() {
-        return playerModels;
     }
 }

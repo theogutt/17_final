@@ -13,7 +13,6 @@ public class Player {
     private boolean inJail = false;
     private int outOfJailTries;
     private boolean jailCard = false;
-    private boolean specialCard = false;
     private int oldRollSum;
 
     public Player(int playerNum){
@@ -100,11 +99,6 @@ public class Player {
         inJail = bool;
     }
 
-    public boolean getSpecialCard() {return specialCard;}
-
-    public void setSpecialCard(Boolean bool) {specialCard = bool; }
-
-
     public Ownable[] getAllPlayerOwnables(){
        return this.account.getPlayerOwnables();
     }
@@ -124,12 +118,4 @@ public class Player {
     public int getOldRollSum() {
         return this.oldRollSum;
     }
-
-    /*  public ArrayList getAllPlayersStreets(){
-       return this.account.getPlayersStreets();
-    }
-
-    public boolean ownsStreetAheadOrBehind(int lfStreetPos){
-        return account.ownsStreetAheadOrBehind(lfStreetPos);
-    }*/
 }
