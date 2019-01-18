@@ -170,7 +170,7 @@ public class GUI_Handler {
     public int chooseNumBuildnings(int posOnBoard, int price){
         GUI_Street street;
         String p = Integer.toString(price);
-        String valg = gui.getUserButtonPressed("Et hus koster " + p + "Kr. \nMan får halv pris tilbage ved salg af hus.","0","1","2","3","4","Hotel","Tilbage");
+        String valg = gui.getUserButtonPressed("Hvert hus koster " + p + "Kr.\nEt hotel koster " + p + "kr. + 4 huse \nMan får halv pris tilbage ved salg af bygninger.","0","1","2","3","4","Hotel","Tilbage");
         int i = 0;
         if (valg.equals("0"))        i=0;
         else if (valg.equals("1"))   i=1;
