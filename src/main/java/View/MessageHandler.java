@@ -50,11 +50,15 @@ public class MessageHandler {
         return returnString;
     }
     public String playerWon(PlayerController playerC, int i) {
-        returnString = playerC.getName(i) + " har vundet spillet! Med et beløb på " + playerC.getBalance(i);
+        returnString = playerC.getName(i) + " har vundet spillet! Med en total værdi på " + playerC.getPlayerFortune(i) + "kr!!!";
         return returnString;
     }
     public String notAllID(){
         returnString = "Du ejer ikke alle felter i denne farve.";
+        return returnString;
+    }
+    public String taxes(PlayerController playerC, int i, int tax){
+        returnString = playerC.getName(i) + " har betalt " + tax + "kr. i skat";
         return returnString;
     }
 }

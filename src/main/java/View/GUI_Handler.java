@@ -61,6 +61,9 @@ public class GUI_Handler {
     public void gotBrokeGui(PlayerController playerC, int i) {
         gui.showMessage(message.gotBroke(playerC, i));
     }
+    public void tax(PlayerController playerC, int i, int tax){
+        gui.showMessage(message.taxes(playerC, i, tax));
+    }
 
     public void startGameGui() {
         gui.showMessage(message.startGame1());
@@ -145,8 +148,8 @@ public class GUI_Handler {
         else{ return 2; }
     }
     public int procentOrFixed(){
-        String choice = gui.getUserSelection("Betal 20% eller 4.000 kr.", "20%", "4.000 kr.");
-        if (choice.equalsIgnoreCase("20%")){ return 1; }
+        String choice = gui.getUserSelection("Betal 10% eller 4.000 kr.", "10%", "4.000 kr.");
+        if (choice.equalsIgnoreCase("10%")){ return 1; }
         else { return 2; }
     }
 
@@ -503,7 +506,7 @@ public class GUI_Handler {
             //skatte felter
             GUI_Tax indkomstskat = new GUI_Tax();
             fields[4] = indkomstskat;
-            indkomstskat.setSubText("20% el. 4.000");
+            indkomstskat.setSubText("10% el. 4.000");
             indkomstskat.setTitle("Indkomstskat");
             indkomstskat.setBackGroundColor(Color.white);
 
