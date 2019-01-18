@@ -11,12 +11,8 @@ public abstract class Square{
         this.positionOnBoard = positionOnBoard;
     }
 
-    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){
-        try {
-        }
-        catch (NullPointerException ex){}
-        //return -1;
-    }
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC){ }
+
     public int getPositionOnBoard(){
         return positionOnBoard;
     }

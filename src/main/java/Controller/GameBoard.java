@@ -27,12 +27,8 @@ public class GameBoard {
         curSquare.landOn(playerC, ref, guiHandler, rentC);
     }
 
-    public int getGroupID(int index) {
-        return (Integer) groupID.get(index);
-    }
-
 // Opretter felter med pris og rent
-    public void instantiateSquares() throws IOException {
+    private void instantiateSquares() {
         for (int i = 0; i < 40; i++) {
             if (i == 0){ squares[i]= new Start(i);}                                                                        //Start
             else if (i == 10 || i == 20 ){ squares[i]= new Parking(i);}                                                    //Parking
@@ -45,10 +41,7 @@ public class GameBoard {
             }
         }
     }
-    public boolean didPlayerPassStart(PlayerController playerC, int ref){
-        boolean passedStartBool = passedStart(playerC, ref);
-        return passedStartBool;
-    }
+
     public boolean passedStart(PlayerController playerC, int ref){
         boolean passedStart = false;
         if (playerC.getOldPosition(ref) == 30 && playerC.getPosition(ref) == 10){
@@ -59,9 +52,5 @@ public class GameBoard {
             passedStart = true;
         }
         return passedStart;
-    }
-
-    public Square getSquare(int i){
-        return squares[i];
     }
 }

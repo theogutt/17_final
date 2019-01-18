@@ -13,7 +13,7 @@ public class Account {
         startAccount();
     }
 
-    public void startAccount() {
+    private void startAccount() {
         balance = 30000;
     }
 
@@ -52,10 +52,6 @@ public class Account {
 
     public int getBalance() {
         return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
     }
 
     public int getSumOfStreets() {

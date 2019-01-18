@@ -4,8 +4,6 @@ import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
 
-import java.io.IOException;
-
 
 public abstract class Ownable extends Square{
     private int owner;
@@ -15,7 +13,7 @@ public abstract class Ownable extends Square{
     private int groupID;
     private int price;
 
-    public Ownable(int positionOnBoard, int price, int numberOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
+    public Ownable(int positionOnBoard, int price, int numberOfBuildings, String name, int groupID, boolean owned, int owner){
         super(positionOnBoard);
         this.owned = owned;
         this.name = name;
@@ -27,16 +25,15 @@ public abstract class Ownable extends Square{
 
     public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
         //spørger om spiller vil købe grunden
-        if (!isOwned()) {
+        if (!this.owned) {
             int ja = 1;
             int answer = guiHandler.buyStreet();
             if (ja == answer) {
-                int price = getPrice();
-                playerC.updatePlayerBalance(ref, price * -1);
+                playerC.updatePlayerBalance(ref, this.price * -1);
                 setOwned(true);
                 setOwner(ref);
-                Square curSquare = this;
-                playerC.addOwnable((Ownable) curSquare, ref);
+                Ownable curSquare = this;
+                playerC.addOwnable(curSquare, ref);
                 guiHandler.changeStreetColor(playerC, ref);
             }
         } else {
@@ -52,7 +49,7 @@ public abstract class Ownable extends Square{
     public String getName() {
         return name;
     }
-    public int getPrice(){return price;}
+
     public int getGroupID() {
         return groupID;
     }
@@ -63,10 +60,6 @@ public abstract class Ownable extends Square{
 
     public int getNumOfBuildings() {
         return numberOfBuildings;
-    }
-
-    public boolean isOwned() {
-        return owned;
     }
 
     public void setOwner(int ref) {

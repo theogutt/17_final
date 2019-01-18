@@ -8,7 +8,6 @@ public class CarColor {
     private int numOfColors = 6;
     private String[] colorStringArray;
     private String[] colorStringArray2;
-    private String colorChosenString;
 
     public CarColor() {
         instaColorArray();
@@ -17,7 +16,6 @@ public class CarColor {
 
     public Color colorChosen(String colorChoiceString) {
         Color returnColor;
-        colorChosenString = colorChoiceString;
         if (colorChoiceString.equalsIgnoreCase("rød")) {
             returnColor = colorArray[0];
         } else if (colorChoiceString.equalsIgnoreCase("grøn")) {
@@ -40,7 +38,7 @@ public class CarColor {
         return returnColor;
     }
 
-    public void updateColorStringArray(String lastChosen) {
+    private void updateColorStringArray(String lastChosen) {
         colorStringArray2 = new String[colorStringArray.length];
 
 
@@ -76,7 +74,7 @@ public class CarColor {
         colorArray[4] = Color.yellow;
         colorArray[5] = Color.white;
     }
-    public void instaColorStringArray() {
+    private void instaColorStringArray() {
         colorStringArray = new String[6];
         colorStringArray[0] = "rød";
         colorStringArray[1] = "grøn";
@@ -84,13 +82,5 @@ public class CarColor {
         colorStringArray[3] = "lila";
         colorStringArray[4] = "gul";
         colorStringArray[5] = "hvid";
-    }
-
-    public String[] getColorStringArray() {
-        return colorStringArray;
-    }
-
-    public String getColorChosenString() {
-        return colorChosenString;
     }
 }

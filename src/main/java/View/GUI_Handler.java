@@ -1,15 +1,11 @@
 package View;
 
-/*
-import Controller.Building;
-*/
 import Controller.Building;
 import Controller.PlayerController;
 import Controller.Trading;
 import Utilities.Copy;
 import Utilities.TextReader;
 import Model.Die;
-import Model.Squares.Square;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -26,7 +22,6 @@ public class GUI_Handler {
     private MessageHandler message;
     private GUI_Field[] fields;
     private GUI_Player[] gui_Players;
-    private GUI_Car[] gui_cars;
     private HashMap chanceDesc;
 
 
@@ -47,13 +42,13 @@ public class GUI_Handler {
         while (aktivTur) {
             updateGuiPlayerBalance(playerC);
             valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Afslut tur");
-            if (valg == "Handel") {
+            if (valg.equals("Handel")) {
                 trade(playerC, playerNum, trading);
-            } else if (valg == "Bygge") {
+            } else if (valg.equals("Bygge")) {
                 building.build(playerC, playerNum, this);
             //} else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
-            } else if (valg == "Afslut tur") {
+            } else if (valg.equals("Afslut tur")) {
                 aktivTur = false;
             }
         }
@@ -76,33 +71,27 @@ public class GUI_Handler {
 
     public void setGameUpGui(PlayerController playerC) {
         int numOfPlayers = playerC.getNumOfPlayers();
-        gui_cars = new GUI_Car[numOfPlayers];
         gui_Players = new GUI_Player[numOfPlayers];
         CarColor carColor = new CarColor();
 
         for (int i = 0; i < playerC.getNumOfPlayers(); i++) {
             enterNamePlayer(playerC, i);
-            GUI_Car car = chosePlayerCar(carColor, playerC, i);
+            GUI_Car car = choosePlayerCar(carColor, playerC, i);
             addGuiPlayer(playerC, i, car);
             setSpecificCar(playerC, i);
         }
     }
 
-    public void addGuiPlayer(PlayerController playerC, int ref, GUI_Car car) {
+    private void addGuiPlayer(PlayerController playerC, int ref, GUI_Car car) {
         gui_Players[ref] = new GUI_Player(playerC.getName(ref), playerC.getBalance(ref), car);
         gui.addPlayer(gui_Players[ref]);
     }
 
-    public void setSpecificCar(PlayerController playerC, int ref) {
-        fields[(playerC.getPosition(ref))].setCar(getGuiPlayer(ref), true);
+    private void setSpecificCar(PlayerController playerC, int ref) {
+        fields[(playerC.getPosition(ref))].setCar(gui_Players[ref], true);
     }
 
-    public GUI_Player getGuiPlayer(int i) {
-        GUI_Player guiPlayer = gui_Players[i];
-        return guiPlayer;
-    }
-
-    public void enterNamePlayer(PlayerController playerC, int ref) {
+    private void enterNamePlayer(PlayerController playerC, int ref) {
         boolean nameTaken;
         int i;
 
@@ -127,7 +116,7 @@ public class GUI_Handler {
         }
     }
 
-    public void messageSquareGui(PlayerController playerC, int ref, Square square, boolean passedStart) {
+    public void messageSquareGui(PlayerController playerC, int ref, boolean passedStart) {
         if (passedStart) {
             gui.showMessage(message.messageSquare(playerC, ref));
         }
@@ -155,32 +144,30 @@ public class GUI_Handler {
         if (choice.equalsIgnoreCase("Betal")){ return 1; }
         else{ return 2; }
     }
-    public int procentOrFixed(PlayerController playerC, int playerNum){
+    public int procentOrFixed(){
         String choice = gui.getUserSelection("Betal 20% eller 4.000 kr.", "20%", "4.000 kr.");
         if (choice.equalsIgnoreCase("20%")){ return 1; }
         else { return 2; }
     }
 
     public String chooseStreetToBuildOn(){
-        String valg = gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
-        return valg;
+        return gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
     }
     public String chooseSepecificStreet(String[] streets){
-        String valg = gui.getUserSelection("Vælg grund",streets);
-        return valg;
+        return gui.getUserSelection("Vælg grund",streets);
     }
 
     public int chooseNumBuildnings(int posOnBoard, int price){
         GUI_Street street;
         String p = Integer.toString(price);
         String valg = gui.getUserButtonPressed("Et hus koster " + p + "Kr. \nMan får halv pris tilbage ved salg af hus.","0","1","2","3","4","Hotel","Tilbage");
-        int i = 0;
-        if (valg == "0")        i=0;
-        else if (valg == "1")   i=1;
-        else if (valg == "2")   i=2;
-        else if (valg == "3")   i=3;
-        else if (valg == "4")   i=4;
-        else if (valg == "Hotel")  i=5;
+        int i;
+        if (valg.equals("0"))        i=0;
+        else if (valg.equals("1"))   i=1;
+        else if (valg.equals("2"))   i=2;
+        else if (valg.equals("3"))   i=3;
+        else if (valg.equals("4"))   i=4;
+        else if (valg.equals("Hotel"))  i=5;
         else                    i=-1;
         street = (GUI_Street) gui.getFields()[posOnBoard];
         if (i==-1){}
@@ -191,7 +178,7 @@ public class GUI_Handler {
     public void notAllID(){
         gui.showMessage(message.notAllID());
     }
-    public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
+    private Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;
         String vælgFarve = "Vælg bilens farve";
@@ -214,11 +201,10 @@ public class GUI_Handler {
             gui.showMessage(playerC.getName(ref) + "'s farve er " + chooseColorStrings[0]);
             carColorS = chooseColorStrings[0];
         }
-        Color carColorChoice = carColorObj.colorChosen(carColorS);
 
-        return carColorChoice;
+        return carColorObj.colorChosen(carColorS);
     }
-    public int choseNumOfPlayers() {
+    public int chooseNumOfPlayers() {
         //int players = gui.getUserInteger("How many players is participating in the game?");
         int numOfPlayers;
         while (true) {
@@ -233,48 +219,44 @@ public class GUI_Handler {
         return numOfPlayers;
     }
 
-    public GUI_Car chosePlayerCar(CarColor carColorObj, PlayerController playerC, int ref) {
+    private GUI_Car choosePlayerCar(CarColor carColorObj, PlayerController playerC, int ref) {
         GUI_Car car;
         Color carColor = chooseCarColor(carColorObj, playerC, ref);
 
             car = new GUI_Car(carColor, Color.blue, CAR, GUI_Car.Pattern.FILL);
-            gui_cars[ref] = car;
 
         return car;
     }
-    public void removeAllCarsCurPos(PlayerController playerC) {
+    public void removeAllCarsCurPos() {
         for (int i = 0; i < 40; i++) {
             fields[i].removeAllCars();
         }
     }
     public void setAllCarsCurPos(PlayerController playerC) {
         for (int i = 0; i < gui_Players.length; i++) {
-            fields[(playerC.getPosition(i))].setCar(getGuiPlayer(i), true);
+            fields[(playerC.getPosition(i))].setCar(gui_Players[i], true);
         }
     }
     public void playerTurnGui(PlayerController player, int ref) {
         gui.showMessage(message.playerTurn(player, ref));
     }
-    public void diceUpdateGui(PlayerController player, Die die1, Die die2) {
+    public void diceUpdateGui(Die die1, Die die2) {
         setDiceGui(die1, die2);
     }
-    public void setDiceGui(Die die1, Die die2) {
+    private void setDiceGui(Die die1, Die die2) {
         gui.setDice(die1.getFaceValue(), die2.getFaceValue());
     }
 
-    public void showScore(PlayerController player, int i) {
-        gui.showMessage(message.playerEndTurn(player, i));
-    }
     public void changeStreetColor(PlayerController player, int ref){
         GUI_Field field;
         GUI_Ownable ownable;
-        Color carColor = getGuiPlayer(ref).getCar().getPrimaryColor();
+        Color carColor = gui_Players[ref].getCar().getPrimaryColor();
         field = gui.getFields()[player.getPosition(ref)];
         ownable = (GUI_Ownable) field;
         ownable.setBorder(carColor);
     }
 
-    public void setSpecificFields() throws IOException{
+    private void setSpecificFields() throws IOException{
         HashMap StreetName = TextReader.textReader(".\\src\\Resources\\StreetName");
             //ejendomsfelter
             GUI_Street rødovrevej = new GUI_Street();
@@ -547,23 +529,17 @@ public class GUI_Handler {
     public void guiChance(int squareInt, PlayerController playerC) {
         gui.displayChanceCard((String) chanceDesc.get(squareInt));
         gui.getUserButtonPressed("", "Ok");
-        removeAllCarsCurPos(playerC);
+        removeAllCarsCurPos();
         updateGuiPlayerBalance(playerC);
         setAllCarsCurPos(playerC);
     }
 
-    public void trade(PlayerController playerC, int playerNum, Trading trading){
+    private void trade(PlayerController playerC, int init, Trading trading){
         // init = initiator, rece = receiver
         String[] players = new String[playerC.getNumOfPlayers()-1];
-        int init = playerNum, rece = playerNum; // rece sat lig playerNum som en safety measure
+        int rece;
         String[] initOffer = new String[0], receOffer = new String[0];
         int initMoney = 0, receMoney = 0;
-
-        // Liste over spiller navne
-        /*
-        for(int n=0 ; n < players.length+1 ; n++)
-            players[n] = playerC.getName(n);
-        */
 
         boolean initfound = false;
         for(int n=0 ; n < players.length+1 ; n++) {
@@ -650,7 +626,7 @@ public class GUI_Handler {
                 for (int offerNum=0 ; offerNum < offer.length ; offerNum++) {
                     if (fields[fieldNum].getTitle().equals(offer[offerNum])){
                         GUI_Ownable owned = (GUI_Ownable)fields[fieldNum];
-                        owned.setBorder(getGuiPlayer(ref).getCar().getPrimaryColor());
+                        owned.setBorder(gui_Players[ref].getCar().getPrimaryColor());
                     }
                 }
             }

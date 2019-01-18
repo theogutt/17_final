@@ -22,7 +22,7 @@ public class Building {
         String valg = gui_handler.chooseStreetToBuildOn();
         boolean forsæt = true;
         while(forsæt) {
-            if (valg == "Lyseblå") {
+            if (valg.equals("Lyseblå")) {
                 if (ownAllID(ejendomme, 1)) {
                     forsæt = false;
                     int k = 0;
@@ -37,7 +37,7 @@ public class Building {
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
-            } else if (valg == "Pink") {
+            } else if (valg.equals("Pink")) {
                 if (ownAllID(ejendomme, 2)) {
                     forsæt = false;
                     int k = 0;
@@ -52,7 +52,7 @@ public class Building {
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
-            } else if (valg == "Grøn") {
+            } else if (valg.equals("Grøn")) {
                 if (ownAllID(ejendomme, 3)) {
                     forsæt = false;
                     int k = 0;
@@ -67,7 +67,7 @@ public class Building {
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
-            } else if (valg == "Grå") {
+            } else if (valg.equals("Grå")) {
                 if (ownAllID(ejendomme, 4)) {
                     forsæt = false;
                     int k = 0;
@@ -82,7 +82,7 @@ public class Building {
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
-            } else if (valg == "Rød") {
+            } else if (valg.equals("Rød")) {
                 if (ownAllID(ejendomme, 5)) {
                     forsæt = false;
                     int k = 0;
@@ -97,7 +97,7 @@ public class Building {
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
-            } else if (valg == "Hvid") {
+            } else if (valg.equals("Hvid")) {
                 if (ownAllID(ejendomme, 6)) {
                     forsæt = false;
                     int k = 0;
@@ -112,7 +112,7 @@ public class Building {
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
-            } else if (valg == "Gul") {
+            } else if (valg.equals("Gul")) {
                 if (ownAllID(ejendomme, 7)) {
                     forsæt = false;
                     int k = 0;
@@ -127,7 +127,7 @@ public class Building {
                     }
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
-            } else if (valg == "Lilla") {
+            } else if (valg.equals("Lilla")) {
                 if (ownAllID(ejendomme, 8)) {
                     int k = 0;
                     String[] streets = new String[2];
@@ -142,7 +142,7 @@ public class Building {
                     forsæt = false;
                     bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
                 }else{ gui_handler.notAllID(); forsæt = false;}
-            } else if (valg == "Tilbage") {
+            } else if (valg.equals("Tilbage")) {
                 forsæt = false;
             }
 
