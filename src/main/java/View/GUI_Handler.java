@@ -6,6 +6,7 @@ import Controller.Building;
 import Controller.Building;
 import Controller.PlayerController;
 import Controller.Trading;
+import Model.Squares.Ownable;
 import Utilities.Copy;
 import Utilities.TextReader;
 import Model.Die;
@@ -558,12 +559,6 @@ public class GUI_Handler {
         int init = playerNum, rece = playerNum; // rece sat lig playerNum som en safety measure
         String[] initOffer = new String[0], receOffer = new String[0];
         int initMoney = 0, receMoney = 0;
-
-        // Liste over spiller navne
-        /*
-        for(int n=0 ; n < players.length+1 ; n++)
-            players[n] = playerC.getName(n);
-        */
 
         boolean initfound = false;
         for(int n=0 ; n < players.length+1 ; n++) {
