@@ -24,7 +24,7 @@ public class RentController {
         hotelRent = TextReader.textReader(".\\src\\Resources\\HotelRent");
     }
 
-    public int getOwnableType(Ownable ownable) {
+    private int getOwnableType(Ownable ownable) {
         int type = 0;
         if (ownable instanceof Street) {
             type = 1;
@@ -65,7 +65,7 @@ public class RentController {
                 if (getNumberOfBreweries(playerC, curOwnable) == 1) {
                     rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100;
                 } else if (getNumberOfBreweries(playerC, curOwnable) == 2) {
-                    rent = (playerC.getPosition(ref)-playerC.getPosition(ref)) * 200;
+                    rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 200;
                 }
             }
             else if(ownableType==2){
@@ -88,7 +88,7 @@ public class RentController {
                 return rent;
         }
 
-    public int getNumberOfFerries(PlayerController playerC, Ownable curOwnable) {
+    private int getNumberOfFerries(PlayerController playerC, Ownable curOwnable) {
         int ferries = 0;
         Ownable[] playerOwnables = playerC.getPlayerOwnables(curOwnable.getOwner());
         for (int i = 0; i < playerOwnables.length; i++) {
@@ -99,7 +99,7 @@ public class RentController {
         return ferries;
     }
 
-    public int getNumberOfBreweries(PlayerController playerC, Ownable curOwnable) {
+    private int getNumberOfBreweries(PlayerController playerC, Ownable curOwnable) {
         int breweries = 0;
         Ownable[] playerOwnables = playerC.getPlayerOwnables(curOwnable.getOwner());
         for (int i = 0; i < playerOwnables.length; i++) {
@@ -110,7 +110,7 @@ public class RentController {
         return breweries;
     }
 
-    public boolean ownAll(PlayerController playerC, int ref, Ownable curOwnable) {
+    private boolean ownAll(PlayerController playerC, int ref, Ownable curOwnable) {
         boolean ownAll = false;
         int owned = 0;
         int groupID = curOwnable.getGroupID();
@@ -135,41 +135,41 @@ public class RentController {
 
 
 
-    public int getRentInt0 ( int index){
+    private int getRentInt0 ( int index){
         return (Integer) baseRent.get(index);
     }
-    public int getRentInt1 ( int index){
+    private int getRentInt1 ( int index){
         return (Integer) oneHouseRent.get(index);
     }
-    public int getRentInt2 ( int index){
+    private int getRentInt2 ( int index){
         return (Integer) twoHouseRent.get(index);
     }
-    public int getRentInt3 ( int index){
+    private int getRentInt3(int index){
         return (Integer) threeHouseRent.get(index);
     }
-    public int getRentInt4 ( int index){
+    private int getRentInt4(int index){
         return (Integer) fourHouseRent.get(index);
     }
-    public int getRentInt5 ( int index){
+    private int getRentInt5(int index){
         return (Integer) hotelRent.get(index);
     }
 
-    public int baseRent ( int position){
+    private int baseRent(int position){
         return getRentInt0(position);
     }
-    public int oneHouseRent ( int position){
+    private int oneHouseRent(int position){
         return getRentInt1(position);
     }
-    public int twoHouseRent ( int position){
+    private int twoHouseRent(int position){
         return getRentInt2(position);
     }
-    public int threeHouseRent ( int position){
+    private int threeHouseRent(int position){
         return getRentInt3(position);
     }
-    public int fourHouseRent ( int position){
+    private int fourHouseRent(int position){
         return getRentInt4(position);
     }
-    public int HotelRent ( int position){
+    private int HotelRent(int position){
         return getRentInt5(position);
     }
 }

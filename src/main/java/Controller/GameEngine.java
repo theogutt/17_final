@@ -31,17 +31,17 @@ public class GameEngine {
         playGame();
     }
 
-    public void setUpGame() {
+    private void setUpGame() {
         guiHandler.startGameGui();
         playerC = new PlayerController(guiHandler.choseNumOfPlayers());
         guiHandler.setGameUpGui(playerC);
     }
 
-    public void playGame() {
+    private void playGame() {
         int loser = turnFlow();
         endGame(loser);
     }
-    public int turnFlow() {
+    private int turnFlow() {
         //Normal turn
         int playerNum;
         int i = 0;
@@ -49,9 +49,7 @@ public class GameEngine {
         do {
             playerNum = calcTurn(i);
             guiHandler.playerTurnGui(playerC, playerNum);
-            if (true) {
-                playTurn(playerNum);
-            }
+            playTurn(playerNum);
             guiHandler.updateGuiPlayerBalance(playerC);
             playerC.broke(playerNum);
             i++;
@@ -60,12 +58,12 @@ public class GameEngine {
         while (!playerC.getModelBroke(playerNum));
         return playerNum;
     }
-    public void playTurn(int playerNum) {
+    private void playTurn(int playerNum) {
         int middlePosition;
 
         guiHandler.updateGuiPlayerBalance(playerC);
 
-        if (playerC.getInJail(playerNum) == true){
+        if (playerC.getInJail(playerNum)){
             if (playerC.getJailCard(playerNum)) {
                 playerC.getOutOfJailFree(playerNum);
             }
@@ -84,34 +82,34 @@ public class GameEngine {
         guiHandler.setAllCarsCurPos(playerC);
         guiHandler.diceUpdateGui(playerC, die1, die2);
         boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
-        if(passedStart==true){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
+        if(passedStart){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
         middlePosition = playerC.getPosition(playerNum);
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
         if (middlePosition != playerC.getPosition(playerNum))
             gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
         guiHandler.updateGuiPlayerBalance(playerC);
         extraTurn(playerNum);
-        pairs = 0;
+        this.pairs = 0;
         guiHandler.menu(playerC, playerNum, building, trading);
     }
 
-    public int calcTurn(int j) {
+    private int calcTurn(int j) {
         int currentTurn = j % playerC.getNumOfPlayers();
         return currentTurn;
     }
 
-    public void endGame(int ref) {
+    private void endGame(int ref) {
         int x = playerC.playerWithHighestBalance();
         guiHandler.gotBrokeGui(playerC, ref);
         guiHandler.playerWonGui(playerC, x);
     }
 
-    public void extraTurn(int playerNum){
+    private void extraTurn(int playerNum){
 
         if (die1.getFaceValue() == die2.getFaceValue()){
-            pairs++;
-            System.out.println(pairs);
-            if (pairs == 3){
+            this.pairs++;
+            System.out.println(this.pairs);
+            if (this.pairs == 3){
                 playerC.setPosition(10,playerNum);
                 playerC.setInJail(playerNum, true);
             }
@@ -119,17 +117,5 @@ public class GameEngine {
                 playTurn(playerNum);
             }
         }
-    }
-
-    public Die getDie1() {
-        return die1;
-    }
-
-    public Die getDie2() {
-        return die2;
-    }
-
-    public void setPairs(int pairs){
-        this.pairs = pairs;
     }
 }

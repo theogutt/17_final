@@ -1,7 +1,6 @@
 package Model.Squares;
 
 
-import Controller.GameBoard;
 import Controller.PlayerController;
 import View.GUI_Handler;
 import Controller.RentController;
@@ -17,7 +16,7 @@ public class Chance extends Square{
     public void landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC){
         int card = chanceCards[0];
         int oldPos = playerC.getPosition(playerNum);
-        Ownable[] playerOwnabels = playerC.getPlayerOwnables(playerNum);;
+        Ownable[] playerOwnabels = playerC.getPlayerOwnables(playerNum);
 
 
         switch (card){
@@ -170,7 +169,7 @@ public class Chance extends Square{
     }
 
 
-    public void leftShiftCards(){
+    private void leftShiftCards(){
         int[] leftShifted = new int[chanceCards.length];
         int firstValue = chanceCards[0];
         for (int number = 0; number < chanceCards.length; number++) {
@@ -180,7 +179,7 @@ public class Chance extends Square{
         leftShifted[leftShifted.length-1] = firstValue;
         chanceCards = leftShifted;
     }
-    public void intantiateCards(){
+    private void intantiateCards(){
         chanceCards = new int[chanceCards.length]; // Resetter chancecards, da den er static
         int[] cards = new int[chanceCards.length];
         int pos;
@@ -196,13 +195,5 @@ public class Chance extends Square{
 
             chanceCards[pos] = cards[card];
         }
-    }
-
-    public int[] getChanceCards() {
-        return chanceCards;
-    }
-
-    public void setChanceCards(int[] chanceCards) {
-        this.chanceCards = chanceCards;
     }
 }

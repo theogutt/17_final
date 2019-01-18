@@ -11,7 +11,6 @@ public class PlayerController {
     private int roll2;
 
     private Player[] playerModels;
-    private int oldRollSum;
 
     public PlayerController(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
@@ -74,7 +73,7 @@ public class PlayerController {
         return ref;
     }
 
-    public int calcNewPosition(int rollSum1, int rollSum2, int i) {
+    public void calcNewPosition(int rollSum1, int rollSum2, int i) {
         int oldPosition = getRef(i).getCurPosition();
         getRef(i).setOldPosition(oldPosition);
 
@@ -90,7 +89,6 @@ public class PlayerController {
             getRef(i).setCurPosition((newPosition));
         }
         getRef(i).setOldRollSum(rollSum1+rollSum2);
-        return oldRollSum = rollSum1+rollSum2;
     }
 
     public void setPosition(int newPosition, int playerNum) {
@@ -98,12 +96,6 @@ public class PlayerController {
         getRef(playerNum).setOldPosition(oldPosition);
         playerModels[playerNum].setCurPosition(newPosition);
     }
-
-/*
-    public void addPlayerStreet(int i, Street street) {
-        getRef(i).addStreet(street);
-    }
-*/
 
     private Player getRef(int i) {
         return playerModels[i];
@@ -158,10 +150,6 @@ public class PlayerController {
 
     public int getOldPosition(int i) {
         return playerModels[i].getOldPosition();
-    }
-
-    public void setOldRollSum(int oldRollSum) {
-        this.oldRollSum = oldRollSum;
     }
 
     public int getOldRollSum(int ref) {

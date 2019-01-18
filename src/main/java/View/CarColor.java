@@ -40,7 +40,7 @@ public class CarColor {
         return returnColor;
     }
 
-    public void updateColorStringArray(String lastChosen) {
+    private void updateColorStringArray(String lastChosen) {
         colorStringArray2 = new String[colorStringArray.length];
 
 
@@ -76,7 +76,7 @@ public class CarColor {
         colorArray[4] = Color.yellow;
         colorArray[5] = Color.white;
     }
-    public void instaColorStringArray() {
+    private void instaColorStringArray() {
         colorStringArray = new String[6];
         colorStringArray[0] = "rød";
         colorStringArray[1] = "grøn";
@@ -84,13 +84,5 @@ public class CarColor {
         colorStringArray[3] = "lila";
         colorStringArray[4] = "gul";
         colorStringArray[5] = "hvid";
-    }
-
-    public String[] getColorStringArray() {
-        return colorStringArray;
-    }
-
-    public String getColorChosenString() {
-        return colorChosenString;
     }
 }

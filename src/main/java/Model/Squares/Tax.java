@@ -1,7 +1,5 @@
 package Model.Squares;
 
-
-import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;

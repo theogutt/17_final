@@ -13,7 +13,7 @@ public class Account {
         startAccount();
     }
 
-    public void startAccount() {
+    private void startAccount() {
         balance = 30000;
     }
 
