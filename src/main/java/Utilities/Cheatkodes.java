@@ -40,6 +40,8 @@ public class Cheatkodes {
         else if(input == 4){
 
         }
+
+        //
         else if(input == 5){
 
         }

@@ -28,4 +28,8 @@ public class Die {
         return this.faceValue;
     }
 
+    public void setFaceValue(int i){
+        faceValue = i;
+    }
+
 }

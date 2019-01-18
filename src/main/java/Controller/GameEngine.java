@@ -94,7 +94,7 @@ public class GameEngine {
             gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC, gameBoard);
         guiHandler.updateGuiPlayerBalance(playerC);
         extraTurn(playerNum);
-        pairs = 0;
+
         guiHandler.menu(playerC, playerNum, building, trading, gameBoard);
     }
 
@@ -117,8 +117,10 @@ public class GameEngine {
             if (pairs == 3){
                 playerC.setPosition(10,playerNum);
                 playerC.setInJail(playerNum, true);
+                pairs = 0;
             }
             else{
+                pairs = 0;
                 playTurn(playerNum, cheatkodes);
             }
         }
