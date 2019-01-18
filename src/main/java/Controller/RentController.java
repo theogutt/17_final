@@ -36,10 +36,11 @@ public class RentController {
         return type;
     }
 
-        public int retrieveRent (PlayerController playerC,int ref, Ownable curOwnable){
+        public int retrieveRent (PlayerController playerC,int ref , Ownable curOwnable){
             int rent=0;
             int position = playerC.getPosition(ref);
             int ownableType = getOwnableType(curOwnable);
+            int homeOwner = curOwnable.getOwner();
             if(ownableType==1) {
                 int buildings=curOwnable.getNumOfBuildings();
                 if (buildings == 1) {
@@ -53,7 +54,7 @@ public class RentController {
                 } else if (buildings == 5) {
                     rent = HotelRent(position);
                 } else {
-                    if (ownAll(playerC, ref, curOwnable)) {
+                    if (ownAll(playerC, homeOwner, curOwnable)) {
                         rent = baseRent(position) * 2;
                     } else {
                         rent = baseRent(position);
@@ -62,28 +63,12 @@ public class RentController {
                 }
             }
             else if(ownableType==3){
-                if (getNumberOfBreweries(playerC, curOwnable) == 1) {
-                    rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100;
-                } else if (getNumberOfBreweries(playerC, curOwnable) == 2) {
-                    rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 200;
-                }
+                        //Slaget der er slået * Rent   * (1 || 2)
+                rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100 * getNumberOfBreweries(playerC, curOwnable);
             }
             else if(ownableType==2){
-                if (getNumberOfFerries(playerC, curOwnable) == 1) {
-                    rent = baseRent(position);
-                }
-                //to færger
-                else if (getNumberOfFerries(playerC, curOwnable) == 2) {
-                    rent = baseRent(position) * 2;
-                }
-                //tre færger
-                else if (getNumberOfFerries(playerC, curOwnable) == 3) {
-                    rent = baseRent(position) * 4;
-                }
-                //fire færger
-                else if (getNumberOfFerries(playerC, curOwnable) == 4) {
-                    rent = baseRent(position) * 8;
-                }
+                //           250 * 2^(antalFærger) = altidDetRigtigeSvar
+                rent = (int)(250 * Math.pow(2,getNumberOfFerries(playerC, curOwnable)));
             }
                 return rent;
         }
@@ -111,7 +96,6 @@ public class RentController {
     }
 
     private boolean ownAll(PlayerController playerC, int ref, Ownable curOwnable) {
-        boolean ownAll = false;
         int owned = 0;
         int groupID = curOwnable.getGroupID();
         Ownable[] playerOwnables = playerC.getPlayerOwnables(ref);
@@ -126,11 +110,7 @@ public class RentController {
             if (playerOwnables[n].getGroupID() == groupID)
                 owned++;
         }
-
-        if (owned == amountInGroup)
-            ownAll = true;
-
-        return ownAll;
+        return (owned == amountInGroup);
     }
 
 
