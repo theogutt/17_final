@@ -153,7 +153,7 @@ public class GUI_Handler {
     public String chooseStreetToBuildOn(){
         return gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
     }
-    public String chooseSepecificStreet(String[] streets){
+    public String chooseSpecificStreet(String[] streets){
         return gui.getUserSelection("Vælg grund",streets);
     }
 
