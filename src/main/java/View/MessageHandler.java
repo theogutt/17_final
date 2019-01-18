@@ -69,6 +69,8 @@ public class MessageHandler {
         returnString = "Du ejer ikke alle felter i denne farve.";
         return returnString;
     }
+
+    // Fortæller spilleren hvor meget de har betalt i skat
     public String taxes(PlayerController playerC, int i, int tax){
         returnString = playerC.getName(i) + " har betalt " + tax + "kr. i skat";
         return returnString;

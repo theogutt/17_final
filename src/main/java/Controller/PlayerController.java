@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class PlayerController {
     private int numOfPlayers;
     private Player[] playerModels;
-    private HashMap squarePrice;
+    private HashMap buildingPrice;
 
     //Konstruktør som også istantiere alle spillere
     public PlayerController(int numOfPlayers) throws IOException {
@@ -20,7 +20,7 @@ public class PlayerController {
         for (int i = 0; i < numOfPlayers; i++) {
             playerModels[i] = new Player(i);
         }
-        squarePrice = TextReader.textReader(".\\src\\Resources\\SquarePrice");
+        buildingPrice = TextReader.textReader(".\\src\\Resources\\BuildingPrice");
     }
 
     //Håndtere en spillers valg om at betale sig ud af fængslet, eller prøve at slå et parslag i tre forsøg, og sidder derefter spilleren ud af fængslet
@@ -80,11 +80,13 @@ public class PlayerController {
         }
         return ref;
     }
+
+    // Udregner samlede formue for en spiller (Penge + værdi af samlede ejendomme + bygninger)
     public int getPlayerFortune(int playerNum){
         int fortune = playerModels[playerNum].getBalance();
         Ownable[] ejendomme = playerModels[playerNum].getAllPlayerOwnables();
         for(int n = 0; n < ejendomme.length; n++){
-            fortune = fortune + ejendomme[n].getPrice() + (ejendomme[n].getNumOfBuildings() * (Integer)squarePrice.get(n));
+            fortune += ejendomme[n].getPrice() + (ejendomme[n].getNumOfBuildings() * (Integer)buildingPrice.get(n));
         }
         return fortune;
     }

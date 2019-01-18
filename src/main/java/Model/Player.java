@@ -25,6 +25,16 @@ public class Player {
         this.account.updateBalance(amount);
     }
 
+    // Se account
+    public void addOwnable(Ownable ownable) {
+        this.account.addOwnable(ownable, this.playerNum);
+    }
+
+    // Se account
+    public void removeOwnable(Ownable ownable){
+        this.account.removeOwnable(ownable);
+    }
+
     // Getters og setters
     public int getSumOfProperties(){
         return account.getSumOfStreets();
@@ -48,10 +58,6 @@ public class Player {
 
     public void setCurPosition(int curPosition) {
         this.curPosition = curPosition;
-    }
-
-    public int getPlayerNum() {
-        return playerNum;
     }
 
     public boolean getBroke(){
@@ -95,13 +101,5 @@ public class Player {
 
     public Ownable[] getAllPlayerOwnables(){
        return this.account.getPlayerOwnables();
-    }
-
-    public void addOwnable(Ownable ownable) {
-        this.account.addOwnable(ownable, this.playerNum);
-    }
-
-    public void removeOwnable(Ownable ownable){
-        this.account.removeOwnable(ownable);
     }
 }

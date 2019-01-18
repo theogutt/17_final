@@ -26,13 +26,13 @@ public class GameEngine {
     }
 
     // Sætter spillet op og starter det
-    public void start() {
+    public void start() throws IOException {
         setUpGame();
         playGame();
     }
 
     // Beder om at opsætte gui'en
-    private void setUpGame() {
+    private void setUpGame() throws IOException {
         guiHandler.startGameGui();
         playerC = new PlayerController(guiHandler.chooseNumOfPlayers());
         guiHandler.setGameUpGui(playerC);
