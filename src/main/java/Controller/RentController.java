@@ -67,8 +67,8 @@ public class RentController {
                 rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100 * getNumberOfBreweries(playerC, curOwnable);
             }
             else if(ownableType==2){
-                //           250 * 2^(antalFærger) = altidDetRigtigeSvar
-                rent = (int)((Integer) baseRent.get(position) * Math.pow(2,getNumberOfFerries(playerC, curOwnable))-1);
+                //           500 * 2^(antalFærger) = altidDetRigtigeSvar
+                rent = ((Integer) baseRent.get(position) * (int) Math.pow(2,(getNumberOfFerries(playerC, curOwnable))-1));
             }
                 return rent;
         }
