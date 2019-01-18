@@ -15,6 +15,7 @@ public class RentController {
     private HashMap hotelRent;
     private HashMap baseRent;
 
+    // Laver HashMaps af de forskellige filer som viser leje for grunde
     public RentController() throws IOException {
         baseRent = TextReader.textReader(".\\src\\Resources\\BaseRent");
         oneHouseRent = TextReader.textReader(".\\src\\Resources\\1HouseRent");
@@ -24,55 +25,48 @@ public class RentController {
         hotelRent = TextReader.textReader(".\\src\\Resources\\HotelRent");
     }
 
-    private int getOwnableType(Ownable ownable) {
-        int type = 0;
-        if (ownable instanceof Street) {
-            type = 1;
-        } else if (ownable instanceof Ferry) {
-            type = 2;
-        } else if (ownable instanceof Brewery) {
-            type = 3;
-        }
-        return type;
-    }
+    // Finder lejen for et felt som kan ejes, baseret på hvilken type det er
+    public int retrieveRent(PlayerController playerC, int ref, Ownable curOwnable) {
+        int rent = 0;
+        int position = playerC.getPosition(ref);
+        int homeOwner = curOwnable.getOwner();
 
-        public int retrieveRent (PlayerController playerC,int ref , Ownable curOwnable){
-            int rent=0;
-            int position = playerC.getPosition(ref);
-            int ownableType = getOwnableType(curOwnable);
-            int homeOwner = curOwnable.getOwner();
-            if(ownableType==1) {
-                int buildings=curOwnable.getNumOfBuildings();
-                if (buildings == 1) {
-                    rent = (Integer) oneHouseRent.get(position);
-                } else if (buildings == 2) {
-                    rent = (Integer) twoHouseRent.get(position);
-                } else if (buildings == 3) {
-                    rent = (Integer) threeHouseRent.get(position);
-                } else if (buildings == 4) {
-                    rent = (Integer) fourHouseRent.get(position);
-                } else if (buildings == 5) {
-                    rent = (Integer) hotelRent.get(position);
+        // Hvis feltet er en grund
+        if (curOwnable instanceof Street) {
+            int buildings = curOwnable.getNumOfBuildings();
+            if (buildings == 1) {
+                rent = (Integer) oneHouseRent.get(position);
+            } else if (buildings == 2) {
+                rent = (Integer) twoHouseRent.get(position);
+            } else if (buildings == 3) {
+                rent = (Integer) threeHouseRent.get(position);
+            } else if (buildings == 4) {
+                rent = (Integer) fourHouseRent.get(position);
+            } else if (buildings == 5) {
+                rent = (Integer) hotelRent.get(position);
+            } else {
+                if (ownAll(playerC, homeOwner, curOwnable)) {
+                    rent = (Integer) baseRent.get(position) * 2;
                 } else {
-                    if (ownAll(playerC, homeOwner, curOwnable)) {
-                        rent = (Integer) baseRent.get(position) * 2;
-                    } else {
-                        rent = (Integer) baseRent.get(position);
+                    rent = (Integer) baseRent.get(position);
 
-                    }
                 }
             }
-            else if(ownableType==3){
-                        //Slaget der er slået * Rent   * (1 || 2)
-                rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100 * getNumberOfBreweries(playerC, curOwnable);
-            }
-            else if(ownableType==2){
-                //           500 * 2^(antalFærger) = altidDetRigtigeSvar
-                rent = ((Integer) baseRent.get(position) * (int) Math.pow(2,(getNumberOfFerries(playerC, curOwnable))-1));
-            }
-                return rent;
-        }
 
+            // Hvis feltet er et bryggeri
+        } else if (curOwnable instanceof Brewery) {
+            // Slaget der er slået * Rent   * (1 || 2)
+            rent = (playerC.getPosition(ref) - playerC.getOldPosition(ref)) * 100 * getNumberOfBreweries(playerC, curOwnable);
+
+            // Hvis feltet er en færge
+        } else if (curOwnable instanceof Ferry) {
+            // 500(færgeleje) * 2^(antalFærger-1)
+            rent = ((Integer) baseRent.get(position) * (int) Math.pow(2, (getNumberOfFerries(playerC, curOwnable)) - 1));
+        }
+        return rent;
+    }
+
+    // Tjekker hvor mange færge den spiller som ejer feltet ellers ejer
     private int getNumberOfFerries(PlayerController playerC, Ownable curOwnable) {
         int ferries = 0;
         Ownable[] playerOwnables = playerC.getPlayerOwnables(curOwnable.getOwner());
@@ -81,9 +75,11 @@ public class RentController {
                 ferries++;
             }
         }
+
         return ferries;
     }
 
+    // Tjekker hvor mange bryggerier den spiller som ejer feltet ellers ejer
     private int getNumberOfBreweries(PlayerController playerC, Ownable curOwnable) {
         int breweries = 0;
         Ownable[] playerOwnables = playerC.getPlayerOwnables(curOwnable.getOwner());
@@ -95,18 +91,19 @@ public class RentController {
         return breweries;
     }
 
+    // Tjekker om en spiller ejer alle grunde af samme gruppeID (fx farve) og returnerer en boolean
     private boolean ownAll(PlayerController playerC, int ref, Ownable curOwnable) {
         int owned = 0;
         int groupID = curOwnable.getGroupID();
         Ownable[] playerOwnables = playerC.getPlayerOwnables(ref);
         int amountInGroup = 3;
 
-        if ( groupID==1 || groupID==8 || groupID==10)
+        if (groupID == 1 || groupID == 8 || groupID == 10)
             amountInGroup = 2;
-        if ( groupID==9 )
+        if (groupID == 9)
             amountInGroup = 4;
 
-        for (int n=0 ; n < playerOwnables.length ; n++){
+        for (int n = 0; n < playerOwnables.length; n++) {
             if (playerOwnables[n].getGroupID() == groupID)
                 owned++;
         }

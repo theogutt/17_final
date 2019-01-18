@@ -156,7 +156,7 @@ public class GUI_Handler {
     public String chooseStreetToBuildOn(){
         return gui.getUserSelection("Vælg grundens farve","Lyseblå","Pink","Grøn","Grå","Rød","Hvid","Gul","Lilla","Tilbage");
     }
-    public String chooseSepecificStreet(String[] streets){
+    public String chooseSpecificStreet(String[] streets){
         return gui.getUserSelection("Vælg grund",streets);
     }
 
@@ -528,7 +528,6 @@ public class GUI_Handler {
         }
 
 
-
     public void guiChance(int squareInt, PlayerController playerC) {
         gui.displayChanceCard((String) chanceDesc.get(squareInt));
         gui.getUserButtonPressed("", "Ok");
@@ -537,6 +536,7 @@ public class GUI_Handler {
         setAllCarsCurPos(playerC);
     }
 
+    // Kører bytte menuen og kontrollerer byttehandlen
     private void trade(PlayerController playerC, int init, Trading trading){
         // init = initiator, rece = receiver
         String[] players = new String[playerC.getNumOfPlayers()-1];
@@ -597,6 +597,7 @@ public class GUI_Handler {
         updateGuiPlayerBalance(playerC);
     }
 
+    // Spørger spilleren om hvilke ejendomme han vil bytte/have og giver et String array med navne
     private String[] getTradeOwnable(PlayerController playerC, int ref){
         String[] ownables = new String[playerC.getPlayerOwnables(ref).length+2]; // +2 for valg "AFSLUT" og "RESET"
         String[] offer = new String[0];
@@ -622,14 +623,15 @@ public class GUI_Handler {
         return offer;
     }
 
+    // Updaterer rammerne for alle Ownables med samme navn som i det givne String array, til den givne spillers farve
     private void updateOwnerBorders(int ref, String[] offer){
         GUI_Field[] fields = gui.getFields();
-        for (int fieldNum=0 ; fieldNum < fields.length ; fieldNum++) {
-            if (fields[fieldNum] instanceof GUI_Ownable){
-                for (int offerNum=0 ; offerNum < offer.length ; offerNum++) {
-                    if (fields[fieldNum].getTitle().equals(offer[offerNum])){
+        for (int fieldNum=0 ; fieldNum < fields.length ; fieldNum++) { // For alle felter
+            if (fields[fieldNum] instanceof GUI_Ownable){              // Hvis de er er en Ownable
+                for (int offerNum=0 ; offerNum < offer.length ; offerNum++) { // For alle navne i offer
+                    if (fields[fieldNum].getTitle().equals(offer[offerNum])){ // Hvis en ownable hedder det samme som offeret
                         GUI_Ownable owned = (GUI_Ownable)fields[fieldNum];
-                        owned.setBorder(gui_Players[ref].getCar().getPrimaryColor());
+                        owned.setBorder(gui_Players[ref].getCar().getPrimaryColor()); // Sæt den ownables ramme til spillerens farve
                     }
                 }
             }

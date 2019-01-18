@@ -13,6 +13,7 @@ public class Chance extends Square{
         intantiateCards();
     }
 
+    // Aktiverer det næste chancekort og dets effect
     public void landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC){
         int card = chanceCards[0];
         int oldPos = playerC.getPosition(playerNum);
@@ -162,32 +163,35 @@ public class Chance extends Square{
                 playerC.setPosition(11,playerNum);
                 break;
         }
+        // Tjekker om spilleren er passeret start, og giver penge hvis de er
         if (oldPos > playerC.getPosition(playerNum) && card != 23 && card != 24)
             playerC.updatePlayerBalance(playerNum,4000);
         gui_handler.guiChance(card, playerC);
         leftShiftCards();
     }
 
-
+    // Sætter alle chancekort i dækket én gang til venstre (og sætter det øverste kort nederst)
     private void leftShiftCards(){
         int[] leftShifted = new int[chanceCards.length];
-        int firstValue = chanceCards[0];
         for (int number = 0; number < chanceCards.length; number++) {
-            int j = (number + 1) % chanceCards.length;
+            int j = (number + 1) % chanceCards.length; // Når vi når enden af dækket, sættes det sidste kort forrest
             leftShifted[number] = chanceCards[j];
         }
-        leftShifted[leftShifted.length-1] = firstValue;
         chanceCards = leftShifted;
     }
+
+    // Laver et dæk af chanckort (int array) og blander det
     private void intantiateCards(){
         chanceCards = new int[chanceCards.length]; // Resetter chancecards, da den er static
         int[] cards = new int[chanceCards.length];
         int pos;
 
+        // Her laves et sæt kort
         for (int i = 0; i < cards.length ; i++) {
             cards[i] = i;
         }
 
+        // Her blandes kortsættet
         for (int card = 0; card < chanceCards.length; card++) {
             do {
                 pos = (int) (Math.random() * chanceCards.length);

@@ -12,10 +12,12 @@ public class Building {
 
     private HashMap buildningPrice;
 
+    // Henter husprisen for alle felter
     public Building() throws IOException{
         buildningPrice = TextReader.textReader(".\\src\\Resources\\BuildingPrice");
     }
 
+    // Finder hvilken ejendom som skal bygges på, og spørger om hvad der skal bygges
     public void build(PlayerController playerC, int playerNum, GUI_Handler gui_handler){
         String bygningDerSkalÆndres = "";
         Ownable[] ejendomme = playerC.getPlayerOwnables(playerNum);
@@ -23,7 +25,7 @@ public class Building {
         boolean forsæt = true;
         while(forsæt) {
             if (valg.equals("Lyseblå")) {
-                if (ownAllID(ejendomme, 1)) {
+                if (ownAllID(ejendomme, 1)) { // Du skal eje alle af den farve for at kunne tilføje huse
                     forsæt = false;
                     int k = 0;
                     String[] streets = new String[2];
@@ -35,7 +37,7 @@ public class Building {
                             }
                         }
                     }
-                    bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
+                    bygningDerSkalÆndres = gui_handler.chooseSpecificStreet(streets); // Spørger hvilken ejedom der skal bygges på
                 }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg.equals("Pink")) {
                 if (ownAllID(ejendomme, 2)) {
@@ -50,7 +52,7 @@ public class Building {
                             }
                         }
                     }
-                    bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
+                    bygningDerSkalÆndres = gui_handler.chooseSpecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg.equals("Grøn")) {
                 if (ownAllID(ejendomme, 3)) {
@@ -65,7 +67,7 @@ public class Building {
                             }
                         }
                     }
-                    bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
+                    bygningDerSkalÆndres = gui_handler.chooseSpecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg.equals("Grå")) {
                 if (ownAllID(ejendomme, 4)) {
@@ -80,7 +82,7 @@ public class Building {
                             }
                         }
                     }
-                    bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
+                    bygningDerSkalÆndres = gui_handler.chooseSpecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg.equals("Rød")) {
                 if (ownAllID(ejendomme, 5)) {
@@ -95,7 +97,7 @@ public class Building {
                             }
                         }
                     }
-                    bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
+                    bygningDerSkalÆndres = gui_handler.chooseSpecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg.equals("Hvid")) {
                 if (ownAllID(ejendomme, 6)) {
@@ -110,7 +112,7 @@ public class Building {
                             }
                         }
                     }
-                    bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
+                    bygningDerSkalÆndres = gui_handler.chooseSpecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg.equals("Gul")) {
                 if (ownAllID(ejendomme, 7)) {
@@ -125,7 +127,7 @@ public class Building {
                             }
                         }
                     }
-                    bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
+                    bygningDerSkalÆndres = gui_handler.chooseSpecificStreet(streets);
                 }else{gui_handler.notAllID(); forsæt = false;}
             } else if (valg.equals("Lilla")) {
                 if (ownAllID(ejendomme, 8)) {
@@ -140,13 +142,15 @@ public class Building {
                         }
                     }
                     forsæt = false;
-                    bygningDerSkalÆndres = gui_handler.chooseSepecificStreet(streets);
+                    bygningDerSkalÆndres = gui_handler.chooseSpecificStreet(streets);
                 }else{ gui_handler.notAllID(); forsæt = false;}
             } else if (valg.equals("Tilbage")) {
                 forsæt = false;
             }
 
         }
+
+        // Bygger huse på den ejendom som blev valgt
         for(int i=0; i<ejendomme.length; i++){
             if (ejendomme[i] instanceof Street) {
                 if (bygningDerSkalÆndres.equalsIgnoreCase(ejendomme[i].getName())) {
@@ -157,15 +161,17 @@ public class Building {
         }
     }
 
+    // Spørger spilleren om et antal bygninger og sætter det antal på ejendommen (og tilføjer/fratrækker penge)
     private void buildBuilding(Ownable ownable, GUI_Handler gui_handler, PlayerController playerC, int playerNum){
         int numBuildBefore = ownable.getNumOfBuildings();
 
-        int price = (Integer) buildningPrice.get(ownable.getPositionOnBoard());
-        int valg = gui_handler.chooseNumBuildnings(ownable.getPositionOnBoard(), price);
+        int price = (Integer) buildningPrice.get(ownable.getPositionOnBoard()); // Finder prisen på ét hus
+        int valg = gui_handler.chooseNumBuildnings(ownable.getPositionOnBoard(), price); // Spørger spiller om antal huse
 
         if (valg != -1) {
             ownable.setNumberOfBuildings(valg);
 
+            // Hvis du har fjernet huse, sælges de for halv pris
             if (numBuildBefore > ownable.getNumOfBuildings()) {
                 int price2 = price * (numBuildBefore - valg);
                 playerC.updatePlayerBalance(playerNum, price2 / 2);
@@ -176,6 +182,7 @@ public class Building {
         }
     }
 
+    // Tjekker om et Ownable array indeholder alle af et bestemt gruppe ID (fx farve, byggeri eller færge)
     private boolean ownAllID(Ownable[] property, int ID){
         int numOfIDs = 0;
         for (int i = 0; i < property.length; i++) {

@@ -6,15 +6,14 @@ import View.GUI_Handler;
 
 public class Start extends Square{
 
-    //Constructor
+
     public Start(int positionOnBoard){
         super(positionOnBoard);
     }
 
-    //@Override
+    //Giver spiller 4.000 kr.
     public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC){
 
         playerC.updatePlayerBalance(playerNum, 4000);
-        //return -1;
     }
 }

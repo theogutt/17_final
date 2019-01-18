@@ -3,6 +3,8 @@ package Controller;
 import Model.Squares.Ownable;
 
 public class Trading {
+
+    // Bytter antal penge og valgte Ownables af two spillere
     public void trade(PlayerController playerC, int initRef, String[] initOwnable, int initMoney,
                                                 int receRef, String[] receOwnable, int receMoney){
 
@@ -32,6 +34,7 @@ public class Trading {
 
     }
 
+    // Konverterer et String array af Ownable navne til et Ownable array af Ownables med de navne
     private Ownable[] convertOwnable(PlayerController playerC, int ref, String[] stringOwnable){
         Ownable[] newOwnables = new Ownable[stringOwnable.length];
         Ownable[] playerOwnables = playerC.getPlayerOwnables(ref);
