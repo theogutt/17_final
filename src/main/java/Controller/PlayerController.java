@@ -7,11 +7,7 @@ import Model.Squares.Ownable;
 public class PlayerController {
     private int numOfPlayers;
 
-    private int roll1;
-    private int roll2;
-
     private Player[] playerModels;
-    private int oldRollSum;
 
     public PlayerController(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
@@ -29,8 +25,8 @@ public class PlayerController {
         }
         else if (choice == 2){
 
-            roll1 = die1.roll();
-            roll2 = die2.roll();
+            int roll1 = die1.roll();
+            int roll2 = die2.roll();
 
             if (roll1 == roll2){
                 setInJail(ref, false);
@@ -74,7 +70,7 @@ public class PlayerController {
         return ref;
     }
 
-    public int calcNewPosition(int rollSum1, int rollSum2, int i) {
+    public void calcNewPosition(int rollSum1, int rollSum2, int i) {
         int oldPosition = getRef(i).getCurPosition();
         getRef(i).setOldPosition(oldPosition);
 
@@ -90,7 +86,6 @@ public class PlayerController {
             getRef(i).setCurPosition((newPosition));
         }
         getRef(i).setOldRollSum(rollSum1+rollSum2);
-        return oldRollSum = rollSum1+rollSum2;
     }
 
     public void setPosition(int newPosition, int playerNum) {
@@ -99,18 +94,12 @@ public class PlayerController {
         playerModels[playerNum].setCurPosition(newPosition);
     }
 
-/*
-    public void addPlayerStreet(int i, Street street) {
-        getRef(i).addStreet(street);
-    }
-*/
-
     private Player getRef(int i) {
         return playerModels[i];
     }
 
     public void broke(int ref) {
-        if (playerModels[ref].getBalance() < 0) setBroke(true, ref);
+        if (playerModels[ref].getBalance() < 0) playerModels[ref].setBroke(true);
     }
 
     public boolean getInJail(int ref) {
@@ -125,16 +114,8 @@ public class PlayerController {
         getRef(i).setJailCard(bool);
     }
 
-    public void setSpecialCard(int i, boolean bool) {
-        getRef(i).setSpecialCard(bool);
-    }
-
     public boolean getJailCard(int ref) {
         return getRef(ref).getJailCard();
-    }
-
-    public boolean getSpecialCard(int ref) {
-        return getRef(ref).getSpecialCard();
     }
 
     public int getPlayerOldPosition(int ref) {
@@ -160,19 +141,6 @@ public class PlayerController {
         return playerModels[i].getOldPosition();
     }
 
-    public void setOldRollSum(int oldRollSum) {
-        this.oldRollSum = oldRollSum;
-    }
-
-    public int getOldRollSum(int ref) {
-        int oldRoll = playerModels[ref].getOldRollSum();
-        return oldRoll;
-    }
-
-    public void setSumOfStreets(int ref, int sumOfStreets) {
-        playerModels[ref].setSumOfProperties(sumOfStreets);
-    }
-
     public String getName(int i) {
         return playerModels[i].getName();
     }
@@ -186,14 +154,6 @@ public class PlayerController {
     }
     public int getBalance(int i) {
         return playerModels[i].getBalance();
-    }
-
-    public void setBroke(boolean bool, int i) {
-        playerModels[i].setBroke(bool);
-    }
-
-    public void setBalance(int newBalance, int i) {
-        playerModels[i].setBalance(newBalance);
     }
 
     public int getNumOfPlayers() {
@@ -214,9 +174,5 @@ public class PlayerController {
 
     public void removeOwnable(Ownable ownable, int i){
         this.playerModels[i].removeOwnable(ownable);
-    }
-
-    public Player[] getPlayerModels() {
-        return playerModels;
     }
 }

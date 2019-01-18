@@ -32,7 +32,7 @@ public class GameBoard {
     }
 
 // Opretter felter med pris og rent
-    public void instantiateSquares() throws IOException {
+    private void instantiateSquares() throws IOException {
         for (int i = 0; i < 40; i++) {
             if (i == 0){ squares[i]= new Start(i);}                                                                        //Start
             else if (i == 10 || i == 20 ){ squares[i]= new Parking(i);}                                                    //Parking
@@ -49,7 +49,7 @@ public class GameBoard {
         boolean passedStartBool = passedStart(playerC, ref);
         return passedStartBool;
     }
-    public boolean passedStart(PlayerController playerC, int ref){
+    private boolean passedStart(PlayerController playerC, int ref){
         boolean passedStart = false;
         if (playerC.getOldPosition(ref) == 30 && playerC.getPosition(ref) == 10){
             // From GoToPrison to Prison

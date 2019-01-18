@@ -1,8 +1,5 @@
 package View;
 
-/*
-import Controller.Building;
-*/
 import Controller.Building;
 import Controller.PlayerController;
 import Controller.Trading;
@@ -47,13 +44,13 @@ public class GUI_Handler {
         while (aktivTur) {
             updateGuiPlayerBalance(playerC);
             valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Afslut tur");
-            if (valg == "Handel") {
+            if (valg.equals("Handel")) {
                 trade(playerC, playerNum, trading);
-            } else if (valg == "Bygge") {
+            } else if (valg.equals("Bygge")) {
                 building.build(playerC, playerNum, this);
             //} else if (valg == "Pantsæt") {
                 //indsæt pantsæt metode :)
-            } else if (valg == "Afslut tur") {
+            } else if (valg.equals("Afslut tur")) {
                 aktivTur = false;
             }
         }
@@ -88,21 +85,21 @@ public class GUI_Handler {
         }
     }
 
-    public void addGuiPlayer(PlayerController playerC, int ref, GUI_Car car) {
+    private void addGuiPlayer(PlayerController playerC, int ref, GUI_Car car) {
         gui_Players[ref] = new GUI_Player(playerC.getName(ref), playerC.getBalance(ref), car);
         gui.addPlayer(gui_Players[ref]);
     }
 
-    public void setSpecificCar(PlayerController playerC, int ref) {
+    private void setSpecificCar(PlayerController playerC, int ref) {
         fields[(playerC.getPosition(ref))].setCar(getGuiPlayer(ref), true);
     }
 
-    public GUI_Player getGuiPlayer(int i) {
+    private GUI_Player getGuiPlayer(int i) {
         GUI_Player guiPlayer = gui_Players[i];
         return guiPlayer;
     }
 
-    public void enterNamePlayer(PlayerController playerC, int ref) {
+    private void enterNamePlayer(PlayerController playerC, int ref) {
         boolean nameTaken;
         int i;
 
@@ -175,12 +172,12 @@ public class GUI_Handler {
         String p = Integer.toString(price);
         String valg = gui.getUserButtonPressed("Et hus koster " + p + "Kr. \nMan får halv pris tilbage ved salg af hus.","0","1","2","3","4","Hotel","Tilbage");
         int i = 0;
-        if (valg == "0")        i=0;
-        else if (valg == "1")   i=1;
-        else if (valg == "2")   i=2;
-        else if (valg == "3")   i=3;
-        else if (valg == "4")   i=4;
-        else if (valg == "Hotel")  i=5;
+        if (valg.equals("0"))        i=0;
+        else if (valg.equals("1"))   i=1;
+        else if (valg.equals("2"))   i=2;
+        else if (valg.equals("3"))   i=3;
+        else if (valg.equals("4"))   i=4;
+        else if (valg.equals("Hotel"))  i=5;
         else                    i=-1;
         street = (GUI_Street) gui.getFields()[posOnBoard];
         if (i==-1){}
@@ -191,7 +188,7 @@ public class GUI_Handler {
     public void notAllID(){
         gui.showMessage(message.notAllID());
     }
-    public Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
+    private Color chooseCarColor(CarColor carColorObj, PlayerController playerC, int ref) {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;
         String vælgFarve = "Vælg bilens farve";
@@ -233,7 +230,7 @@ public class GUI_Handler {
         return numOfPlayers;
     }
 
-    public GUI_Car chosePlayerCar(CarColor carColorObj, PlayerController playerC, int ref) {
+    private GUI_Car chosePlayerCar(CarColor carColorObj, PlayerController playerC, int ref) {
         GUI_Car car;
         Color carColor = chooseCarColor(carColorObj, playerC, ref);
 
@@ -258,7 +255,7 @@ public class GUI_Handler {
     public void diceUpdateGui(PlayerController player, Die die1, Die die2) {
         setDiceGui(die1, die2);
     }
-    public void setDiceGui(Die die1, Die die2) {
+    private void setDiceGui(Die die1, Die die2) {
         gui.setDice(die1.getFaceValue(), die2.getFaceValue());
     }
 
@@ -274,7 +271,7 @@ public class GUI_Handler {
         ownable.setBorder(carColor);
     }
 
-    public void setSpecificFields() throws IOException{
+    private void setSpecificFields() throws IOException{
         HashMap StreetName = TextReader.textReader(".\\src\\Resources\\StreetName");
             //ejendomsfelter
             GUI_Street rødovrevej = new GUI_Street();
@@ -552,7 +549,7 @@ public class GUI_Handler {
         setAllCarsCurPos(playerC);
     }
 
-    public void trade(PlayerController playerC, int playerNum, Trading trading){
+    private void trade(PlayerController playerC, int playerNum, Trading trading){
         // init = initiator, rece = receiver
         String[] players = new String[playerC.getNumOfPlayers()-1];
         int init = playerNum, rece = playerNum; // rece sat lig playerNum som en safety measure
