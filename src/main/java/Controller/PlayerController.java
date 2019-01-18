@@ -80,11 +80,13 @@ public class PlayerController {
         }
         return ref;
     }
+
+    // Udregner samlede formue for en spiller (Penge + værdi af samlede ejendomme + bygninger)
     public int getPlayerFortune(int playerNum){
         int fortune = playerModels[playerNum].getBalance();
         Ownable[] ejendomme = playerModels[playerNum].getAllPlayerOwnables();
         for(int n = 0; n < ejendomme.length; n++){
-            fortune = fortune + ejendomme[n].getPrice() + (ejendomme[n].getNumOfBuildings() * (Integer)buildingPrice.get(n));
+            fortune += ejendomme[n].getPrice() + (ejendomme[n].getNumOfBuildings() * (Integer)buildingPrice.get(n));
         }
         return fortune;
     }

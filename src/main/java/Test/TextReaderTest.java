@@ -1,5 +1,6 @@
-package Utilities;
+package Test;
 
+import Utilities.TextReader;
 import org.junit.Test;
 
 import java.io.IOException;
