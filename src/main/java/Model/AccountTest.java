@@ -3,6 +3,8 @@ package Model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class AccountTest {
@@ -26,5 +28,4 @@ public class AccountTest {
         accountPlayers.updateBalance(-2050);
         assertEquals(30000, accountPlayers.getBalance());
     }
-
 }

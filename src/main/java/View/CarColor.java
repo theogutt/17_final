@@ -8,7 +8,6 @@ public class CarColor {
     private int numOfColors = 6;
     private String[] colorStringArray;
     private String[] colorStringArray2;
-    private String colorChosenString;
 
     public CarColor() {
         instaColorArray();
@@ -17,7 +16,6 @@ public class CarColor {
 
     public Color colorChosen(String colorChoiceString) {
         Color returnColor;
-        colorChosenString = colorChoiceString;
         if (colorChoiceString.equalsIgnoreCase("rød")) {
             returnColor = colorArray[0];
         } else if (colorChoiceString.equalsIgnoreCase("grøn")) {

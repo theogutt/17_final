@@ -51,7 +51,7 @@ public class PlayerController {
     public int playerWithHighestBalance() {
         int max = 0;
         int ref = 0;
-        int sumOfProp;
+        //int sumOfProp;
 
         for (int i = 0; i < numOfPlayers; i++) {
             //Finds the player with the highest balance
@@ -85,7 +85,6 @@ public class PlayerController {
             newPosition = (rollSum1+rollSum2 + oldPosition);
             getRef(i).setCurPosition((newPosition));
         }
-        getRef(i).setOldRollSum(rollSum1+rollSum2);
     }
 
     public void setPosition(int newPosition, int playerNum) {

@@ -13,7 +13,6 @@ public class Player {
     private boolean inJail = false;
     private int outOfJailTries;
     private boolean jailCard = false;
-    private int oldRollSum;
 
     public Player(int playerNum){
         this.playerNum = playerNum;
@@ -22,14 +21,6 @@ public class Player {
     public int getSumOfProperties(){
         return account.getSumOfStreets();
     }
-    public void setSumOfProperties(int sumOfProperties){
-        account.setSumOfStreets(sumOfProperties);
-    }
-    /*public void addStreet(Street street){
-        account.addStreet(street);
-    }
-*/
-    public void setBalance(int newBalance){ account.setBalance(newBalance);}
 
     public int getBalance() {
         return account.getBalance();
@@ -109,13 +100,5 @@ public class Player {
 
     public void removeOwnable(Ownable ownable){
         this.account.removeOwnable(ownable);
-    }
-
-    public void setOldRollSum(int oldRollSum) {
-        this.oldRollSum = oldRollSum;
-    }
-
-    public int getOldRollSum() {
-        return this.oldRollSum;
     }
 }

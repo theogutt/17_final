@@ -14,7 +14,7 @@ public class Tax extends Square {
     public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
 
         if (playerC.getPosition(playerNum) == 4) {
-            int choice = guiHandler.procentOrFixed(playerC, playerNum);
+            int choice = guiHandler.procentOrFixed();
             if(choice == 1){
                 int t = (int) (-1 * (playerC.getBalance(playerNum) * 0.2));
                 playerC.updatePlayerBalance(playerNum, t);

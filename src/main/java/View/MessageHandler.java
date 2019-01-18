@@ -18,8 +18,7 @@ public class MessageHandler {
         return returnString;
     }
     public String turnMessage(PlayerController playerC, int ref, String kindOfSquare) {
-        String playerMessage = playerC.getName(ref) + getSquareMessage(Integer.parseInt(kindOfSquare));
-        return playerMessage;
+        return playerC.getName(ref) + getSquareMessage(Integer.parseInt(kindOfSquare));
     }
     public String getSquareMessage(int index) {
         return (String) hashMapTurnMessages.get(index);
@@ -43,13 +42,9 @@ public class MessageHandler {
     }
 
     public String gameMessage(String messageNum){
-        String playerMessage = getSquareMessage(Integer.parseInt(messageNum));
-        return playerMessage;
+        return getSquareMessage(Integer.parseInt(messageNum));
     }
-    public String playerEndTurn(PlayerController playerC, int i) {
-        returnString = playerC.getName(i) + " har nu " + playerC.getBalance(i) + " kr.";
-        return returnString;
-    }
+
     public String playerTurn(PlayerController playerC, int i) {
         returnString = "Det er " + playerC.getName(i) + "'s tur! Tryk enter for at kaste terningerne!";
         return returnString;
