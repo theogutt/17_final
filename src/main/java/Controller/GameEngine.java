@@ -24,6 +24,7 @@ public class GameEngine {
         building = new Building();
         trading = new Trading();
     }
+
     public void start() {
         setUpGame();
         playGame();
@@ -39,6 +40,7 @@ public class GameEngine {
         int loser = turnFlow();
         endGame(loser);
     }
+
     private int turnFlow() {
         //Normal turn
         int playerNum;
@@ -56,6 +58,7 @@ public class GameEngine {
         while (!playerC.getModelBroke(playerNum));
         return playerNum;
     }
+
     private void playTurn(int playerNum) {
         int middlePosition;
 

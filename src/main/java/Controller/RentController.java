@@ -43,20 +43,20 @@ public class RentController {
             if(ownableType==1) {
                 int buildings=curOwnable.getNumOfBuildings();
                 if (buildings == 1) {
-                    rent = oneHouseRent(position);
+                    rent = (Integer) oneHouseRent.get(position);
                 } else if (buildings == 2) {
-                    rent = twoHouseRent(position);
+                    rent = (Integer) twoHouseRent.get(position);
                 } else if (buildings == 3) {
-                    rent = threeHouseRent(position);
+                    rent = (Integer) threeHouseRent.get(position);
                 } else if (buildings == 4) {
-                    rent = fourHouseRent(position);
+                    rent = (Integer) fourHouseRent.get(position);
                 } else if (buildings == 5) {
-                    rent = HotelRent(position);
+                    rent = (Integer) hotelRent.get(position);
                 } else {
                     if (ownAll(playerC, ref, curOwnable)) {
-                        rent = baseRent(position) * 2;
+                        rent = (Integer) baseRent.get(position) * 2;
                     } else {
-                        rent = baseRent(position);
+                        rent = (Integer) baseRent.get(position);
 
                     }
                 }
@@ -70,19 +70,19 @@ public class RentController {
             }
             else if(ownableType==2){
                 if (getNumberOfFerries(playerC, curOwnable) == 1) {
-                    rent = baseRent(position);
+                    rent = (Integer) baseRent.get(position);
                 }
                 //to færger
                 else if (getNumberOfFerries(playerC, curOwnable) == 2) {
-                    rent = baseRent(position) * 2;
+                    rent = (Integer) baseRent.get(position) * 2;
                 }
                 //tre færger
                 else if (getNumberOfFerries(playerC, curOwnable) == 3) {
-                    rent = baseRent(position) * 4;
+                    rent = (Integer) baseRent.get(position) * 4;
                 }
                 //fire færger
                 else if (getNumberOfFerries(playerC, curOwnable) == 4) {
-                    rent = baseRent(position) * 8;
+                    rent = (Integer) baseRent.get(position) * 8;
                 }
             }
                 return rent;
@@ -131,46 +131,6 @@ public class RentController {
             ownAll = true;
 
         return ownAll;
-    }
-
-
-
-    private int getRentInt0 ( int index){
-        return (Integer) baseRent.get(index);
-    }
-    private int getRentInt1 ( int index){
-        return (Integer) oneHouseRent.get(index);
-    }
-    private int getRentInt2 ( int index){
-        return (Integer) twoHouseRent.get(index);
-    }
-    private int getRentInt3(int index){
-        return (Integer) threeHouseRent.get(index);
-    }
-    private int getRentInt4(int index){
-        return (Integer) fourHouseRent.get(index);
-    }
-    private int getRentInt5(int index){
-        return (Integer) hotelRent.get(index);
-    }
-
-    private int baseRent(int position){
-        return getRentInt0(position);
-    }
-    private int oneHouseRent(int position){
-        return getRentInt1(position);
-    }
-    private int twoHouseRent(int position){
-        return getRentInt2(position);
-    }
-    private int threeHouseRent(int position){
-        return getRentInt3(position);
-    }
-    private int fourHouseRent(int position){
-        return getRentInt4(position);
-    }
-    private int HotelRent(int position){
-        return getRentInt5(position);
     }
 }
 
