@@ -53,4 +53,7 @@ public class GameBoard {
         }
         return passedStart;
     }
+    public Square getSquare(int index){
+        return squares[index];
+    }
 }

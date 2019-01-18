@@ -26,7 +26,7 @@ public class GameBoardTest {
             assertEquals(30000, playerC.getBalance(i));
         }
     }
-
+/*
     @Test
     public void getGroupID() {
         //start
@@ -37,7 +37,7 @@ public class GameBoardTest {
         assertEquals(9, gameBoard.getGroupID(15));
         //Rådhuspladsen
         assertEquals(8, gameBoard.getGroupID(39));
-    }
+    }*/
 
     @Test
     public void instantiateSquares() {
