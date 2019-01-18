@@ -23,11 +23,12 @@ public abstract class Ownable extends Square{
         this.price = price;
     }
 
+    // Hvis grunden IKKE er ejet, spørger den om spilleren vil købe grunden, hvis den ER ejet trækker den leje
+    // medmindre du selv ejer grunden
     public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
-        //spørger om spiller vil købe grunden
-        if (!this.owned) {
+        if (!this.owned) { // Ingen ejer grunden
             int ja = 1;
-            int answer = guiHandler.buyStreet();
+            int answer = guiHandler.buyStreet(); //spørger om spiller vil købe grunden
             if (ja == answer) {
                 playerC.updatePlayerBalance(ref, this.price * -1);
                 setOwned(true);
@@ -37,15 +38,18 @@ public abstract class Ownable extends Square{
                 guiHandler.changeStreetColor(playerC, ref);
             }
         } else {
-            if(this.owner!=ref) {
+            if(this.owner!=ref) { // Du ejer IKKE grunden
                 int rent = rentC.retrieveRent(playerC, ref, this);
                 playerC.updatePlayerBalance(ref, rent * -1);
                 playerC.updatePlayerBalance(this.owner, rent);
                 guiHandler.payRent(playerC, this.owner, ref, rent);
             }
+            // Du ejer grunden
             else{guiHandler.playersOwnSquare(playerC, ref);}
         }
     }
+
+    // Getters og setters
     public String getName() {
         return name;
     }

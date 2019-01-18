@@ -14,6 +14,7 @@ public class GameBoard {
     private HashMap StreetName;
     private HashMap groupID;
 
+    // Laver et spillebræt og opretter felterne
     public GameBoard() throws IOException {
         squarePrice = TextReader.textReader(".\\src\\Resources\\SquarePrice");
         StreetName = TextReader.textReader(".\\src\\Resources\\StreetName");
@@ -21,13 +22,14 @@ public class GameBoard {
         instantiateSquares();
     }
 
+    // Aktiverer et felts effekt baseret på hvor spilleren står
     public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC){
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];
         curSquare.landOn(playerC, ref, guiHandler, rentC);
     }
 
-// Opretter felter med pris og rent
+    // Opretter felter med pris og rent
     private void instantiateSquares() {
         for (int i = 0; i < 40; i++) {
             if (i == 0){ squares[i]= new Start(i);}                                                                        //Start
@@ -42,10 +44,11 @@ public class GameBoard {
         }
     }
 
+    // Tjekker om spilleren passerede start og giver dem startpenge hvis de gjorde
     public boolean passedStart(PlayerController playerC, int ref){
         boolean passedStart = false;
         if (playerC.getOldPosition(ref) == 30 && playerC.getPosition(ref) == 10){
-            // From GoToPrison to Prison
+            // Fra GoToPrison til Prison (Spiller skal ikke have penge for at komme i fængsel)
         }
         else if (playerC.getPlayerOldPosition(ref)>playerC.getPosition(ref)){
             playerC.updatePlayerBalance(ref,4000);
@@ -53,6 +56,8 @@ public class GameBoard {
         }
         return passedStart;
     }
+
+    // Getter til test
     public Square getSquare(int index){
         return squares[index];
     }

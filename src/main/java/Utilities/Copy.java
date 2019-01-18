@@ -3,6 +3,8 @@ import Model.Squares.Ownable;
 import Model.Squares.Street;
 
 public class Copy {
+
+    // Laver en kopi af dit valgte Array, men en nyvalgt længde
     public static Ownable[] of(Ownable[] original, int newLength){
         Ownable[] newArray = new Ownable[newLength];
         int stop;
@@ -18,6 +20,7 @@ public class Copy {
         return newArray;
     }
 
+    // Laver en kopi af dit valgte Array, men en nyvalgt længde
     public static Street[] of(Street[] original, int newLength){
         Street[] newArray = new Street[newLength];
         int stop;
@@ -33,6 +36,7 @@ public class Copy {
         return newArray;
     }
 
+    // Laver en kopi af dit valgte Array, men en nyvalgt længde
     public static String[] of(String[] original, int newLength){
         String[] newArray = new String[newLength];
         int stop;
@@ -48,6 +52,7 @@ public class Copy {
         return newArray;
     }
 
+    // Tjekker om et String array indeholder en bestemt String
     public static boolean contains(String[] arr, String element){
         boolean contains = false;
 

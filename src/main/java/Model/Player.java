@@ -14,20 +14,24 @@ public class Player {
     private int outOfJailTries;
     private boolean jailCard = false;
 
+    // Giver spilleren et ID og laver en account til dem
     public Player(int playerNum){
         this.playerNum = playerNum;
         this.account = new Account();
     }
+
+    // Tilføjer et antal penge til spillerens pengebeholdning
+    public void updateBalance(int amount) {
+        this.account.updateBalance(amount);
+    }
+
+    // Getters og setters
     public int getSumOfProperties(){
         return account.getSumOfStreets();
     }
 
     public int getBalance() {
         return account.getBalance();
-    }
-
-    public void updateBalance(int amount) {
-        this.account.updateBalance(amount);
     }
 
     public String getName() {
@@ -37,7 +41,6 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public int getCurPosition() {
         return curPosition;
