@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class PlayerController {
     private int numOfPlayers;
     private Player[] playerModels;
-    private HashMap squarePrice;
+    private HashMap buildingPrice;
 
     public PlayerController(int numOfPlayers) throws IOException {
         this.numOfPlayers = numOfPlayers;
@@ -19,7 +19,7 @@ public class PlayerController {
         for (int i = 0; i < numOfPlayers; i++) {
             playerModels[i] = new Player(i);
         }
-        squarePrice = TextReader.textReader(".\\src\\Resources\\SquarePrice");
+        buildingPrice = TextReader.textReader(".\\src\\Resources\\BuildingPrice");
     }
 
     public void wantOutOfJail(int ref, int choice, Die die1, Die die2) {
@@ -80,7 +80,7 @@ public class PlayerController {
         int fortune = playerModels[playerNum].getBalance();
         Ownable[] ejendomme = playerModels[playerNum].getAllPlayerOwnables();
         for(int n = 0; n < ejendomme.length; n++){
-            fortune = fortune + ejendomme[n].getPrice() + (ejendomme[n].getNumOfBuildings() * (Integer)squarePrice.get(n));
+            fortune = fortune + ejendomme[n].getPrice() + (ejendomme[n].getNumOfBuildings() * (Integer)buildingPrice.get(n));
         }
         return fortune;
     }
