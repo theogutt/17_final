@@ -1,8 +1,6 @@
 package Controller;
 
 import Model.Die;
-import Model.Squares.Chance;
-import Model.Squares.Square;
 import View.GUI_Handler;
 import java.io.IOException;
 
@@ -94,8 +92,7 @@ public class GameEngine {
     }
 
     private int calcTurn(int j) {
-        int currentTurn = j % playerC.getNumOfPlayers();
-        return currentTurn;
+        return j % playerC.getNumOfPlayers();
     }
 
     private void endGame(int ref) {
