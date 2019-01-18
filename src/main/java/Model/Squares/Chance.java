@@ -78,8 +78,8 @@ public class Chance extends Square{
                 }
                 break;
 
-            case 13: // Get 40.000 if balance < 3.000.
-                if (playerC.getBalance(playerNum) < 3000)
+            case 13: // Get 40.000 if fortune < 15.000.
+                if (playerC.getPlayerFortune(playerNum) < 15000)
                     playerC.updatePlayerBalance(playerNum, 40000);
                 break;
 
