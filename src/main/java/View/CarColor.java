@@ -14,6 +14,7 @@ public class CarColor {
         instaColorStringArray();
     }
 
+    //Metode til at vælge bilfarve
     public Color colorChosen(String colorChoiceString) {
         Color returnColor;
         if (colorChoiceString.equalsIgnoreCase("rød")) {
@@ -38,13 +39,16 @@ public class CarColor {
         return returnColor;
     }
 
+    //Opdaterer liste af mulige farve valg til biler
     private void updateColorStringArray(String lastChosen) {
         colorStringArray2 = new String[colorStringArray.length];
 
-
+        //Sætter farver ind i et nyt array fra det gamle array
         for (int i = 0; i < colorStringArray.length; i++) {
             colorStringArray2[i] = colorStringArray[i];
         }
+
+        //Overskriver det første array, gør det en kortere og fjerner den valgte farve
         colorStringArray = new String[(numOfColors - colorsChosen)];
         for (int i = 0; i < colorStringArray.length; i++) {
             if (!colorStringArray2[i].equalsIgnoreCase(lastChosen)) {
@@ -59,6 +63,8 @@ public class CarColor {
             }
         }
     }
+
+    //Retunere de farver, der er at vælge fra
     public String colorsToChooseFrom() {
         String returnString = "";
         for (int i = 0; i < colorStringArray.length; i++) {
@@ -66,6 +72,8 @@ public class CarColor {
         }
         return returnString;
     }
+
+    //Array over de farve bilerne kan være
     private void instaColorArray() {
         colorArray[0] = Color.red;
         colorArray[1] = Color.GREEN;
@@ -74,6 +82,8 @@ public class CarColor {
         colorArray[4] = Color.yellow;
         colorArray[5] = Color.white;
     }
+
+    //Array som viser de farver, der er at vælge imellem
     private void instaColorStringArray() {
         colorStringArray = new String[6];
         colorStringArray[0] = "rød";

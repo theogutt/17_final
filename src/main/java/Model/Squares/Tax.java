@@ -10,9 +10,10 @@ public class Tax extends Square {
         super(positionOnBoard);
     }
 
-    //@Override
+    //Når en spiller lander på et af de to skatte felter ser metoden først, hvilket af de to felter spilleren er landet på
     public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
 
+        //Hvis det er "Betal 10% eller 4.000 kr., får spilleren muligheden for at vælge, om de vil betale 20%(nej dette er ikke en fejl) eller 4.000 kr.
         if (playerC.getPosition(playerNum) == 4) {
             int choice = guiHandler.procentOrFixed();
             if(choice == 1){
@@ -22,9 +23,10 @@ public class Tax extends Square {
             else if (choice == 2){
                 playerC.updatePlayerBalance(playerNum, -4000);
             }
+
+            //Hvis det er det andet skatte felt betaler spilleren bare 2.000 kr.
         } else {
             playerC.updatePlayerBalance(playerNum, -2000);
         }
-        //return -1;
     }
 }
