@@ -1,5 +1,6 @@
-package Model;
+package Test;
 
+import Model.Account;
 import org.junit.Before;
 import org.junit.Test;
 

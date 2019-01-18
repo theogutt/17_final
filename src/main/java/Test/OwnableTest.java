@@ -1,8 +1,9 @@
-package Model.Squares;
+package Test;
 
 import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
+import Model.Squares.Street;
 import View.GUI_Handler;
 import org.junit.Before;
 import org.junit.Test;

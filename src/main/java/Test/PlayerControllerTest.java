@@ -1,5 +1,6 @@
-package Controller;
+package Test;
 
+import Controller.PlayerController;
 import Model.Die;
 import org.junit.Before;
 import org.junit.Test;

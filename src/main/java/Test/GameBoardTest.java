@@ -1,5 +1,8 @@
-package Controller;
+package Test;
 
+import Controller.GameBoard;
+import Controller.PlayerController;
+import Controller.RentController;
 import Model.Squares.*;
 import View.GUI_Handler;
 import org.junit.Before;

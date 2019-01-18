@@ -91,7 +91,7 @@ public class GameEngine {
         guiHandler.menu(playerC, playerNum, building, trading);
     }
 
-    private int calcTurn(int j) {
+    public int calcTurn(int j) {
         return j % playerC.getNumOfPlayers();
     }
 
