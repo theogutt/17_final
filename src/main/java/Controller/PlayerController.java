@@ -3,17 +3,23 @@ package Controller;
 import Model.Die;
 import Model.Player;
 import Model.Squares.Ownable;
+import Utilities.TextReader;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 public class PlayerController {
     private int numOfPlayers;
     private Player[] playerModels;
+    private HashMap squarePrice;
 
-    public PlayerController(int numOfPlayers) {
+    public PlayerController(int numOfPlayers) throws IOException {
         this.numOfPlayers = numOfPlayers;
         playerModels = new Player[numOfPlayers];
         for (int i = 0; i < numOfPlayers; i++) {
             playerModels[i] = new Player(i);
         }
+        squarePrice = TextReader.textReader(".\\src\\Resources\\SquarePrice");
     }
 
     public void wantOutOfJail(int ref, int choice, Die die1, Die die2) {
@@ -47,26 +53,36 @@ public class PlayerController {
         setInJail(playerNum, false);
     }
 
-    public int playerWithHighestBalance() {
+    public int playerWithHighestBalance(int loser) {
         int max = 0;
         int ref = 0;
         //int sumOfProp;
 
         for (int i = 0; i < numOfPlayers; i++) {
-            //Finds the player with the highest balance
-            if (max < playerModels[i].getBalance()) {
-                max = playerModels[i].getBalance();
-                ref = playerModels[i].getPlayerNum();
-            }
-
-            //If equal amount, the winner is the one with the greatest amount of property value
-            else if (max == playerModels[i].getBalance()) {
-                if (playerModels[ref].getSumOfProperties() < playerModels[i].getSumOfProperties()) {
+            //Finds the player with the highest balance and property value
+            if(i != loser) {
+                if (max < getPlayerFortune(i)) {
+                    max = getPlayerFortune(i);
                     ref = i;
+                }
+
+                //If equal amount, the winner is the one with the greatest amount of property value
+                else if (max == getPlayerFortune(i)) {
+                    if (playerModels[ref].getSumOfProperties() < playerModels[i].getSumOfProperties()) {
+                        ref = i;
+                    }
                 }
             }
         }
         return ref;
+    }
+    public int getPlayerFortune(int playerNum){
+        int fortune = playerModels[playerNum].getBalance();
+        Ownable[] ejendomme = playerModels[playerNum].getAllPlayerOwnables();
+        for(int n = 0; n < ejendomme.length; n++){
+            fortune =+ ejendomme[n].getPrice() + (ejendomme[n].getNumOfBuildings() * (Integer)squarePrice.get(n));
+        }
+        return fortune;
     }
 
     public void calcNewPosition(int rollSum1, int rollSum2, int i) {

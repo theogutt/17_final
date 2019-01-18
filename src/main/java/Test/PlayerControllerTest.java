@@ -5,6 +5,8 @@ import Model.Die;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class PlayerControllerTest {
@@ -12,7 +14,7 @@ public class PlayerControllerTest {
     private Die die1;
     private Die die2;
     @Before
-    public void initialize() {
+    public void initialize() throws IOException {
         playerC = new PlayerController(4);
         die1 = new Die(6);
         die2 = new Die(6);
@@ -53,7 +55,7 @@ public class PlayerControllerTest {
         playerC.updatePlayerBalance(2, 100000);
         playerC.updatePlayerBalance(3, 10000);
 
-        assertEquals(2, playerC.playerWithHighestBalance());
+        assertEquals(2, playerC.playerWithHighestBalance(1));
     }
 
     @Test

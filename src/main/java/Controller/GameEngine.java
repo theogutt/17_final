@@ -25,12 +25,12 @@ public class GameEngine {
         trading = new Trading();
     }
 
-    public void start() {
+    public void start() throws IOException{
         setUpGame();
         playGame();
     }
 
-    private void setUpGame() {
+    private void setUpGame()throws IOException{
         guiHandler.startGameGui();
         playerC = new PlayerController(guiHandler.chooseNumOfPlayers());
         guiHandler.setGameUpGui(playerC);
@@ -95,7 +95,7 @@ public class GameEngine {
     }
 
     private void endGame(int ref) {
-        int x = playerC.playerWithHighestBalance();
+        int x = playerC.playerWithHighestBalance(ref);
         guiHandler.gotBrokeGui(playerC, ref);
         guiHandler.playerWonGui(playerC, x);
     }

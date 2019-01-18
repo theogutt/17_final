@@ -62,6 +62,10 @@ public abstract class Ownable extends Square{
         return numberOfBuildings;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public void setOwner(int ref) {
         this.owner = ref;
     }
