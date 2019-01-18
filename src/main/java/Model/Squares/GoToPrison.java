@@ -9,10 +9,9 @@ public class GoToPrison extends Square{
         super(positionOnBoard);
     }
 
-    //@Override
+    //Sætter spillerens position til at være på "I fængsel" feltet og sætter spillerens tilstand til at være "I fængsel"
     public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
         playerC.setPosition(10,playerNum);
         playerC.setInJail(playerNum, true);
-        //return -2;
     }
 }

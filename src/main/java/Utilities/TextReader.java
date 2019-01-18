@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class TextReader {
 
+    // Laver et HashMap fra en fil og splitter hver linje på "=" tegn
     public static HashMap textReader(String file) throws IOException {
         BufferedReader br = new BufferedReader((new FileReader(file)));
         String line;
