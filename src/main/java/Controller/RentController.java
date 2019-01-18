@@ -65,7 +65,7 @@ public class RentController {
                 if (getNumberOfBreweries(playerC, curOwnable) == 1) {
                     rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 100;
                 } else if (getNumberOfBreweries(playerC, curOwnable) == 2) {
-                    rent = (playerC.getPosition(ref)-playerC.getPosition(ref)) * 200;
+                    rent = (playerC.getPosition(ref)-playerC.getOldPosition(ref)) * 200;
                 }
             }
             else if(ownableType==2){
