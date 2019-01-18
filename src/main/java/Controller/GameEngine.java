@@ -31,7 +31,7 @@ public class GameEngine {
 
     private void setUpGame() {
         guiHandler.startGameGui();
-        playerC = new PlayerController(guiHandler.choseNumOfPlayers());
+        playerC = new PlayerController(guiHandler.chooseNumOfPlayers());
         guiHandler.setGameUpGui(playerC);
     }
 
@@ -74,13 +74,13 @@ public class GameEngine {
             die1.roll();
             die2.roll();
         }
-        guiHandler.removeAllCarsCurPos(playerC);
+        guiHandler.removeAllCarsCurPos();
         if (!playerC.getInJail(playerNum))
             playerC.calcNewPosition(die1.getFaceValue(), die2.getFaceValue(), playerNum);
         guiHandler.setAllCarsCurPos(playerC);
-        guiHandler.diceUpdateGui(playerC, die1, die2);
-        boolean passedStart = gameBoard.didPlayerPassStart(playerC, playerNum);
-        if(passedStart){guiHandler.messageSquareGui(playerC, playerNum, gameBoard.getSquare(playerC.getPosition(playerNum)), passedStart);}
+        guiHandler.diceUpdateGui(die1, die2);
+        boolean passedStart = gameBoard.passedStart(playerC, playerNum);
+        if(passedStart){guiHandler.messageSquareGui(playerC, playerNum, passedStart);}
         middlePosition = playerC.getPosition(playerNum);
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
         if (middlePosition != playerC.getPosition(playerNum))
