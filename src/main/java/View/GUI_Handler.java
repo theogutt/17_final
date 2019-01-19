@@ -78,6 +78,7 @@ public class GUI_Handler {
         gui.showMessage(message.gotBroke(playerC, i));
     }
 
+    // Viser beskeden for at spiller har fået en ekstra tur
     public void extraTurnGui(){
         gui.showMessage(message.extraTurn());
     }
