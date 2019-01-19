@@ -94,7 +94,7 @@ public class PlayerController {
         int fortune = playerModels[playerNum].getBalance();
         Ownable[] ejendomme = playerModels[playerNum].getAllPlayerOwnables();
         for(int n = 0; n < ejendomme.length; n++){
-            fortune += ejendomme[n].getPrice() + (ejendomme[n].getNumOfBuildings() * (Integer)buildingPrice.get(n));
+            fortune += ejendomme[n].getPrice() + (ejendomme[n].getNumOfBuildings() * (Integer)buildingPrice.get(ejendomme[n].getPositionOnBoard()));
         }
         return fortune;
     }
