@@ -78,6 +78,10 @@ public class GUI_Handler {
         gui.showMessage(message.gotBroke(playerC, i));
     }
 
+    public void extraTurnGui(){
+        gui.showMessage(message.extraTurn());
+    }
+
     // Fortæller spilleren hvor meget de har betalt i skat
     public void tax(PlayerController playerC, int i, int tax) {
         gui.showMessage(message.taxes(playerC, i, tax));

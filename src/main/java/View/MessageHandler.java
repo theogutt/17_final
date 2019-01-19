@@ -60,7 +60,7 @@ public class MessageHandler {
 
     //Siger hvilken spillers tur det
     public String playerTurn(PlayerController playerC, int i) {
-        returnString = "Det er " + playerC.getName(i) + "'s tur! Tryk enter for at kaste terningerne!";
+        returnString = "Det er " + playerC.getName(i) + "'s tur! Tryk ENTER for at kaste terningerne!";
         return returnString;
     }
 
@@ -88,6 +88,10 @@ public class MessageHandler {
                 "Din balance er " + balance + "kr. \n" +
                 "Din total værdi er " + fortune + "kr.";
         return returnString;
+    }
+
+    public String extraTurn(){
+        return "Du slog to ens, du får en ekstra tur! Tryk ENTER for at kaste terningerne";
     }
 
     //Getter en besked fra hashmappet TurnMessages
