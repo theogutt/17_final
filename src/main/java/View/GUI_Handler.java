@@ -210,8 +210,7 @@ public class GUI_Handler {
     }
 
     // Spørger spilleren om hvor mange huse de vil bygge og viser det på spillebrættet
-    public int chooseNumBuildnings(int posOnBoard, int price) {
-        GUI_Street street;
+    public int chooseNumBuildnings(int price) {
         String p = Integer.toString(price);
         String valg = gui.getUserButtonPressed("Hvert hus koster " + p + "Kr.\nEt hotel koster " + p + "kr. + 4 huse \nMan får halv pris tilbage ved salg af bygninger.", "0", "1", "2", "3", "4", "Hotel", "Tilbage");
         int i;
@@ -222,14 +221,24 @@ public class GUI_Handler {
         else if (valg.equals("4")) i = 4;
         else if (valg.equals("Hotel")) i = 5;
         else i = -1;
-        street = (GUI_Street) gui.getFields()[posOnBoard];
-        if (i == -1) {
-        } else if (i == 5) {
+
+        return i;
+    }
+
+    // Sætter et antal huse på en grund
+    public void putHouses(int pos, int houses){
+        GUI_Street street = (GUI_Street) gui.getFields()[pos];
+
+        if (houses == 5) {
             street.setHotel(true);
         } else {
-            street.setHouses(i);
+            street.setHouses(houses);
         }
-        return i;
+    }
+
+    // Fortæller spiller at de ikke har råd til huse
+    public void cantAffordHouses(){
+        gui.showMessage(message.cantAffortHouses());
     }
 
     // Fortæller spilleren at de ikke ejer alle felter af den valgte farve

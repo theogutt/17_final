@@ -172,7 +172,13 @@ public class Building {
         int numBuildBefore = ownable.getNumOfBuildings();
 
         int price = (Integer) buildningPrice.get(ownable.getPositionOnBoard()); // Finder prisen på ét hus
-        int valg = gui_handler.chooseNumBuildnings(ownable.getPositionOnBoard(), price); // Spørger spiller om antal huse
+        int valg = gui_handler.chooseNumBuildnings(price); // Spørger spiller om antal huse
+
+        // Hvis spilleren ikke har nok penge til at købe
+        if ((playerC.getBalance(playerNum) < (price * valg)) && (valg > numBuildBefore)) {
+            valg = -1;
+            gui_handler.cantAffordHouses();
+        }
 
         if (valg != -1) {
             ownable.setNumberOfBuildings(valg);
@@ -185,6 +191,8 @@ public class Building {
                 int price2 = -price * (valg - numBuildBefore);
                 playerC.updatePlayerBalance(playerNum, price2);
             }
+
+            gui_handler.putHouses(ownable.getPositionOnBoard(), valg);
         }
     }
 

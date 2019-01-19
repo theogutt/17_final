@@ -100,4 +100,9 @@ public class MessageHandler {
     public String getSquareMessage(int index) {
         return (String) hashMapTurnMessages.get(index);
     }
+
+    // Fortæller spiller at de ikke har råd til huse
+    public String cantAffortHouses(){
+        return "Du har ikke nok penge!";
+    }
 }
