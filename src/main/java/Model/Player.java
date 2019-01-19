@@ -1,3 +1,9 @@
+//*******************************************************************
+// Player.java       Author: Gruppe 17
+//
+// Repræsenterer en spiller
+//*******************************************************************
+
 package Model;
 
 import Model.Squares.Ownable;

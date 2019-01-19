@@ -1,3 +1,9 @@
+//*******************************************************************
+// AccountTest.java       Author: Gruppe 17
+//
+// Tester Account klassen
+//*******************************************************************
+
 package Test;
 
 import Model.Account;
@@ -16,11 +22,13 @@ public class AccountTest {
         accountPlayers = new Account();
     }
 
+    // Tester om spilleren starter med det rigtige antal penge
     @Test
     public void startAccount() {
         assertEquals(30000, accountPlayers.getBalance());
     }
 
+    // Tester om spillerens pengebeholdning opdateres korrekt
     @Test
     public void updateBalance() {
         assertEquals(30000, accountPlayers.getBalance());

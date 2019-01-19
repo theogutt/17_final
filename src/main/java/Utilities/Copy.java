@@ -1,3 +1,11 @@
+//*******************************************************************
+// Copy.java       Author: Gruppe 17
+//
+// Indeholder nogle hjælpemetoder til Arrays.
+// Nogle af disse metoder findes i senere java-versioner, men kunne
+// ikke bruges i dette projekt af diverse grunde.
+//*******************************************************************
+
 package Utilities;
 import Model.Squares.Ownable;
 import Model.Squares.Street;

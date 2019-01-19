@@ -1,3 +1,9 @@
+//**************************************************************************
+// Trading.java       Author: Gruppe 17
+//
+// Overfører grunde og penge mellem to spiller som har lavet en byttehandel
+//**************************************************************************
+
 package Controller;
 
 import Model.Squares.Ownable;

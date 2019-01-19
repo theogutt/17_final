@@ -1,3 +1,9 @@
+//*******************************************************************
+// Tax.java       Author: Gruppe 17
+//
+// Repræsenterer et skatte felt hvor spilleren skal betale skat
+//*******************************************************************
+
 package Model.Squares;
 
 import Controller.PlayerController;

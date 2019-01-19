@@ -1,3 +1,9 @@
+//*******************************************************************
+// Ownable.java       Author: Gruppe 17
+//
+// Abstrakt klasse som repræsenterer et felt som kan ejes
+//*******************************************************************
+
 package Model.Squares;
 
 import Controller.PlayerController;

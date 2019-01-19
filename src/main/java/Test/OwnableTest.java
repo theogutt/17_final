@@ -1,21 +1,21 @@
+//*******************************************************************
+// OwnableTets.java       Author: Gruppe 17
+//
+// Tester Ownable klassen
+//*******************************************************************
+
 package Test;
 
-import Controller.GameBoard;
-import Controller.PlayerController;
-import Controller.RentController;
 import Model.Squares.Street;
-import View.GUI_Handler;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static org.junit.Assert.*;
 
 public class OwnableTest {
 
+    // Tester om et felt får det korrekte navn når det laves
     @Test
-    public void getName() throws IOException {
+    public void getName() {
         Street allegade = new Street(0,0,0,"allegade", 0,false,99);
         assertEquals("allegade", allegade.getName());
     }
@@ -26,27 +26,30 @@ public class OwnableTest {
         assertEquals(1000, allegade.getPrice());
     }*/
 
+    // Tester om et felt får det korrekte gruppe ID når det laves
     @Test
-    public void getGroupID() throws IOException {
+    public void getGroupID() {
         Street allegade = new Street(0,0,0,"", 1,false,99);
         assertEquals(1, allegade.getGroupID());
     }
 
+    // Tester om der kan bygges huse på en felt
     @Test
-    public void setNumberOfBuildings() throws IOException {
+    public void setNumberOfBuildings() {
         Street allegade = new Street(0,0,0,"", 0,false,99);
         assertEquals(0, allegade.getNumOfBuildings());
         allegade.setNumberOfBuildings(4);
         assertEquals(4, allegade.getNumOfBuildings());
     }
 
+    // Tester om et felt kan returnerer det korrekte antal huse
     @Test
-    public void getNumOfBuildings() throws IOException {
+    public void getNumOfBuildings() {
         Street allegade = new Street(0,0,4,"", 0,false,99);
         assertEquals(4, allegade.getNumOfBuildings());
     }
 
-  /*  @Test
+    /*  @Test
     public void isOwned() throws IOException {
         Street allegade = new Street(0,0,0,"", 0,false,99);
         assertEquals(false, allegade.isOwned());
@@ -54,21 +57,23 @@ public class OwnableTest {
         assertEquals(true, allegade.isOwned());
     }*/
 
+    // Tester om et felt kan ændre ejer
     @Test
-    public void setOwner() throws IOException {
+    public void setOwner() {
         Street allegade = new Street(0,0,0,"", 0,false,99);
         assertEquals(99, allegade.getOwner());
         allegade.setOwner(1);
         assertEquals(1, allegade.getOwner());
     }
 
+    // Tester om et felt returnerer den korrekte ejer
     @Test
-    public void getOwner() throws IOException {
+    public void getOwner() {
         Street allegade = new Street(0,0,0,"", 0,false,99);
         assertEquals(99, allegade.getOwner());
     }
 
-/*    @Test
+    /*    @Test
     public void setOwned() throws IOException {
         Street allegade = new Street(0,0,0,"", 0,false,99);
         assertEquals(false, allegade.isOwned());

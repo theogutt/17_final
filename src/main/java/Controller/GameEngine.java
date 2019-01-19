@@ -1,3 +1,9 @@
+//************************************************************************
+// GameEngine.java       Author: Gruppe 17
+//
+// Opsætter spillet ud fra de andre klasser og kontrollerer spillets gang
+//************************************************************************
+
 package Controller;
 
 import Model.Die;

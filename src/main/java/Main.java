@@ -1,3 +1,9 @@
+//*******************************************************************
+// Main.java       Author: Gruppe 17
+//
+// Starter spillet
+//*******************************************************************
+
 import Controller.GameEngine;
 
 import java.io.IOException;

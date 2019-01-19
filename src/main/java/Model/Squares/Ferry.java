@@ -1,3 +1,9 @@
+//*******************************************************************
+// Ferry.java       Author: Gruppe 17
+//
+// Repræsenterer et færge felt som man kan eje
+//*******************************************************************
+
 package Model.Squares;
 
 public class Ferry extends Ownable {
