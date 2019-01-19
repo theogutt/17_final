@@ -98,6 +98,24 @@ public class PlayerController {
         }
         return fortune;
     }
+    public int getSumOfBuildings(int playerNum) {
+        int buildningPrice = 0;
+        Ownable[] ejendomme = playerModels[playerNum].getAllPlayerOwnables();
+        for (int n = 0; n < ejendomme.length; n++) {
+            buildningPrice += (ejendomme[n].getNumOfBuildings() * (Integer) buildingPrice.get(ejendomme[n].getPositionOnBoard()));
+        }
+        return buildningPrice;
+    }
+
+    public int getSumofOwnables(int playerNum){
+        int sumofOwnables = 0;
+        Ownable[] ejendomme = playerModels[playerNum].getAllPlayerOwnables();
+        for(int n = 0; n < ejendomme.length; n++) {
+            sumofOwnables += ejendomme[n].getPrice();
+        }
+        return sumofOwnables;
+    }
+
 
     //Beregner en spillers nye position på brættet ud fra tegnnig slag og håndtere hvis en spiller passere start
     public void calcNewPosition(int rollSum1, int rollSum2, int i) {

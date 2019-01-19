@@ -9,6 +9,7 @@ package View;
 import Controller.Building;
 import Controller.PlayerController;
 import Controller.Trading;
+import Model.Player;
 import Utilities.Copy;
 import Utilities.TextReader;
 import Model.Die;
@@ -45,7 +46,7 @@ public class GUI_Handler {
         String valg;
         while (aktivTur) {
             updateGuiPlayerBalance(playerC);
-            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Afslut tur");
+            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Se værdier", "Afslut tur");
             if (valg.equals("Handel")) {
                 trade(playerC, playerNum, trading);
             } else if (valg.equals("Bygge")) {
@@ -54,8 +55,17 @@ public class GUI_Handler {
                 //indsæt pantsæt metode :)
             } else if (valg.equals("Afslut tur")) {
                 aktivTur = false;
+            } else if (valg.equals("Se værdier")){
+                playerValue(playerC, playerNum);
             }
         }
+    }//fortæller spilleren, hvor meget de er værd
+    public void playerValue(PlayerController playerC, int playerNum){
+        int fortune = playerC.getPlayerFortune(playerNum);
+        int balance = playerC.getBalance(playerNum);
+        int grund = playerC.getSumofOwnables(playerNum);
+        int bygning = playerC.getSumOfBuildings(playerNum);
+        gui.showMessage(message.playerValue(balance, grund, bygning, fortune));
     }
 
     //Siger hvilken spiller, der har vundet
