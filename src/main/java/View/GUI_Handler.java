@@ -9,7 +9,6 @@ package View;
 import Controller.Building;
 import Controller.PlayerController;
 import Controller.Trading;
-import Model.Player;
 import Model.Squares.Ownable;
 import Utilities.Copy;
 import Utilities.TextReader;
@@ -696,11 +695,18 @@ public class GUI_Handler {
             selected = gui.getUserSelection("Ejendomme: " + Arrays.toString(offer), ownables);
             if (!selected.equals("AFSLUT") && !selected.equals("RESET")) {
                 if (!Copy.contains(offer, selected)) {
+                    ownables = Copy.remove(ownables, selected);
                     offer = Copy.of(offer, offer.length + 1);
                     offer[offer.length - 1] = selected;
                 }
-            } else if (selected.equals("RESET"))
+            } else if (selected.equals("RESET")) {
                 offer = new String[0];
+                ownables = new String[playerC.getPlayerOwnables(ref).length + 2];
+                for (int n = 0; n < playerC.getPlayerOwnables(ref).length; n++)
+                    ownables[n] = playerC.getPlayerOwnables(ref)[n].getName();
+                ownables[ownables.length - 1] = "AFSLUT";
+                ownables[ownables.length - 2] = "RESET";
+            }
         } while (!selected.equals("AFSLUT"));
 
         return offer;
