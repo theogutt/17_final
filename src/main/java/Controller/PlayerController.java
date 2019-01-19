@@ -30,12 +30,12 @@ public class PlayerController {
     }
 
     //Håndtere en spillers valg om at betale sig ud af fængslet, eller prøve at slå et parslag i tre forsøg, og sidder derefter spilleren ud af fængslet
-    public void wantOutOfJail(int ref, int choice, Die die1, Die die2) {
+    public void wantOutOfJail(int playerNum, int choice, Die die1, Die die2) {
         // Spiller betaler sig ud af fængslet
         if (choice == 1){
-            playerModels[ref].updateBalance(-1000);
-            playerModels[ref].setOutOfJailTries(0);
-            setInJail(ref, false);
+            playerModels[playerNum].updateBalance(-1000);
+            playerModels[playerNum].setOutOfJailTries(0);
+            setInJail(playerNum, false);
         }
         // Spiller slår med terninger for at komme ud
         else if (choice == 2){
@@ -44,15 +44,15 @@ public class PlayerController {
             int roll2 = die2.roll();
 
             if (roll1 == roll2){
-                setInJail(ref, false);
-                playerModels[ref].setOutOfJailTries(0);
+                setInJail(playerNum, false);
+                playerModels[playerNum].setOutOfJailTries(0);
             }
             else {
-                playerModels[ref].setOutOfJailTries(playerModels[ref].getOutOfJailTries() + 1);
-                if (playerModels[ref].getOutOfJailTries() == 3){
-                    playerModels[ref].updateBalance(-1000);
-                    playerModels[ref].setOutOfJailTries(0);
-                    setInJail(ref, false);
+                playerModels[playerNum].setOutOfJailTries(playerModels[playerNum].getOutOfJailTries() + 1);
+                if (playerModels[playerNum].getOutOfJailTries() == 3){
+                    playerModels[playerNum].updateBalance(-1000);
+                    playerModels[playerNum].setOutOfJailTries(0);
+                    setInJail(playerNum, false);
                 }
             }
         }
@@ -67,7 +67,7 @@ public class PlayerController {
     //Finder vinderen af spillet
     public int playerWithHighestBalance(int loser) {
         int max = 0;
-        int ref = 0;
+        int playerNum = 0;
         //int sumOfProp;
 
         for (int i = 0; i < numOfPlayers; i++) {
@@ -75,18 +75,18 @@ public class PlayerController {
             if(i != loser) {
                 if (max < getPlayerFortune(i)) {
                     max = getPlayerFortune(i);
-                    ref = i;
+                    playerNum = i;
                 }
 
                 //Hvis to spiller har lige store pengebeholdninger, er vinderen den spiller med den højeste ejendomsværdi
                 else if (max == getPlayerFortune(i)) {
-                    if (playerModels[ref].getSumOfProperties() < playerModels[i].getSumOfProperties()) {
-                        ref = i;
+                    if (playerModels[playerNum].getSumOfProperties() < playerModels[i].getSumOfProperties()) {
+                        playerNum = i;
                     }
                 }
             }
         }
-        return ref;
+        return playerNum;
     }
 
     // Udregner samlede formue for en spiller (Penge + værdi af samlede ejendomme + bygninger)
@@ -118,53 +118,53 @@ public class PlayerController {
 
 
     //Beregner en spillers nye position på brættet ud fra tegnnig slag og håndtere hvis en spiller passere start
-    public void calcNewPosition(int rollSum1, int rollSum2, int i) {
-        int oldPosition = playerModels[i].getCurPosition();
-        playerModels[i].setOldPosition(oldPosition);
+    public void calcNewPosition(int rollSum1, int rollSum2, int playerNum) {
+        int oldPosition = playerModels[playerNum].getCurPosition();
+        playerModels[playerNum].setOldPosition(oldPosition);
 
         int newPosition;
         if (rollSum1+rollSum2 + oldPosition == 39) {
-            playerModels[i].setCurPosition(39);
+            playerModels[playerNum].setCurPosition(39);
         } else if ((rollSum1+rollSum2 + oldPosition) > 39) {
             newPosition = ((rollSum1+rollSum2 + oldPosition) % 40);
-            playerModels[i].setCurPosition((newPosition));
+            playerModels[playerNum].setCurPosition((newPosition));
 
         } else {
             newPosition = (rollSum1+rollSum2 + oldPosition);
-            playerModels[i].setCurPosition((newPosition));
+            playerModels[playerNum].setCurPosition((newPosition));
         }
     }
 
     //Tjekker om en spiller er gået fallit
-    public void broke(int ref) {
-        if (playerModels[ref].getBalance() < 0) playerModels[ref].setBroke(true);
+    public void broke(int playerNum) {
+        if (playerModels[playerNum].getBalance() < 0) playerModels[playerNum].setBroke(true);
     }
 
     //Ændre en spiller pengebeholdning med et difinret beløb
-    public void updatePlayerBalance(int ref, int accountUpdate) {
-        playerModels[ref].updateBalance(accountUpdate);
+    public void updatePlayerBalance(int playerNum, int accountUpdate) {
+        playerModels[playerNum].updateBalance(accountUpdate);
     }
 
     //(Se Account.owable)
-    public void addOwnable(Ownable ownable, int i){
-        this.playerModels[i].addOwnable(ownable);
+    public void addOwnable(Ownable ownable, int playerNum){
+        this.playerModels[playerNum].addOwnable(ownable);
     }
 
     //(Se Account.owable)
-    public void removeOwnable(Ownable ownable, int i){
-        this.playerModels[i].removeOwnable(ownable);
+    public void removeOwnable(Ownable ownable, int playerNum){
+        this.playerModels[playerNum].removeOwnable(ownable);
     }
 
     //Finder en spiller reference nummer ud fra spilleren navn
     public int getPlayerNumFromName(String name) {
-        int ref = -1;
+        int playerNum = -1;
 
         for(int n=0 ; n < playerModels.length ; n++) {
             if (name.equals(playerModels[n].getName()))
-                ref = n;
+                playerNum = n;
         }
 
-        return ref;
+        return playerNum;
     }
 
     //Sætter  kun en spillers position (i modsætning til calcNewPosition)
@@ -176,55 +176,55 @@ public class PlayerController {
 
 
     //Getters og setters
-    public boolean getInJail(int ref) {
-        return playerModels[ref].getInJail();
+    public boolean getInJail(int playerNum) {
+        return playerModels[playerNum].getInJail();
     }
 
-    public void setInJail(int i, boolean bool) {
-        playerModels[i].setInJail(bool);
+    public void setInJail(int playerNum, boolean bool) {
+        playerModels[playerNum].setInJail(bool);
     }
 
-    public void setJailCard(int i, boolean bool) {
-        playerModels[i].setJailCard(bool);
+    public void setJailCard(int playerNum, boolean bool) {
+        playerModels[playerNum].setJailCard(bool);
     }
 
-    public boolean getJailCard(int ref) {
-        return playerModels[ref].getJailCard();
+    public boolean getJailCard(int playerNum) {
+        return playerModels[playerNum].getJailCard();
     }
 
-    public int getPlayerOldPosition(int ref) {
-        return playerModels[ref].getOldPosition();
+    public int getPlayerOldPosition(int playerNum) {
+        return playerModels[playerNum].getOldPosition();
     }
 
-    public int getPosition(int i) {
-        return playerModels[i].getCurPosition();
+    public int getPosition(int playerNum) {
+        return playerModels[playerNum].getCurPosition();
     }
 
-    public int getOldPosition(int i) {
-        return playerModels[i].getOldPosition();
+    public int getOldPosition(int playerNum) {
+        return playerModels[playerNum].getOldPosition();
     }
 
-    public String getName(int i) {
-        return playerModels[i].getName();
+    public String getName(int playerNum) {
+        return playerModels[playerNum].getName();
     }
 
-    public void setName(String name, int i) {
-        playerModels[i].setName(name);
+    public void setName(String name, int playerNum) {
+        playerModels[playerNum].setName(name);
     }
 
-    public int getBalance(int i) {
-        return playerModels[i].getBalance();
+    public int getBalance(int playerNum) {
+        return playerModels[playerNum].getBalance();
     }
 
     public int getNumOfPlayers() {
         return numOfPlayers;
     }
 
-    public boolean getModelBroke(int i) {
-        return playerModels[i].getBroke();
+    public boolean getModelBroke(int playerNum) {
+        return playerModels[playerNum].getBroke();
     }
 
-    public Ownable[] getPlayerOwnables(int ref) {
-        return playerModels[ref].getAllPlayerOwnables();
+    public Ownable[] getPlayerOwnables(int playerNum) {
+        return playerModels[playerNum].getAllPlayerOwnables();
     }
 }
