@@ -31,11 +31,13 @@ public class PlayerController {
 
     //Håndtere en spillers valg om at betale sig ud af fængslet, eller prøve at slå et parslag i tre forsøg, og sidder derefter spilleren ud af fængslet
     public void wantOutOfJail(int ref, int choice, Die die1, Die die2) {
+        // Spiller betaler sig ud af fængslet
         if (choice == 1){
             playerModels[ref].updateBalance(-1000);
             playerModels[ref].setOutOfJailTries(0);
             setInJail(ref, false);
         }
+        // Spiller slår med terninger for at komme ud
         else if (choice == 2){
 
             int roll1 = die1.roll();
