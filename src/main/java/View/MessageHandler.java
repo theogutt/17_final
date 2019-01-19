@@ -82,6 +82,7 @@ public class MessageHandler {
         return returnString;
     }
 
+    // Fortæller spilleren om deres amlede værdier
     public String playerValue(int balance, int grund, int bygning, int fortune){
         returnString ="Din værdi i grunde er " + grund + "kr. \n" +
                 "Din værdi i bygninger er " + bygning + "kr. \n" +
@@ -90,6 +91,7 @@ public class MessageHandler {
         return returnString;
     }
 
+    // Fortæller spilleren at de har fået en ekstra tur
     public String extraTurn(){
         return "Du slog to ens, du får en ekstra tur! Tryk ENTER for at kaste terningerne";
     }
