@@ -121,7 +121,6 @@ public class GameEngine {
 
         if (die1.getFaceValue() == die2.getFaceValue()){
             this.pairs++;
-            System.out.println(this.pairs);
             if (this.pairs == 3){
                 playerC.setPosition(10,playerNum);
                 playerC.setInJail(playerNum, true);

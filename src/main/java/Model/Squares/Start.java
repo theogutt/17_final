@@ -13,7 +13,5 @@ public class Start extends Square{
 
     //Giver spiller 4.000 kr.
     public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC){
-
-        playerC.updatePlayerBalance(playerNum, 4000);
     }
 }

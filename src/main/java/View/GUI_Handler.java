@@ -224,9 +224,6 @@ public class GUI_Handler {
         String[] chooseColorStrings = carColorObj.colorsToChooseFrom().split(" ");
         String carColorS;
         String vælgFarve = "Vælg bilens farve";
-        for (int i = 0; i < chooseColorStrings.length; i++) {
-            System.out.println(chooseColorStrings[i]);
-        }
         if (chooseColorStrings.length == 6) {
             carColorS = gui.getUserSelection(vælgFarve, chooseColorStrings[0], chooseColorStrings[1], chooseColorStrings[2], chooseColorStrings[3], chooseColorStrings[4], chooseColorStrings[5]);
         } else if (chooseColorStrings.length == 5) {
