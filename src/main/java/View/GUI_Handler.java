@@ -658,6 +658,7 @@ public class GUI_Handler {
                     receMoney = gui.getUserInteger("Hvor mange penge skal byttes?", 0, playerC.getBalance(rece));
             }
 
+            // Tjekker om der er huse på en af grundenes farve
             if (hasBuildings(playerC, trading, init, initOffer)){
                 initOffer = new String[0];
                 gui.showMessage(message.housesExist());
