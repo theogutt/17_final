@@ -58,7 +58,7 @@ public class RentController {
                 }
             }
 
-            // Hvis feltet er et bryggeri
+        // Hvis feltet er et bryggeri
         } else if (curOwnable instanceof Brewery) {
             // Udregner først hvad spilleren har rullet
             int playerRoll = playerC.getPosition(ref) - playerC.getOldPosition(ref);
@@ -68,7 +68,7 @@ public class RentController {
             // Slaget der er slået * Rent   * (1 || 2)
             rent = playerRoll * 100 * getNumberOfBreweries(playerC, curOwnable);
 
-            // Hvis feltet er en færge
+        // Hvis feltet er en færge
         } else if (curOwnable instanceof Ferry) {
             // 500(færgeleje) * 2^(antalFærger-1)
             rent = ((Integer) baseRent.get(position) * (int) Math.pow(2, (getNumberOfFerries(playerC, curOwnable)) - 1));
