@@ -94,7 +94,7 @@ public class GameEngine {
 
         // Hvis spilleren passerede start
         boolean passedStart = gameBoard.passedStart(playerC, playerNum);
-        if(passedStart){guiHandler.messageSquareGui(playerC, playerNum, passedStart);}
+        if(passedStart){guiHandler.messageSquareGui(playerC, playerNum);}
 
         middlePosition = playerC.getPosition(playerNum);
         gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);

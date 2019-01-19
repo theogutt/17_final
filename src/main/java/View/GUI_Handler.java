@@ -127,10 +127,7 @@ public class GUI_Handler {
     }
 
     // Fortæller en spiller hvis de har passeret start
-    public void messageSquareGui(PlayerController playerC, int ref, boolean passedStart) {
-        if (passedStart) {
-            gui.showMessage(message.messageSquare(playerC, ref));
-        }
+    public void messageSquareGui(PlayerController playerC, int ref) {
         gui.showMessage(message.messageSquare(playerC, ref));
     }
 
