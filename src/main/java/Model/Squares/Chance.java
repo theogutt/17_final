@@ -1,3 +1,9 @@
+//*******************************************************************
+// Chance.java       Author: Gruppe 17
+//
+// Repræsenterer et chancekort felt og chancekortene
+//*******************************************************************
+
 package Model.Squares;
 
 

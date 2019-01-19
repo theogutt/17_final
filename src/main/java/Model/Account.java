@@ -1,3 +1,9 @@
+//*******************************************************************
+// Account.java       Author: Gruppe 17
+//
+// Repræsenterer en spillers konto af penge og ejendomme
+//*******************************************************************
+
 package Model;
 
 import Model.Squares.Ownable;

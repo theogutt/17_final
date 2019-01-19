@@ -1,3 +1,9 @@
+//*******************************************************************
+// Building.java       Author: Gruppe 17
+//
+// Styrer når en spiller vil bygge huse på en grund
+//*******************************************************************
+
 package Controller;
 
 import Model.Squares.Ownable;

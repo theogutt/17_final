@@ -1,3 +1,9 @@
+//*******************************************************************
+// Brewery.java       Author: Gruppe 17
+//
+// Repræsenterer et bryggeri felt som man kan eje
+//*******************************************************************
+
 package Model.Squares;
 
 public class Brewery extends Ownable {

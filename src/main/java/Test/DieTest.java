@@ -1,3 +1,9 @@
+//*******************************************************************
+// DieTest.java       Author: Gruppe 17
+//
+// Tester Die klassen
+//*******************************************************************
+
 package Test;
 
 import Model.Die;
@@ -17,7 +23,7 @@ public class DieTest {
         die = new Die(6);
     }
 
-
+    // Tester om terningen ruller det korrekte antal øjne (fra 1 til 6)
     @Test
     public void roll() {
         // can the die roll faceValues smaller than 1 or bigger than 6.

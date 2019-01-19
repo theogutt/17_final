@@ -1,3 +1,9 @@
+//*******************************************************************
+// GoToPrison.java       Author: Gruppe 17
+//
+// Repræsenterer et "gå i fængsel" felt
+//*******************************************************************
+
 package Model.Squares;
 
 import Controller.PlayerController;

@@ -1,3 +1,9 @@
+//*******************************************************************
+// GameBoardTest.java       Author: Gruppe 17
+//
+// Tester GameBoard klassen
+//*******************************************************************
+
 package Test;
 
 import Controller.GameBoard;
@@ -24,12 +30,13 @@ public class GameBoardTest {
         gameBoard = new GameBoard();
         playerC = new PlayerController(3);
         rent = new RentController();
+        // Tester om spillerne starter fra start, og har rigtig pengebeholdning til start
         for (int i = 0; i < 3; i++) {
             assertEquals(0, playerC.getPosition(i));
             assertEquals(30000, playerC.getBalance(i));
         }
     }
-/*
+    /*
     @Test
     public void getGroupID() {
         //start
@@ -42,6 +49,7 @@ public class GameBoardTest {
         assertEquals(8, gameBoard.getGroupID(39));
     }*/
 
+    // Tester om der laves det korrekte antal af hvert felt
     @Test
     public void instantiateSquares() {
         int numOfStart = 0;
@@ -72,6 +80,7 @@ public class GameBoardTest {
         assertEquals(4, numOfFerries);
     }
 
+    // Tester om spilleren får det korrekte anatal penge for at passere start
     @Test
     public void passedStart() {
         playerC.setPosition(39, 0);
