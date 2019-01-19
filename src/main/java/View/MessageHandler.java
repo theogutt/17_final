@@ -81,6 +81,7 @@ public class MessageHandler {
         returnString = playerC.getName(i) + " har betalt " + tax + "kr. i skat";
         return returnString;
     }
+
     public String playerValue(int balance, int grund, int bygning, int fortune){
         returnString ="Din værdi i grunde er " + grund + "kr. \n" +
                 "Din værdi i bygninger er " + bygning + "kr. \n" +
