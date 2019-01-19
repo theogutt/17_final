@@ -7,6 +7,7 @@
 package Controller;
 
 import Model.Die;
+import Utilities.Cheatkodes;
 import View.GUI_Handler;
 import java.io.IOException;
 
@@ -20,6 +21,7 @@ public class GameEngine {
     private Die die2;
     private RentController rentC;
     private int pairs;
+    private Cheatkodes cheatkodes;
 
     public GameEngine() throws IOException {
         guiHandler = new GUI_Handler();
@@ -29,6 +31,7 @@ public class GameEngine {
         rentC = new RentController();
         building = new Building();
         trading = new Trading();
+        cheatkodes = new Cheatkodes();
     }
 
     // Sætter spillet op og starter det
@@ -71,6 +74,8 @@ public class GameEngine {
 
     // Kører én spillers tur
     private void playTurn(int playerNum) {
+
+        cheatkodes.cheats(playerC,playerNum,this, guiHandler, rentC, gameBoard);
         int middlePosition;
 
         guiHandler.updateGuiPlayerBalance(playerC);
@@ -135,5 +140,9 @@ public class GameEngine {
                 playTurn(playerNum);
             }
         }
+    }
+
+    public void setPairs(int i){
+        pairs = i;
     }
 }

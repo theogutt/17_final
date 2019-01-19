@@ -206,4 +206,8 @@ public class Chance extends Square{
             chanceCards[pos] = cards[card];
         }
     }
+
+    public void setChanceCards(int i){
+        chanceCards[0] = i;
+    }
 }

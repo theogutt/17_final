@@ -59,9 +59,9 @@ public class Cheatkodes {
             int i = scan.nextInt();
             if (i < 40){
                 playerC.setPosition(i, playerNum);
-                guiHandler.removeAllCarsCurPos(playerC);
+                guiHandler.removeAllCarsCurPos();
                 guiHandler.setAllCarsCurPos(playerC);
-                GameBoard.squares[i].landOn(playerC,playerNum,guiHandler,rentC,gameBoard);
+                GameBoard.squares[i].landOn(playerC,playerNum,guiHandler,rentC);
             }
         }
 
@@ -70,9 +70,8 @@ public class Cheatkodes {
             int[] chanceCards = new int[27];
             int i = scan.nextInt();
             if (i < 27){
-                chanceCards[0] = i;
-                chance.setChanceCards(chanceCards);
-                GameBoard.squares[2].landOn(playerC,playerNum,guiHandler,rentC,gameBoard);
+                chance.setChanceCards(i);
+                GameBoard.squares[2].landOn(playerC,playerNum,guiHandler,rentC);
             }
         }
     }
