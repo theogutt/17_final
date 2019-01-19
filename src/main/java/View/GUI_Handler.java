@@ -201,8 +201,8 @@ public class GUI_Handler {
     }
 
     // Spørger spilleren om at vælge en farve de vil bygge på
-    public String chooseStreetToBuildOn() {
-        return gui.getUserSelection("Vælg grundens farve", "Lyseblå", "Pink", "Grøn", "Grå", "Rød", "Hvid", "Gul", "Lilla", "Tilbage");
+    public String chooseStreetToBuildOn(String[] choices) {
+        return gui.getUserSelection("Vælg grundens farve", choices);
     }
 
     // Spørger spilleren om at vælge en bestemt grund udfra String arrayet
