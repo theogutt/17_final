@@ -73,44 +73,46 @@ public class GameEngine {
     private void playTurn(int playerNum) {
         int middlePosition;
 
-        guiHandler.updateGuiPlayerBalance(playerC);
+        do {
+            guiHandler.updateGuiPlayerBalance(playerC);
 
-        // Hvis en spiller er i fængsel
-        if (playerC.getInJail(playerNum)){
-            if (playerC.getJailCard(playerNum)) {
-                playerC.getOutOfJailFree(playerNum);
+            // Hvis en spiller er i fængsel
+            if (playerC.getInJail(playerNum)) {
+                if (playerC.getJailCard(playerNum)) {
+                    playerC.getOutOfJailFree(playerNum);
+                } else {
+                    int choice = guiHandler.payOrRoll();
+                    playerC.wantOutOfJail(playerNum, choice, die1, die2);
+                }
+            } else {
+                die1.roll();
+                die2.roll();
             }
-            else {
-                int choice = guiHandler.payOrRoll();
-                playerC.wantOutOfJail(playerNum, choice, die1, die2);
+            guiHandler.removeAllCarsCurPos();
+
+            // Hvis spilleren stadig ikke er kommet ud af fængslet
+            if (!playerC.getInJail(playerNum))
+                playerC.calcNewPosition(die1.getFaceValue(), die2.getFaceValue(), playerNum);
+
+            guiHandler.setAllCarsCurPos(playerC);
+            guiHandler.diceUpdateGui(die1, die2);
+
+            // Hvis spilleren passerede start
+            boolean passedStart = gameBoard.passedStart(playerC, playerNum);
+            if (passedStart) {
+                guiHandler.messageSquareGui(playerC, playerNum);
             }
-        }
-        else{
-            die1.roll();
-            die2.roll();
-        }
-        guiHandler.removeAllCarsCurPos();
 
-        // Hvis spilleren stadig ikke er kommet ud af fængslet
-        if (!playerC.getInJail(playerNum))
-            playerC.calcNewPosition(die1.getFaceValue(), die2.getFaceValue(), playerNum);
-
-        guiHandler.setAllCarsCurPos(playerC);
-        guiHandler.diceUpdateGui(die1, die2);
-
-        // Hvis spilleren passerede start
-        boolean passedStart = gameBoard.passedStart(playerC, playerNum);
-        if(passedStart){guiHandler.messageSquareGui(playerC, playerNum);}
-
-        middlePosition = playerC.getPosition(playerNum);
-        gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
-
-        // Hvis spilleren ramte et chancekort som ændrede hans position
-        if (middlePosition != playerC.getPosition(playerNum))
+            middlePosition = playerC.getPosition(playerNum);
             gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
 
-        guiHandler.updateGuiPlayerBalance(playerC);
-        extraTurn(playerNum); // Hvis spiller slog to ens får han en ekstra tur
+            // Hvis spilleren ramte et chancekort som ændrede hans position
+            if (middlePosition != playerC.getPosition(playerNum))
+                gameBoard.squareImpact(playerNum, playerC, guiHandler, rentC);
+
+            guiHandler.updateGuiPlayerBalance(playerC);
+             // Hvis spiller slog to ens får han en ekstra tur
+        } while(extraTurn(playerNum));
         this.pairs = 0;
         guiHandler.menu(playerC, playerNum, building, trading);
     }
@@ -123,8 +125,8 @@ public class GameEngine {
     }
 
     // Giver spilleren en ekstra tur hvis han slår to ens, men sætter ham i fængsel hvis han slår to ens tre gange
-    private void extraTurn(int playerNum){
-
+    private boolean extraTurn(int playerNum){
+        boolean getExtra = false;
         if (die1.getFaceValue() == die2.getFaceValue()){
             this.pairs++;
             if (this.pairs == 3){
@@ -132,8 +134,9 @@ public class GameEngine {
                 playerC.setInJail(playerNum, true);
             }
             else{
-                playTurn(playerNum);
+                getExtra = true;
             }
         }
+        return getExtra;
     }
 }
