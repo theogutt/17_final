@@ -98,6 +98,8 @@ public class PlayerController {
         }
         return fortune;
     }
+
+    //udregner hvad en spiller har af værdi i bygninger
     public int getSumOfBuildings(int playerNum) {
         int buildningPrice = 0;
         Ownable[] ejendomme = playerModels[playerNum].getAllPlayerOwnables();
@@ -107,6 +109,7 @@ public class PlayerController {
         return buildningPrice;
     }
 
+    //udregner hvad en spiller har af værdi i grunde
     public int getSumofOwnables(int playerNum){
         int sumofOwnables = 0;
         Ownable[] ejendomme = playerModels[playerNum].getAllPlayerOwnables();
