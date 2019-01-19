@@ -133,6 +133,7 @@ public class GameEngine {
                 playerC.setPosition(10,playerNum);
                 playerC.setInJail(playerNum, true);
             }
+            else if(playerC.getInJail(playerNum)){} // Hvis spilleren kom i fængsel på et dobbelt slag
             else{
                 getExtra = true;
                 guiHandler.extraTurnGui();

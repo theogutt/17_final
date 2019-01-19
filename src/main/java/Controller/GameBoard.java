@@ -53,10 +53,10 @@ public class GameBoard {
     // Tjekker om spilleren passerede start og giver dem startpenge hvis de gjorde
     public boolean passedStart(PlayerController playerC, int ref){
         boolean passedStart = false;
-        if (playerC.getOldPosition(ref) == 30 && playerC.getPosition(ref) == 10){
-            // Fra GoToPrison til Prison (Spiller skal ikke have penge for at komme i fængsel)
+        if (playerC.getInJail(ref)){
+            // Fra fx GoToPrison til Prison (Spiller skal ikke have penge for at komme i fængsel)
         }
-        else if (playerC.getPlayerOldPosition(ref)>playerC.getPosition(ref)){
+        else if (playerC.getOldPosition(ref)>playerC.getPosition(ref)){
             playerC.updatePlayerBalance(ref,4000);
             passedStart = true;
         }

@@ -195,10 +195,6 @@ public class PlayerController {
         return playerModels[playerNum].getJailCard();
     }
 
-    public int getPlayerOldPosition(int playerNum) {
-        return playerModels[playerNum].getOldPosition();
-    }
-
     public int getPosition(int playerNum) {
         return playerModels[playerNum].getCurPosition();
     }
