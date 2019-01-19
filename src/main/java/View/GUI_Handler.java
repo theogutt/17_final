@@ -10,6 +10,7 @@ import Controller.Building;
 import Controller.PlayerController;
 import Controller.Trading;
 import Model.Player;
+import Model.Squares.Ownable;
 import Utilities.Copy;
 import Utilities.TextReader;
 import Model.Die;
@@ -656,6 +657,18 @@ public class GUI_Handler {
                 else if (typeSelection.equals("PENGE"))
                     receMoney = gui.getUserInteger("Hvor mange penge skal byttes?", 0, playerC.getBalance(rece));
             }
+
+            if (hasBuildings(playerC, trading, init, initOffer)){
+                initOffer = new String[0];
+                gui.showMessage(message.housesExist());
+            }
+
+            if (hasBuildings(playerC, trading, rece, receOffer)){
+                receOffer = new String[0];
+                gui.showMessage(message.housesExist());
+            }
+
+
         } while (!invSelection.equals("AFSLUT"));
 
         trading.trade(playerC, init, initOffer, initMoney,
@@ -705,5 +718,26 @@ public class GUI_Handler {
                 }
             }
         }
+    }
+
+    // Tjekker om et tilbud indeholder en grund hvis farve der er huse på
+    private boolean hasBuildings(PlayerController playerC, Trading trading, int ref, String[] offer){
+        boolean hasBuildings = false;
+
+        Ownable[] allOwnables = playerC.getPlayerOwnables(ref);
+        Ownable[] offerOwnables = trading.convertOwnable(playerC, ref, offer);
+
+        // Tjekker om der er nogle grunde med samme ID som dem i offeret som har huse
+        for (Ownable offerOwnable : offerOwnables){
+            for (Ownable allOwnable : allOwnables){
+                if (offerOwnable.getGroupID() == allOwnable.getGroupID()) {
+                    if (allOwnable.getNumOfBuildings() > 0)
+                        hasBuildings = true;
+                }
+            }
+        }
+
+
+        return hasBuildings;
     }
 }

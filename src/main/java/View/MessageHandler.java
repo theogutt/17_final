@@ -105,4 +105,9 @@ public class MessageHandler {
     public String cantAffortHouses(){
         return "Du har ikke nok penge!";
     }
+
+    // Fortæller spilleren at de ikke kan bytte en grund da der er huse på dens farve
+    public String housesExist(){
+        return "Du kan ikke bytte en grund når der er huse på dens farve";
+    }
 }
