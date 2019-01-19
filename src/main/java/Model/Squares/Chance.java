@@ -1,7 +1,12 @@
+//*******************************************************************
+// Chance.java       Author: Gruppe 17
+//
+// Repræsenterer et chancekort felt og chancekortene
+//*******************************************************************
+
 package Model.Squares;
 
 
-import Controller.GameBoard;
 import Controller.PlayerController;
 import View.GUI_Handler;
 import Controller.RentController;
@@ -14,10 +19,11 @@ public class Chance extends Square{
         intantiateCards();
     }
 
-    public void landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC, GameBoard gameBoard){
+    // Aktiverer det næste chancekort og dets effect
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler gui_handler, RentController rentC){
         int card = chanceCards[0];
         int oldPos = playerC.getPosition(playerNum);
-        Ownable[] playerOwnabels = playerC.getPlayerOwnables(playerNum);;
+        Ownable[] playerOwnabels = playerC.getPlayerOwnables(playerNum);
 
 
         switch (card){
@@ -79,8 +85,8 @@ public class Chance extends Square{
                 }
                 break;
 
-            case 13: // Get 40.000 if balance < 3.000.
-                if (playerC.getBalance(playerNum) < 3000)
+            case 13: // Get 40.000 if fortune < 15.000.
+                if (playerC.getPlayerFortune(playerNum) < 15000)
                     playerC.updatePlayerBalance(playerNum, 40000);
                 break;
 
@@ -163,32 +169,35 @@ public class Chance extends Square{
                 playerC.setPosition(11,playerNum);
                 break;
         }
+        // Tjekker om spilleren er passeret start, og giver penge hvis de er
         if (oldPos > playerC.getPosition(playerNum) && card != 23 && card != 24)
             playerC.updatePlayerBalance(playerNum,4000);
         gui_handler.guiChance(card, playerC);
         leftShiftCards();
     }
 
-
-    public void leftShiftCards(){
+    // Sætter alle chancekort i dækket én gang til venstre (og sætter det øverste kort nederst)
+    private void leftShiftCards(){
         int[] leftShifted = new int[chanceCards.length];
-        int firstValue = chanceCards[0];
         for (int number = 0; number < chanceCards.length; number++) {
-            int j = (number + 1) % chanceCards.length;
+            int j = (number + 1) % chanceCards.length; // Når vi når enden af dækket, sættes det sidste kort forrest
             leftShifted[number] = chanceCards[j];
         }
-        leftShifted[leftShifted.length-1] = firstValue;
         chanceCards = leftShifted;
     }
-    public void intantiateCards(){
+
+    // Laver et dæk af chanckort (int array) og blander det
+    private void intantiateCards(){
         chanceCards = new int[chanceCards.length]; // Resetter chancecards, da den er static
         int[] cards = new int[chanceCards.length];
         int pos;
 
+        // Her laves et sæt kort
         for (int i = 0; i < cards.length ; i++) {
             cards[i] = i;
         }
 
+        // Her blandes kortsættet
         for (int card = 0; card < chanceCards.length; card++) {
             do {
                 pos = (int) (Math.random() * chanceCards.length);
@@ -196,13 +205,5 @@ public class Chance extends Square{
 
             chanceCards[pos] = cards[card];
         }
-    }
-
-    public int[] getChanceCards() {
-        return chanceCards;
-    }
-
-    public void setChanceCards(int[] chanceCards) {
-        this.chanceCards = chanceCards;
     }
 }

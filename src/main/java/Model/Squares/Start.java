@@ -1,25 +1,14 @@
-package Model.Squares;
+//*******************************************************************
+// Start.java       Author: Gruppe 17
+//
+// Repræsenterer start feltet
+//*******************************************************************
 
-import Controller.PlayerController;
-import Controller.RentController;
-import View.GUI_Handler;
+package Model.Squares;
 
 public class Start extends Square{
 
-    //Constructor
     public Start(int positionOnBoard){
         super(positionOnBoard);
-    }
-
-    @Override
-    public int getPositionOnBoard(){
-        return super.getPositionOnBoard();
-    }
-
-    //@Override
-    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC){
-
-        playerC.updatePlayerBalance(playerNum, 4000);
-        //return -1;
     }
 }

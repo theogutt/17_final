@@ -1,3 +1,9 @@
+//*******************************************************************
+// Player.java       Author: Gruppe 17
+//
+// Repræsenterer en spiller
+//*******************************************************************
+
 package Model;
 
 import Model.Squares.Ownable;
@@ -13,32 +19,35 @@ public class Player {
     private boolean inJail = false;
     private int outOfJailTries;
     private boolean jailCard = false;
-    private boolean specialCard = false;
-    private int oldRollSum;
-    private int numOfPlayers;
 
-    public Player(int playerNum, int numOfPlayers){
+    // Giver spilleren et ID og laver en account til dem
+    public Player(int playerNum){
         this.playerNum = playerNum;
         this.account = new Account();
     }
+
+    // Tilføjer et antal penge til spillerens pengebeholdning
+    public void updateBalance(int amount) {
+        this.account.updateBalance(amount);
+    }
+
+    // Se account
+    public void addOwnable(Ownable ownable) {
+        this.account.addOwnable(ownable, this.playerNum);
+    }
+
+    // Se account
+    public void removeOwnable(Ownable ownable){
+        this.account.removeOwnable(ownable);
+    }
+
+    // Getters og setters
     public int getSumOfProperties(){
         return account.getSumOfStreets();
     }
-    public void setSumOfProperties(int sumOfProperties){
-        account.setSumOfStreets(sumOfProperties);
-    }
-    /*public void addStreet(Street street){
-        account.addStreet(street);
-    }
-*/
-    public void setBalance(int newBalance){ account.setBalance(newBalance);}
 
     public int getBalance() {
         return account.getBalance();
-    }
-
-    public void updateBalance(int amount) {
-        this.account.updateBalance(amount);
     }
 
     public String getName() {
@@ -49,17 +58,12 @@ public class Player {
         this.name = name;
     }
 
-
     public int getCurPosition() {
         return curPosition;
     }
 
     public void setCurPosition(int curPosition) {
         this.curPosition = curPosition;
-    }
-
-    public int getPlayerNum() {
-        return playerNum;
     }
 
     public boolean getBroke(){
@@ -101,40 +105,7 @@ public class Player {
         inJail = bool;
     }
 
-    public boolean getSpecialCard() {return specialCard;}
-
-    public void setSpecialCard(Boolean bool) {specialCard = bool; }
-
-
     public Ownable[] getAllPlayerOwnables(){
        return this.account.getPlayerOwnables();
     }
-
-    public void addOwnable(Ownable ownable) {
-        this.account.addOwnable(ownable);
-    }
-
-    public void removeOwnable(Ownable ownable){
-        this.account.removeOwnable(ownable);
-    }
-
-    public void setOldRollSum(int oldRollSum) {
-        this.oldRollSum = oldRollSum;
-    }
-
-    public int getOldRollSum() {
-        return this.oldRollSum;
-    }
-
-    public int getNumOfPlayers() {
-        return numOfPlayers;
-    }
-
-    /*  public ArrayList getAllPlayersStreets(){
-       return this.account.getPlayersStreets();
-    }
-
-    public boolean ownsStreetAheadOrBehind(int lfStreetPos){
-        return account.ownsStreetAheadOrBehind(lfStreetPos);
-    }*/
 }

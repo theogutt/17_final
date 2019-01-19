@@ -1,22 +1,23 @@
+//*******************************************************************
+// GoToPrison.java       Author: Gruppe 17
+//
+// Repræsenterer et "gå i fængsel" felt
+//*******************************************************************
+
 package Model.Squares;
 
-import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
 
 public class GoToPrison extends Square{
-
-    private PlayerController playerC;
-
     public GoToPrison(int positionOnBoard) {
         super(positionOnBoard);
     }
 
-    //@Override
-    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard) {
+    //Sætter spillerens position til at være på "I fængsel" feltet og sætter spillerens tilstand til at være "I fængsel"
+    public void landOn(PlayerController playerC, int playerNum, GUI_Handler guiHandler, RentController rentC) {
         playerC.setPosition(10,playerNum);
         playerC.setInJail(playerNum, true);
-        //return -2;
     }
 }

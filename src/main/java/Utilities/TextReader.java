@@ -1,3 +1,9 @@
+//*******************************************************************
+// Textreader.java       Author: Gruppe 17
+//
+// Laver et HashMap ud fra en given fil
+//*******************************************************************
+
 package Utilities;
 
 import java.io.BufferedReader;
@@ -7,6 +13,7 @@ import java.util.HashMap;
 
 public class TextReader {
 
+    // Laver et HashMap fra en fil og splitter hver linje på "=" tegn
     public static HashMap textReader(String file) throws IOException {
         BufferedReader br = new BufferedReader((new FileReader(file)));
         String line;

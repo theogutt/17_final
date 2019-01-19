@@ -1,8 +1,16 @@
+//**************************************************************************
+// Trading.java       Author: Gruppe 17
+//
+// Overfører grunde og penge mellem to spiller som har lavet en byttehandel
+//**************************************************************************
+
 package Controller;
 
 import Model.Squares.Ownable;
 
 public class Trading {
+
+    // Bytter antal penge og valgte Ownables af two spillere
     public void trade(PlayerController playerC, int initRef, String[] initOwnable, int initMoney,
                                                 int receRef, String[] receOwnable, int receMoney){
 
@@ -32,13 +40,14 @@ public class Trading {
 
     }
 
+    // Konverterer et String array af Ownable navne til et Ownable array af Ownables med de navne
     private Ownable[] convertOwnable(PlayerController playerC, int ref, String[] stringOwnable){
         Ownable[] newOwnables = new Ownable[stringOwnable.length];
         Ownable[] playerOwnables = playerC.getPlayerOwnables(ref);
         int nextID = 0;
 
         for (int n=0 ; n < newOwnables.length ; n++){
-            for(int i=0 ; i < newOwnables.length ; i++) {
+            for(int i=0 ; i < playerOwnables.length ; i++) {
                 if (stringOwnable[n].equals(playerOwnables[i].getName())) {
                     newOwnables[nextID] = playerOwnables[i];
                     nextID++;

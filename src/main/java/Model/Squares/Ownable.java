@@ -1,83 +1,87 @@
+//*******************************************************************
+// Ownable.java       Author: Gruppe 17
+//
+// Abstrakt klasse som repræsenterer et felt som kan ejes
+//*******************************************************************
+
 package Model.Squares;
 
-import Controller.GameBoard;
 import Controller.PlayerController;
 import Controller.RentController;
 import View.GUI_Handler;
-
-import java.io.IOException;
 
 
 public abstract class Ownable extends Square{
     private int owner;
     private boolean owned;
     private String name;
-    private int numOfBuildings;
+    private int numberOfBuildings;
     private int groupID;
     private int price;
 
-    public Ownable(int positionOnBoard, int price, int numOfBuildings, String name, int groupID, boolean owned, int owner) throws IOException {
+    public Ownable(int positionOnBoard, int price, int numberOfBuildings, String name, int groupID, boolean owned, int owner){
         super(positionOnBoard);
         this.owned = owned;
         this.name = name;
-        this.numOfBuildings = numOfBuildings;
+        this.numberOfBuildings = numberOfBuildings;
         this.groupID = groupID;
         this.owner = owner;
         this.price = price;
     }
 
-    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard) {
-        //spørger om spiller vil købe grunden
-        if (isOwned() == false) {
+    // Hvis grunden IKKE er ejet, spørger den om spilleren vil købe grunden, hvis den ER ejet trækker den leje
+    // medmindre du selv ejer grunden
+    public void landOn(PlayerController playerC, int ref, GUI_Handler guiHandler, RentController rentC) {
+        if (!this.owned) { // Ingen ejer grunden
             int ja = 1;
-            int answer = guiHandler.buyStreet();
+            int answer = guiHandler.buyStreet(); //spørger om spiller vil købe grunden
             if (ja == answer) {
-                int price = getPrice();
-                playerC.updatePlayerBalance(ref, price * -1);
+                playerC.updatePlayerBalance(ref, this.price * -1);
                 setOwned(true);
                 setOwner(ref);
-                Square curSquare = this;
-                playerC.addOwnable((Ownable) curSquare, ref);
+                Ownable curSquare = this;
+                playerC.addOwnable(curSquare, ref);
                 guiHandler.changeStreetColor(playerC, ref);
             }
-            else {}
         } else {
-            if(this.getOwner()!=ref) {
-                int rent = rentC.retrieveRent(playerC, ref, gameBoard);
+            if(this.owner!=ref) { // Du ejer IKKE grunden
+                int rent = rentC.retrieveRent(playerC, ref, this);
                 playerC.updatePlayerBalance(ref, rent * -1);
-                playerC.updatePlayerBalance(this.getOwner(), rent);
-                guiHandler.payRent(playerC, this.getOwner(), ref, rent);
+                playerC.updatePlayerBalance(this.owner, rent);
+                guiHandler.payRent(playerC, this.owner, ref, rent);
             }
+            // Du ejer grunden
             else{guiHandler.playersOwnSquare(playerC, ref);}
         }
     }
+
+    // Getters og setters
     public String getName() {
         return name;
     }
-    public int getPrice(){return price;}
+
     public int getGroupID() {
         return groupID;
     }
 
-    public void setNumOfBuildings(int numOfBuildings){
-        this.numOfBuildings = numOfBuildings;
+    public void setNumberOfBuildings(int numberOfBuildings){
+        this.numberOfBuildings = numberOfBuildings;
     }
 
-    @Override
     public int getNumOfBuildings() {
-        return super.getNumOfBuildings();
+        return numberOfBuildings;
     }
 
-    public int getOwner() {
-        return this.owner;
-    }
-
-    public boolean isOwned() {
-        return owned;
+    public int getPrice() {
+        return price;
     }
 
     public void setOwner(int ref) {
         this.owner = ref;
+    }
+
+    public int getOwner() {
+        return owner;
     }
 
     public void setOwned(boolean owned) {

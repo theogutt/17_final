@@ -1,5 +1,10 @@
+//*******************************************************************
+// Main.java       Author: Gruppe 17
+//
+// Starter spillet
+//*******************************************************************
+
 import Controller.GameEngine;
-import Model.Squares.Chance;
 
 import java.io.IOException;
 

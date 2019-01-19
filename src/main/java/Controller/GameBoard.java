@@ -1,3 +1,9 @@
+//*******************************************************************
+// GameBoard.java       Author: Gruppe 17
+//
+// Repræsenterer et spillebræt med felter
+//*******************************************************************
+
 package Controller;
 
 import Model.Squares.*;
@@ -13,8 +19,8 @@ public class GameBoard {
     private HashMap squarePrice;
     private HashMap StreetName;
     private HashMap groupID;
-    private PlayerController PlayerC;
 
+    // Laver et spillebræt og opretter felterne
     public GameBoard() throws IOException {
         squarePrice = TextReader.textReader(".\\src\\Resources\\SquarePrice");
         StreetName = TextReader.textReader(".\\src\\Resources\\StreetName");
@@ -22,32 +28,15 @@ public class GameBoard {
         instantiateSquares();
     }
 
-    public int getOwner(int position){
-        Square curSquare = squares[position];
-        return curSquare.getOwner();
-    }
-
-    public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC, GameBoard gameBoard){
+    // Aktiverer et felts effekt baseret på hvor spilleren står
+    public void squareImpact(int ref, PlayerController playerC, GUI_Handler guiHandler, RentController rentC){
         int curPosition = playerC.getPosition(ref);
         Square curSquare = squares[curPosition];
-        curSquare.landOn(playerC, ref, guiHandler, rentC, gameBoard);
+        curSquare.landOn(playerC, ref, guiHandler, rentC);
     }
 
-    public int getGroupID(int index) {
-        return (Integer) groupID.get(index);
-    }
-    public int numberOfGroupIDs(int index){
-        int numberOfGroupIDs=0;
-        for(int i = 0; i<40; i++){
-            if(index==getGroupID(i)){
-                numberOfGroupIDs++;
-            }
-        }
-        return numberOfGroupIDs;
-    }
-
-// Opretter felter med pris og rent
-    public void instantiateSquares() throws IOException {
+    // Opretter felter med pris og rent
+    private void instantiateSquares() {
         for (int i = 0; i < 40; i++) {
             if (i == 0){ squares[i]= new Start(i);}                                                                        //Start
             else if (i == 10 || i == 20 ){ squares[i]= new Parking(i);}                                                    //Parking
@@ -60,14 +49,12 @@ public class GameBoard {
             }
         }
     }
-    public boolean didPlayerPassStart(PlayerController playerC, int ref){
-        boolean passedStartBool = passedStart(playerC, ref);
-        return passedStartBool;
-    }
+
+    // Tjekker om spilleren passerede start og giver dem startpenge hvis de gjorde
     public boolean passedStart(PlayerController playerC, int ref){
         boolean passedStart = false;
         if (playerC.getOldPosition(ref) == 30 && playerC.getPosition(ref) == 10){
-            // From GoToPrison to Prison
+            // Fra GoToPrison til Prison (Spiller skal ikke have penge for at komme i fængsel)
         }
         else if (playerC.getPlayerOldPosition(ref)>playerC.getPosition(ref)){
             playerC.updatePlayerBalance(ref,4000);
@@ -76,10 +63,8 @@ public class GameBoard {
         return passedStart;
     }
 
-    public Square getSquare(int i){
-        return squares[i];
-    }
-    public void changeBuilding(Street street, int numOfBuildings){
-        street.setNumOfBuildings(numOfBuildings);
+    // Getter til test
+    public Square getSquare(int index){
+        return squares[index];
     }
 }
