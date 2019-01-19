@@ -1,3 +1,9 @@
+//*******************************************************************
+// GUI_Handler.java       Author: Gruppe 17
+//
+// Styrer alt der har med user-input og output, og det visuelle.
+//*******************************************************************
+
 package View;
 
 import Controller.Building;

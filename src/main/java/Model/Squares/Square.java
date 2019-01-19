@@ -1,3 +1,9 @@
+//*******************************************************************
+// Square.java       Author: Gruppe 17
+//
+// Abstrakt felt som repræsenterer et felt af hvilken som helst type
+//*******************************************************************
+
 package Model.Squares;
 
 import Controller.PlayerController;

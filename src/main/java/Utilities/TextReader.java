@@ -1,3 +1,9 @@
+//*******************************************************************
+// Textreader.java       Author: Gruppe 17
+//
+// Laver et HashMap ud fra en given fil
+//*******************************************************************
+
 package Utilities;
 
 import java.io.BufferedReader;

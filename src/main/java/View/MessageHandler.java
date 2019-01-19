@@ -1,3 +1,9 @@
+//********************************************************************
+// MessageHandler.java       Author: Gruppe 17
+//
+// Håndterer beskeder som skal vises til brugeren alt efter situation
+//********************************************************************
+
 package View;
 
 import Controller.PlayerController;

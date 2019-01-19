@@ -1,3 +1,9 @@
+//*******************************************************************
+// PlayerController.java       Author: Gruppe 17
+//
+// Kontrollerer spillernes data
+//*******************************************************************
+
 package Controller;
 
 import Model.Die;

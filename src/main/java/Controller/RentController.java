@@ -1,3 +1,8 @@
+//*******************************************************************
+// RentController.java       Author: Gruppe 17
+//
+// Udregner lejen for en bestemt grund
+//*******************************************************************
 
 package Controller;
 

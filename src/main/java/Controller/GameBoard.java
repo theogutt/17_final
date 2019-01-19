@@ -1,3 +1,9 @@
+//*******************************************************************
+// GameBoard.java       Author: Gruppe 17
+//
+// Repræsenterer et spillebræt med felter
+//*******************************************************************
+
 package Controller;
 
 import Model.Squares.*;
