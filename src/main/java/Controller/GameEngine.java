@@ -135,6 +135,7 @@ public class GameEngine {
             }
             else{
                 getExtra = true;
+                guiHandler.extraTurnGui();
             }
         }
         return getExtra;
