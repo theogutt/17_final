@@ -48,10 +48,6 @@ public class MessageHandler {
     public String startGame3() {
         return getSquareMessage(998);
     }
-    public String startGame4() {
-        return getSquareMessage(999);
-    }
-
 
     //Retunere en besked
     public String gameMessage(String messageNum){
