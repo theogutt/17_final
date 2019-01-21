@@ -93,7 +93,6 @@ public class GUI_Handler {
         gui.showMessage(message.startGame1());
         gui.showMessage(message.startGame2());
         gui.showMessage(message.startGame3());
-        gui.showMessage(message.startGame4());
     }
 
     // Kalder alle metoderne som laver spillere for hver spiller
