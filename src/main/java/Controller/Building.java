@@ -8,6 +8,7 @@ package Controller;
 
 import Model.Squares.Ownable;
 import Model.Squares.Street;
+import Utilities.Copy;
 import Utilities.TextReader;
 import View.GUI_Handler;
 
@@ -17,17 +18,34 @@ import java.util.HashMap;
 public class Building {
 
     private HashMap buildningPrice;
+    private HashMap groupColors;
 
     // Henter husprisen for alle felter
     public Building() throws IOException{
         buildningPrice = TextReader.textReader(".\\src\\Resources\\BuildingPrice");
+        groupColors = TextReader.textReader(".\\src\\Resources\\GroupIDColors");
     }
 
     // Finder hvilken ejendom som skal bygges på, og spørger om hvad der skal bygges
     public void build(PlayerController playerC, int playerNum, GUI_Handler gui_handler){
         String bygningDerSkalÆndres = "";
         Ownable[] ejendomme = playerC.getPlayerOwnables(playerNum);
-        String valg = gui_handler.chooseStreetToBuildOn();
+        String[] choices = new String[1];
+
+        // Giver kun valget mellem farver du har alle tre af
+        int next = 0;
+        for (int n=0 ; n < ejendomme.length ; n++){
+            if (ownAllID(ejendomme, ejendomme[n].getGroupID())){
+                if (!Copy.contains(choices, (String) groupColors.get(ejendomme[n].getGroupID()))) {
+                    choices = Copy.of(choices, next + 2);
+                    choices[next] = (String) groupColors.get(ejendomme[n].getGroupID());
+                    next++;
+                }
+            }
+        }
+        choices[choices.length-1] = "Tilbage";
+
+        String valg = gui_handler.chooseStreetToBuildOn(choices);
         boolean forsæt = true;
         while(forsæt) {
             if (valg.equals("Lyseblå")) {
@@ -172,7 +190,13 @@ public class Building {
         int numBuildBefore = ownable.getNumOfBuildings();
 
         int price = (Integer) buildningPrice.get(ownable.getPositionOnBoard()); // Finder prisen på ét hus
-        int valg = gui_handler.chooseNumBuildnings(ownable.getPositionOnBoard(), price); // Spørger spiller om antal huse
+        int valg = gui_handler.chooseNumBuildnings(price); // Spørger spiller om antal huse
+
+        // Hvis spilleren ikke har nok penge til at købe
+        if ((playerC.getBalance(playerNum) < (price * valg)) && (valg > numBuildBefore)) {
+            valg = -1;
+            gui_handler.cantAffordHouses();
+        }
 
         if (valg != -1) {
             ownable.setNumberOfBuildings(valg);
@@ -185,6 +209,8 @@ public class Building {
                 int price2 = -price * (valg - numBuildBefore);
                 playerC.updatePlayerBalance(playerNum, price2);
             }
+
+            gui_handler.putHouses(ownable.getPositionOnBoard(), valg);
         }
     }
 

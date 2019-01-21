@@ -48,10 +48,6 @@ public class MessageHandler {
     public String startGame3() {
         return getSquareMessage(998);
     }
-    public String startGame4() {
-        return getSquareMessage(999);
-    }
-
 
     //Retunere en besked
     public String gameMessage(String messageNum){
@@ -60,7 +56,7 @@ public class MessageHandler {
 
     //Siger hvilken spillers tur det
     public String playerTurn(PlayerController playerC, int i) {
-        returnString = "Det er " + playerC.getName(i) + "'s tur! Tryk enter for at kaste terningerne!";
+        returnString = "Det er " + playerC.getName(i) + "'s tur! Tryk ENTER for at kaste terningerne!";
         return returnString;
     }
 
@@ -82,8 +78,32 @@ public class MessageHandler {
         return returnString;
     }
 
+    // Fortæller spilleren om deres amlede værdier
+    public String playerValue(int balance, int grund, int bygning, int fortune){
+        returnString ="Din værdi i grunde er " + grund + "kr. \n" +
+                "Din værdi i bygninger er " + bygning + "kr. \n" +
+                "Din balance er " + balance + "kr. \n" +
+                "Din total værdi er " + fortune + "kr.";
+        return returnString;
+    }
+
+    // Fortæller spilleren at de har fået en ekstra tur
+    public String extraTurn(){
+        return "Du slog to ens, du får en ekstra tur! Tryk ENTER for at kaste terningerne";
+    }
+
     //Getter en besked fra hashmappet TurnMessages
     public String getSquareMessage(int index) {
         return (String) hashMapTurnMessages.get(index);
+    }
+
+    // Fortæller spiller at de ikke har råd til huse
+    public String cantAffortHouses(){
+        return "Du har ikke nok penge!";
+    }
+
+    // Fortæller spilleren at de ikke kan bytte en grund da der er huse på dens farve
+    public String housesExist(){
+        return "Du kan ikke bytte en grund når der er huse på dens farve";
     }
 }

@@ -41,7 +41,7 @@ public class Trading {
     }
 
     // Konverterer et String array af Ownable navne til et Ownable array af Ownables med de navne
-    private Ownable[] convertOwnable(PlayerController playerC, int ref, String[] stringOwnable){
+    public Ownable[] convertOwnable(PlayerController playerC, int ref, String[] stringOwnable){
         Ownable[] newOwnables = new Ownable[stringOwnable.length];
         Ownable[] playerOwnables = playerC.getPlayerOwnables(ref);
         int nextID = 0;

@@ -9,6 +9,7 @@ package View;
 import Controller.Building;
 import Controller.PlayerController;
 import Controller.Trading;
+import Model.Squares.Ownable;
 import Utilities.Copy;
 import Utilities.TextReader;
 import Model.Die;
@@ -45,7 +46,7 @@ public class GUI_Handler {
         String valg;
         while (aktivTur) {
             updateGuiPlayerBalance(playerC);
-            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Afslut tur");
+            valg = gui.getUserButtonPressed(playerC.getName(playerNum) + "'s tur \n" + "Menu:", "Handel", "Bygge", "Se værdier", "Afslut tur");
             if (valg.equals("Handel")) {
                 trade(playerC, playerNum, trading);
             } else if (valg.equals("Bygge")) {
@@ -54,8 +55,17 @@ public class GUI_Handler {
                 //indsæt pantsæt metode :)
             } else if (valg.equals("Afslut tur")) {
                 aktivTur = false;
+            } else if (valg.equals("Se værdier")){
+                playerValue(playerC, playerNum);
             }
         }
+    }//fortæller spilleren, hvor meget de er værd
+    public void playerValue(PlayerController playerC, int playerNum){
+        int fortune = playerC.getPlayerFortune(playerNum);
+        int balance = playerC.getBalance(playerNum);
+        int grund = playerC.getSumofOwnables(playerNum);
+        int bygning = playerC.getSumOfBuildings(playerNum);
+        gui.showMessage(message.playerValue(balance, grund, bygning, fortune));
     }
 
     //Siger hvilken spiller, der har vundet
@@ -68,6 +78,11 @@ public class GUI_Handler {
         gui.showMessage(message.gotBroke(playerC, i));
     }
 
+    // Viser beskeden for at spiller har fået en ekstra tur
+    public void extraTurnGui(){
+        gui.showMessage(message.extraTurn());
+    }
+
     // Fortæller spilleren hvor meget de har betalt i skat
     public void tax(PlayerController playerC, int i, int tax) {
         gui.showMessage(message.taxes(playerC, i, tax));
@@ -78,7 +93,6 @@ public class GUI_Handler {
         gui.showMessage(message.startGame1());
         gui.showMessage(message.startGame2());
         gui.showMessage(message.startGame3());
-        gui.showMessage(message.startGame4());
     }
 
     // Kalder alle metoderne som laver spillere for hver spiller
@@ -185,8 +199,8 @@ public class GUI_Handler {
     }
 
     // Spørger spilleren om at vælge en farve de vil bygge på
-    public String chooseStreetToBuildOn() {
-        return gui.getUserSelection("Vælg grundens farve", "Lyseblå", "Pink", "Grøn", "Grå", "Rød", "Hvid", "Gul", "Lilla", "Tilbage");
+    public String chooseStreetToBuildOn(String[] choices) {
+        return gui.getUserSelection("Vælg grundens farve", choices);
     }
 
     // Spørger spilleren om at vælge en bestemt grund udfra String arrayet
@@ -195,8 +209,7 @@ public class GUI_Handler {
     }
 
     // Spørger spilleren om hvor mange huse de vil bygge og viser det på spillebrættet
-    public int chooseNumBuildnings(int posOnBoard, int price) {
-        GUI_Street street;
+    public int chooseNumBuildnings(int price) {
         String p = Integer.toString(price);
         String valg = gui.getUserButtonPressed("Hvert hus koster " + p + "Kr.\nEt hotel koster " + p + "kr. + 4 huse \nMan får halv pris tilbage ved salg af bygninger.", "0", "1", "2", "3", "4", "Hotel", "Tilbage");
         int i;
@@ -207,14 +220,24 @@ public class GUI_Handler {
         else if (valg.equals("4")) i = 4;
         else if (valg.equals("Hotel")) i = 5;
         else i = -1;
-        street = (GUI_Street) gui.getFields()[posOnBoard];
-        if (i == -1) {
-        } else if (i == 5) {
+
+        return i;
+    }
+
+    // Sætter et antal huse på en grund
+    public void putHouses(int pos, int houses){
+        GUI_Street street = (GUI_Street) gui.getFields()[pos];
+
+        if (houses == 5) {
             street.setHotel(true);
         } else {
-            street.setHouses(i);
+            street.setHouses(houses);
         }
-        return i;
+    }
+
+    // Fortæller spiller at de ikke har råd til huse
+    public void cantAffordHouses(){
+        gui.showMessage(message.cantAffortHouses());
     }
 
     // Fortæller spilleren at de ikke ejer alle felter af den valgte farve
@@ -632,6 +655,19 @@ public class GUI_Handler {
                 else if (typeSelection.equals("PENGE"))
                     receMoney = gui.getUserInteger("Hvor mange penge skal byttes?", 0, playerC.getBalance(rece));
             }
+
+            // Tjekker om der er huse på en af grundenes farve
+            if (hasBuildings(playerC, trading, init, initOffer)){
+                initOffer = new String[0];
+                gui.showMessage(message.housesExist());
+            }
+
+            if (hasBuildings(playerC, trading, rece, receOffer)){
+                receOffer = new String[0];
+                gui.showMessage(message.housesExist());
+            }
+
+
         } while (!invSelection.equals("AFSLUT"));
 
         trading.trade(playerC, init, initOffer, initMoney,
@@ -658,11 +694,18 @@ public class GUI_Handler {
             selected = gui.getUserSelection("Ejendomme: " + Arrays.toString(offer), ownables);
             if (!selected.equals("AFSLUT") && !selected.equals("RESET")) {
                 if (!Copy.contains(offer, selected)) {
+                    ownables = Copy.remove(ownables, selected);
                     offer = Copy.of(offer, offer.length + 1);
                     offer[offer.length - 1] = selected;
                 }
-            } else if (selected.equals("RESET"))
+            } else if (selected.equals("RESET")) {
                 offer = new String[0];
+                ownables = new String[playerC.getPlayerOwnables(ref).length + 2];
+                for (int n = 0; n < playerC.getPlayerOwnables(ref).length; n++)
+                    ownables[n] = playerC.getPlayerOwnables(ref)[n].getName();
+                ownables[ownables.length - 1] = "AFSLUT";
+                ownables[ownables.length - 2] = "RESET";
+            }
         } while (!selected.equals("AFSLUT"));
 
         return offer;
@@ -681,5 +724,26 @@ public class GUI_Handler {
                 }
             }
         }
+    }
+
+    // Tjekker om et tilbud indeholder en grund hvis farve der er huse på
+    private boolean hasBuildings(PlayerController playerC, Trading trading, int ref, String[] offer){
+        boolean hasBuildings = false;
+
+        Ownable[] allOwnables = playerC.getPlayerOwnables(ref);
+        Ownable[] offerOwnables = trading.convertOwnable(playerC, ref, offer);
+
+        // Tjekker om der er nogle grunde med samme ID som dem i offeret som har huse
+        for (Ownable offerOwnable : offerOwnables){
+            for (Ownable allOwnable : allOwnables){
+                if (offerOwnable.getGroupID() == allOwnable.getGroupID()) {
+                    if (allOwnable.getNumOfBuildings() > 0)
+                        hasBuildings = true;
+                }
+            }
+        }
+
+
+        return hasBuildings;
     }
 }

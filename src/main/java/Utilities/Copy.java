@@ -73,4 +73,24 @@ public class Copy {
 
         return contains;
     }
+
+    // Fjerner en String fra et String array
+    public static String[] remove(String[] arr, String element){
+        int x = 0;
+
+        //Tjekker hvor den String som skal fjernes er
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals(element)) {
+                x = i;
+                break;
+            }
+        }
+        // Sætter alt på den nye plads i Arrayet
+        for(int i = x; i < arr.length-1; i++){
+            arr[i] = arr[i+1];
+        }
+        arr = of(arr, arr.length - 1);
+
+        return arr;
+    }
 }
