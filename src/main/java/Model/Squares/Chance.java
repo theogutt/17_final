@@ -144,7 +144,7 @@ public class Chance extends Square{
                 break;
 
             case 22: // Move to start.
-                playerC.setPosition(playerNum, 0);
+                playerC.setPosition(0, playerNum);
                 break;
 
             case 23: // Go to prison.
